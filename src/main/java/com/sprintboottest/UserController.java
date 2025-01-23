@@ -1,12 +1,21 @@
 package com.sprintboottest;
 
+import com.sprintboottest.entity.Customer;
 import com.sprintboottest.model.UserModel;
+import com.sprintboottest.repository.CustomerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 //First entrypoint for a request from an application
 //When they make a request will hit the controller first
@@ -14,15 +23,11 @@ import java.util.Map;
 @RestController
 public class UserController {
 
-    private Map<String, UserModel> userMap = new HashMap<>();
+    @Autowired
+    private CustomerRepository customerRepository;
 
-    public UserController() {
-        userMap.put("Kyle", new UserModel("Kyle", "Anderson", 12345));
-        userMap.put("Kyle Jr", new UserModel("Kyle Jr", "Anderson", 143567));
-    }
-
-    @GetMapping("/getUser/{userName}")
-    public UserModel getUser(@PathVariable String userName) {
-        return userMap.get(userName);
+    @GetMapping("/getUser")
+    public List<Customer> getAllCustomer() {
+        return customerRepository.findAll();
     }
 }
