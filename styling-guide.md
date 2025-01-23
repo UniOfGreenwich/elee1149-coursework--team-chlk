@@ -1,5 +1,3 @@
-# Styling Guide
-
 # Styling Guide for [TBA]
 
 This document outlines the design and styling standards for the project to ensure a consistent and professional appearance throughout the website.
