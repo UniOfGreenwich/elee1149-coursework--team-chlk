@@ -146,4 +146,3 @@ This document outlines the design and styling standards for the project to ensur
 
 ---
 
-Feel free to extend or modify this guide as the project evolves!
