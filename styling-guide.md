@@ -1,4 +1,4 @@
-# Styling Guide for [TBA]
+# Styling Guide for [TBD]
 
 This document outlines the design and styling standards for the project to ensure a consistent and professional appearance throughout the website.
 
