@@ -1,4 +1,4 @@
-package com.sprintboottest.model;
+package com.fairshare.model;
 
 public class UserModel {
     private String firstName;
