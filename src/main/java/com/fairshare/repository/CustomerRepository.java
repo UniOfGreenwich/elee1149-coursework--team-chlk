@@ -1,9 +1,7 @@
-package com.sprintboottest.repository;
+package com.fairshare.repository;
 
-import com.sprintboottest.entity.Customer;
+import com.fairshare.entity.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.Optional;
 
 public interface CustomerRepository extends JpaRepository<Customer, String> {
 }
