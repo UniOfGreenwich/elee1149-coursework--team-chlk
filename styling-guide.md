@@ -1,4 +1,4 @@
-# Styling Guide for [TBD]
+# Styling Guide for the website - FairShare
 
 This document outlines the design and styling standards for the project to ensure a consistent and professional appearance throughout the website.
 
@@ -8,7 +8,7 @@ This document outlines the design and styling standards for the project to ensur
 
 ### **Font Family**
 
-- **Primary Font**: `Inter`, sans-serif
+- **Primary Font**: `Poppins`, `Inter`, sans-serif
 - **Fallback Fonts**: `Arial`, `Helvetica`, `sans-serif`
 
 ### **Font Sizes**
@@ -23,13 +23,13 @@ This document outlines the design and styling standards for the project to ensur
 
 ### **Line Height**
 
-- Default line height: 1.5
+- Default line height: 1.2
 
 ### **Text Colors**
 
-- Primary Text: `#333333`
-- Secondary Text: `#666666`
-- Placeholder Text: `#AAAAAA`
+- Primary Text: `#F3F3F3`
+- Secondary Text: `#FFFFFF`
+- Placeholder Text: `#F2F2F2`
 
 ---
 
@@ -37,12 +37,14 @@ This document outlines the design and styling standards for the project to ensur
 
 ### **Primary Colors**
 
-| Name           | Hex Code  | Usage                             |
-| -------------- | --------- | --------------------------------- |
-| Primary Blue   | `#1E90FF` | Buttons, Links, Highlights        |
-| Accent Green   | `#4CAF50` | Success States, Positive Balances |
-| Warning Yellow | `#FFC107` | Warnings, Notifications           |
-| Error Red      | `#FF5252` | Errors, Negative Balances         |
+| Name           | Hex Code  | Usage                                |
+| -------------- | --------- | ------------------------------------ |
+| Deep Purple    | `#141627` | Background, NavBar, Dashboard Widget |
+| Accent Blue    | `#4495C7` | Primary CTA, Some widgets            |
+| Accent Pink    | `#FE6789` | Secondary CTA, Some widgets          |
+| Accent Green   | `#4CAF50` | Success States, Positive Balances    |
+| Warning Yellow | `#FFC107` | Warnings, Notifications              |
+| Error Red      | `#FF5252` | Errors, Negative Balances            |
 
 ### **Neutral Colors**
 
@@ -54,10 +56,10 @@ This document outlines the design and styling standards for the project to ensur
 
 ### **Background Colors**
 
-| Name             | Hex Code  | Usage            |
-| ---------------- | --------- | ---------------- |
-| Light Background | `#FFFFFF` | Main Background  |
-| Dashboard Gray   | `#FAFAFA` | Dashboard Panels |
+| Name        | Hex Code  | Usage                                      |
+| ----------- | --------- | ------------------------------------------ |
+| Light White | `#F3F3F3` | Main Background                            |
+| Light Gray  | `#E8E8E8` | Inactive Buttons, Input field placeholders |
 
 ---
 
@@ -85,20 +87,20 @@ This document outlines the design and styling standards for the project to ensur
 
 ### **Primary Buttons**
 
-- Background: `#1E90FF`
-- Text Color: `#FFFFFF`
+- Background: `#4495C7`
+- Text Color: `#F3F3F3`
 - Border Radius: `4px`
 - Padding: `12px 16px`
-- Hover: Darker shade of blue (`#1C7ED6`)
+- Hover: Darker shade of blue
 
 ### **Secondary Buttons**
 
-- Background: `#FFFFFF`
-- Border: `1px solid #1E90FF`
-- Text Color: `#1E90FF`
+- Background: `none`
+- Border: `2px solid #FE6789`
+- Text Color: `#F3F3F3`
 - Border Radius: `4px`
 - Padding: `12px 16px`
-- Hover: Light blue background (`#EAF4FF`)
+- Hover: Fill pink colour
 
 ---
 
@@ -126,29 +128,22 @@ This document outlines the design and styling standards for the project to ensur
 
 ## **6. Icons and Illustrations**
 
-- Use a consistent icon library, such as `Font Awesome` or `Material Icons`.
-- Icon Color: `#333333` (default), or match the purpose (e.g., success, warning, error colors).
+- Use a consistent icon library, such as `Font Awesome` or `Iconify`.
 - Icon Size: `16px` or `24px` depending on context.
 
 ---
 
-## **7. Accessibility**
-
-- Minimum contrast ratio: 4.5:1 for text.
-- All interactive elements must have focus and hover states.
-- Use `aria-labels` for screen readers.
-
 ---
 
-## **8. Animations**
+## **7. Animations**
 
 - **Hover Effects**: Subtle transitions (e.g., `0.3s ease-in-out` for color changes).
 - **Loading Spinners**: Use CSS-based spinners or lightweight libraries.
-- Avoid overly flashy animations.
+- **Reveal on Scroll**: Use JS-based libraries for reveal on scroll on the home page(index.html).
 
 ---
 
-## **9. Responsive Design**
+## **8. Responsive Design (Stretch Objective)**
 
 - Mobile-first approach.
 - Breakpoints:
@@ -159,9 +154,9 @@ This document outlines the design and styling standards for the project to ensur
 
 ---
 
-## **10. Miscellaneous Guidelines**
+## **9. Miscellaneous Guidelines**
 
-- Border Radius: Keep it consistent (`4px` or `8px` for rounded elements).
+- Border Radius: Keep it consistent (`8px` for rounded elements).
 - Shadows: Use subtle shadows for depth (`box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);`).
 - Grid System: Follow a 12-column grid for layouts.
 
