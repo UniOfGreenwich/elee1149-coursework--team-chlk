@@ -43,7 +43,7 @@ This document outlines the requirements for the FairShare website designed to he
 - Record payments made to settle debts.
 - Generate notifications when a payment is settled or a new entry is created \*.
 
-### **3.6 Notifications (Stretct)**
+### **3.6 Notifications (Stretch)**
 
 - Notify users about new expenses, settlements, and reminders.
 
