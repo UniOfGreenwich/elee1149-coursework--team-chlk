@@ -1,4 +1,4 @@
-package com.fairshare;
+package com.fairshare.services;
 
 import com.fairshare.entity.Balance;
 import com.fairshare.repository.BalanceRepository;
