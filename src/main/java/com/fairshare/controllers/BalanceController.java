@@ -1,7 +1,6 @@
 package com.fairshare.controllers;
 
-import com.fairshare.BalanceService;
-import com.fairshare.repository.BalanceRepository;
+import com.fairshare.services.BalanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
