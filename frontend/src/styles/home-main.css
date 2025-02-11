@@ -1,0 +1,148 @@
+.hero {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    padding: 0 90px;
+    position: relative;
+}
+
+.hero-content {
+    width: 600px;
+    /* height: 542px; */
+}
+
+.greetings {
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 8px;
+
+}
+
+.hero-title {
+    font-size: 75px;
+    line-height: 1.2;
+}
+
+.description {
+    font-size: 18px;
+    width: 526px;
+    line-height: 2;
+
+    margin: 2rem 0;
+}
+
+.hero-content a {
+    display: inline-block;
+    text-decoration: none;
+    padding: 12px 36px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #F3F3F3;
+}
+
+.hero-image-container img {
+    width: 100%;
+}
+
+/* Feature 1 section */
+
+.feature {
+    display: flex;
+    gap: 160px;
+    align-items: center;
+
+    margin: 60px 0;
+    padding: 0 90px;
+}
+
+.feature-1 {
+    position: relative;
+}
+
+.feature .content {
+    width: 600px;
+}
+
+.feature-1 .image-container {
+    width: 454px;
+}
+
+.feature-1 .image-container img {
+    width: 100%;
+}
+
+.tagline {
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 36px;
+    letter-spacing: 0.3em;
+    color: #A789FF;
+}
+
+.heading {
+    font-weight: 500;
+    font-size: 48px;
+    line-height: 70px;
+}
+
+.feature-2 .content {
+    padding-left: 5rem;
+}
+
+/* signup section */
+.signup {
+    background: linear-gradient(180deg, #9976FF 0%, #5C4799 100%);
+    border-radius: 20px;
+    height: 467px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin: 10rem 90px;
+}
+
+.cta {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0.15em;
+}
+
+.signup h3 {
+    font-size: 48px;
+    line-height: 72px;
+    font-weight: 700;
+    margin-top: 36px;
+    margin-bottom: 74px;
+}
+
+.signup-button {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #F3F3F3;
+
+    font-size: 24px;
+    font-weight: 600;
+
+    background-color: #FE6789;
+    padding: 12px 36px;
+    border-radius: 4px;
+
+}
+
+.ellipse {
+    position: absolute;
+}
+
+.ellipse-1 {
+    top: -9rem;
+    left: 0;
+}
+
+.ellipse-2 {
+    top: -10rem;
+    right: 0rem;
+}
