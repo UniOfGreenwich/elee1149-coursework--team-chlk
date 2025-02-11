@@ -1,7 +1,7 @@
-package com.fairshare;
+package com.fairshare.controllers;
 
-import com.fairshare.entity.Customer;
-import com.fairshare.repository.CustomerRepository;
+import com.fairshare.entity.User;
+import com.fairshare.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,10 +17,15 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private CustomerRepository customerRepository;
+    private UserRepository userRepository;
 
     @GetMapping("/getUser")
-    public List<Customer> getAllCustomer() {
-        return customerRepository.findAll();
+    public List<User> getAllCustomer() {
+        return userRepository.findAll();
     }
+
+
+
+
+
 }
