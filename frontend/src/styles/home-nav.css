@@ -4,10 +4,8 @@ body {
 }
 
 header {
-    /* border: 1px solid white; */
-    height: 120px ;
+    height: 100px;
     padding: 0 90px;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -53,4 +51,20 @@ header .navigation-list {
 
 .secondary-button:hover {
     background-color: #4C3590;
+}
+
+@media only screen and (max-width: 670px) {
+    .navigation-list, .navigation-list li{
+        display: none;
+    }
+
+    header {
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+    }
+
+    .logo img{
+        width: 150px;
+    }
 }
