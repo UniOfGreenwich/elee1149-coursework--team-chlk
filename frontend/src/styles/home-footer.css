@@ -43,3 +43,19 @@
     align-items: center;
 
 }
+
+@media only screen and (max-width: 670px) {
+    .footer-main {
+        padding: 1rem;
+        flex-direction: column;
+    }
+
+    .footer-main .footer-logo {
+        margin-bottom: 3rem;
+    }
+
+    .copyright {
+        height: fit-content;
+        font-size: 1rem;
+    }
+}
