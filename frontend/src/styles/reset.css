@@ -9,6 +9,7 @@
 .page-wrapper {
     background-color: #141627;
     color: #F3F3F3;
+    width: 100%;
     max-width: 1440px;
     margin: 0 auto;
 }
