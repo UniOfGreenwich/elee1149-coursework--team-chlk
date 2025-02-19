@@ -10,6 +10,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -25,6 +28,59 @@ class BalanceServiceTest {
     void setUp() {
 
     }
+
+    @Test
+    public void testUpdateBalance() {
+        String payerId = "payerId";
+        String payeeId = "payeeId";
+        double amount = 100.0;
+        Balance balance = new Balance();
+        balance.setUser1Id(payerId);
+        balance.setUser2Id(payeeId);
+        balance.setNetAmount(100.0);
+
+        when(balanceRepository.findByUsers(payerId, payeeId)).thenReturn(balance);
+
+        balanceService.updateBalance(payerId, payeeId, amount);
+
+        assertEquals(200.0, balance.getNetAmount());
+
+        verify(balanceRepository, times(1)).save(balance);
+    }
+
+    @Test
+    public void testUpdateBalanceWhenBalanceIsNull() {
+        String payerId = "payerId";
+        String payeeId = "payeeId";
+        double amount = 100.0;
+
+
+        when(balanceRepository.findByUsers(payerId, payeeId)).thenReturn(null);
+
+        balanceService.updateBalance(payerId, payeeId, amount);
+
+
+        verify(balanceRepository, times(1)).save((any(Balance.class)));
+    }
+
+    @Test
+    void testUpdateBalanceWhenUser2IsUser1() {
+        String payerId = "payerId";
+        String payeeId = "payeeId";
+        double amount = 100.0;
+        Balance balance = new Balance();
+        balance.setUser1Id(payeeId);
+        balance.setUser2Id(payerId);
+        balance.setNetAmount(100.0);
+
+        when(balanceRepository.findByUsers(payerId, payeeId)).thenReturn(balance);
+
+        balanceService.updateBalance(payerId, payeeId, amount);
+
+        assertEquals(0.0, balance.getNetAmount());
+        verify(balanceRepository, times(1)).save(balance);
+    }
+
 
     @Test
     void testGetNetBalance() {
