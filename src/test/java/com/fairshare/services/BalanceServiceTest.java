@@ -24,40 +24,36 @@ class BalanceServiceTest {
     @InjectMocks
     BalanceService balanceService;
 
+    private static final String PAYER_ID = "payerId";
+    private static final String PAYEE_ID = "payeeId";
+    private static final double DEFAULT_AMOUNT = 100.0;
+
+    private Balance defaultBalance;
+
     @BeforeEach
     void setUp() {
-
+        defaultBalance = new Balance();
+        defaultBalance.setUser1Id(PAYER_ID);
+        defaultBalance.setUser2Id(PAYEE_ID);
+        defaultBalance.setNetAmount(DEFAULT_AMOUNT);
     }
 
     @Test
-    public void testUpdateBalance() {
-        String payerId = "payerId";
-        String payeeId = "payeeId";
-        double amount = 100.0;
-        Balance balance = new Balance();
-        balance.setUser1Id(payerId);
-        balance.setUser2Id(payeeId);
-        balance.setNetAmount(100.0);
+     void testUpdateBalance() {
+        when(balanceRepository.findByUsers(PAYER_ID, PAYEE_ID)).thenReturn(defaultBalance);
 
-        when(balanceRepository.findByUsers(payerId, payeeId)).thenReturn(balance);
+        balanceService.updateBalance(PAYER_ID, PAYEE_ID, DEFAULT_AMOUNT);
 
-        balanceService.updateBalance(payerId, payeeId, amount);
+        assertEquals(200.0, defaultBalance.getNetAmount());
 
-        assertEquals(200.0, balance.getNetAmount());
-
-        verify(balanceRepository, times(1)).save(balance);
+        verify(balanceRepository, times(1)).save(defaultBalance);
     }
 
     @Test
     public void testUpdateBalanceWhenBalanceIsNull() {
-        String payerId = "payerId";
-        String payeeId = "payeeId";
-        double amount = 100.0;
+        when(balanceRepository.findByUsers(PAYER_ID, PAYEE_ID)).thenReturn(null);
 
-
-        when(balanceRepository.findByUsers(payerId, payeeId)).thenReturn(null);
-
-        balanceService.updateBalance(payerId, payeeId, amount);
+        balanceService.updateBalance(PAYER_ID, PAYEE_ID, DEFAULT_AMOUNT);
 
 
         verify(balanceRepository, times(1)).save((any(Balance.class)));
@@ -65,17 +61,14 @@ class BalanceServiceTest {
 
     @Test
     void testUpdateBalanceWhenUser2IsUser1() {
-        String payerId = "payerId";
-        String payeeId = "payeeId";
-        double amount = 100.0;
         Balance balance = new Balance();
-        balance.setUser1Id(payeeId);
-        balance.setUser2Id(payerId);
+        balance.setUser1Id(PAYEE_ID);
+        balance.setUser2Id(PAYER_ID);
         balance.setNetAmount(100.0);
 
-        when(balanceRepository.findByUsers(payerId, payeeId)).thenReturn(balance);
+        when(balanceRepository.findByUsers(PAYER_ID, PAYEE_ID)).thenReturn(balance);
 
-        balanceService.updateBalance(payerId, payeeId, amount);
+        balanceService.updateBalance(PAYER_ID, PAYEE_ID, DEFAULT_AMOUNT);
 
         assertEquals(0.0, balance.getNetAmount());
         verify(balanceRepository, times(1)).save(balance);
