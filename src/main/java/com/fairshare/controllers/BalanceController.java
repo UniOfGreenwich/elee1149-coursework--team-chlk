@@ -23,11 +23,6 @@ public class BalanceController {
         balanceService.updateBalance(payerId, payeeId, amount);
     }
 
-//    @GetMapping("/net")
-//    public Double getNetBalance(@RequestParam String user1, @RequestParam String user2){
-//        return balanceService.getNetBalance(user1, user2);
-
-
     @GetMapping("/{user1}/{user2}")
     public Double getNetBalance(@PathVariable Integer user1, @PathVariable Integer user2) {
         return balanceService.getNetBalance(user1, user2);

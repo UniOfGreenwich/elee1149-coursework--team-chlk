@@ -1,5 +1,6 @@
 package com.fairshare.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -14,17 +15,17 @@ import java.util.Optional;
 import java.util.Set;
 
 @Entity
-@Table(name = "User", schema = "fairdbo")
+@Table(name = "users", schema = "fairdbo")
 public class User {
 
     @Id
     @Column(name = "user_id")
     private Integer userId;
 
-    @Column(name = "first_name")
+    @Column(name = "firstname")
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name = "lastname")
     private String lastName;
 
     @Column(name = "email")
@@ -33,28 +34,22 @@ public class User {
     @Column(name = "username")
     private String username;
 
-    @Column(name = "password_hash")
+    @Column(name = "passwordhash")
     private String passwordHash;
 
     @Column(name = "password")
     private String password;
 
-    @ManyToMany
-    @JoinTable
-    (
-        name = "userGroup",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "group_id")
-    )
+    @ManyToMany (mappedBy = "users")
+    @JsonIgnore // Add this to avoid random massive response
     private Set<Group> groups;
 
-
-    public Integer getId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setId(Integer id) {
-        this.userId = id;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getFirstName() {
@@ -71,6 +66,38 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Set<Group> getGroups() {
