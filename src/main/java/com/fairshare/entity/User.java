@@ -6,12 +6,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "customers", schema = "dbo")
+@Table(name = "User", schema = "fairdbo")
 public class User {
 
     @Id
-    @Column(name = "id")
-    private Integer id;
+    @Column(name = "user_id")
+    private Integer userId;
 
     @Column(name = "first_name")
     private String firstName;
@@ -19,16 +19,25 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "group_id")
-    private String groupId;
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "username")
+    private String username;
+
+    @Column(name = "password_hash")
+    private String passwordHash;
+
+    @Column(name = "password")
+    private String password;
 
 
     public Integer getId() {
-        return id;
+        return userId;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.userId = id;
     }
 
     public String getFirstName() {
@@ -47,11 +56,4 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(String groupId) {
-        this.groupId = groupId;
-    }
 }

@@ -8,43 +8,44 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "balances", schema = "dbo")
+@Table(name = "Balance", schema = "fairdbo")
 public class Balance {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "balance_id")
+    private Integer balanceId;
 
     @Column(name = "user1_id")
-    private String user1Id;
+    private Integer user1Id;
 
     @Column(name = "user2_id")
-    private String user2Id;
+    private Integer user2Id;
 
     @Column(name = "net_amount")
     private Double netAmount;
 
-    public Long getId() {
-        return id;
+    public Integer getBalance_id() {
+        return balanceId;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.balanceId = balanceId;
     }
 
-    public String getUser1Id() {
+    public Integer getUser1Id() {
         return user1Id;
     }
 
-    public void setUser1Id(String user1Id) {
+    public void setUser1Id(Integer user1Id) {
         this.user1Id = user1Id;
     }
 
-    public String getUser2Id() {
+    public Integer getUser2Id() {
         return user2Id;
     }
 
-    public void setUser2Id(String user2Id) {
+    public void setUser2Id(Integer user2Id) {
         this.user2Id = user2Id;
     }
 
@@ -56,3 +57,4 @@ public class Balance {
         this.netAmount = netAmount;
     }
 }
+

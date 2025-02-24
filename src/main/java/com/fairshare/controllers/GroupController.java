@@ -20,7 +20,7 @@ public class GroupController {
     private UserRepository userRepository;
 
     @GetMapping ("/{groupId}/users")
-    public List<User> getUsersByGroupId(@PathVariable String groupId) {
+    public List<User> getUsersByGroupId(@PathVariable Integer groupId) {
         return userRepository.findByGroupId(groupId);
     }
 }

@@ -8,18 +8,23 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import java.util.Date;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 @Entity
-@Table(name = "expense", schema = "dbo")
+@Table(name = "Expense", schema = "fairdbo")
 public class Expense {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "expense_id")
     private Integer expenseId;
+
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "description")
     private String description;
@@ -31,7 +36,7 @@ public class Expense {
     private String currency;
 
     @Column(name = "date")
-    private Date date;
+    private LocalDate date;
 
     @Column(name = "category_id")
     private Integer categoryId;
@@ -39,12 +44,8 @@ public class Expense {
     @Column(name = "group_id")
     private Integer groupId;
 
-    @Column(name = "user_id")
-    private Integer userId;
-
-    @OneToMany(mappedBy = "expenseId", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserShare> userShares;
-
+    @Column(name = "payer_id")
+    private Integer payerId;
 
     public Integer getExpenseId() {
         return expenseId;
@@ -78,11 +79,11 @@ public class Expense {
         this.currency = currency;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -102,19 +103,14 @@ public class Expense {
         this.groupId = groupId;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getPayerId() {
+        return payerId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setPayerId(Integer userId) {
+        this.payerId = userId;
     }
 
-    public List<UserShare> getUserShares() {
-        return userShares;
-    }
-
-    public void setUserShares(List<UserShare> userShares) {
-        this.userShares = userShares;
+    public void setUserExpense(List<UserExpense> userExpenses) {
     }
 }
