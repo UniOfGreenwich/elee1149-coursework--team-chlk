@@ -7,6 +7,6 @@ import com.fairshare.entity.Category;
 
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
-    @Query("SELECT c.name FROM Category c WHERE c.id = :categoryId")
+    @Query("SELECT c.categoryName FROM Category c WHERE c.categoryId = :categoryId")
     String findCategoryNameById(@Param("categoryId") Integer categoryId);
 }
