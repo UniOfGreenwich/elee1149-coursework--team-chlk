@@ -13,6 +13,12 @@ public class GroupService {
     @Autowired
     private GroupRepository groupRepository;
 
+        public String getGroupNameById(Integer groupId) {
+            Group group = groupRepository.findById(groupId).orElse(null);
+            return group != null ? group.getGroupName() : null;
+        }
+
+
     public Set<User> getUsersByGroupId(Integer groupId) {
         Group group = groupRepository.findByGroupId(groupId);
         if (group != null) {

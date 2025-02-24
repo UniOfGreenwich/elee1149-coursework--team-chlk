@@ -21,6 +21,11 @@ public class GroupController {
     @Autowired
     private GroupService groupService;
 
+    @GetMapping("/{groupId}/name")
+    public String getGroupName(@PathVariable Integer groupId) {
+        return groupService.getGroupNameById(groupId);
+    }
+
     @GetMapping ("/{groupId}/users")
     public Set<User> getUsersByGroupId(@PathVariable Integer groupId) {
         return groupService.getUsersByGroupId(groupId);
