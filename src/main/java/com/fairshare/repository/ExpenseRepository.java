@@ -10,5 +10,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface ExpenseRepository extends JpaRepository<Expense, Long> {
+    List<Expense> findByGroupId(Integer groupId);
 
 }

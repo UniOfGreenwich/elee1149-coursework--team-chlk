@@ -27,7 +27,7 @@ public class ExpenseController {
 
     }
     @GetMapping("/all-expenses")
-    public List<Expense> getAllExpenses() {
-        return expenseService.getAllExpenses();
+    public List<Expense> getAllExpenses(@RequestParam Integer groupId) {
+        return expenseService.getExpensesByGroupId(groupId);
     }
 }

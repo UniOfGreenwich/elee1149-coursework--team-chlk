@@ -37,7 +37,7 @@ public class ExpenseService {
         }
     }
 
-    public List<Expense> getAllExpenses() {
-        return expenseRepository.findAll();
+    public List<Expense> getExpensesByGroupId(Integer groupId) {
+        return expenseRepository.findByGroupId(groupId);
     }
 }
