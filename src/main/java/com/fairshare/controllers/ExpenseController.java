@@ -20,13 +20,16 @@ public class ExpenseController {
     }
 
     @PostMapping("/add-expense")
-    public void addExpense(@RequestBody Expense expense, @RequestParam Integer payerId, @RequestBody List<UserExpense> userExpenses) {
-        expenseService.addExpense(expense, payerId, userExpenses);
+    public void addExpense(@RequestBody Expense expense, @RequestParam Integer payerId) {
+        if (expense.getCategoryId() == null) {
+            expense.setCategoryId(1); //set as deafult category
+        }
+        expenseService.addExpense(expense, payerId);
 
     }
-    @GetMapping("/recent-expenses")
-    public List<RecentExpensesDTO> getRecentExpenses(@RequestParam Integer userId, @RequestParam(defaultValue = "5") int limit) { // Optional limit parameter
-        return expenseService.getRecentExpenses(userId, limit);
-
-    }
+//    @GetMapping("/recent-expenses")
+//    public List<RecentExpensesDTO> getRecentExpenses(@RequestParam Integer userId, @RequestParam(defaultValue = "5") int limit) { // Optional limit parameter
+//        return expenseService.getRecentExpenses(userId, limit);
+//
+//    }
 }
