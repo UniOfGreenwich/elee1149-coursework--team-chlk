@@ -1,8 +1,7 @@
 package com.fairshare.controllers;
 
-import com.fairshare.DTO.RecentExpensesDTO;
 import com.fairshare.entity.Expense;
-import com.fairshare.entity.UserExpense;
+
 import com.fairshare.services.ExpenseService;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,9 +26,8 @@ public class ExpenseController {
         expenseService.addExpense(expense, payerId);
 
     }
-//    @GetMapping("/recent-expenses")
-//    public List<RecentExpensesDTO> getRecentExpenses(@RequestParam Integer userId, @RequestParam(defaultValue = "5") int limit) { // Optional limit parameter
-//        return expenseService.getRecentExpenses(userId, limit);
-//
-//    }
+    @GetMapping("/all-expenses")
+    public List<Expense> getAllExpenses() {
+        return expenseService.getAllExpenses();
+    }
 }

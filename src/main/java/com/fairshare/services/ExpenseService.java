@@ -8,6 +8,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -34,7 +35,9 @@ public class ExpenseService {
             balanceService.updateBalance(payerId, userShare.getUserId(), userShare.getShareAmount());
 
         }
+    }
 
-
+    public List<Expense> getAllExpenses() {
+        return expenseRepository.findAll();
     }
 }

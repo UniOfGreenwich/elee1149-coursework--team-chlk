@@ -11,6 +11,4 @@ import java.util.List;
 
 public interface ExpenseRepository extends JpaRepository<Expense, Long> {
 
-    @Query("SELECT e FROM Expense e JOIN UserExpense ue ON e.expenseId = ue.userExpenseId.expenseId WHERE ue.userExpenseId.userId = :userId ORDER BY e.date DESC")
-    List<Expense> findRecentExpensesByUserId(@Param("userId") Integer userId, Pageable pageable);
 }
