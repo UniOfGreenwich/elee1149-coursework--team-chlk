@@ -9,7 +9,7 @@ export function HomeMain() {
         {/* hero section */}
         <main>
             <section className="hero">
-                {/* <img src={require('../assets/ellipse-1.png')} alt="" className='ellipse-1 ellipse'/> might add later*/}
+                {/* <img src={require('../assets/ellipse-1.png')} alt="" className='ellipse-1 ellipse'/> */}
                 <div className="hero-content">
                     <p className="greetings">Hi, there!</p>
                     <h1 className="hero-title">Your smarter way to split costs</h1>
@@ -23,9 +23,9 @@ export function HomeMain() {
 
         {/* feature 1 */}
             <section className='feature feature-1'>
-            {/* <img src={require('../assets/ellipse-2.png')} alt="" className='ellipse-2 ellipse'/> might add later */}
+            {/* <img src={require('../assets/ellipse-2.png')} alt="" className='ellipse-2 ellipse'/> */}
                 <div className="image-container">
-                    <img src={require('../assets/image-2.png')} alt="" />
+                    <img src={require('../assets/feature-1.png')} alt="" />
                 </div>
                 <div className="content">
                     <p className="tagline">feature</p>
@@ -43,14 +43,14 @@ export function HomeMain() {
                     <p className="description">Track every penny with ease. From past transactions to upcoming payments, our tools make managing your finances simple and stress-free.</p>
                 </div>
                 <div className="image-container">
-                    <img src={require('../assets/image-3.png')} alt="" />
+                    <img src={require('../assets/feature-2.png')} alt="" />
                 </div>
             </section>
 
         {/* feature 3 */}
             <section className='feature feature-3'>
                 <div className="image-container">
-                    <img src={require('../assets/image-4.png')} alt="" />
+                    <img src={require('../assets/feature-3.png')} alt="" />
                 </div>
                 <div className="content">
                     <p className="tagline">feature</p>

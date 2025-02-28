@@ -44,7 +44,7 @@ public class BalanceService {
                 return -balance.getNetAmount();
             }
         }
-        return 0.0;
+        return null;
     }
 }
 
