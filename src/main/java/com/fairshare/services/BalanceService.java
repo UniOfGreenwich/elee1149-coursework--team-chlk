@@ -3,17 +3,19 @@ package com.fairshare.services;
 import com.fairshare.entity.Balance;
 import com.fairshare.repository.BalanceRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class BalanceService {
 
-    @Autowired
-    private BalanceRepository balanceRepository;
+    private final BalanceRepository balanceRepository;
+
+    public BalanceService(BalanceRepository balanceRepository) {
+        this.balanceRepository = balanceRepository;
+    }
 
     @Transactional
-    public void updateBalance(String payerId, String payeeId, double amount) {
+    public void updateBalance(Integer payerId, Integer payeeId, double amount) {
         Balance balance = balanceRepository.findByUsers(payerId, payeeId);
 
         if (balance == null) {
@@ -33,7 +35,7 @@ public class BalanceService {
 
     }
 
-    public Double getNetBalance(String user1, String user2) {
+    public Double getNetBalance(Integer user1, Integer user2) {
         Balance balance = balanceRepository.findByUsers(user1, user2);
         if (balance != null) {
             if (balance.getUser1Id().equals(user1)) {

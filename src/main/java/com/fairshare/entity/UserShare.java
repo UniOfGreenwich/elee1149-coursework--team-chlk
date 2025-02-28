@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "user_share", schema = "dbo")
+@Table(name = "user_share", schema = "fairdbo")
 public class UserShare {
 
     @Id
@@ -17,7 +17,7 @@ public class UserShare {
     private Integer id;
 
     @Column(name = "user_id")
-    private String userId;
+    private Integer userId;
 
     @Column(name = "expense_id")
     private Integer expenseId;
@@ -33,11 +33,11 @@ public class UserShare {
         this.id = id;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 

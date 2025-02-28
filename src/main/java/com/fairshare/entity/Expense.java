@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @Entity
-@Table(name = "expense", schema = "dbo")
+@Table(name = "expense", schema = "fairdbo")
 public class Expense {
 
     @Id
@@ -33,7 +33,7 @@ public class Expense {
     @Column(name = "date")
     private Date date;
 
-    @Column(name = "category_id")
+    @Column(name = "category_id", nullable = false)
     private Integer categoryId;
 
     @Column(name = "group_id")
