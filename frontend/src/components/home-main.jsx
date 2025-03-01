@@ -1,9 +1,20 @@
 import '../styles/reset.css'; // importing the styles file
 import '../styles/home-main.css'; // importing the styles file
+import ScrollReveal from 'scrollreveal';
 
 import { Link } from 'react-router-dom';
 
 export function HomeMain() {
+
+    console.log(document.querySelector('.hero-title'));
+    
+    // ScrollReveal().reveal('.description', {
+    //     duration: 1000, 
+    //     reset: true 
+    // });
+
+    
+    
     return (
         <>
         {/* hero section */}
@@ -67,7 +78,9 @@ export function HomeMain() {
                 <Link to='/sign-up' className='signup-button'>sign up</Link>
             </section>
         </main>
-
+        
         </>
-    )
+
+)
 }
+
