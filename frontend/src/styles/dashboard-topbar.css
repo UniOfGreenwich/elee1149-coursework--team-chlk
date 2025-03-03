@@ -4,7 +4,8 @@
     align-items: center;
     padding: 20px 0;
     border-bottom: 1px solid #4C3590;
-    margin-bottom: 1.5rem ;
+    margin-bottom: 1.5rem;
+    height: 10vh;
 }
 
 .page-title {
@@ -27,7 +28,6 @@
 }
 
 .search-container {
-    /* border: 1px solid; */
     display: flex;
     align-items: center;
     gap: 3rem;
