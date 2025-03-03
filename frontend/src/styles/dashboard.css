@@ -1,0 +1,10 @@
+.dashboard-wrapper {
+    display: grid;
+    grid-template-columns: auto 1fr;
+}
+
+.dashboard-content {
+    /* border: 1px solid white; */
+    color: white;
+    padding: 2rem;
+}
