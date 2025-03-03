@@ -1,5 +1,6 @@
 package com.fairshare.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,6 +9,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +34,7 @@ public class Expense {
     private String currency;
 
     @Column(name = "date")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date date;
 
     @Column(name = "category_id", nullable = false)
@@ -43,7 +47,7 @@ public class Expense {
     private Integer userId;
 
     @OneToMany(mappedBy = "expenseId", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserShare> userShares;
+    private List<UserShare> userShares = new ArrayList<>();
 
 
     public Integer getExpenseId() {
