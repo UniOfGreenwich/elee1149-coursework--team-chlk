@@ -2,7 +2,6 @@ package com.fairshare.services;
 
 import com.fairshare.Requests.CreateUserRequest;
 import com.fairshare.entity.User;
-import com.fairshare.repository.BalanceRepository;
 import com.fairshare.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,7 +16,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class UserServiceTest {
+class UserServiceTest {
 
     @Mock
     UserRepository userRepository;
@@ -29,7 +28,7 @@ public class UserServiceTest {
     String password = "password";
 
     @Test
-    void testAuthenitcateLoginWithValidCredentials() {
+    void testAuthenticateLoginWithValidCredentials() {
         User testUser = new User();
 
         testUser.setEmail(email);
@@ -80,6 +79,4 @@ public class UserServiceTest {
 
         assertNull(result);
     }
-
-
 }
