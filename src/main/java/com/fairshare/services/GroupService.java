@@ -26,8 +26,7 @@ public class GroupService {
 
     public Group createGroup(String groupName, Integer userId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
-        Group group = new Group();
-        group.setGroupName(groupName);
+        Group group = new Group(null, groupName);
         group.getUsers().add(user);
         return groupRepository.save(group);
     }
