@@ -63,7 +63,7 @@ public class UserControllerTests {
     }
 
     @Test
-    void testNewUserAddedWhenNewUserIsTrue() {
+    void testNewUserAddedWhenNoUserExists() {
         String firstName = "Hello";
         String lastName = "World";
         String username = "HelloWorld";
@@ -79,5 +79,24 @@ public class UserControllerTests {
         assertEquals("New User created!", testResponse.getMessage());
         assertEquals(true, testResponse.getSuccess());
         assertEquals(null, testResponse.getUserId());
+    }
+
+    @Test
+    void testNewUserAddedWhenUserExists() {
+        String firstName = "Hello";
+        String lastName = "World";
+        String username = "HelloWorld";
+        String email = "helloworld@test.com";
+        String password = "password";
+
+        CreateUserRequest testRequest = new CreateUserRequest(firstName, lastName, username, email, password);
+
+        when(userService.CreateUser(testRequest)).thenReturn(null);
+
+        CreateUserResponse testResponse = userController.newUser(testRequest);
+
+        assertEquals("User already exists", testResponse.getMessage());
+        assertEquals(false, testResponse.getSuccess());
+        assertNull(testResponse.getUserId());
     }
 }
