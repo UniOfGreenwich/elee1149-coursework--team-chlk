@@ -24,8 +24,8 @@ class BalanceServiceTest {
     @InjectMocks
     BalanceService balanceService;
 
-    private static final String PAYER_ID = "payerId";
-    private static final String PAYEE_ID = "payeeId";
+    private static final Integer PAYER_ID = 1;
+    private static final Integer PAYEE_ID = 2;
     private static final double DEFAULT_AMOUNT = 100.0;
 
     private Balance defaultBalance;
@@ -79,8 +79,8 @@ class BalanceServiceTest {
     void testGetNetBalance() {
         /* Create and initialise our variables that we need to pass through the test
          this will match the parameters of the method you are testing. */
-        String user1 = "user1";
-        String user2 =  "user2";
+        Integer user1 = 1;
+        Integer user2 =  2;
         Balance balance = new Balance(); //Creat a new balance object
         balance.setUser1Id(user1); //Set the user1Id field of the Balance object to user1
         balance.setUser2Id(user2); // Ditto for user2
