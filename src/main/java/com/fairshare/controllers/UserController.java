@@ -36,7 +36,7 @@ public class UserController {
     }
     @PostMapping("/newUser")
     public CreateUserResponse newUser(@RequestBody CreateUserRequest request) {
-        User createdUser = userService.CreateUser(request);
+        User createdUser = userService.createUser(request);
         if (createdUser != null) {
             return new CreateUserResponse("New User created!", true, createdUser.getUserId());
         } else {

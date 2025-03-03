@@ -72,7 +72,7 @@ public class UserControllerTests {
 
         CreateUserRequest testRequest = new CreateUserRequest(firstName, lastName, username, email, password);
 
-        when(userService.CreateUser(testRequest)).thenReturn(new User());
+        when(userService.createUser(testRequest)).thenReturn(new User());
 
         CreateUserResponse testResponse = userController.newUser(testRequest);
 
@@ -91,7 +91,7 @@ public class UserControllerTests {
 
         CreateUserRequest testRequest = new CreateUserRequest(firstName, lastName, username, email, password);
 
-        when(userService.CreateUser(testRequest)).thenReturn(null);
+        when(userService.createUser(testRequest)).thenReturn(null);
 
         CreateUserResponse testResponse = userController.newUser(testRequest);
 
