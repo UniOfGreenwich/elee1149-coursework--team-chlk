@@ -41,4 +41,22 @@ public class UserControllerTests {
         assertEquals(true, testResponse.getSuccess());
         assertEquals(001, testResponse.getUserId());
     }
+
+    @Test
+    void testLoginWithInValidUser() {
+        //Create variables to test with Mocks
+        String email = "test@example.com";
+        String password = "password";
+
+        LoginRequest testRequest = new LoginRequest(email, password);
+
+        when(userService.authenticateLogin(email, password)).thenReturn(null);
+
+        LoginResponse testResponse = userController.login(testRequest);
+
+        //Assert our expected results
+        assertEquals("Invalid Login", testResponse.getMessage());
+        assertEquals(false, testResponse.getSuccess());
+        assertEquals(null, testResponse.getUserId());
+    }
 }
