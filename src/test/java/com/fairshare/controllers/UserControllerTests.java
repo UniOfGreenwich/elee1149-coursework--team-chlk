@@ -1,5 +1,7 @@
 package com.fairshare.controllers;
 
+import com.fairshare.Requests.CreateUserRequest;
+import com.fairshare.Requests.CreateUserResponse;
 import com.fairshare.Requests.LoginRequest;
 import com.fairshare.Requests.LoginResponse;
 import com.fairshare.entity.User;
@@ -57,6 +59,25 @@ public class UserControllerTests {
         //Assert our expected results
         assertEquals("Invalid Login", testResponse.getMessage());
         assertEquals(false, testResponse.getSuccess());
+        assertEquals(null, testResponse.getUserId());
+    }
+
+    @Test
+    void testNewUserAddedWhenNewUserIsTrue() {
+        String firstName = "Hello";
+        String lastName = "World";
+        String username = "HelloWorld";
+        String email = "helloworld@test.com";
+        String password = "password";
+
+        CreateUserRequest testRequest = new CreateUserRequest(firstName, lastName, username, email, password);
+
+        when(userService.CreateUser(testRequest)).thenReturn(new User());
+
+        CreateUserResponse testResponse = userController.newUser(testRequest);
+
+        assertEquals("New User created!", testResponse.getMessage());
+        assertEquals(true, testResponse.getSuccess());
         assertEquals(null, testResponse.getUserId());
     }
 }
