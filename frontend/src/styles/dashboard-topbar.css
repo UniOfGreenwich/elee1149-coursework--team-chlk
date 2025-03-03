@@ -28,7 +28,6 @@
 }
 
 .search-container {
-    /* border: 1px solid; */
     display: flex;
     align-items: center;
     gap: 3rem;
