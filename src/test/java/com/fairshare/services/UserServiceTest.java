@@ -41,5 +41,17 @@ public class UserServiceTest {
 
     }
 
+    @Test
+    void testAuthenitcateLoginWithInvalidCredentials() {
+        String email = "test@example.com";
+        String password = "password";
+        
+        when(userRepository.findByEmail(email)).thenReturn(null);
+
+        User testResult = userService.authenticateLogin(email, password);
+
+        assertNotNull(testResult);
+    }
+
 
 }
