@@ -11,6 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -22,11 +23,11 @@ public class UserServiceTest {
     @InjectMocks
     UserService userService;
 
+    String email = "test@example.com";
+    String password = "password";
 
     @Test
     void testAuthenitcateLoginWithValidCredentials() {
-        String email = "test@example.com";
-        String password = "password";
         User testUser = new User();
 
         testUser.setEmail(email);
@@ -43,15 +44,11 @@ public class UserServiceTest {
 
     @Test
     void testAuthenitcateLoginWithInvalidCredentials() {
-        String email = "test@example.com";
-        String password = "password";
-        
         when(userRepository.findByEmail(email)).thenReturn(null);
 
         User testResult = userService.authenticateLogin(email, password);
 
-        assertNotNull(testResult);
+        assertNull(testResult);
     }
-
 
 }
