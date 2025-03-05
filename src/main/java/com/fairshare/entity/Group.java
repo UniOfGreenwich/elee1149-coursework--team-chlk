@@ -32,6 +32,9 @@ public class Group {
     )
     private Set<User> users = new HashSet<>();
 
+    public Group() {
+    }
+
     public Group(Integer groupId, String groupName) {
         this.groupId = groupId;
         this.groupName = groupName;
