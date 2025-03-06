@@ -1,5 +1,6 @@
 package com.fairshare.services;
 
+import com.fairshare.DTO.UserWithBalance;
 import com.fairshare.entity.Group;
 import com.fairshare.entity.User;
 import com.fairshare.repository.GroupRepository;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class GroupService {
@@ -16,12 +18,21 @@ public class GroupService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private BalanceService balanceService;
 
     public String getGroupNameById(Integer groupId) {
         return groupRepository.findById(groupId).map(Group::getGroupName).orElse(null);
     }
-    public Set<User> getUsersByGroupId(Integer groupId) {
-        return groupRepository.findById(groupId).map(Group::getUsers).orElse(null);
+    public Set<UserWithBalance> getUsersByGroupId(Integer groupId, Integer userId) {
+        return groupRepository.findById(groupId).map(Group::getUsers).orElse(null)
+                .stream()
+                .map( user -> {
+        UserWithBalance userWithBalance = new UserWithBalance(user, balanceService.getNetBalance(userId, user.getUserId()));
+        userWithBalance.setBalance(balanceService.getNetBalance(userId, user.getUserId()));
+        return userWithBalance;
+    })
+            .collect(Collectors.toSet());
     }
 
     public Group createGroup(String groupName, Integer userId) {
