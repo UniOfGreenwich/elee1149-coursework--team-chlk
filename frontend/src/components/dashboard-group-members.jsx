@@ -9,7 +9,7 @@ export function GroupMembers() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:8080/group/1/users")
+    fetch("http://localhost:8080/group/1/1/users")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch data");
