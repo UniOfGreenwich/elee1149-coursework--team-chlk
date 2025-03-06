@@ -31,50 +31,15 @@ export function GroupMembers() {
   }
 
   if (error) {
-    console.log(data); //printing the data to the console
     return <p>Error: {error}</p>;
   }
 
-  // const data = [
-  //   {
-  //     userId: 5,
-  //     firstName: "Heather",
-  //     lastName: "Russell",
-  //     email: "Heather@gmail.com",
-  //     username: "HeatherR",
-  //     passwordHash: null,
-  //     password: "password789",
-  //     balance: 20,
-  //   },
-
-  //   {
-  //     userId: 1,
-  //     firstName: "Charu",
-  //     lastName: "Srivastava",
-  //     email: "Charu@email.com",
-  //     username: "charu_s",
-  //     passwordHash: null,
-  //     password: "password1",
-  //     balance: -30.5,
-  //   },
-  //   {
-  //     userId: 2,
-  //     firstName: "Kyle",
-  //     lastName: "Anderson",
-  //     email: "kyle@email.com",
-  //     username: "kyle_a",
-  //     passwordHash: null,
-  //     password: "password1",
-  //     balance: 15.0,
-  //   },
-  // ];
-
+  console.log(data); //printing the data to the console
 
   return (
     <div className="dashboard-grid-component">
       <h2 className="component-title">Group Members</h2>
       <p className="balance-title">Balance</p>
-
       <ul>
         {data.map((e) => (
           <li key={e.userId}>
