@@ -39,6 +39,21 @@ public class User {
     @JsonIgnore // Add this to avoid random massive response
     private Set<Group> groups;
 
+    public User(Integer userId, String firstName, String lastName, String email, String username, String passwordHash, String password) {
+        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.username = username;
+        this.passwordHash = passwordHash;
+        this.password = password;
+    }
+
+    public User() {
+
+    }
+
+
     public Integer getUserId() {
         return userId;
     }
