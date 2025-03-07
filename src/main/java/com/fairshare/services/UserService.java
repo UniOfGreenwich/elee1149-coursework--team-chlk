@@ -22,7 +22,7 @@ public class UserService {
         }
     }
 
-    public User CreateUser (CreateUserRequest createUserRequest) {
+    public User createUser(CreateUserRequest createUserRequest) {
         if (userRepository.findByEmail(createUserRequest.getEmail()) == null) {
 
             User newUser = new User();

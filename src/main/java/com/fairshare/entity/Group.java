@@ -30,6 +30,14 @@ public class Group {
     @JsonIgnore  // Important to prevent serialization loops
     private Set<User> users = new HashSet<>();
 
+    public Group() {
+    }
+
+    public Group(Integer groupId, String groupName) {
+        this.groupId = groupId;
+        this.groupName = groupName;
+    }
+
     public Integer getGroupId() {
         return groupId;
     }

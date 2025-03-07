@@ -8,6 +8,17 @@ public class CreateUserRequest {
     private String email;
     private String password;
 
+    public CreateUserRequest() {
+    }
+
+    public CreateUserRequest(String firstName, String lastName, String username, String email, String password) {
+        this.FirstName = firstName;
+        this.LastName = lastName;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
     public String getFirstName() {return FirstName;}
 
     public void setFirstName(String FirstName) {this.FirstName = FirstName;}

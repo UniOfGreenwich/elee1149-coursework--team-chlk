@@ -2,6 +2,7 @@ package com.fairshare.controllers;
 
 import com.fairshare.Requests.AddUserToGroupResponse;
 import com.fairshare.Requests.AddUserToGroupRequest;
+import com.fairshare.DTO.UserWithBalance;
 import com.fairshare.Requests.CreateGroupRequest;
 import com.fairshare.Requests.CreateGroupResponse;
 import com.fairshare.entity.Group;
@@ -36,9 +37,9 @@ public class GroupController {
         return groupService.getGroupNameById(groupId);
     }
 
-    @GetMapping ("/{groupId}/users") //(Working with Hopscotch 24/02/25)
-    public Set<User> getUsersByGroupId(@PathVariable Integer groupId) {
-        return groupService.getUsersByGroupId(groupId);
+    @GetMapping ("/{groupId}/{userId}/users") //(Working with Hopscotch 24/02/25)
+    public Set<UserWithBalance> getUsersByGroupId(@PathVariable Integer groupId, @PathVariable Integer userId) {
+        return groupService.getUsersByGroupId(groupId, userId);
     }
 
     @PostMapping("/create") //(Working with Hopscotch 24/02/25)
