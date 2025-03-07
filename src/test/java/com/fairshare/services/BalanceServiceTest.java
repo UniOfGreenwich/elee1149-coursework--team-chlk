@@ -79,8 +79,10 @@ class BalanceServiceTest {
     void testGetNetBalance() {
         /* Create and initialise our variables that we need to pass through the test
          this will match the parameters of the method you are testing. */
+
         Integer user1 = 1;
         Integer user2 =  2;
+
         Balance balance = new Balance(); //Creat a new balance object
         balance.setUser1Id(user1); //Set the user1Id field of the Balance object to user1
         balance.setUser2Id(user2); // Ditto for user2
