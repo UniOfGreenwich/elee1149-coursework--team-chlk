@@ -37,10 +37,6 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "adminId")
-    private Set<Group> groupsAdministered;
-
     @ManyToMany (mappedBy = "users")
     @JsonIgnore // Add this to avoid random massive response
     private Set<Group> groups;

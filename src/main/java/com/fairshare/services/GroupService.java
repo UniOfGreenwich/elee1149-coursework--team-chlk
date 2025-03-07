@@ -32,13 +32,13 @@ public class GroupService {
 
     public Group createGroup(CreateGroupRequest createGroupRequest) {
         String groupName = createGroupRequest.getGroupName();
-        Integer adminId = createGroupRequest.getAdminId();
+        Integer userId = createGroupRequest.getUserId();
         Integer groupId = createGroupRequest.getGroupId();
 
-        User admin = userRepository.findById(adminId)
+        User user = userRepository.findById(userId)
                 .orElse(null);
 
-        if (admin == null) {
+        if (user == null) {
             return null; // Indicates user not found
         }
 
@@ -50,8 +50,7 @@ public class GroupService {
 
         Group newGroup = new Group();
         newGroup.setGroupName(groupName);
-        newGroup.setAdmin(admin); // Set the admin
-        newGroup.getUsers().add(admin); // Add admin to the users set as well
+        newGroup.getUsers().add(user); // Add the user who created the group to the users set as well
 
         return groupRepository.save(newGroup);
     }

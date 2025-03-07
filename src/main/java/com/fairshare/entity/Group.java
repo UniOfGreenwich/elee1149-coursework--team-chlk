@@ -17,8 +17,8 @@ public class Group {
     private String groupName;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "admin_id")
-    private User adminId;
+    @JoinColumn(name = "user_id")
+    private User userId;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -45,16 +45,12 @@ public class Group {
         this.groupName = groupName;
     }
 
-    public User getAdmin() {
-        return adminId;
+    public User getUser() {
+        return userId;
     }
 
-    public void setAdmin(User adminId) {
-        this.adminId = adminId;
-    }
-
-    public boolean isAdmin(User user) {
-        return this.adminId != null && this.adminId.getUserId().equals(user.getUserId());
+    public void setUser(User userId) {
+        this.userId = userId;
     }
 
     @JsonIgnore
