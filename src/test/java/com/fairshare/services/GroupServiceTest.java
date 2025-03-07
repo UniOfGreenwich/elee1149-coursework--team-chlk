@@ -1,5 +1,6 @@
 package com.fairshare.services;
 
+import com.fairshare.DTO.UserWithBalance;
 import com.fairshare.entity.Group;
 import com.fairshare.entity.User;
 import com.fairshare.repository.GroupRepository;
@@ -59,13 +60,14 @@ public class GroupServiceTest {
     @Test
     void testGetUsersByGroupId() {
         Integer groupId = 1;
+        Integer userId = 1;
         Set<User> users = new HashSet<>();
         Group group = new Group(groupId, "Test Group");
         group.setUsers(users);
 
         when(groupRepository.findById(groupId)).thenReturn(Optional.of(group));
 
-        Set<User> result = groupService.getUsersByGroupId(groupId);
+        Set<UserWithBalance> result = groupService.getUsersByGroupId(groupId, userId);
 
         assertEquals(users, result);
     }
