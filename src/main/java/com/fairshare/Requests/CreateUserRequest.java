@@ -36,8 +36,4 @@ public class CreateUserRequest {
         this.password = password;
     }
 
-    //Charu TODO: Add the fields for the CreateUserRequest class
-    // Look at entity class
-    // Create createUser method in UserService class
-    // Create createUser method in UserController class
 }

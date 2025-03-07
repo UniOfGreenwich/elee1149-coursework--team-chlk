@@ -1,14 +1,7 @@
 package com.fairshare.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,13 +16,18 @@ public class Group {
     @Column(name = "groupname")
     private String groupName;
 
-    @ManyToMany
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "admin_id")
+    private User adminId;
+
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "user_group",
             schema = "fairdbo",
-            joinColumns = @jakarta.persistence.JoinColumn(name = "group_id"),
-            inverseJoinColumns = @jakarta.persistence.JoinColumn(name = "user_id")
+            joinColumns = @JoinColumn(name = "group_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
     )
+    @JsonIgnore  // Important to prevent serialization loops
     private Set<User> users = new HashSet<>();
 
     public Integer getGroupId() {
@@ -43,11 +41,23 @@ public class Group {
     public String getGroupName() {
         return groupName;
     }
-
     public void setGroupName(String groupName) {
         this.groupName = groupName;
     }
 
+    public User getAdmin() {
+        return adminId;
+    }
+
+    public void setAdmin(User adminId) {
+        this.adminId = adminId;
+    }
+
+    public boolean isAdmin(User user) {
+        return this.adminId != null && this.adminId.getUserId().equals(user.getUserId());
+    }
+
+    @JsonIgnore
     public Set<User> getUsers() {
         return users;
     }
