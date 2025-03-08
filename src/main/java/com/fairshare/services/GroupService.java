@@ -19,7 +19,7 @@ public class GroupService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private BalanceService balanceService;
+    private BalanceService  balanceService;
 
     public String getGroupNameById(Integer groupId) {
         return groupRepository.findById(groupId).map(Group::getGroupName).orElse(null);
