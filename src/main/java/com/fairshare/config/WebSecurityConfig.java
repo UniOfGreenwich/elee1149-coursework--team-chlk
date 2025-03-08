@@ -15,7 +15,7 @@ public class WebSecurityConfig {
         http
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/", "/home", "/login", "/group-dashboard", "/group/**", "/users/login").permitAll()
+                                .requestMatchers("/", "/home", "/login", "/group-dashboard", "/group/**", "/users/**", "/expense/**", "/balances/**" ).permitAll()
                                 .anyRequest().authenticated()
                 )
                 .formLogin(formLogin ->
@@ -26,7 +26,8 @@ public class WebSecurityConfig {
                 .logout(logout ->
                         logout
                                 .permitAll()
-                );
+                )
+                .csrf(csrf -> csrf.disable());
 
         return http.build();
     }
