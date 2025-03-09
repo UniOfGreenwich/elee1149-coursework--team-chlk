@@ -1,0 +1,37 @@
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.button-container .button {
+  padding: 1.3rem 12px;
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  width: 80%;
+  margin: 0 auto;
+  transition: background-color 200ms ease-in;
+}
+
+.add-expense {
+  background-color: #fe6789;
+}
+
+.settle-payment {
+  background-color: #4495c7;
+}
+
+.add-expense:hover {
+  background-color: #e05a7a;
+}
+
+.settle-payment:hover {
+  background-color: #3c82ae;
+}
