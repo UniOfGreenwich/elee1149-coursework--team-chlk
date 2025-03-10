@@ -14,16 +14,11 @@ This is how you dropdown.
 ### Prerequisites
 Before moving foward with any of these steps, ensure that **Docker** is installed and running on your system. If you do not have **Docker** installed you can download and install it from the [offical Docker website](https://www.docker.com/). It is also assumed that you have a working internet connection to pull the needed Docker images. We also assume basic familiarity with command-line operations.
 
-<details>
-<summary>Clone the repository</summary>
-<br>
-Clone the `fairshare` repository to your local machine. This will give you access to the 3 Main Docker Files: docker.backend, docker.frontend, docker-compose.yml. 
-```
-git clone https://github.com/UniOfGreenwich/elee1149-coursework--team-chlk.git
-```
-</details>
 
-Clone the `fairshare` repository to your local machine. This will give you access to the 3 Main Docker Files: docker.backend, docker.frontend, docker-compose.yml. 
+1. Clone the `fairshare` repository to your local machine. This will give you access to the 3 Main Docker Files:
+- docker.backend
+- docker-compose.yml
+- docker.frontend,  
 ```
 git clone https://github.com/UniOfGreenwich/elee1149-coursework--team-chlk.git
 ```
