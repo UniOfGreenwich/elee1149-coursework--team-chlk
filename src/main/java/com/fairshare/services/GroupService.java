@@ -20,7 +20,7 @@ public class GroupService {
 
     @Autowired
     private UserRepository userRepository;
-  
+
     @Autowired
     private BalanceService balanceService;
 
@@ -56,47 +56,50 @@ public class GroupService {
         newGroup.getUsers().add(user); // Add the user who created the group to the users set as well
 
         return groupRepository.save(newGroup);
-      
-    public Set<UserWithBalance> getUsersByGroupId(Integer groupId, Integer userId) {
-        return groupRepository.findById(groupId).map(Group::getUsers).orElse(null)
-                .stream()
-                .map( user -> {
-        UserWithBalance userWithBalance = new UserWithBalance(user, balanceService.getNetBalance(userId, user.getUserId()));
-        userWithBalance.setBalance(balanceService.getNetBalance(userId, user.getUserId()));
-        return userWithBalance;
-    })
-            .collect(Collectors.toSet());
     }
 
-    public Group addUserToGroup(Integer groupId, Integer userId) {
-        Group group = groupRepository.findById(groupId)
-                .orElse(null);
-        User user = userRepository.findById(userId)
-                .orElse(null);
-
-        if (group == null && user == null) {
-            Group errorGroup = new Group();
-            errorGroup.setGroupName("GroupAndUserError");
-            return errorGroup;
-        } else if (group == null) {
-            Group errorGroup = new Group();
-            errorGroup.setGroupName("GroupNotFoundError");
-            return errorGroup;
-        } else if (user == null) {
-            Group errorGroup = new Group();
-            errorGroup.setGroupName("UserNotFoundError");
-            return errorGroup;
+        public Set<UserWithBalance> getUsersByGroupId (Integer groupId, Integer userId){
+            return groupRepository.findById(groupId).map(Group::getUsers).orElse(null)
+                    .stream()
+                    .map(user -> {
+                        UserWithBalance userWithBalance = new UserWithBalance(user, balanceService.getNetBalance(userId, user.getUserId()));
+                        userWithBalance.setBalance(balanceService.getNetBalance(userId, user.getUserId()));
+                        return userWithBalance;
+                    })
+                    .collect(Collectors.toSet());
         }
 
-        if (group.getUsers().contains(user)) {
-            Group errorGroup = new Group();
-            errorGroup.setGroupName("UserAlreadyInGroup");
-            return errorGroup;
+        public Group addUserToGroup (Integer groupId, Integer userId){
+            Group group = groupRepository.findById(groupId)
+                    .orElse(null);
+            User user = userRepository.findById(userId)
+                    .orElse(null);
+
+            if (group == null && user == null) {
+                Group errorGroup = new Group();
+                errorGroup.setGroupName("GroupAndUserError");
+                return errorGroup;
+            } else if (group == null) {
+                Group errorGroup = new Group();
+                errorGroup.setGroupName("GroupNotFoundError");
+                return errorGroup;
+            } else if (user == null) {
+                Group errorGroup = new Group();
+                errorGroup.setGroupName("UserNotFoundError");
+                return errorGroup;
+            }
+
+            if (group.getUsers().contains(user)) {
+                Group errorGroup = new Group();
+                errorGroup.setGroupName("UserAlreadyInGroup");
+                return errorGroup;
+            }
+
+            group.getUsers().add(user);
+            groupRepository.save(group);
+            return group;
         }
 
-        group.getUsers().add(user);
-        groupRepository.save(group);
-        return group;
     }
 
-}
+
