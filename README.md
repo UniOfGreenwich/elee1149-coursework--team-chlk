@@ -8,7 +8,8 @@
 This is how you dropdown.
 </details>
 
-## Installation
+## Installation
+
 `Fairshare` is designed to be run with `Docker` container to simplify the setup process and ensure consistency across different environments. Below are the outline steps to get the application up and running on your machine:
 
 ### Prerequisites
