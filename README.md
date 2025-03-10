@@ -92,16 +92,17 @@ Fairshare is designed to run within a [Docker](https://www.docker.com/resources/
 
 | Technology   | Section Used    |
 |--------------|-----------------|
-| ![Postman](https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/postman.png) | API Testing |
-| ![HTML](https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/html.png) | Frontend Structure |
-| ![CSS](https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/css.png) | Frontend Styling |
-| ![JavaScript](https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/javascript.png) | Frontend Logic |
-| ![React](https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/react.png) | Frontend Framework |
-| ![npm](https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/npm.png) | Package Management |
-| ![Java](https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/java.png) | Backend Logic |
-| ![Spring](https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring.png) | Backend Framework |
-| ![PostgreSQL](https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/postgresql.png) | Database Management |
-| ![Spring Boot](https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring_boot.png) | Backend Framework |
+| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/postman.png" width="50"> | API Testing |
+| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/html.png" width="50"> | Frontend Structure |
+| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/css.png" width="50"> | Frontend Styling |
+| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/javascript.png" width="50"> | Frontend Logic |
+| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/react.png" width="50"> | Frontend Framework |
+| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/npm.png" width="50"> | Package Management |
+| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/java.png" width="50"> | Backend Logic |
+| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring.png" width="50"> | Backend Framework |
+| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/postgresql.png" width="50"> | Database Management |
+| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring_boot.png" width="50"> | Backend Framework |
+
 
 
 
