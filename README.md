@@ -51,19 +51,22 @@ Fairshare is designed to run within a [Docker](https://www.docker.com/resources/
 <summary>Running Fairshare</summary>
 <div></div>
 <ol>
-  <li>**Clone the repository:**
+  <li>Clone the repository:
+
     
     ```bash
     git clone https://github.com/UniOfGreenwich/elee1149-coursework--team-chlk.git
     ```
   </li>
-  <li>**Build and run:** Navigate to the project's root directory and run:
+  <li>Build and run: Navigate to the project's root directory and run:
+    
+    
     ```bash
     docker-compose up --build
     ```
     This command builds and starts the application. It may take some time depending on your internet connection.
   </li>
-  <li>**Verify:** Access the application in your web browser:
+  <li>Verify: Access the application in your web browser:
     <ul>
       <li>Frontend: <a href="http://localhost:3000/">http://localhost:3000/</a></li>
       <li>Backend (API): http://localhost:8080</li>
@@ -75,7 +78,22 @@ Fairshare is designed to run within a [Docker](https://www.docker.com/resources/
 ## Tech Stack 
 
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=UniOfGreenwich&repo=elee1149-coursework--team-chlk&layout=compact" alt="Top Languages" />
+	<table>
+		<tr>
+			<td><code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/postman.png" alt="Postman" title="Postman"/></code></td>
+			<td><code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/html.png" alt="HTML" title="HTML"/></code></td>
+			<td><code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/css.png" alt="CSS" title="CSS"/></code></td>
+			<td><code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/javascript.png" alt="JavaScript" title="JavaScript"/></code></td>
+			<td><code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/react.png" alt="React" title="React"/></code></td>
+			<td><code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/npm.png" alt="npm" title="npm"/></code></td>
+			<td><code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/java.png" alt="Java" title="Java"/></code></td>
+			<td><code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring.png" alt="Spring" title="Spring"/></code></td>
+		</tr>
+		<tr>
+			<td><code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring_boot.png" alt="Spring Boot" title="Spring Boot"/></code></td>
+			<td><code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/postgresql.png" alt="PostgreSQL" title="PostgreSQL"/></code></td>
+		</tr>
+	</table>
 </div>
 
 * **Frontend:** React, HTML, CSS, JavaScript, npm
