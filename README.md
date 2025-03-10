@@ -12,7 +12,16 @@ This is how you dropdown.
 `Fairshare` is designed to be run with `Docker` container to simplify the setup process and ensure consistency across different environments. Below are the outline steps to get the application up and running on your machine:
 
 ### Prerequisites
-Before moving foward with any of these steps, ensure that `Docker` is installed and running on your system. If you do not have `Docker` installed you can download and install it from the offical Docker website [here](https://www.docker.com/). It is also assumed that you have a working internet connection to pull the needed Docker images. We also assume basic familiarity with command-line operations.
+Before moving foward with any of these steps, ensure that **Docker** is installed and running on your system. If you do not have **Docker** installed you can download and install it from the [offical Docker website](https://www.docker.com/). It is also assumed that you have a working internet connection to pull the needed Docker images. We also assume basic familiarity with command-line operations.
+
+<details>
+<summary>Clone the repository</summary>
+<br>
+Clone the `fairshare` repository to your local machine. This will give you access to the 3 Main Docker Files: docker.backend, docker.frontend, docker-compose.yml. 
+```
+git clone https://github.com/UniOfGreenwich/elee1149-coursework--team-chlk.git
+```
+</details>
 
 Clone the `fairshare` repository to your local machine. This will give you access to the 3 Main Docker Files: docker.backend, docker.frontend, docker-compose.yml. 
 ```
