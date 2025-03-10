@@ -1,53 +1,150 @@
-# [Fairshare](http://localhost:3000/)
+<h1 align="center"><a href="http://localhost:3000/">Fairshare</h1>
 
+<div align="center">
+  <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=F7F7F7&width=435&lines=Your+smarter+way+to+split+costs;Split+Smarter%2C+Together;Take+Control+of+your+Expenses;Everything+at+a+glance" alt="Typing SVG" /></a>
+</div>
+
+
+<h4 align="center">
+  <img width="668" alt="Image" src="https://github.com/user-attachments/assets/7fc40b44-09a1-41ad-97e6-b38dbb525b76" />
+</h4>
 
 ## Introduction
 
-`fairshare` is a cool app - [TODO]
+Fairshare simplifies how you share expenses with friends, family, and groups through its powerful web application. Track, split, and settle costs seamlessly, all in one place. It's cost-sharing made smarter.
 
-<img width="668" alt="Image" src="https://github.com/user-attachments/assets/7fc40b44-09a1-41ad-97e6-b38dbb525b76" />
+Fairshare offers a streamlined approach to managing shared expenses, eliminating the hassle of manual calculations and awkward IOUs.  Whether you're splitting bills with roommates, tracking holiday costs with friends, or managing group expenses for a project, Fairshare makes it easy to keep everyone on the same page.
 
 <details>
-<summary>How do I dropdown?</summary>
-<br>
-This is how you dropdown.
+<summary>Click to expand features</summary>
+
+ 
+- **User-friendly Interface:** Intuitive design for effortless expense tracking and splitting.
+- **Group Management:** Create and manage groups for different expense sharing scenarios.
+- **Real-time Updates:** Instantly see the latest expenses and balances.
+- **Flexible Splitting:** Divide expenses equally or by custom percentages.
+- **Expense History:** Maintain a detailed record of all transactions.
+- **Secure and Reliable:** Your data is safe and accessible whenever you need it.
 </details>
 
+## Usage
+Currently, Fairshare is a locally hosted product. To get started, follow the [Intallation instructions](#installation)
+
+<a id="installation"></a>
 ## Installation
 
-`Fairshare` is designed to be run with `Docker` container to simplify the setup process and ensure consistency across different environments. Below are the outline steps to get the application up and running on your machine:
+### 🐳 Docker Quick Start
 
-### Prerequisites
-Before moving foward with any of these steps, ensure that **Docker** is installed and running on your system. If you do not have **Docker** installed you can download and install it from the [offical Docker website](https://www.docker.com/). It is also assumed that you have a working internet connection to pull the needed Docker images. We also assume basic familiarity with command-line operations.
+Fairshare is designed to run within a [Docker](https://www.docker.com/resources/what-container/) container for simplified setup and cross-enironment consistency.
+
+<details>
+<summary>Prerequisites</summary>
+	
+- **Docker:** Ensure Docker is installed and running. Download it from the [official Docker website](https://www.docker.com)
+- **Internet Connection:** Required to pull Docker images.
+-  **Basic Command-Line Familiarity:** You'll need to use basic command-line commands.
+</details>
 
 
-1. Clone the `fairshare` repository to your local machine. This will give you access to the 3 Main Docker Files:
-- docker.backend
-- docker-compose.yml
-- docker.frontend,  
-```
-git clone https://github.com/UniOfGreenwich/elee1149-coursework--team-chlk.git
-```
-2. Build and run Docker Image
-Ensure you are in the root ```./``` of the project, and it contains a Dockerfile. The Docker image can be built using the following command. This command tags the image as fairshare:latest by default which can be changed if you wish to within the docker-compose.yaml. This step might take a while to run based on the size of this application and your internet connection. This command will downlaod the images and dependencies needed to run this application. Please be patient while this command runs :). 
 
-```
-docker-compose up --build
-```
+<details>
+<summary>Running Fairshare</summary>
 
-3. Verify the application
-After the container starts the application should now be accessible. The front and backend should be running on their respective ports.
-- Backend = port:8080
-- Frontend = port:3000
+1. **Clone the repository:**
+	  
+    ```bash
+    git clone https://github.com/UniOfGreenwich/elee1149-coursework--team-chlk.git
+    ```
 
-Navigate to a webbrowser and access [port:3000](http://localhost:3000/)
-  
+
+2. Navigate the the project's root directory and run:
+
+	```
+	├── src/
+	```
+
+2. **Build and run:** Navigate to the project's root directory and run:
+
+    ```bash
+    docker-compose up --build
+    ```
+    This command builds and starts the application. It may take some time depending on your internet connection.
+
+3. **Verify:** Access the application in your web browser:
+ - **Frontend:**  [http://localhost:3000/](http://localhost:3000/)
+ - **Backend:** [http://localhost:8080](http://localhost:8080)
+    </ul>
+  </li>
+</ol>
+</details>
 
 ## Tech Stack 
+| Technology   | Section Used    |
+|--------------|-----------------|
+| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/postman.png" width="50"> | API Testing |
+| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/html.png" width="50"> | Frontend Structure |
+| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/css.png" width="50"> | Frontend Styling |
+| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/javascript.png" width="50"> | Frontend Logic |
+| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/react.png" width="50"> | Frontend Framework |
+| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/npm.png" width="50"> | Package Management |
+| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/java.png" width="50"> | Backend Logic |
+| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring.png" width="50"> | Backend Framework |
+| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/postgresql.png" width="50"> | Database Management |
+| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring_boot.png" width="50"> | Backend Framework |
 
 ## Development
 
+### Plugins (Gradle Dependencies) 
+
+See the [Dependencies section](#dependencies) below for details on the project's Gradle dependencies.
+
+<a id="dependencies"></a>
+## Dependencies
+
+<details>
+<summary>Gradle Dependencies</summary>
+<div></div>
+  <table>
+    <thead>
+      <tr>
+        <th>Dependency</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>org.springframework.boot:spring-boot-starter-web</code></td>
+        <td>Provides the core Spring Boot web starter for building web applications.</td>
+      </tr>
+      <tr>
+        <td><code>org.postgresql:postgresql</code></td>
+        <td>PostgreSQL JDBC driver for database connectivity.</td>
+      </tr>
+      <tr>
+        <td><code>org.springframework.boot:spring-boot-starter-data-jpa</code></td>
+        <td>Spring Data JPA for simplified database interactions.</td>
+      </tr>
+      <tr>
+        <td><code>org.springframework.boot:spring-boot-starter-test</code></td>
+        <td>Spring Boot test utilities for testing.</td>
+      </tr>
+      <tr>
+        <td><code>org.junit.platform:junit-platform-launcher</code> (testRuntimeOnly)</td>
+        <td>JUnit Platform launcher for running tests.</td>
+      </tr>
+    </tbody>
+  </table>
+</details>
+
 ## Contributers
+
+## References
+
+- [Typing effect](https://readme-typing-svg.demolab.com/demo/?color=F7F7F7&lines=Your+smarter+way+to+split+costs;Split+Smarter%2C+Together;Take+Control+of+your+Expenses;Everything+at+a+glance)
+- [Docker Tutorial](https://www.youtube.com/watch?v=Ud7Npgi6x8E)
+- [Spring-boot-docker](https://spring.io/guides/gs/spring-boot-docker)
+- [Tech Badges](https://marwin1991.github.io/profile-technology-icons/)
+- [Animated badges](https://techstack-generator.vercel.app/)
 
 
 ## Licence
