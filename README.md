@@ -1,8 +1,10 @@
 <h1 align="center"><a href="http://localhost:3000/">Fairshare</h1>
 
-<p align=center>
-	<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.comfont=Fira+Code&pause=1000&color=F7F7F7&width=435&lines=Your+smarter+way+to+split+costs;Split+Smarter%2C+Together;Take+Control+of+your+Expenses;Everything+at+a+glance" alt="Typing SVG" /></a>
-</p>
+<div align="center">
+  <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=F7F7F7&width=435&lines=Your+smarter+way+to+split+costs;Split+Smarter%2C+Together;Take+Control+of+your+Expenses;Everything+at+a+glance" alt="Typing SVG" /></a>
+</div>
+
+
 
 
 
