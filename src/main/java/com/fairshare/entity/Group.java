@@ -16,9 +16,9 @@ public class Group {
     @Column(name = "groupname")
     private String groupName;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User userId;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "user_id")
+//    private User userId;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -53,13 +53,13 @@ public class Group {
         this.groupName = groupName;
     }
 
-    public User getUser() {
-        return userId;
-    }
-
-    public void setUser(User userId) {
-        this.userId = userId;
-    }
+//    public User getUser() {
+//        return userId;
+//    }
+//
+//    public void setUser(User userId) {
+//        this.userId = userId;
+//    }
 
     @JsonIgnore
     public Set<User> getUsers() {
