@@ -52,6 +52,7 @@ Fairshare is designed to run within a [Docker](https://www.docker.com/resources/
 <div></div>
 <ol>
   <li>**Clone the repository:**
+    
     ```bash
     git clone https://github.com/UniOfGreenwich/elee1149-coursework--team-chlk.git
     ```
