@@ -8,7 +8,7 @@
 <summary>
   Features - [TODO] - add images
 </summary>
-</details>
+</details><br /> 
 
 ## Installation
 `Fairshare` is designed to be run with `Docker` container to simplify the setup process and ensure consistency across different environments. Below are the outline steps to get the application up and running on your machine:
