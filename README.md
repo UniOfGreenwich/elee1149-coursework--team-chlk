@@ -47,34 +47,27 @@ Fairshare is designed to run within a [Docker](https://www.docker.com/resources/
 </ul>
 </details>
 
-<style>
-.code-block-container {
-	margin-top: 1em;
-}
-</style>
+
 
 <details>
 <summary>Running Fairshare</summary>
-<div></div>
-<ol>
-  <li><strong>Clone the repository:</strong>
-    <div class="code-block-container">
+
+1. ** Clone the repository: **
 	  
     ```bash
     git clone https://github.com/UniOfGreenwich/elee1149-coursework--team-chlk.git
     ```
-  </li>
-  <li><strong>Build and run:</strong>Navigate to the project's root directory and run:
+
+2. ** Build and run: ** Navigate to the project's root directory and run:
 
     ```bash
     docker-compose up --build
     ```
     This command builds and starts the application. It may take some time depending on your internet connection.
-  </li>
-  <li><strong>Verify:</strong>Access the application in your web browser:
-    <ul>
-      <li><strong>Frontend:</strong> <a href="http://localhost:3000/">http://localhost:3000/</a></li>
-      <li><strong>Backend (API):</strong> http://localhost:8080</li>
+
+3. ** Verify: ** Access the application in your web browser:\
+ 	- ** Frontend: **  [http://localhost:3000/](http://localhost:3000/)
+        - ** Backend: ** [http://localhost:8080](http://localhost:8080)
     </ul>
   </li>
 </ol>
