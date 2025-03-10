@@ -2,6 +2,8 @@
 
 `fairshare` is a cool app - [TODO]
 
+<img width="668" alt="Image" src="https://github.com/user-attachments/assets/7fc40b44-09a1-41ad-97e6-b38dbb525b76" />
+
 <details>
 <summary>How do I dropdown?</summary>
 <br>
