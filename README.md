@@ -1,6 +1,6 @@
 <h1 align="center"><a href="http://localhost:3000/">Fairshare</h1>
 
-<p align="center>
+<p align="center">
   <i align="center">The smarter way to split costs between friends!
 </p>
 
