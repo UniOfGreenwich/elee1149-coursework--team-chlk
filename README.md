@@ -1,14 +1,22 @@
 <h1 align="center"><a href="http://localhost:3000/">Fairshare</h1>
 
+<p align="center>
+  <i align="center">The smarter way to split costs between friends!
+</p>
+
+<h4 align="center">
+  <img width="668" alt="Image" src="https://github.com/user-attachments/assets/7fc40b44-09a1-41ad-97e6-b38dbb525b76" />
+</h4>
 
 ## Introduction
 
-`fairshare` is a cool app - [TODO]
+`fairshare` simlifies how you share your expenses with friends, family and groups through its powerful web application. Track, split and settle costs seamlessly, all in one place. It's cost-sharing made smarter. 
 
-<img width="668" alt="Image" src="https://github.com/user-attachments/assets/7fc40b44-09a1-41ad-97e6-b38dbb525b76" />
+add more here...
+
 
 <details>
-<summary>How do I dropdown?</summary>
+<summary>Features</summary>
 <br>
 This is how you dropdown.
 </details>
