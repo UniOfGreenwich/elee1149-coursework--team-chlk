@@ -1,4 +1,4 @@
-<h1 align="center"># [Fairshare](http://localhost:3000/)</h1>
+<h1 align="center"> # [Fairshare](http://localhost:3000/)</h1>
 
 
 ## Introduction
