@@ -39,12 +39,10 @@ Fairshare is designed to run within a [Docker](https://www.docker.com/resources/
 
 <details>
 <summary>Prerequisites</summary>
-<div></div>
-<ul>
-  <li><strong>Docker:</strong> Ensure Docker is installed and running. Download it from the <a href="https://www.docker.com/">official Docker website</a>.</li>
-  <li><strong>Internet Connection:</strong> Required to pull Docker images.</li>
-  <li><strong>Basic Command-Line Familiarity:</strong>  You'll need to use basic command-line commands.</li>
-</ul>
+	
+- **Docker:** Ensure Docker is installed and running. Download it from the [official Docker website](https://www.docker.com)
+- **Internet Connection:** Required to pull Docker images.
+-  **Basic Command-Line Familiarity:** You'll need to use basic command-line commands.
 </details>
 
 
@@ -86,7 +84,9 @@ Fairshare is designed to run within a [Docker](https://www.docker.com/resources/
 			<td><code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/npm.png" alt="npm" title="npm"/></code></td>
 			<td><code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/java.png" alt="Java" title="Java"/></code></td>
 			<td><code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring.png" alt="Spring" title="Spring"/></code></td>
-		</tr>
+			<td><code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/postgresql.png" alt="PostgreSQL" title="PostgreSQL"><code></td>
+   			<td><code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring_boot.png" alt="Spring Boot" title="Spring Boot"/></code></td>
+</tr>
 		<tr>
 			<td><code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring_boot.png" alt="Spring Boot" title="Spring Boot"/></code></td>
 			<td><code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/postgresql.png" alt="PostgreSQL" title="PostgreSQL"/></code></td>
