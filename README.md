@@ -76,6 +76,8 @@ Navigate to a webbrowser and access [port:3000](http://localhost:3000/)
 	<code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/postgresql.png" alt="PostgreSQL" title="PostgreSQL"/></code>
 </div>
 
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&width=435&lines=Welcome+to+the+Fairshare+tech+stack)](https://git.io/typing-svg)
+
 Docker is Cool
 
 ## Development
