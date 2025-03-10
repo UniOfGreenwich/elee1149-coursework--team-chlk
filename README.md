@@ -47,29 +47,34 @@ Fairshare is designed to run within a [Docker](https://www.docker.com/resources/
 </ul>
 </details>
 
+<style>
+.code-block-container {
+	margin-top: 1em;
+}
+</style>
+
 <details>
 <summary>Running Fairshare</summary>
 <div></div>
 <ol>
-  <li>Clone the repository:
-
-    
+  <li><strong>Clone the repository:</strong>
+    <div class="code-block-container">
+	  
     ```bash
     git clone https://github.com/UniOfGreenwich/elee1149-coursework--team-chlk.git
     ```
   </li>
-  <li>Build and run: Navigate to the project's root directory and run:
-    
-    
+  <li><strong>Build and run:</strong>Navigate to the project's root directory and run:
+
     ```bash
     docker-compose up --build
     ```
     This command builds and starts the application. It may take some time depending on your internet connection.
   </li>
-  <li>Verify: Access the application in your web browser:
+  <li><strong>Verify:</strong>Access the application in your web browser:
     <ul>
-      <li>Frontend: <a href="http://localhost:3000/">http://localhost:3000/</a></li>
-      <li>Backend (API): http://localhost:8080</li>
+      <li><strong>Frontend:</strong> <a href="http://localhost:3000/">http://localhost:3000/</a></li>
+      <li><strong>Backend (API):</strong> http://localhost:8080</li>
     </ul>
   </li>
 </ol>
@@ -95,6 +100,7 @@ Fairshare is designed to run within a [Docker](https://www.docker.com/resources/
 		</tr>
 	</table>
 </div>
+
 
 * **Frontend:** React, HTML, CSS, JavaScript, npm
 * **Backend:** Spring Boot, Java, Gradle
