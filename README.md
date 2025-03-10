@@ -35,10 +35,10 @@ Unfortunately at this current point in time Fairshare is a locally hosted produc
 `Fairshare` is designed to be run with [Docker](https://www.docker.com/resources/what-container/) container to simplify the setup process and ensure consistency across different environments. Below are the outline steps to get the application up and running on your machine:
 
 <details>
-<summary>Pre-requisites</summary>
-<br>
-Before moving foward with any of these steps, ensure that **Docker** is installed and running on your system. If you do not have **Docker** installed you can download and install it from the [offical Docker website](https://www.docker.com/). It is also assumed that you have a working internet connection to pull the needed Docker images. We also assume basic familiarity with command-line operations.
+  <summary>Pre-requisites</summary>
+  <div>  </div> <p>Before moving forward with any of these steps, ensure that <strong>Docker</strong> is installed and running on your system. If you do not have <strong>Docker</strong> installed, you can download and install it from the <a href="https://www.docker.com/">official Docker website</a>. It is also assumed that you have a working internet connection to pull the needed Docker images. We also assume basic familiarity with command-line operations.</p>
 </details>
+
 
 ### Prerequisites
 Before moving foward with any of these steps, ensure that **Docker** is installed and running on your system. If you do not have **Docker** installed you can download and install it from the [offical Docker website](https://www.docker.com/). It is also assumed that you have a working internet connection to pull the needed Docker images. We also assume basic familiarity with command-line operations.
