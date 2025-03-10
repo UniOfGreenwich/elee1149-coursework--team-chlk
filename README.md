@@ -87,6 +87,14 @@ Navigate to a webbrowser and access [port:3000](http://localhost:3000/)
 	</table>
 </div>
 
+| Feature | Screenshot | Architecture |
+|---|---|---|
+| Login | <img src="logo.png" width="200" alt="Login Logo"><br>Users can log in securely. | <img src="screenshot1.png" width="200" alt="Architecture Diagram"><br>Overview of the system architecture. |
+| Dashboard | <img src="screenshot2.png" width="200" alt="Dashboard Screenshot"><br>The user-friendly dashboard. |  |
+
+
+
+
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&width=435&lines=Welcome+to+the+Fairshare+tech+stack)](https://git.io/typing-svg)
 
 Docker is Cool
