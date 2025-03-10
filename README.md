@@ -1,7 +1,7 @@
 <h1 align="center"><a href="http://localhost:3000/">Fairshare</h1>
 
 <p align="center">
-  <i align="center">The smarter way to split costs between friends!
+  <i align="center">The smarter way to split costs between friends! </i>
 </p>
 
 <h4 align="center">
@@ -20,6 +20,9 @@ add more here...
 <br>
 This is how you dropdown.
 </details>
+
+## Usage
+Unfortunately at this current point in time Fairshare is a locally hosted product only. To get started with Fairshare you can follow the (#Installation)
 
 ## Installation
 
