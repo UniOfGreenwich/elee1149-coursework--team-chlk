@@ -118,29 +118,41 @@ Docker is Cool
   <summary>Gradle Dependencies</summary>
   <div></div>
   <p>
-    The <code>build.gradle</code> file defines the project's dependencies, which are managed by Gradle. Here's a breakdown of the key dependencies used:
+    The <code>build.gradle</code> file defines the project's dependencies, which are managed by Gradle.  Here's a breakdown of the key dependencies used:
   </p>
-  <ul>
-    <li>
-      <strong><code>org.springframework.boot:spring-boot-starter-web</code></strong>: This dependency provides the core Spring Boot web starter, including embedded Tomcat server support, REST controllers, and other web-related functionalities.  It's essential for building web applications with Spring Boot.
-    </li>
-    <li>
-      <strong><code>org.postgresql:postgresql</code></strong>: This is the PostgreSQL JDBC driver. It allows your application to connect to and interact with a PostgreSQL database.
-    </li>
-    <li>
-      <strong><code>org.springframework.boot:spring-boot-starter-data-jpa</code></strong>: This dependency provides Spring Data JPA, which simplifies database interactions using the Java Persistence API (JPA). It reduces boilerplate code and makes database operations more convenient.
-    </li>
-    <li>
-      <strong><code>org.springframework.boot:spring-boot-starter-test</code></strong>: This dependency includes Spring Boot test utilities and libraries for writing unit and integration tests.  It provides support for testing Spring components and other application logic.
-    </li>
-    <li>
-      <strong><code>org.junit.platform:junit-platform-launcher</code></strong> (testRuntimeOnly): This is the JUnit Platform launcher, used for running tests.  The <code>testRuntimeOnly</code> scope means it's only required during the test phase of the build process.
-    </li>
-  </ul>
-  <p>
-    These dependencies provide the necessary building blocks for a Spring Boot application that interacts with a PostgreSQL database, has a web interface, and can be easily tested.
-  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Dependency</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>org.springframework.boot:spring-boot-starter-web</code></td>
+        <td>Provides the core Spring Boot web starter, including embedded Tomcat server support, REST controllers, and other web-related functionalities. Essential for building web applications with Spring Boot.</td>
+      </tr>
+      <tr>
+        <td><code>org.postgresql:postgresql</code></td>
+        <td>The PostgreSQL JDBC driver. Allows the application to connect to and interact with a PostgreSQL database.</td>
+      </tr>
+      <tr>
+        <td><code>org.springframework.boot:spring-boot-starter-data-jpa</code></td>
+        <td>Provides Spring Data JPA, simplifying database interactions using the Java Persistence API (JPA). Reduces boilerplate code and makes database operations more convenient.</td>
+      </tr>
+      <tr>
+        <td><code>org.springframework.boot:spring-boot-starter-test</code></td>
+        <td>Includes Spring Boot test utilities and libraries for writing unit and integration tests. Provides support for testing Spring components and other application logic.</td>
+      </tr>
+      <tr>
+        <td><code>org.junit.platform:junit-platform-launcher</code> (testRuntimeOnly)</td>
+        <td>The JUnit Platform launcher, used for running tests. The <code>testRuntimeOnly</code> scope means it's only required during the test phase.</td>
+      </tr>
+    </tbody>
+  </table>
 </details>
+
+
 
 
 ## Contributers
