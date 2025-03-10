@@ -1,0 +1,81 @@
+.component-options {
+    display: flex;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.all-expenses {
+    border-bottom: 1px solid white;
+}
+
+.recent-expenses-row {
+    border-bottom: 1px solid white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    margin-top: 8px;
+  }
+
+.expense-details {
+    display:flex;
+}
+
+.category-tile {
+    min-height: 100%;
+    padding-left: 100%;
+    background-color: #4a4f76;
+    padding: .5rem;
+    border-radius: 8px;
+}
+
+.expense-titles {
+    padding-left: 16px;
+}
+
+.expense-name {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.category {
+    font-size: 12px;
+    font-weight: 300;
+}
+
+.date {
+    font-size: 12px;
+    font-weight: 300;
+}
+
+.expense-values {
+    display:flex;
+}
+
+.total-expense {
+    border-right:0.2px solid white;
+    padding-right: 16px;
+}
+
+.expense-amount {
+    font-weight: bold;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.expense-payer {
+    font-size: 10px;
+    font-weight: 300;
+    text-align: center;
+}
+
+.expense-split {
+    padding-left: 16px;
+}
+
+.split-amount {
+    font-weight: bold;
+    font-size: 1rem;
+    text-align: center;
+}
+
