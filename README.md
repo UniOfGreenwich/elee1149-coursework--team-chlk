@@ -39,9 +39,36 @@ Unfortunately at this current point in time Fairshare is a locally hosted produc
   <div>  </div> <p>Before moving forward with any of these steps, ensure that <strong>Docker</strong> is installed and running on your system. If you do not have <strong>Docker</strong> installed, you can download and install it from the <a href="https://www.docker.com/">official Docker website</a>. It is also assumed that you have a working internet connection to pull the needed Docker images. We also assume basic familiarity with command-line operations.</p>
 </details>
 
+<details>
+  <summary>Running Fairshare</summary>
+  <div></div>
+  <ol>
+    <li>
+      Clone the <code>fairshare</code> repository to your local machine. This will give you access to the 3 Main Docker Files:
+      <ul>
+        <li><code>docker.backend</code></li>
+        <li><code>docker-compose.yml</code></li>
+        <li><code>docker.frontend</code></li>
+      </ul>
+      <pre><code>git clone https://github.com/UniOfGreenwich/elee1149-coursework--team-chlk.git</code></pre>
+    </li>
+    <li>
+      Build and run Docker Image<br>
+      Ensure you are in the root <code>./</code> of the project, and it contains a Dockerfile. The Docker image can be built using the following command. This command tags the image as <code>fairshare:latest</code> by default, which can be changed if you wish within the <code>docker-compose.yaml</code>. This step might take a while to run based on the size of this application and your internet connection. This command will download the images and dependencies needed to run this application. Please be patient while this command runs :).
+      <pre><code>docker-compose up --build</code></pre>
+    </li>
+    <li>
+      Verify the application<br>
+      After the container starts, the application should now be accessible. The front and backend should be running on their respective ports.
+      <ul>
+        <li>Backend = port:8080</li>
+        <li>Frontend = port:3000</li>
+      </ul>
+      Navigate to a web browser and access <a href="http://localhost:3000/">port:3000</a>
+    </li>
+  </ol>
+</details>
 
-### Prerequisites
-Before moving foward with any of these steps, ensure that **Docker** is installed and running on your system. If you do not have **Docker** installed you can download and install it from the [offical Docker website](https://www.docker.com/). It is also assumed that you have a working internet connection to pull the needed Docker images. We also assume basic familiarity with command-line operations.
 
 
 1. Clone the `fairshare` repository to your local machine. This will give you access to the 3 Main Docker Files:
