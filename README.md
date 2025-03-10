@@ -56,6 +56,13 @@ Fairshare is designed to run within a [Docker](https://www.docker.com/resources/
     git clone https://github.com/UniOfGreenwich/elee1149-coursework--team-chlk.git
     ```
 
+
+2. Navigate the the project's root directory and run:
+
+	```
+	├── src/
+	```
+
 2. **Build and run:** Navigate to the project's root directory and run:
 
     ```bash
@@ -84,15 +91,6 @@ Fairshare is designed to run within a [Docker](https://www.docker.com/resources/
 | <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring.png" width="50"> | Backend Framework |
 | <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/postgresql.png" width="50"> | Database Management |
 | <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring_boot.png" width="50"> | Backend Framework |
-
-
-
-
-* **Frontend:** React, HTML, CSS, JavaScript, npm
-* **Backend:** Spring Boot, Java, Gradle
-* **Database:** PostgreSQL
-* **Containerization:** Docker
-* **Other:** Postman
 
 ## Development
 
