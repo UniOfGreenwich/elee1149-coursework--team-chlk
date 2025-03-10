@@ -141,7 +141,10 @@ See the [Dependencies section](#dependencies) below for details on the project's
 ## References
 
 - [Typing effect](https://readme-typing-svg.demolab.com/demo/?color=F7F7F7&lines=Your+smarter+way+to+split+costs;Split+Smarter%2C+Together;Take+Control+of+your+Expenses;Everything+at+a+glance)
-- [Badges]()
+- [Docker Tutorial](https://www.youtube.com/watch?v=Ud7Npgi6x8E)
+- [Spring-boot-docker](https://spring.io/guides/gs/spring-boot-docker)
+- [Tech Badges](https://marwin1991.github.io/profile-technology-icons/)
+- [Animated badges](https://techstack-generator.vercel.app/)
 
 
 ## Licence
