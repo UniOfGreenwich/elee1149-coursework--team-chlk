@@ -5,121 +5,96 @@
 </div>
 
 
-
-
-
-
 <h4 align="center">
   <img width="668" alt="Image" src="https://github.com/user-attachments/assets/7fc40b44-09a1-41ad-97e6-b38dbb525b76" />
 </h4>
 
 ## Introduction
 
-`fairshare` simlifies how you share your expenses with friends, family and groups through its powerful web application. Track, split and settle costs seamlessly, all in one place. It's cost-sharing made smarter. 
+Fairshare simplifies how you share expenses with friends, family, and groups through its powerful web application. Track, split, and settle costs seamlessly, all in one place. It's cost-sharing made smarter.
 
-add more here...
-
+Fairshare offers a streamlined approach to managing shared expenses, eliminating the hassle of manual calculations and awkward IOUs.  Whether you're splitting bills with roommates, tracking holiday costs with friends, or managing group expenses for a project, Fairshare makes it easy to keep everyone on the same page.
 
 <details>
-<summary>Features</summary>
-<br>
-This is how you dropdown.
+<summary>Click to expand features</summary>
+<div></div> <ul>
+  <li>**User-friendly Interface:** Intuitive design for effortless expense tracking and splitting.</li>
+  <li>**Group Management:**  Create and manage groups for different expense sharing scenarios.</li>
+  <li>**Real-time Updates:**  Instantly see the latest expenses and balances.</li>
+  <li>**Flexible Splitting:**  Divide expenses equally or by custom percentages.</li>
+  <li>**Expense History:** Maintain a detailed record of all transactions.</li>
+  <li>**Secure and Reliable:**  Your data is safe and accessible whenever you need it.</li>
+</ul>
 </details>
 
 ## Usage
-Unfortunately at this current point in time Fairshare is a locally hosted product only. To get started with Fairshare you can follow the [Intallation section](#installation)
+Currently, Fairshare is a locally hosted product. To get started, follow the [Intallation instructions](#installation)
 
 <a id="installation"></a>
 ## Installation
 
 ### 🐳 Docker Quick Start
 
-`Fairshare` is designed to be run with [Docker](https://www.docker.com/resources/what-container/) container to simplify the setup process and ensure consistency across different environments. Below are the outline steps to get the application up and running on your machine:
+Fairshare is designed to run within a [Docker](https://www.docker.com/resources/what-container/) container for simplified setup and cross-enironment consistency.
 
 <details>
-  <summary>Pre-requisites</summary>
-  <div>  </div> <p>Before moving forward with any of these steps, ensure that <strong>Docker</strong> is installed and running on your system. If you do not have <strong>Docker</strong> installed, you can download and install it from the <a href="https://www.docker.com/">official Docker website</a>. It is also assumed that you have a working internet connection to pull the needed Docker images. We also assume basic familiarity with command-line operations.</p>
+<summary>Prerequisites</summary>
+<div></div>
+<ul>
+  <li><strong>Docker:</strong> Ensure Docker is installed and running. Download it from the <a href="https://www.docker.com/">official Docker website</a>.</li>
+  <li><strong>Internet Connection:</strong> Required to pull Docker images.</li>
+  <li><strong>Basic Command-Line Familiarity:</strong>  You'll need to use basic command-line commands.</li>
+</ul>
 </details>
 
 <details>
-  <summary>Running Fairshare</summary>
-  <div></div>
-  <ol>
-    <li>
-      Clone the <code>fairshare</code> repository to your local machine. This will give you access to the 3 Main Docker Files:
-      <ul>
-        <li><code>docker.backend</code></li>
-        <li><code>docker-compose.yml</code></li>
-        <li><code>docker.frontend</code></li>
-      </ul>
-      <pre><code>git clone https://github.com/UniOfGreenwich/elee1149-coursework--team-chlk.git</code></pre>
-    </li>
-    <li>
-      Build and run Docker Image<br>
-      Ensure you are in the root <code>./</code> of the project, and it contains a Dockerfile. The Docker image can be built using the following command. This command tags the image as <code>fairshare:latest</code> by default, which can be changed if you wish within the <code>docker-compose.yaml</code>. This step might take a while to run based on the size of this application and your internet connection. This command will download the images and dependencies needed to run this application. Please be patient while this command runs :).
-      <pre><code>docker-compose up --build</code></pre>
-    </li>
-    <li>
-      Verify the application<br>
-      After the container starts, the application should now be accessible. The front and backend should be running on their respective ports.
-      <ul>
-        <li>Backend = port:8080</li>
-        <li>Frontend = port:3000</li>
-      </ul>
-      Navigate to a web browser and access <a href="http://localhost:3000/">port:3000</a>
-    </li>
-  </ol>
+<summary>Running Fairshare</summary>
+<div></div>
+<ol>
+  <li>**Clone the repository:**
+    ```bash
+    git clone https://github.com/UniOfGreenwich/elee1149-coursework--team-chlk.git
+    ```
+  </li>
+  <li>**Build and run:** Navigate to the project's root directory and run:
+    ```bash
+    docker-compose up --build
+    ```
+    This command builds and starts the application. It may take some time depending on your internet connection.
+  </li>
+  <li>**Verify:** Access the application in your web browser:
+    <ul>
+      <li>Frontend: <a href="http://localhost:3000/">http://localhost:3000/</a></li>
+      <li>Backend (API): http://localhost:8080</li>
+    </ul>
+  </li>
+</ol>
 </details>
 
 ## Tech Stack 
 
-<img src="https://github-readme-tech-stack.vercel.app/api/cards?title=Fairshare+tech+stack&lineCount=2&line1=react%2Creact%2C00aaff%3Bnpm%2Cnpm%2Ce9f500%3Bdocker%2Cdocker%2C16ddff%3B&line2=spring%2Cspring%2C3dff00%3BPOSTGRESQL%2CPOSTGRESQL%2C00e3ff%3Bgradle%2Cgradle%2Cffffff%3B" alt="Fairshare tech stack" />
-
-<div style="display: flex;"><img src="https://techstack-generator.vercel.app/docker-icon.svg" alt="icon" width="65" style="width: 65px; height: 65px; margin-right: 0px; margin-bottom: 0px;" /></div>
-
-<div style="display: flex;"><img src="https://techstack-generator.vercel.app/docker-icon.svg" alt="icon" width="65" style="width: 65px; height: 65px; margin-right: 50px; margin-bottom: 0px;" /><img src="https://techstack-generator.vercel.app/github-icon.svg" alt="icon" width="65" style="width: 65px; height: 65px; margin-right: 50px; margin-bottom: 0px;" /><img src="https://techstack-generator.vercel.app/java-icon.svg" alt="icon" width="65" style="width: 65px; height: 65px; margin-right: 0px; margin-bottom: 0px;" /></div>
-
 <div align="center">
-	<table>
-		<tr>
-			<td><code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/postman.png" alt="Postman" title="Postman"/></code></td>
-			<td><code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/html.png" alt="HTML" title="HTML"/></code></td>
-			<td><code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/css.png" alt="CSS" title="CSS"/></code></td>
-			<td><code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/javascript.png" alt="JavaScript" title="JavaScript"/></code></td>
-			<td><code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/react.png" alt="React" title="React"/></code></td>
-			<td><code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/npm.png" alt="npm" title="npm"/></code></td>
-			<td><code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/java.png" alt="Java" title="Java"/></code></td>
-			<td><code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring.png" alt="Spring" title="Spring"/></code></td>
-		</tr>
-		<tr>
-			<td><code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring_boot.png" alt="Spring Boot" title="Spring Boot"/></code></td>
-			<td><code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/postgresql.png" alt="PostgreSQL" title="PostgreSQL"/></code></td>
-		</tr>
-	</table>
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=UniOfGreenwich&repo=elee1149-coursework--team-chlk&layout=compact" alt="Top Languages" />
 </div>
 
-| Tech | Screenshot | Architecture |
-|---|---|---|
-| Login | <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/postman.png" alt="Postman" title="Postman"/></code>| <img src="screenshot1.png" width="200" alt="Architecture Diagram"><br>Overview of the system architecture. |
-| Dashboard | <img src="screenshot2.png" width="200" alt="Dashboard Screenshot"><br>The user-friendly dashboard. |  |
-
-
-
-
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&width=435&lines=Welcome+to+the+Fairshare+tech+stack)](https://git.io/typing-svg)
-
-Docker is Cool
+* **Frontend:** React, HTML, CSS, JavaScript, npm
+* **Backend:** Spring Boot, Java, Gradle
+* **Database:** PostgreSQL
+* **Containerization:** Docker
+* **Other:** Postman
 
 ## Development
 
-## Plugins
+## Plugins (Gradle Dependencies) 
+
+See the [Dependencies section](#dependencies) below for details on the project's Gradle dependencies.
+
+<a id="dependencies"></a>
+## Dependencies
 
 <details>
-  <summary>Gradle Dependencies</summary>
-  <div></div>
-  <p>
-    The <code>build.gradle</code> file defines the project's dependencies, which are managed by Gradle.  Here's a breakdown of the key dependencies used:
-  </p>
+<summary>Gradle Dependencies</summary>
+<div></div>
   <table>
     <thead>
       <tr>
@@ -130,30 +105,27 @@ Docker is Cool
     <tbody>
       <tr>
         <td><code>org.springframework.boot:spring-boot-starter-web</code></td>
-        <td>Provides the core Spring Boot web starter, including embedded Tomcat server support, REST controllers, and other web-related functionalities. Essential for building web applications with Spring Boot.</td>
+        <td>Provides the core Spring Boot web starter for building web applications.</td>
       </tr>
       <tr>
         <td><code>org.postgresql:postgresql</code></td>
-        <td>The PostgreSQL JDBC driver. Allows the application to connect to and interact with a PostgreSQL database.</td>
+        <td>PostgreSQL JDBC driver for database connectivity.</td>
       </tr>
       <tr>
         <td><code>org.springframework.boot:spring-boot-starter-data-jpa</code></td>
-        <td>Provides Spring Data JPA, simplifying database interactions using the Java Persistence API (JPA). Reduces boilerplate code and makes database operations more convenient.</td>
+        <td>Spring Data JPA for simplified database interactions.</td>
       </tr>
       <tr>
         <td><code>org.springframework.boot:spring-boot-starter-test</code></td>
-        <td>Includes Spring Boot test utilities and libraries for writing unit and integration tests. Provides support for testing Spring components and other application logic.</td>
+        <td>Spring Boot test utilities for testing.</td>
       </tr>
       <tr>
         <td><code>org.junit.platform:junit-platform-launcher</code> (testRuntimeOnly)</td>
-        <td>The JUnit Platform launcher, used for running tests. The <code>testRuntimeOnly</code> scope means it's only required during the test phase.</td>
+        <td>JUnit Platform launcher for running tests.</td>
       </tr>
     </tbody>
   </table>
 </details>
-
-
-
 
 ## Contributers
 
