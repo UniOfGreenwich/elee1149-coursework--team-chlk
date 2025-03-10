@@ -1,10 +1,10 @@
 <h1 align="center"><a href="http://localhost:3000/">Fairshare</h1>
 
 <p align="center">
-  <i align="center">The smarter way to split costs between friends! </i>
+ [![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=F7F7F7&width=435&lines=Your+smarter+way+to+split+costs;Split+Smarter%2C+Together;Take+Control+of+your+Expenses;Everything+at+a+glance)](https://git.io/typing-svg)
 </p>
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=F7F7F7&width=435&lines=Your+smarter+way+to+split+costs;Split+Smarter%2C+Together;Take+Control+of+your+Expenses;Everything+at+a+glance)](https://git.io/typing-svg)
+
 
 <h4 align="center">
   <img width="668" alt="Image" src="https://github.com/user-attachments/assets/7fc40b44-09a1-41ad-97e6-b38dbb525b76" />
