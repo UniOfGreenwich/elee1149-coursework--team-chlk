@@ -22,7 +22,7 @@ This is how you dropdown.
 </details>
 
 ## Usage
-Unfortunately at this current point in time Fairshare is a locally hosted product only. To get started with Fairshare you can follow the (#installation)
+Unfortunately at this current point in time Fairshare is a locally hosted product only. To get started with Fairshare you can follow the [Intallation section](#installation)
 
 <a id="installation></a>
 ## Installation
