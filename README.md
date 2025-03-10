@@ -59,6 +59,8 @@ Navigate to a webbrowser and access [port:3000](http://localhost:3000/)
 
 <img src="https://github-readme-tech-stack.vercel.app/api/cards?title=Fairshare+tech+stack&lineCount=2&line1=react%2Creact%2C00aaff%3Bnpm%2Cnpm%2Ce9f500%3Bdocker%2Cdocker%2C16ddff%3B&line2=spring%2Cspring%2C3dff00%3BPOSTGRESQL%2CPOSTGRESQL%2C00e3ff%3Bgradle%2Cgradle%2Cffffff%3B" alt="Fairshare tech stack" />
 
+<div style="display: flex;"><img src="https://techstack-generator.vercel.app/docker-icon.svg" alt="icon" width="65" style="width: 65px; height: 65px; margin-right: 0px; margin-bottom: 0px;" /></div>
+
 ## Development
 
 ## Contributers
