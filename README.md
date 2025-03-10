@@ -17,7 +17,8 @@ Fairshare offers a streamlined approach to managing shared expenses, eliminating
 
 <details>
 <summary>Click to expand features</summary>
-	
+
+ 
 - **User-friendly Interface:** Intuitive design for effortless expense tracking and splitting.
 - **Group Management:** Create and manage groups for different expense sharing scenarios.
 - **Real-time Updates:** Instantly see the latest expenses and balances.
