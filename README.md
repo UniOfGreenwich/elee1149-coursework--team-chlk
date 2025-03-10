@@ -90,6 +90,20 @@ Fairshare is designed to run within a [Docker](https://www.docker.com/resources/
 	</table>
 </div>
 
+| Technology   | Section Used    |
+|--------------|-----------------|
+| ![Postman](https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/postman.png) | API Testing |
+| ![HTML](https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/html.png) | Frontend Structure |
+| ![CSS](https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/css.png) | Frontend Styling |
+| ![JavaScript](https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/javascript.png) | Frontend Logic |
+| ![React](https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/react.png) | Frontend Framework |
+| ![npm](https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/npm.png) | Package Management |
+| ![Java](https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/java.png) | Backend Logic |
+| ![Spring](https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring.png) | Backend Framework |
+| ![PostgreSQL](https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/postgresql.png) | Database Management |
+| ![Spring Boot](https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring_boot.png) | Backend Framework |
+
+
 
 * **Frontend:** React, HTML, CSS, JavaScript, npm
 * **Backend:** Spring Boot, Java, Gradle
