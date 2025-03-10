@@ -1,14 +1,26 @@
 # ELEE1149-Project-Template
 
+## Introduction
 
-Hello my name is kyle
+`fairshare` is a cool app - [TODO]
 
-Hello again
+<details open>
+<summary>
+  Features - [TODO] - add images
+</summary>
+</details>
 
-Hello, this is Charu
+## Installation
+`Fairshare` is designed to be run with `Docker` container to simplify the setup process and ensure consistency across different environments. Below are the outline steps to get the application up and running on your machine:
 
-Hello I am Lewis
+> [!IMPORTANT]
+> Before beginning these steps, ensure you have `Docker` installed and runnin g on your system. 
+
+## Tech Stack 
+
+## Development
+
+## Contributers
 
 
-
-Trigger 
+## Licence
