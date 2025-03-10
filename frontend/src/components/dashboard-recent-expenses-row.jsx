@@ -12,7 +12,7 @@ export function RecentExpensesRow(props) {
                 <p className="category">{props.category}</p>
             </div>
         </div>
-        <p className="date">{props.date}</p>
+        <p className="expense-date">{props.date}</p>
         <div className="expense-values">
             <div className="total-expense">
                 <p className="expense-amount">£{props.userPaid.toFixed(2)}</p>
