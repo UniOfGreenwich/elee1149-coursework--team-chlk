@@ -89,7 +89,7 @@ Navigate to a webbrowser and access [port:3000](http://localhost:3000/)
 
 | Tech | Screenshot | Architecture |
 |---|---|---|
-| Login | img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/postman.png" alt="Postman" title="Postman"/>| <img src="screenshot1.png" width="200" alt="Architecture Diagram"><br>Overview of the system architecture. |
+| Login | <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/postman.png" alt="Postman" title="Postman"/></code>| <img src="screenshot1.png" width="200" alt="Architecture Diagram"><br>Overview of the system architecture. |
 | Dashboard | <img src="screenshot2.png" width="200" alt="Dashboard Screenshot"><br>The user-friendly dashboard. |  |
 
 
