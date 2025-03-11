@@ -1,0 +1,52 @@
+---
+## Sequence Diagram for user case 3: Create Group
+---
+sequenceDiagram
+    actor User
+participant User Interface
+participant GroupController
+participant GroupService
+participant GroupRepository
+participant UserRepository
+participant FairShare Database
+
+User->>User Interface: Enters group name, userId (to associate creator)
+User Interface->>GroupController: createGroup(createGroupRequest)
+GroupController->>GroupService: createGroup(createGroupRequest)
+
+alt User not found
+GroupService->>UserRepository: findById(createGroupRequest.userId)
+UserRepository->>FairShare Database: //DB query
+FairShare Database-->>UserRepository: User object (or null if not found)
+UserRepository-->>GroupService: User object (or null)
+GroupService-->>GroupController: null //Indicates user not found
+GroupController-->>User Interface: "User not found"
+else Group name already exists
+GroupService->>UserRepository: findById(createGroupRequest.userId)
+UserRepository->>FairShare Database: //DB query
+FairShare Database-->>UserRepository: User object (or null if not found)
+UserRepository-->>GroupService: User object (or null)
+GroupService->>GroupRepository: existsByGroupName(createGroupRequest.groupName)
+GroupRepository->>FairShare Database: //DB query
+FairShare Database-->>GroupRepository: Boolean (true/false)
+GroupRepository-->>GroupService: Boolean (true/false)
+GroupService-->>GroupController: Group with "GroupExistsError"
+GroupController-->>User Interface: "A group with this name already exists"
+else Create new group
+GroupService->>UserRepository: findById(createGroupRequest.userId)
+UserRepository->>FairShare Database: //DB query
+FairShare Database-->>UserRepository: User object (or null if not found)
+UserRepository-->>GroupService: User object (or null)
+GroupService->>GroupRepository: existsByGroupName(createGroupRequest.groupName)
+GroupRepository->>FairShare Database: //DB query
+FairShare Database-->>GroupRepository: Boolean (true/false)
+GroupRepository-->>GroupService: Boolean (true/false)
+GroupService->>GroupService: Create new Group object
+GroupService->>GroupService: Add user to Group.users
+GroupService->>GroupRepository: save(newGroup)
+GroupRepository->>FairShare Database: //DB interaction
+FairShare Database-->>GroupRepository: Group object (with groupId)
+GroupRepository-->>GroupService: Group object (with groupId)
+GroupService-->>GroupController: Group object (with groupId)
+GroupController-->>User Interface: "New group created!", groupId
+end
