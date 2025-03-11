@@ -49,11 +49,10 @@
   justify-content: flex-start;
   align-items: center;
   gap: 1rem;
-  margin: 0.5rem 0;
+  margin: 0.5rem;
 }
 
 .form-row label {
-  color: black;
   width: 200px;
   text-align: left;
   font-weight: 400;
@@ -107,24 +106,4 @@ input[type="submit"]:hover {
 select#recipient {
   width: 100%;
   padding: 8px;
-}
-
-.balance-box {
-  color: black;
-  text-align: left;
-}
-
-.balance-message {
-  color: black;
-  font-weight: bold;
-}
-
-.settlement-option {
-  color: black;
-  text-align: left;
-}
-
-.radio label,
-.radio input {
-  display: inline;
 }
