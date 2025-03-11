@@ -53,7 +53,8 @@ export function RecentExpenses() {
                     date={getDateFromString(e.date)}
                     userPaid={e.amount}
                     split={e.userShares}
-                    payerName={e.userId}
+                    payerId={e.userId}
+                    payerName={e.userName}
                   />
                 </li>
               ))}
