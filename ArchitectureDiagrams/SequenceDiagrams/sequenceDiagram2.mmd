@@ -1,0 +1,27 @@
+---
+## Sequence diagram for use case 2
+---
+sequenceDiagram
+    title Use Case 2: User Login
+    actor User
+    participant User Interface
+    participant UserController
+    participant UserService
+    participant UserRepository
+    participant FairShare Database
+
+    User->>User Interface: Enters email and password
+    User Interface->>UserController: login(loginRequest)
+    UserController->>UserService: authenticateLogin(loginRequest.email, loginRequest.password)
+    UserService->>UserRepository: findByEmail(loginRequest.email)
+    UserRepository->>FairShare Database:  %% DB query
+    FairShare Database-->>UserRepository: User object (or null if not found)
+    UserRepository-->>UserService: User object (or null)
+    alt User not found or invalid password
+        UserService-->>UserController: null  %% Authentication failed
+        UserController-->>User Interface: "Invalid Login"
+    else Successful Login
+        UserService->>UserService: user.getPassword().equals(password)
+        UserService-->>UserController: User object  %% Authentication successful
+        UserController-->>User Interface: "Successful Login", userId
+    end

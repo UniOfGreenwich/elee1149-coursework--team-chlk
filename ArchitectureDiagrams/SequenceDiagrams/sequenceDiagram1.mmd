@@ -1,0 +1,31 @@
+---
+## Sequence diagram for use case 1
+---
+sequenceDiagram
+    title Use Case 1: User SignUp
+    actor User
+    participant User Interface
+    participant UserController
+    participant UserService
+    participant UserRepository
+    participant FairShare Database
+
+    User->>User Interface: Enters signup details (firstName, lastName, username, email, password)
+    User Interface->>UserController: newUser(createUserRequest)
+    UserController->>UserService: CreateUser(createUserRequest)
+    alt User with email already exists
+        UserService->>UserRepository: findByEmail(createUserRequest.email)
+        UserRepository-->>UserService: User (if exists) / null
+        UserService-->>UserController: null  %% User already exists
+        UserController-->>User Interface: "User already exists" message
+    else Create new User
+        UserService->>UserRepository: findByEmail(createUserRequest.email)
+        UserRepository-->>UserService: null
+        UserService->>UserService: Create new User object
+        UserService->>UserRepository: save(newUser)
+        UserRepository->>FairShare Database:  %% DB interaction
+        FairShare Database-->>UserRepository: User object (with userId)
+        UserRepository-->>UserService: User object (with userId)
+        UserService-->>UserController: User object (with userId)  %% New user created
+        UserController-->>User Interface: "New User created!" message, userId
+    end
