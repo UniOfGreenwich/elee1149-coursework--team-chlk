@@ -1,8 +1,10 @@
 package com.fairshare.services;
 
 import com.fairshare.entity.Expense;
+import com.fairshare.entity.User;
 import com.fairshare.entity.UserShare;
 import com.fairshare.repository.ExpenseRepository;
+import com.fairshare.repository.UserRepository;
 import com.fairshare.repository.UserShareRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,8 @@ public class ExpenseService {
 
     @Autowired
     private BalanceService balanceService;
+    @Autowired
+    private UserRepository userRepository;
 
     @Transactional
     public void addExpense(Expense expense, Integer payerId) {
@@ -38,6 +42,11 @@ public class ExpenseService {
     }
 
     public List<Expense> getExpensesByGroupId(Integer groupId) {
-        return expenseRepository.findByGroupId(groupId);
+        List<Expense> expenses = expenseRepository.findByGroupId(groupId);
+        for (Expense expense : expenses) {
+            User user = userRepository.findById(expense.getUserId()).orElse(new User());
+            expense.setUserName(user.getFirstName());
+        }
+        return expenses;
     }
 }
