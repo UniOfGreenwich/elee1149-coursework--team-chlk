@@ -1,5 +1,4 @@
 import "../styles/dashboard-recent-expenses.css"
-import categoryIconTemp from "../assets/groups-icon.png";
 import categories from "../data/category-map"
 import {format} from "date-fns"
 
