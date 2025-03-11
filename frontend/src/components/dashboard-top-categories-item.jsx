@@ -6,7 +6,9 @@ export function TopCategoriesItem(props) {
     const foundCategory = categories.find(category => category.categoryId === props.categoryId)
     return (
         <div className="top-categories-item">
-            <img className="category-tile" src={foundCategory.categoryIcon} alt="" />
+            <div className="category-tile">
+                <img src={foundCategory.categoryIcon} alt="" />
+            </div>
             <div className="category-details">
                 <p className="category-name">{foundCategory.categoryName}</p>
                 <p className="category-amount">£{props.amount.toFixed(2)}</p>

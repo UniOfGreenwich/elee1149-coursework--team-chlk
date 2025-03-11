@@ -11,7 +11,9 @@ export function RecentExpensesRow(props) {
     return (
       <div className="recent-expenses-row">
         <div className="expense-details">
-            <img className="category-tile" src={foundCategory.categoryIcon} alt="" />
+            <div className="category-tile">
+                <img src={foundCategory.categoryIcon} alt="" />
+            </div>
             <div className="expense-titles">
                 <p className="expense-name">{props.expenseName}</p>
                 <p className="category">{foundCategory.categoryName}</p>

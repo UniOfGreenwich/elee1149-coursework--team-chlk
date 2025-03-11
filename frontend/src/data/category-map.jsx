@@ -1,5 +1,3 @@
-import categoryIconTemp from "../assets/groups-icon.png";
-import categoryIconTemp2 from "../assets/friends-icon.png"
 import transportationIcon from "../assets/travel-icon.png"
 import entertainmentIcon from "../assets/entertainment-icon.png"
 import foodAndDrinkIcon from "../assets/food-icon.png"
