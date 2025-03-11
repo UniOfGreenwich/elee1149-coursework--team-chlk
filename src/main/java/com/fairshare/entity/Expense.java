@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -45,6 +46,9 @@ public class Expense {
 
     @Column(name = "user_id")
     private Integer userId;
+
+    @Transient
+    private String userName;
 
     @OneToMany(mappedBy = "expenseId", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserShare> userShares = new ArrayList<>();
@@ -112,6 +116,14 @@ public class Expense {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public List<UserShare> getUserShares() {
