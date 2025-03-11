@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @Entity
-@Table(name = "expense", schema = "fairdbo")
+@Table(name = "expenses", schema = "fairdbo")
 public class Expense {
 
     @Id
