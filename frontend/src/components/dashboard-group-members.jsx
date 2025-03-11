@@ -8,7 +8,7 @@ export function GroupMembers() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:8080/group/1/1/users") // fetching the data
+    fetch(`${process.env.REACT_APP_BACKEND}/group/1/1/users`) // fetching the data
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch data");
@@ -24,6 +24,7 @@ export function GroupMembers() {
         setLoading(false);
       });
   }, []);
+
 
   if (loading) {
     return <p>Loading...</p>;
