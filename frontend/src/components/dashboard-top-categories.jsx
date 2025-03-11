@@ -3,25 +3,6 @@ import "../styles/dashboard-top-categories.css"
 import { TopCategoriesItem } from "./dashboard-top-categories-item";
 import categories from "../data/category-map"
 
-// const data = [
-//   {
-//     "categoryId": 1,
-//     "amount": 250
-//   },
-//   {
-//     "categoryId": 2,
-//     "amount": 350
-//   },
-//   {
-//     "categoryId": 3,
-//     "amount": 80
-//   },
-//   {
-//     "categoryId": 4,
-//     "amount": 420
-//   }
-// ]
-
 export function TopCategories() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
