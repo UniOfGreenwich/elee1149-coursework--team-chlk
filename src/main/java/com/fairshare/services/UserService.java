@@ -1,10 +1,14 @@
 package com.fairshare.services;
 
 import com.fairshare.Requests.CreateUserRequest;
+import com.fairshare.entity.Group;
 import com.fairshare.entity.User;
 import com.fairshare.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -37,5 +41,13 @@ public class UserService {
         else {
             return null;
         }
+    }
+
+    public List<Group> getUsersGroups (Integer userId) {
+        User user = userRepository.findById(userId).orElse(null);
+        if (user != null) {
+            return new ArrayList<>(user.getGroups());
+        }
+        return null;
     }
 }
