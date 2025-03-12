@@ -1,11 +1,15 @@
+// importing styles
+import "../styles/quick-action-buttons.css";
+import closeIcon from "../assets/close-icon.png";
 import React, { useState, useEffect } from "react";
 
-import closeIcon from "../assets/close-icon.png";
-
 const SettlePayment = ({ closeModal }) => {
-  const [users, setUsers] = useState([]);
-  const [selectedRecipient, setSelectedRecipient] = useState("");
-  // getting the user group data
+  const [users, setUsers] = useState([]); // List of users in the group
+  const [selectedRecipient, setSelectedRecipient] = useState(null); // Selected recipient object
+  const [amount, setAmount] = useState(""); // Amount field value
+  const [settleOption, setSettleOption] = useState("outstanding"); // Radio button selection
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(false); // State to disable button
+
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -14,7 +18,7 @@ const SettlePayment = ({ closeModal }) => {
           throw new Error("Failed to fetch users");
         }
         const data = await response.json();
-        setUsers(data); // Assuming the API returns an array of users
+        setUsers(data);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
@@ -23,45 +27,140 @@ const SettlePayment = ({ closeModal }) => {
     fetchUsers();
   }, []);
 
+  // Update amount when recipient or settlement option changes
+  useEffect(() => {
+    if (selectedRecipient) {
+      if (settleOption === "outstanding") {
+        setAmount(
+          selectedRecipient.balance < 0 ? selectedRecipient.balance : ""
+        );
+      } else {
+        setAmount(""); // Clear input for 'custom'
+      }
+    }
+  }, [selectedRecipient, settleOption]);
+
+  useEffect(() => {
+    if (selectedRecipient && selectedRecipient.balance > 0) {
+      // alert(`${selectedRecipient.firstName} owes you money`);
+      setIsSubmitDisabled(true);
+      document.getElementById("submit").classList.add("hide");
+    } else {
+      setIsSubmitDisabled(false);
+      document.getElementById("submit").classList.remove("hide");
+    }
+  }, [selectedRecipient]);
+
+  const handleRecipientChange = (e) => {
+    const userId = Number(e.target.value);
+    const selectedUser = users.find((user) => user.userId === userId);
+    setSelectedRecipient(selectedUser || null);
+  };
+
+  const handleSettleOptionChange = (e) => {
+    setSettleOption(e.target.value);
+  };
+
+  const handleAmountChange = (e) => {
+    let enteredAmount = Number(e.target.value);
+    if (selectedRecipient && settleOption === "custom") {
+      const maxAmount = Math.abs(selectedRecipient.balance); // Max you can pay is what you owe
+      if (enteredAmount > maxAmount) {
+        enteredAmount = maxAmount; // Prevent overpaying
+      }
+    }
+    setAmount(enteredAmount); // Ensure the value updates correctly
+  };
+
   return (
     <div className="modal-overlay" onClick={closeModal}>
       <div className="modal-box" onClick={(e) => e.stopPropagation()}>
         <h3 className="action-title">Settle Payment</h3>
-        <div className="modal-content">
-          <form action="#" className="expense-form">
-            <div className="form-row">
-              <label htmlFor="recipient">Select Recipient:</label>
-              <select
-                id="recipient"
-                value={selectedRecipient}
-                onChange={(e) => setSelectedRecipient(e.target.value)}
-                required
-              >
-                <option value="">-- Select a Recipient --</option>
-                {users.map((user) => (
-                  <option key={user.id} value={user.id}>
-                    {user.firstName}
-                  </option>
-                ))}
-              </select>
+        <form className="expense-form">
+          <div className="form-row">
+            <label htmlFor="recipient">Select Recipient:</label>
+            <select id="recipient" onChange={handleRecipientChange} required>
+              <option value="">-- Select a Recipient --</option>
+              {users.map((user) => (
+                <option key={user.userId} value={user.userId}>
+                  {user.firstName}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {selectedRecipient && (
+            <div className="balance-box">
+              {selectedRecipient.balance > 0 ? (
+                <p className="balance-message alert">
+                  Warning: {selectedRecipient.firstName} owes you £
+                  {selectedRecipient.balance}. You can't settle payment.
+                </p>
+              ) : selectedRecipient.balance < 0 ? (
+                <p className="balance-message">
+                  You owe {selectedRecipient.firstName} £
+                  {Math.abs(selectedRecipient.balance).toFixed(2)}
+                </p>
+              ) : (
+                <p className="balance-message">
+                  No outstanding balance between you and{" "}
+                  {selectedRecipient.firstName}
+                </p>
+              )}
             </div>
-            <div className="form-row">
-              <div className="balance-box"></div>
+          )}
+
+          <div className="form-row settle-container">
+            <p className="settlement-option">Settlement Option:</p>
+            <div className="radio-inputs">
+              <div className="radio-input">
+                <input
+                  type="radio"
+                  id="outstanding"
+                  value="outstanding"
+                  name="settle"
+                  checked={settleOption === "outstanding"}
+                  onChange={handleSettleOptionChange}
+                />
+                <label htmlFor="outstanding">Outstanding</label>
+              </div>
+
+              <div className="radio-input">
+                <input
+                  type="radio"
+                  id="custom"
+                  value="custom"
+                  name="settle"
+                  checked={settleOption === "custom"}
+                  onChange={handleSettleOptionChange}
+                />
+                <label htmlFor="custom">Custom</label>
+              </div>
             </div>
-            <div className="form-row">
-              <label htmlFor="amount" className="expense-description">
-                Amount:
-              </label>
-              <input
-                type="number"
-                id="amount"
-                placeholder="Enter Amount"
-                required
-              />
-            </div>
-            <input type="submit" value="Settle Payment" />
-          </form>
-        </div>
+          </div>
+
+          <div className="form-row">
+            <label htmlFor="amount">Amount:</label>
+            <input
+              type="number"
+              id="amount"
+              value={Math.abs(amount)}
+              onChange={handleAmountChange}
+              min="0"
+              max={selectedRecipient ? Math.abs(selectedRecipient.balance) : ""}
+              placeholder={settleOption === "custom" ? "Enter amount" : ""}
+              required
+            />
+          </div>
+          {console.log("Selected recipient:", selectedRecipient)}
+          {console.log("Balance:", selectedRecipient?.balance)}
+          <input
+            type="submit"
+            value="Settle Payment"
+            id="submit"
+            disabled={isSubmitDisabled}
+          />
+        </form>
         <img
           onClick={closeModal}
           src={closeIcon}

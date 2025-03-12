@@ -75,7 +75,7 @@ const AddExpense = ({ closeModal }) => {
               />
             </div>
             <div className="form-row">
-              <label htmlFor="split" className="expense-split">
+              <label htmlFor="split" className="expense-split-label">
                 Split Percentage:
               </label>
               <input
