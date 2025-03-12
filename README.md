@@ -28,7 +28,7 @@ Fairshare offers a streamlined approach to managing shared expenses, eliminating
 </details>
 
 ## Usage
-Currently, Fairshare is a locally hosted product. To get started, follow the [Intallation instructions](#installation)
+Currently, Fairshare is a locally hosted product. To get started, follow the [Installation instructions](#installation)
 
 <a id="installation"></a>
 ## Installation
