@@ -21,6 +21,12 @@ public class Group {
     @Column(name = "date_created")
     private Date dateCreated;
 
+    @Column(name = "updated_at")
+    private Date updatedAt;
+
+    @Column(name = "message")
+    private String message;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "user_group",
@@ -60,6 +66,22 @@ public class Group {
 
     public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     //    public User getUser() {
