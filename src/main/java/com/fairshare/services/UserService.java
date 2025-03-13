@@ -58,9 +58,13 @@ public class UserService {
         if (user != null) {
             List<GroupResponse> groupResponses = new ArrayList<>();
             for (Group group : user.getGroups()) {
-                int numberOfUsers = group.getUsers().size();
-                double totalSpent = calculateTotalMoneySpent(group);
-                groupResponses.add(new GroupResponse(group, numberOfUsers, totalSpent));
+                GroupResponse groupResponse = new GroupResponse();
+                groupResponse.setGroupId(group.getGroupId());
+                groupResponse.setGroupName(group.getGroupName());
+                groupResponse.setDateCreated(group.getDateCreated());
+                groupResponse.setNumberOfUsers(group.getUsers().size());
+                groupResponse.setTotalSpent(expenseService.getTotalExpensesByGroupId(group.getGroupId()));
+                groupResponses.add(groupResponse);
             }
             return groupResponses;
         }
