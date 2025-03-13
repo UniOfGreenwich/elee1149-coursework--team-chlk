@@ -5,22 +5,34 @@ import com.fairshare.entity.Group;
 import java.util.Date;
 
 public class GroupResponse {
-    private Group group;
+    private Integer groupId;
+    private String groupName;
+    private Date dateCreated;
     private int numberOfUsers;
     private double totalSpent;
 
-    public GroupResponse(Group group, int numberOfUsers, double totalSpent) {
-        this.group = group;
-        this.numberOfUsers = numberOfUsers;
-        this.totalSpent = totalSpent;
+    public Integer getGroupId() {
+        return groupId;
     }
 
-    public Group getGroup() {
-        return group;
+    public void setGroupId(Integer groupId) {
+        this.groupId = groupId;
     }
 
-    public void setGroup(Group group) {
-        this.group = group;
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
     public int getNumberOfUsers() {
@@ -30,8 +42,6 @@ public class GroupResponse {
     public void setNumberOfUsers(int numberOfUsers) {
         this.numberOfUsers = numberOfUsers;
     }
-
-
 
     public double getTotalSpent() {
         return totalSpent;
