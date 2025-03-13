@@ -6,7 +6,6 @@ import com.fairshare.Requests.LoginRequest;
 import com.fairshare.Requests.LoginResponse;
 import com.fairshare.Requests.CreateUserRequest;
 import com.fairshare.Requests.CreateUserResponse;
-import com.fairshare.Requests.UserGroupsResponse;
 import com.fairshare.entity.Group;
 import com.fairshare.entity.User;
 import com.fairshare.services.UserService;
@@ -52,9 +51,8 @@ public class UserController {
     }
 
     @GetMapping("/groups")
-    public UserGroupsResponse getUsersGroups (@RequestParam Integer userId) {
-        List<GroupResponse> groupResponses = userService.getUsersGroups(userId);
-        return new UserGroupsResponse(groupResponses);
+    public List<GroupResponse> getUsersGroups (@RequestParam Integer userId) {
+        return userService.getUsersGroups(userId);
     }
 }
 
