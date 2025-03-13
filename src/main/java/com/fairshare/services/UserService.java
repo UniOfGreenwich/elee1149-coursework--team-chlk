@@ -70,11 +70,7 @@ public class UserService {
         }
         return null;
     }
-
-    private double calculateTotalMoneySpent(Group group) {
-        return expenseService.getTotalExpensesByGroupId(group.getGroupId());
-    }
-
+    
     public int getNumOfUsersInGroup (Integer groupId) {
         Group group = groupRepository.findById(groupId).orElse(null);
         if (group != null) {
