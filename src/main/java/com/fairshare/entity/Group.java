@@ -16,10 +16,6 @@ public class Group {
     @Column(name = "groupname")
     private String groupName;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "user_id")
-//    private User userId;
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "user_group",
