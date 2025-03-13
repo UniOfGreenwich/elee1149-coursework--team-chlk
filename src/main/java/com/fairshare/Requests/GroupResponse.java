@@ -2,6 +2,8 @@ package com.fairshare.Requests;
 
 import com.fairshare.entity.Group;
 
+import java.util.Date;
+
 public class GroupResponse {
     private Group group;
     private int numberOfUsers;
@@ -28,6 +30,8 @@ public class GroupResponse {
     public void setNumberOfUsers(int numberOfUsers) {
         this.numberOfUsers = numberOfUsers;
     }
+
+
 
     public double getTotalSpent() {
         return totalSpent;

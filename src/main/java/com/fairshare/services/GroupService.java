@@ -56,7 +56,6 @@ public class GroupService {
         newGroup.setGroupName(groupName);
         newGroup.setDateCreated(new Date());
         newGroup.getUsers().add(user); // Add the user who created the group to the users set as well
-
         return groupRepository.save(newGroup);
     }
 
