@@ -9,6 +9,7 @@ import com.fairshare.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -53,6 +54,7 @@ public class GroupService {
 
         Group newGroup = new Group();
         newGroup.setGroupName(groupName);
+        newGroup.setDateCreated(new Date());
         newGroup.getUsers().add(user); // Add the user who created the group to the users set as well
 
         return groupRepository.save(newGroup);

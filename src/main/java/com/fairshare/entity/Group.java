@@ -2,6 +2,8 @@ package com.fairshare.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,6 +17,9 @@ public class Group {
 
     @Column(name = "groupname")
     private String groupName;
+
+    @Column(name = "date_created")
+    private Date dateCreated;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -49,7 +54,15 @@ public class Group {
         this.groupName = groupName;
     }
 
-//    public User getUser() {
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    //    public User getUser() {
 //        return userId;
 //    }
 //
