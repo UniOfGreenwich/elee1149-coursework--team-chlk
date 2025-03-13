@@ -1,6 +1,7 @@
 package com.fairshare.controllers;
 
 
+import com.fairshare.Requests.GroupResponse;
 import com.fairshare.Requests.LoginRequest;
 import com.fairshare.Requests.LoginResponse;
 import com.fairshare.Requests.CreateUserRequest;
@@ -50,10 +51,9 @@ public class UserController {
     }
 
     @GetMapping("/groups")
-    public List<Group> getUsersGroups (@RequestParam Integer userId) {
+    public List<GroupResponse> getUsersGroups (@RequestParam Integer userId) {
         return userService.getUsersGroups(userId);
     }
-
 }
 
 
