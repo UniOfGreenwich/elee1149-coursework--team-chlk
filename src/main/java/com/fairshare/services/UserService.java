@@ -62,6 +62,8 @@ public class UserService {
                 groupResponse.setGroupId(group.getGroupId());
                 groupResponse.setGroupName(group.getGroupName());
                 groupResponse.setDateCreated(group.getDateCreated());
+                groupResponse.setUpdatedAt(group.getUpdatedAt());
+                groupResponse.setMessage(group.getMessage());
                 groupResponse.setNumberOfUsers(group.getUsers().size());
                 groupResponse.setTotalSpent(expenseService.getTotalExpensesByGroupId(group.getGroupId()));
                 groupResponses.add(groupResponse);
@@ -70,7 +72,7 @@ public class UserService {
         }
         return null;
     }
-    
+
     public int getNumOfUsersInGroup (Integer groupId) {
         Group group = groupRepository.findById(groupId).orElse(null);
         if (group != null) {

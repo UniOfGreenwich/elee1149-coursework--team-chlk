@@ -8,8 +8,10 @@ public class GroupResponse {
     private Integer groupId;
     private String groupName;
     private Date dateCreated;
+    private Date updatedAt;
     private int numberOfUsers;
     private double totalSpent;
+    private String message;
 
     public Integer getGroupId() {
         return groupId;
@@ -35,6 +37,14 @@ public class GroupResponse {
         this.dateCreated = dateCreated;
     }
 
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
     public int getNumberOfUsers() {
         return numberOfUsers;
     }
@@ -49,5 +59,13 @@ public class GroupResponse {
 
     public void setTotalSpent(double totalSpent) {
         this.totalSpent = totalSpent;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }
