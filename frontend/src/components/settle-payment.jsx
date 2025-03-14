@@ -10,6 +10,7 @@ const SettlePayment = ({ closeModal }) => {
   const [settleOption, setSettleOption] = useState("outstanding"); // Radio button selection
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(false); // State to disable button
 
+  // getting the data
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -40,6 +41,7 @@ const SettlePayment = ({ closeModal }) => {
     }
   }, [selectedRecipient, settleOption]);
 
+  // updating the submit button visibility based on selected group members
   useEffect(() => {
     if (selectedRecipient && selectedRecipient.balance > 0) {
       // alert(`${selectedRecipient.firstName} owes you money`);
@@ -61,6 +63,7 @@ const SettlePayment = ({ closeModal }) => {
     setSettleOption(e.target.value);
   };
 
+  // updating amount field if it exceeds outstanding balance
   const handleAmountChange = (e) => {
     let enteredAmount = Number(e.target.value);
     if (selectedRecipient && settleOption === "custom") {
@@ -72,11 +75,70 @@ const SettlePayment = ({ closeModal }) => {
     setAmount(enteredAmount); // Ensure the value updates correctly
   };
 
+  //handling form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent default form submission
+
+    if (!selectedRecipient) {
+      alert("Please select a recipient.");
+      return;
+    }
+
+    // formatting the input data for payload to backend
+    const payload = {
+      description: "Settling Payment",
+      amount: Math.abs(amount),
+      currency: "GBP",
+      date: new Date().toISOString(),
+      categoryId: 5,
+      groupId: 1, // Update as per group ID logic
+      userId: selectedRecipient.userId, // The recipient's ID
+      userShares: [
+        {
+          userId: 1, // user id of the logged in user
+          shareAmount: Math.abs(amount),
+        },
+        {
+          userId: selectedRecipient.userId,
+          shareAmount: -Math.abs(amount), // Negative for recipient
+        },
+      ],
+    };
+
+    console.log(payload);
+
+    // sending the data to the backend end-point
+    try {
+      const response = await fetch(
+        "http://localhost:8080/expense/add-expense",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            payerId: "1", // Replace with actual payer ID dynamically
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to submit payment");
+      }
+
+      const data = await response.json();
+      alert("Payment settled successfully!");
+      closeModal(); // Close modal on success
+    } catch (error) {
+      console.error("Error submitting payment:", error);
+      alert("An error occurred while processing your payment.");
+    }
+  };
+
   return (
     <div className="modal-overlay" onClick={closeModal}>
       <div className="modal-box" onClick={(e) => e.stopPropagation()}>
         <h3 className="action-title">Settle Payment</h3>
-        <form className="expense-form">
+        <form className="expense-form" onSubmit={handleSubmit}>
           <div className="form-row">
             <label htmlFor="recipient">Select Recipient:</label>
             <select id="recipient" onChange={handleRecipientChange} required>
