@@ -3,7 +3,7 @@ import './App.css';
 import {useState} from "react";
 import { useRef } from 'react';
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Navigate, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { Home } from './pages/home';
 import { Login } from './pages/login';
@@ -16,21 +16,34 @@ import { Friends } from './pages/friends';
 import { Transactions } from './pages/transactions';
 
 function App() {
+  const [token, setToken] = useState();
+  console.log(token)
+  if(!token) {
+    return (
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home/>}/>
+          <Route path="/home" element={<Home/>}/>
+          <Route path="/login" element={<Login setToken={setToken}/>}/>
+          <Route path="/sign-up" element={<SignUp/>}/>
+          <Route path="/*" element={<Home/>}/>
+        </Routes>
+      </Router>
+    )
+  }
 
     return (
       <div className='app'>
         <Router>
           <Routes>
-            <Route path="/" element={<Home/>}/>
-            <Route path="/home" element={<Home/>}/>
-            <Route path="/login" element={<Login/>}/>
-            <Route path="/sign-up" element={<SignUp/>}/>
-            <Route path="/groups" element={<Groups/>}/>
-            <Route path="/groups-dashboard" element={<GroupsDashboard/>}/>
-            <Route path="/expenses" element={<Expenses/>}/>
-            <Route path="/friends" element={<Friends/>}/>
-            <Route path="/transactions" element={<Transactions/>}/>
-            <Route path="/*" element={<Error/>}/>
+          <Route path="/" element={<GroupsDashboard/>}/>
+          <Route path="/login" element={token ? <Navigate to="/" replace /> : <Login/>} />
+          <Route path="/groups" element={<Groups/>}/>
+          <Route path="/groups-dashboard" element={<GroupsDashboard/>}/>
+          <Route path="/expenses" element={<Expenses/>}/>
+          <Route path="/friends" element={<Friends/>}/>
+          <Route path="/transactions" element={<Transactions/>}/>
+          <Route path="/*" element={<Error/>}/>
           </Routes>
         </Router>
       </div>

@@ -4,14 +4,14 @@ import { LoginForm } from "../components/login-form";
 
 import logo from "../assets/Fairshare-logo.png";
 
-export function Login() {
+export function Login( {setToken } ) {
   return (
     <div className="form-page-wrapper">
       <Link to="/">
         <img src={logo} alt="logo in white" className="logo" />
       </Link>
 
-      <LoginForm />
+      <LoginForm setToken={setToken}/>
     </div>
   );
 }
