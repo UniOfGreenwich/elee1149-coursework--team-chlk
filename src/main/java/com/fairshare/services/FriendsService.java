@@ -29,5 +29,9 @@ public class FriendsService {
         friendsRepository.save(friend);
     }
 
+    public void declineFriendRequest(Integer requestId) {
+        friendsRepository.deleteById(requestId);
+    }
+
     
 }
