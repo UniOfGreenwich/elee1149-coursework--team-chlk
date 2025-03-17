@@ -33,5 +33,13 @@ public class FriendsService {
         friendsRepository.deleteById(requestId);
     }
 
+    public List<Friends> getFriendsList(Integer userId) {
+        return friendsRepository.findByFriendUserIdandStatus(userId, true);
+    }
+
+    public List<Friends> getPendingFriendRequests(Integer userId) {
+        return friendsRepository.findByFriendUserIdandStatus(userId, false);
+    }
+
     
 }
