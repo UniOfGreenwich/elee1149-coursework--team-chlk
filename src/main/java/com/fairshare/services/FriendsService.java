@@ -22,4 +22,12 @@ public class FriendsService {
             friendsRepository.save(friends);
         }
     }
+
+    public void acceptFriendRequest(Integer requestId) {
+        Friends friend = friendsRepository.findById(requestId).orElseThrow();
+        friend.setStatus(true); //set as 'ACCEPTED'
+        friendsRepository.save(friend);
+    }
+
+    
 }
