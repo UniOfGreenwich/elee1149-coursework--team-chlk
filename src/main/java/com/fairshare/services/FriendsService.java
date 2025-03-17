@@ -41,5 +41,7 @@ public class FriendsService {
         return friendsRepository.findByFriendUserIdandStatus(userId, false);
     }
 
-    
+    public boolean areFriends(Integer userId, Integer friendUserId) {
+        return friendsRepository.existsFriendship(userId, friendUserId);
+    }
 }
