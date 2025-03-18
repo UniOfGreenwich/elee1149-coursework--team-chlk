@@ -1,0 +1,65 @@
+.dashboard-wrapper {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1440px;
+}
+
+.dashboard-content {
+  color: white;
+  padding: 0 2rem;
+}
+
+/* Dashboard Components */
+.dashboard-grid-wrapper {
+  /* border: 1px solid; */
+  height: calc(90vh - 3rem);
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: 1fr 2fr;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.grid-component {
+  list-style: none;
+}
+
+.overview {
+  grid-column: 1 / span 3;
+  grid-row: 1;
+}
+
+.categories {
+  grid-column: 4 / span 3;
+  grid-row: 1;
+}
+
+.quick-actions {
+  grid-column: 7 / span 2;
+  grid-row: 1;
+}
+
+.recent-expenses {
+  grid-column: 1 / span 5;
+  grid-row: 2;
+}
+
+.group {
+  grid-column: 6 / span 3;
+  grid-row: 2;
+}
+
+.dashboard-grid-component {
+  min-height: 100%;
+  background-color: #222645;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.component-title {
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}

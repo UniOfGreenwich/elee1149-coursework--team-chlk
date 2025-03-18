@@ -1,0 +1,75 @@
+form {
+    max-width: 400px;
+
+    /* margin: 0 auto; */
+}
+
+.input-block {
+    margin: 24px 0;
+    color: #f3f3f3;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+input {
+    width: 400px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    background-color: transparent;
+
+    border: 1px solid white;
+    color: white;
+}
+
+input::placeholder {
+    color: white;
+}
+
+.submit-button {
+    color: white;
+    font-weight: 700;
+    background-color: #4C3590;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    transition: all 200ms ease-in;
+}
+
+.submit-button:hover {
+    background-color: #6145b5;
+}
+
+input[type='checkbox'] {
+    display: inline-block;
+}
+
+.register {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.register:hover {
+    text-decoration: underline;
+}
+
+.form-page-wrapper {
+    height: 100vh;
+    background: linear-gradient(180deg, #141627 0%, #202340 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 10rem;
+
+}
+
+.to-login {
+    text-align: center;
+}
