@@ -35,6 +35,7 @@ export function LoginForm( { setToken } ) {
 
   return (
     <>
+      <p className="invalid-login">{error}</p>
       <form action="#" className="login-form" onSubmit={handleSubmit}>
         <div className="input-block">
           <label htmlFor="email">Email Address</label>
@@ -55,7 +56,6 @@ export function LoginForm( { setToken } ) {
           <input type="submit" value="Login" className="submit-button" />
         </div>
       </form>
-      <p>{error}</p>
       <p>
         <Link to="/sign-up" className="register">
           Create an account
