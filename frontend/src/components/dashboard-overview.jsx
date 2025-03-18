@@ -10,7 +10,7 @@ import DoughnutChart from "./dashboard-overview-chart";
 // importing style sheet
 import "../styles/dashboard-overview.css";
 
-export function Overview(token) {
+export function Overview() {
   const date = getCurrentMonthYear();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);

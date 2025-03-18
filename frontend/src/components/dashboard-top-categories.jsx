@@ -3,7 +3,7 @@ import "../styles/dashboard-top-categories.css"
 import { TopCategoriesItem } from "./dashboard-top-categories-item";
 import categories from "../data/category-map"
 
-export function TopCategories(token) {
+export function TopCategories() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

@@ -21,7 +21,7 @@ function logout() {
   sessionStorage.clear()
 }
 
-export function SideBar(token) {
+export function SideBar() {
   return (
     <div className="sidebar-wrapper">
       <div className="sidebar-top">
