@@ -14,10 +14,12 @@ import { GroupsDashboard } from './pages/groups-dashboard';
 import { Expenses } from './pages/expenses';
 import { Friends } from './pages/friends';
 import { Transactions } from './pages/transactions';
+import useToken from './components/use-token';
 
 function App() {
-  const [token, setToken] = useState();
-  console.log(token)
+  const { token, setToken } = useToken();
+
+  
   if(!token) {
     return (
       <Router>
