@@ -17,6 +17,10 @@ import groupsIcon from "../assets/groups-icon.png";
 import logoutIcon from "../assets/logout-icon.png";
 import profilePicture from "../assets/profile-picture.png";
 
+function logout() {
+  sessionStorage.clear()
+}
+
 export function SideBar() {
   return (
     <div className="sidebar-wrapper">
@@ -54,7 +58,7 @@ export function SideBar() {
             </li>
             <li className="nav-item">
               <Link to="/groups">
-                <SideBarNavItem navPageName="Groups" navIcon={groupsIcon} />
+                <SideBarNavItem navPageName="Groups" navIcon={groupsIcon}/>
               </Link>
             </li>
           </ul>
@@ -64,7 +68,7 @@ export function SideBar() {
       <div className="sidebar-footer">
         <div className="logout-button">
           <Link to="/login">
-            <SideBarNavItem navPageName="Logout" navIcon={logoutIcon} />
+            <SideBarNavItem navPageName="Logout" navIcon={logoutIcon} onClick={logout}/>
           </Link>
         </div>
         <div className="profile-section">
