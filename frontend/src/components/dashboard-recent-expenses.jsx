@@ -4,7 +4,7 @@ import { RecentExpensesRow } from "./dashboard-recent-expenses-row";
 
 const currentUserId = 1
 
-export function RecentExpenses() {
+export function RecentExpenses(token) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

@@ -10,29 +10,29 @@ import { QuickActions } from "../components/dashboard-quick-actions";
 import { RecentExpenses } from "../components/dashboard-recent-expenses";
 import { GroupMembers } from "../components/dashboard-group-members";
 
-export function GroupsDashboard() {
+export function GroupsDashboard(token) {
   return (
     <div className="dashboard-wrapper">
-      <SideBar />
+      <SideBar token={token}/>
       <div className="dashboard-content">
         <div className="topbar">
-          <TopBar pageName="Dashboard" />
+          <TopBar pageName="Dashboard" token={token}/>
         </div>
         <ul className="dashboard-grid-wrapper">
           <li className="grid-component overview">
-            <Overview />
+            <Overview token={token}/>
           </li>
           <li className="grid-component categories">
-            <TopCategories />
+            <TopCategories token={token}/>
           </li>
           <li className="grid-component quick-actions">
-            <QuickActions />
+            <QuickActions token={token}/>
           </li>
           <li className="grid-component recent-expenses">
-            <RecentExpenses />
+            <RecentExpenses token={token}/>
           </li>
           <li className="grid-component group">
-            <GroupMembers />
+            <GroupMembers token={token}/>
           </li>
         </ul>
       </div>

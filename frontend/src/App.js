@@ -38,13 +38,13 @@ function App() {
       <div className='app'>
         <Router>
           <Routes>
-          <Route path="/" element={<GroupsDashboard/>}/>
+          <Route path="/" element={<GroupsDashboard token={token}/>}/>
           <Route path="/login" element={token ? <Navigate to="/" replace /> : <Login/>} />
-          <Route path="/groups" element={<Groups/>}/>
-          <Route path="/groups-dashboard" element={<GroupsDashboard/>}/>
-          <Route path="/expenses" element={<Expenses/>}/>
-          <Route path="/friends" element={<Friends/>}/>
-          <Route path="/transactions" element={<Transactions/>}/>
+          <Route path="/groups" element={<Groups token={token}/>}/>
+          <Route path="/groups-dashboard" element={<GroupsDashboard token={token}/>}/>
+          <Route path="/expenses" element={<Expenses token={token}/>}/>
+          <Route path="/friends" element={<Friends token={token}/>}/>
+          <Route path="/transactions" element={<Transactions token={token}/>}/>
           <Route path="/*" element={<Error/>}/>
           </Routes>
         </Router>
