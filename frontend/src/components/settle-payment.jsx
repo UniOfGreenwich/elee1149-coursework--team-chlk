@@ -84,38 +84,38 @@ const SettlePayment = ({ closeModal }) => {
       return;
     }
 
+    const today = new Date();
+    const formattedDate = `${today.getFullYear()} - ${String(
+      today.getMonth() + 1
+    ).padStart(2, "0")} - ${String(today.getDate()).padStart(2, "0")}`;
+
     // formatting the input data for payload to backend
     const payload = {
       description: "Settling Payment",
-      amount: Math.abs(amount),
+      amount: parseFloat(Math.abs(amount).toFixed(2)),
       currency: "GBP",
-      date: new Date().toISOString(),
-      categoryId: 5,
+      date: "2025-12-10",
+      categoryId: null,
       groupId: 1, // Update as per group ID logic
-      userId: selectedRecipient.userId, // The recipient's ID
+      userId: 1, // The recipient's ID
       userShares: [
         {
-          userId: 1, // user id of the logged in user
-          shareAmount: Math.abs(amount),
-        },
-        {
           userId: selectedRecipient.userId,
-          shareAmount: -Math.abs(amount), // Negative for recipient
+          shareAmount: parseFloat(Math.abs(amount).toFixed(2)), // Negative for recipient
         },
       ],
     };
 
-    console.log(payload);
+    console.log(JSON.stringify(payload, null, 2)); // Debugging
 
     // sending the data to the backend end-point
     try {
       const response = await fetch(
-        "http://localhost:8080/expense/add-expense",
+        "http://localhost:8080/expense/add-expense?payerId=1",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            payerId: "1", // Replace with actual payer ID dynamically
           },
           body: JSON.stringify(payload),
         }
@@ -129,7 +129,6 @@ const SettlePayment = ({ closeModal }) => {
       alert("Payment settled successfully!");
       closeModal(); // Close modal on success
     } catch (error) {
-      console.error("Error submitting payment:", error);
       alert("An error occurred while processing your payment.");
     }
   };
