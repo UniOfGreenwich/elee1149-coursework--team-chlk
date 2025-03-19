@@ -46,5 +46,10 @@ public class FriendsController {
         List<Friends> friendsList = friendsService.getFriendsList(userId);
         return ResponseEntity.ok(friendsList);
     }
-    
+
+    @GetMapping("pendingRequests")
+    public ResponseEntity<List<Friends>> getPendingFriendRequests(@RequestParam Integer userId, @RequestParam Integer friendUserId) {
+        List<Friends> pendingRequestsList = friendsService.getPendingFriendRequests(userId);
+        return ResponseEntity.ok(pendingRequestsList);
+    }
 }
