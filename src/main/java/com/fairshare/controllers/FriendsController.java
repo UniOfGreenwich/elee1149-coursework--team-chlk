@@ -52,4 +52,10 @@ public class FriendsController {
         List<Friends> pendingRequestsList = friendsService.getPendingFriendRequests(userId);
         return ResponseEntity.ok(pendingRequestsList);
     }
+
+    @GetMapping
+    public ResponseEntity<Boolean> areFriends(@RequestParam Integer userId, @RequestParam Integer friendUserId) {
+        boolean areFriends = friendsService.areFriends(userId, friendUserId);
+        return ResponseEntity.ok(areFriends);
+    }
 }
