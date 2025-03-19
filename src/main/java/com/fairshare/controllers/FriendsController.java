@@ -1,14 +1,18 @@
 package com.fairshare.controllers;
 
+import com.fairshare.entity.Friends;
 import com.fairshare.services.FriendsService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/friends")
@@ -37,12 +41,10 @@ public class FriendsController {
         return ResponseEntity.ok("Friend request deleted");
     }
 
+    @GetMapping("/list")
+    public ResponseEntity<List<Friends>> getFriendsList(@RequestParam Integer userId) {
+        List<Friends> friendsList = friendsService.getFriendsList(userId);
+        return ResponseEntity.ok(friendsList);
+    }
     
-    //2. acceptFriendRequest
-    //3. declineFriendRequest
-    //4. getFriendsList
-    //5. getPendingFriendRequests
-    //6. areFriends
-
-
 }
