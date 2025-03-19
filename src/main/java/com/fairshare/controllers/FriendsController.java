@@ -24,6 +24,11 @@ public class FriendsController {
         return ResponseEntity.ok("Friend Request Sent");
     }
 
+    @PostMapping("/acceptFriendRequest")
+    public ResponseEntity<String> acceptFriendRequest(@RequestParam Integer requestId) {
+        friendsService.acceptFriendRequest(requestId);
+        return ResponseEntity.ok("Friend request accepted.");
+    }
     //2. acceptFriendRequest
     //3. declineFriendRequest
     //4. getFriendsList
