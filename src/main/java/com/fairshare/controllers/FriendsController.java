@@ -1,5 +1,6 @@
 package com.fairshare.controllers;
 
+import com.fairshare.Responses.FriendsResponse;
 import com.fairshare.entity.Friends;
 import com.fairshare.services.FriendsService;
 import org.apache.coyote.Response;
@@ -24,9 +25,8 @@ public class FriendsController {
     //Methods:
     //1. sendFriendRequest
     @PostMapping("/sendRequest")
-    public ResponseEntity<String> sendFriendRequest(@RequestParam Integer userId, @RequestParam Integer friendUserId) {
-        String response = friendsService.sendFriendRequest(userId, friendUserId);
-        return ResponseEntity.ok(response);
+    public FriendsResponse sendFriendRequest(@RequestParam Integer userId, @RequestParam Integer friendUserId) {
+        return friendsService.sendFriendRequest(userId, friendUserId);
     }
 
     @PostMapping("/acceptFriendRequest")
@@ -48,7 +48,7 @@ public class FriendsController {
     }
 
     @GetMapping("pendingRequests")
-    public ResponseEntity<List<Friends>> getPendingFriendRequests(@RequestParam Integer userId, @RequestParam Integer friendUserId) {
+    public ResponseEntity<List<Friends>> getPendingFriendRequests(@RequestParam Integer userId) {
         List<Friends> pendingRequestsList = friendsService.getPendingFriendRequests(userId);
         return ResponseEntity.ok(pendingRequestsList);
     }

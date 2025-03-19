@@ -1,5 +1,6 @@
 package com.fairshare.services;
 
+import com.fairshare.Responses.FriendsResponse;
 import com.fairshare.entity.Friends;
 import com.fairshare.repository.FriendsRepository;
 import jakarta.transaction.Transactional;
@@ -15,16 +16,16 @@ public class FriendsService {
     private FriendsRepository friendsRepository;
 
     @Transactional
-    public String sendFriendRequest(Integer userId, Integer friendUserId) {
+    public FriendsResponse sendFriendRequest(Integer userId, Integer friendUserId) {
         if (friendsRepository.existsFriendship(userId, friendUserId)) {
-            return "Friendship already exists";
+            return new FriendsResponse("Friend request already sent", false);
         }
         Friends friend = new Friends();
         friend.setUserId(userId);
         friend.setFriendUserId(friendUserId);
         friend.setStatus(false); //set as 'PENDING'
         friendsRepository.save(friend);
-        return "Friend Request Sent";
+        return new FriendsResponse("Friend request sent", true);
     }
 
     public void acceptFriendRequest(Integer requestId) {
