@@ -2,6 +2,7 @@ package com.fairshare.services;
 
 import com.fairshare.entity.Friends;
 import com.fairshare.repository.FriendsRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,14 +14,17 @@ public class FriendsService {
     @Autowired
     private FriendsRepository friendsRepository;
 
-    public void sendFriendRequest(Integer userId, Integer friendUserId) {
-        if (!friendsRepository.existsFriendship(userId, friendUserId)) {
-            Friends friends = new Friends();
-            friends.setUserId(userId);
-            friends.setFriendId(friendUserId);
-            friends.setStatus(false); //Set as 'PENDING'
-            friendsRepository.save(friends);
+    @Transactional
+    public String sendFriendRequest(Integer userId, Integer friendUserId) {
+        if (friendsRepository.existsFriendship(userId, friendUserId)) {
+            return "Friendship already exists";
         }
+        Friends friend = new Friends();
+        friend.setUserId(userId);
+        friend.setFriendUserId(friendUserId);
+        friend.setStatus(false); //set as 'PENDING'
+        friendsRepository.save(friend);
+        return "Friend Request Sent";
     }
 
     public void acceptFriendRequest(Integer requestId) {
@@ -34,11 +38,11 @@ public class FriendsService {
     }
 
     public List<Friends> getFriendsList(Integer userId) {
-        return friendsRepository.findByFriendUserIdandStatus(userId, true);
+        return friendsRepository.findByFriendUserIdAndStatus(userId, true);
     }
 
     public List<Friends> getPendingFriendRequests(Integer userId) {
-        return friendsRepository.findByFriendUserIdandStatus(userId, false);
+        return friendsRepository.findByFriendUserIdAndStatus(userId, false);
     }
 
     public boolean areFriends(Integer userId, Integer friendUserId) {

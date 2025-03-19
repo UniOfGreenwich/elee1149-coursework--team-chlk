@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Version;
 
 @Entity
 @Table(name = "friends", schema = "fairdbo")
@@ -24,6 +25,10 @@ public class Friends {
 
     @Column(name = "status", nullable = false)
     private Boolean status; //'False' = 'PENDING', 'True' = 'ACCEPTED'
+
+    @Version
+    @Column(name = "version")
+    private Integer version = 0;
 
     public Integer getFriendId() {
         return friendId;

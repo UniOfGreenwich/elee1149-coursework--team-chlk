@@ -10,10 +10,9 @@ import java.util.List;
 
 @Repository
 public interface FriendsRepository extends JpaRepository<Friends, Integer> {
-    List<Friends> findByUserIdandStatus(Integer userId, Boolean status);
-    List<Friends> findByFriendUserIdandStatus(Integer userId, Boolean status);
+    List<Friends> findByFriendUserIdAndStatus(Integer userId, Boolean status);
 
-    @Query("SELECT CASE WHEN COUNT(f) > 0 THEN true ELSE false END FROM Friends f WHERE (f.userId = :userId AND f.friendUserId = :friendUserId AND f.status = true) OR (f.userId = :friendUserId AND f.friendUserId = :userId AND f.status = true)")
+    @Query("SELECT CASE WHEN COUNT(f) > 0 THEN true ELSE false END FROM Friends f WHERE (f.userId = :userId AND f.friendUserId = :friendUserId) OR (f.userId = :friendUserId AND f.friendUserId = :userId)")
     boolean existsFriendship(@Param("userId") Integer userId, @Param("friendUserId") Integer friendUserId);
-
 }
+

@@ -25,8 +25,8 @@ public class FriendsController {
     //1. sendFriendRequest
     @PostMapping("/sendRequest")
     public ResponseEntity<String> sendFriendRequest(@RequestParam Integer userId, @RequestParam Integer friendUserId) {
-        friendsService.sendFriendRequest(userId, friendUserId);
-        return ResponseEntity.ok("Friend Request Sent");
+        String response = friendsService.sendFriendRequest(userId, friendUserId);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/acceptFriendRequest")
