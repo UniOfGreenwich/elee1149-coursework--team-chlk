@@ -4,6 +4,7 @@ import com.fairshare.services.FriendsService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,6 +30,14 @@ public class FriendsController {
         friendsService.acceptFriendRequest(requestId);
         return ResponseEntity.ok("Friend request accepted.");
     }
+
+    @DeleteMapping("/declineRequest")
+    public ResponseEntity<String> declineFriendRequest(@RequestParam Integer requestId) {
+        friendsService.declineFriendRequest(requestId);
+        return ResponseEntity.ok("Friend request deleted");
+    }
+
+    
     //2. acceptFriendRequest
     //3. declineFriendRequest
     //4. getFriendsList
