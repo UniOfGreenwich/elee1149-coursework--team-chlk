@@ -16,5 +16,5 @@ services:
     depends_on:
       - backend
     environment:
-        - REACT_APP_BACKEND_URL=http://backend:8080
+        - REACT_APP_BACKEND_URL=${CODESPACE_NAME:-localhost}:8080
 
