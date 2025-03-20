@@ -1,5 +1,5 @@
 import "../styles/login-signup-page.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
@@ -18,6 +18,7 @@ export function LoginForm( { setToken } ) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [error, setError] = useState();
+  let navigate = useNavigate();
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -27,10 +28,12 @@ export function LoginForm( { setToken } ) {
     });
     if(token.success) {
       setToken(token)
+      navigate("/Groups-Dashboard")
     } else {
       setError(token.message)
     }
     
+    console.log(token)
   }
 
   return (

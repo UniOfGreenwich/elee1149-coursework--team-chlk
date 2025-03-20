@@ -5,7 +5,7 @@ import { SideBarNavItem } from "./dashboard-sidebar-navitem";
 import "../styles/dashboard-sidebar.css";
 
 // Link Router
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // Images
 import logo from "../assets/Fairshare-logo.png";
@@ -17,11 +17,7 @@ import groupsIcon from "../assets/groups-icon.png";
 import logoutIcon from "../assets/logout-icon.png";
 import profilePicture from "../assets/profile-picture.png";
 
-function logout() {
-  sessionStorage.clear()
-}
-
-export function SideBar() {
+export function SideBar( {setToken } ) {
   return (
     <div className="sidebar-wrapper">
       <div className="sidebar-top">
@@ -66,9 +62,9 @@ export function SideBar() {
       </div>
 
       <div className="sidebar-footer">
-        <div className="logout-button">
+        <div className="logout-button" onClick={setToken(null)}>
           <Link to="/login">
-            <SideBarNavItem navPageName="Logout" navIcon={logoutIcon} onClick={logout}/>
+            <SideBarNavItem navPageName="Logout" navIcon={logoutIcon} />
           </Link>
         </div>
         <div className="profile-section">

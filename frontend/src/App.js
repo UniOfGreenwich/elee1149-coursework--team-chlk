@@ -18,7 +18,7 @@ import useToken from './components/use-token';
 
 function App() {
   const { token, setToken } = useToken();
-
+  console.log(token)
   
   if(!token) {
     return (
@@ -32,16 +32,15 @@ function App() {
         </Routes>
       </Router>
     )
-  }
-
+  } else if(token.success) {
     return (
       <div className='app'>
         <Router>
           <Routes>
-          <Route path="/" element={<GroupsDashboard/>}/>
-          <Route path="/login" element={token ? <Navigate to="/" replace /> : <Login/>} />
+          <Route path="/" element={<GroupsDashboard setToken={setToken}/>}/>
+          <Route path="/login" element={token.success ? <Navigate to="/" replace /> : <Login/>} />
           <Route path="/groups" element={<Groups/>}/>
-          <Route path="/groups-dashboard" element={<GroupsDashboard/>}/>
+          <Route path="/groups-dashboard" element={<GroupsDashboard setToken={setToken}/>}/>
           <Route path="/expenses" element={<Expenses/>}/>
           <Route path="/friends" element={<Friends/>}/>
           <Route path="/transactions" element={<Transactions/>}/>
@@ -49,8 +48,8 @@ function App() {
           </Routes>
         </Router>
       </div>
-
-  );
+    );
+  }
 }
 
 export default App;
