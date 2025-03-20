@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.Set;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "https://${CODESPACE_NAME}-3000.app.github.dev"})
 @RequestMapping("/group")
 public class GroupController {
 

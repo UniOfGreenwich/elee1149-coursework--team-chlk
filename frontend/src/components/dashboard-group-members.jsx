@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import "../styles/dashboard-group-members.css";
 import { GroupMembersRow } from "./dashboard-group-members-row";
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080";
 export function GroupMembers() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/group/1/1/users`) // fetching the data
+    fetch(`${backendUrl}/group/1/1/users`) // fetching the data
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch data");
