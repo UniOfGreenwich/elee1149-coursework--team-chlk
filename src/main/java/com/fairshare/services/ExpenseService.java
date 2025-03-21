@@ -49,4 +49,13 @@ public class ExpenseService {
         }
         return expenses;
     }
+
+    public double getTotalExpensesByGroupId(Integer groupId) {
+        List<Expense> expenses = expenseRepository.findByGroupId(groupId);
+        double total = 0;
+        for (Expense expense : expenses) {
+            total += expense.getAmount();
+        }
+        return total;
+    }
 }

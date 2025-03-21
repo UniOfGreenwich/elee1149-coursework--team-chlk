@@ -1,18 +1,24 @@
 package com.fairshare.controllers;
 
 
+import com.fairshare.Requests.GroupResponse;
 import com.fairshare.Requests.LoginRequest;
 import com.fairshare.Requests.LoginResponse;
 import com.fairshare.Requests.CreateUserRequest;
 import com.fairshare.Requests.CreateUserResponse;
+import com.fairshare.entity.Group;
 import com.fairshare.entity.User;
 import com.fairshare.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 //First entrypoint for a request from an application
 //When they make a request will hit the controller first
@@ -44,6 +50,10 @@ public class UserController {
         }
     }
 
+    @GetMapping("/groups")
+    public List<GroupResponse> getUsersGroups (@RequestParam Integer userId) {
+        return userService.getUsersGroups(userId);
+    }
 }
 
 
