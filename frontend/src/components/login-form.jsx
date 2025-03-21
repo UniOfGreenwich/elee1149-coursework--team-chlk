@@ -14,7 +14,7 @@ async function userLogin(credentials) {
   .then(data => data.json())
 }
 
-export function LoginForm( { setToken } ) {
+export function LoginForm( { setToken, setLoggedIn} ) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [error, setError] = useState();
@@ -28,6 +28,7 @@ export function LoginForm( { setToken } ) {
     });
     if(token.success) {
       setToken(token)
+      setLoggedIn(true)
       navigate("/Groups-Dashboard")
     } else {
       setError(token.message)

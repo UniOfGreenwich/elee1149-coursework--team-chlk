@@ -17,7 +17,11 @@ import groupsIcon from "../assets/groups-icon.png";
 import logoutIcon from "../assets/logout-icon.png";
 import profilePicture from "../assets/profile-picture.png";
 
-export function SideBar( {setToken } ) {
+export function SideBar( {setLoggedIn } ) {
+  const logout = () => {
+    sessionStorage.removeItem('token')
+    setLoggedIn(false)
+  }
   return (
     <div className="sidebar-wrapper">
       <div className="sidebar-top">
@@ -62,7 +66,7 @@ export function SideBar( {setToken } ) {
       </div>
 
       <div className="sidebar-footer">
-        <div className="logout-button" onClick={setToken(null)}>
+        <div className="logout-button" onClick={logout}>
           <Link to="/login">
             <SideBarNavItem navPageName="Logout" navIcon={logoutIcon} />
           </Link>

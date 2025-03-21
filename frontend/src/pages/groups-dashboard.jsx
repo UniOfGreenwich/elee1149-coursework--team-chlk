@@ -10,10 +10,10 @@ import { QuickActions } from "../components/dashboard-quick-actions";
 import { RecentExpenses } from "../components/dashboard-recent-expenses";
 import { GroupMembers } from "../components/dashboard-group-members";
 
-export function GroupsDashboard( { setToken } ) {
+export function GroupsDashboard( { setLoggedIn } ) {
   return (
     <div className="dashboard-wrapper">
-      <SideBar setToken={setToken}/>
+      <SideBar setLoggedIn={setLoggedIn}/>
       <div className="dashboard-content">
         <div className="topbar">
           <TopBar pageName="Dashboard" />

@@ -18,29 +18,31 @@ import useToken from './components/use-token';
 
 function App() {
   const { token, setToken } = useToken();
+  const [loggedIn, setLoggedIn] = useState(false);
   console.log(token)
+  console.log(loggedIn)
   
-  if(!token) {
+  if(!loggedIn) {
     return (
       <Router>
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/home" element={<Home/>}/>
-          <Route path="/login" element={<Login setToken={setToken}/>}/>
+          <Route path="/login" element={<Login setToken={setToken} setLoggedIn={setLoggedIn}/>}/>
           <Route path="/sign-up" element={<SignUp/>}/>
           <Route path="/*" element={<Home/>}/>
         </Routes>
       </Router>
     )
-  } else if(token.success) {
+  } else {
     return (
       <div className='app'>
         <Router>
           <Routes>
-          <Route path="/" element={<GroupsDashboard setToken={setToken}/>}/>
+          <Route path="/" element={<GroupsDashboard setLoggedIn={setLoggedIn}/>}/>
           <Route path="/login" element={token.success ? <Navigate to="/" replace /> : <Login/>} />
           <Route path="/groups" element={<Groups/>}/>
-          <Route path="/groups-dashboard" element={<GroupsDashboard setToken={setToken}/>}/>
+          <Route path="/groups-dashboard" element={<GroupsDashboard setLoggedIn={setLoggedIn}/>}/>
           <Route path="/expenses" element={<Expenses/>}/>
           <Route path="/friends" element={<Friends/>}/>
           <Route path="/transactions" element={<Transactions/>}/>
