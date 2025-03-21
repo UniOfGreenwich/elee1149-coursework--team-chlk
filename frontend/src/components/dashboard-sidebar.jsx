@@ -17,10 +17,10 @@ import groupsIcon from "../assets/groups-icon.png";
 import logoutIcon from "../assets/logout-icon.png";
 import profilePicture from "../assets/profile-picture.png";
 
-export function SideBar( {setLoggedIn } ) {
+export function SideBar( { token, setToken } ) {
   const logout = () => {
     sessionStorage.removeItem('token')
-    setLoggedIn(false)
+    setToken(null)
   }
   return (
     <div className="sidebar-wrapper">
@@ -31,7 +31,7 @@ export function SideBar( {setLoggedIn } ) {
         <div className="side-bar-navigation">
           <ul className="sidebar-navigation-list">
             <li className="nav-item">
-              <Link to="/groups-dashboard">
+              <Link to={`/user/${token.userId}/groups-dashboard`}>
                 <SideBarNavItem
                   navPageName="Dashboard"
                   navIcon={dashboardIcon}
@@ -39,12 +39,12 @@ export function SideBar( {setLoggedIn } ) {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/expenses">
+              <Link to={`/user/${token.userId}/expenses`}>
                 <SideBarNavItem navPageName="Expenses" navIcon={expensesIcon} />
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/transactions">
+              <Link to={`/user/${token.userId}/transactions`}>
                 <SideBarNavItem
                   navPageName="Transactions"
                   navIcon={transactionsIcon}
@@ -52,12 +52,12 @@ export function SideBar( {setLoggedIn } ) {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/friends">
+              <Link to={`/user/${token.userId}/friends`}>
                 <SideBarNavItem navPageName="Friends" navIcon={friendsIcon} />
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/groups">
+              <Link to={`/user/${token.userId}/groups`}>
                 <SideBarNavItem navPageName="Groups" navIcon={groupsIcon}/>
               </Link>
             </li>

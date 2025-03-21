@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import "./styles/dashboard.css";
 import {useState} from "react";
 import { useRef } from 'react';
 
@@ -14,21 +15,24 @@ import { GroupsDashboard } from './pages/groups-dashboard';
 import { Expenses } from './pages/expenses';
 import { Friends } from './pages/friends';
 import { Transactions } from './pages/transactions';
+
 import useToken from './components/use-token';
+
+import { SideBar } from "./components/dashboard-sidebar";
+import { TopBar } from "./components/dashboard-topbar";
+
 
 function App() {
   const { token, setToken } = useToken();
-  const [loggedIn, setLoggedIn] = useState(false);
   console.log(token)
-  console.log(loggedIn)
   
-  if(!loggedIn) {
+  if(!token) {
     return (
       <Router>
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/home" element={<Home/>}/>
-          <Route path="/login" element={<Login setToken={setToken} setLoggedIn={setLoggedIn}/>}/>
+          <Route path="/login" element={<Login setToken={setToken}/>}/>
           <Route path="/sign-up" element={<SignUp/>}/>
           <Route path="/*" element={<Home/>}/>
         </Routes>
@@ -38,17 +42,30 @@ function App() {
     return (
       <div className='app'>
         <Router>
-          <Routes>
-          <Route path="/" element={<GroupsDashboard setLoggedIn={setLoggedIn}/>}/>
-          <Route path="/login" element={token.success ? <Navigate to="/" replace /> : <Login/>} />
-          <Route path="/groups" element={<Groups/>}/>
-          <Route path="/groups-dashboard" element={<GroupsDashboard setLoggedIn={setLoggedIn}/>}/>
-          <Route path="/expenses" element={<Expenses/>}/>
-          <Route path="/friends" element={<Friends/>}/>
-          <Route path="/transactions" element={<Transactions/>}/>
-          <Route path="/*" element={<Error/>}/>
-          </Routes>
+        <div className="dashboard-wrapper">
+              <SideBar 
+                token={token} 
+                setToken={setToken}
+              />
+              <div className="dashboard-content">
+                <div className="topbar">
+                  <TopBar pageName="Dashboard" />
+                </div>
+
+                  <Routes>
+                    <Route path="/user/:id/" element={<GroupsDashboard/>}/>
+                    <Route path="/user/:id/groups" element={<Groups/>}/>
+                    <Route path="/user/:id/groups-dashboard" element={<GroupsDashboard/>}/>
+                    <Route path="/user/:id/expenses" element={<Expenses/>}/>
+                    <Route path="/user/:id/friends" element={<Friends/>}/>
+                    <Route path="/user/:id/transactions" element={<Transactions/>}/>
+                    <Route path="/*" element={<Error/>}/>
+                  </Routes>
+                          
+              </div>
+            </div>
         </Router>
+        
       </div>
     );
   }

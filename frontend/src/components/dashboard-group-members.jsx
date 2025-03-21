@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import "../styles/dashboard-group-members.css";
 import { GroupMembersRow } from "./dashboard-group-members-row";
 
-export function GroupMembers() {
+export function GroupMembers({userId}) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:8080/group/1/1/users") // fetching the data
+    fetch(`http://localhost:8080/group/1/${userId}/users`) // fetching the data
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch data");

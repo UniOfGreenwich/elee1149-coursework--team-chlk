@@ -10,7 +10,7 @@ import DoughnutChart from "./dashboard-overview-chart";
 // importing style sheet
 import "../styles/dashboard-overview.css";
 
-export function Overview() {
+export function Overview({userId}) {
   const date = getCurrentMonthYear();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -21,7 +21,7 @@ export function Overview() {
 
   // importing the data
   useEffect(() => {
-    fetch("http://localhost:8080/group/1/1/users")
+    fetch(`http://localhost:8080/group/1/${userId}/users`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch data");

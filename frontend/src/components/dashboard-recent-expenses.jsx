@@ -2,9 +2,7 @@ import { useEffect, useState } from "react";
 import "../styles/dashboard-recent-expenses.css"
 import { RecentExpensesRow } from "./dashboard-recent-expenses-row";
 
-const currentUserId = 1
-
-export function RecentExpenses() {
+export function RecentExpenses({userId}) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -47,7 +45,7 @@ export function RecentExpenses() {
               {data.map((e) => (
                 <li key={e.expenseId}>
                   <RecentExpensesRow
-                    currentUser = {currentUserId}
+                    currentUser = {userId}
                     expenseName={e.description}
                     category={e.categoryId}
                     date={getDateFromString(e.date)}
