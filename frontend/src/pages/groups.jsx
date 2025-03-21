@@ -1,9 +1,14 @@
 import "../styles/dashboard.css";
-import { SideBar } from "../components/dashboard-sidebar";
-import { TopBar } from "../components/dashboard-topbar";
+import { GroupsList } from "../components/groups-list";
+import { useParams } from "react-router-dom";
 
 export function Groups() {
+  let params = useParams()
   return (
-        <h1>Your Groups</h1>
+        <ul className="groups-wrapper">
+                  <li className="groups-component-list">
+                    <GroupsList userId={params.id}/>
+                  </li>
+                </ul>
   );
 }
