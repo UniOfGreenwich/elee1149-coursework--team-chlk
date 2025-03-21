@@ -41,11 +41,13 @@ export function GroupsList({userId}) {
         {data.map((e) => (
           <li key={e.groupId}>
             <GroupsListItem
-              groupName={e.groupName}
-              dateCreated={e.dateCreated}
-              updatedAt={e.updatedAt}
-              numberOfUsers={e.numberOfUsers}
-              totalSpent={e.totalSpent}
+                userId={userId}
+                groupId={e.groupId}
+                groupName={e.groupName}
+                dateCreated={e.dateCreated}
+                updatedAt={e.updatedAt}
+                numberOfUsers={e.numberOfUsers}
+                totalSpent={e.totalSpent}
             />
           </li>
         ))}

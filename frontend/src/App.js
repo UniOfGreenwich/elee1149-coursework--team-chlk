@@ -53,9 +53,9 @@ function App() {
                 </div>
 
                   <Routes>
-                    <Route path="/user/:id/" element={<GroupsDashboard/>}/>
+                    <Route path="/user/:id/" element={<Groups/>}/>
                     <Route path="/user/:id/groups" element={<Groups/>}/>
-                    <Route path="/user/:id/groups-dashboard" element={<GroupsDashboard/>}/>
+                      <Route path="/user/:id/groups/:groupId/groups-dashboard" element={<GroupsDashboard/>}/>
                     <Route path="/user/:id/expenses" element={<Expenses/>}/>
                     <Route path="/user/:id/friends" element={<Friends/>}/>
                     <Route path="/user/:id/transactions" element={<Transactions/>}/>
