@@ -9,6 +9,14 @@
     margin-bottom: 16px;
 }
 
+.add-group-button {
+    background-color: #fe6789;
+    padding: 1rem;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
 .groups-list-wrapper {
     min-height: 100%;
     background-color: #222645;
