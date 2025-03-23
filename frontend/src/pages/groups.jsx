@@ -7,7 +7,7 @@ export function Groups() {
   return (
     <div className="groups-wrapper">
       <div className="groups-header">
-        <h2 className="groups-title">Your Groups</h2>
+        <h1 className="groups-title">Groups</h1>
         <p className="add-group-button">+ New Group</p>
       </div>
       <div className="groups-list-wrapper">

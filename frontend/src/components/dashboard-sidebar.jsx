@@ -44,14 +44,6 @@ export function SideBar( { token, setToken } ) {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to={`/user/${token.userId}/transactions`}>
-                <SideBarNavItem
-                  navPageName="Transactions"
-                  navIcon={transactionsIcon}
-                />
-              </Link>
-            </li>
-            <li className="nav-item">
               <Link to={`/user/${token.userId}/friends`}>
                 <SideBarNavItem navPageName="Friends" navIcon={friendsIcon} />
               </Link>

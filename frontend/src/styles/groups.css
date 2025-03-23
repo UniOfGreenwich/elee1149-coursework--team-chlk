@@ -40,7 +40,7 @@
 }
 
 .group-list-item {
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid #0f0f0f;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -50,7 +50,12 @@
 
 .group-list-item:hover {
     opacity: 1;
-    background-color: #4C3590;
+    background-color: #4495c7;
+    border-radius: 8px;
+}
+
+.group-details-column {
+    margin-left: 8px;
 }
 
 .group-name {
@@ -85,7 +90,7 @@
     display: flex;
     height: 40px;
     width: 75px;
-    background-color: #4495c7;;
+    background-color: #4495c7;
     border-radius: 8px;
     align-items: center;
     justify-content: center;

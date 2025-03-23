@@ -14,7 +14,6 @@ import { Groups } from './pages/groups';
 import { GroupsDashboard } from './pages/groups-dashboard';
 import { Expenses } from './pages/expenses';
 import { Friends } from './pages/friends';
-import { Transactions } from './pages/transactions';
 
 import useToken from './components/use-token';
 
@@ -58,7 +57,6 @@ function App() {
                       <Route path="/user/:id/groups/:groupId/groups-dashboard" element={<GroupsDashboard/>}/>
                     <Route path="/user/:id/expenses" element={<Expenses/>}/>
                     <Route path="/user/:id/friends" element={<Friends/>}/>
-                    <Route path="/user/:id/transactions" element={<Transactions/>}/>
                     <Route path="/*" element={<Error/>}/>
                   </Routes>
                           
