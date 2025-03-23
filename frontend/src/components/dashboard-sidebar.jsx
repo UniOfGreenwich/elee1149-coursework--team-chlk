@@ -31,7 +31,7 @@ export function SideBar( { token, setToken } ) {
         <div className="side-bar-navigation">
           <ul className="sidebar-navigation-list">
             <li className="nav-item">
-              <Link to={`/user/${token.userId}/groups-dashboard`}>
+              <Link to={`/user/${token.userId}/dashboard`}>
                 <SideBarNavItem
                   navPageName="Dashboard"
                   navIcon={dashboardIcon}

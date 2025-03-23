@@ -10,6 +10,7 @@ import { Home } from './pages/home';
 import { Login } from './pages/login';
 import { SignUp } from './pages/sign-up';
 import { Error } from './pages/error';
+import { Dashboard } from './pages/dashboard';
 import { Groups } from './pages/groups';
 import { GroupsDashboard } from './pages/groups-dashboard';
 import { Expenses } from './pages/expenses';
@@ -52,7 +53,8 @@ function App() {
                 </div>
 
                   <Routes>
-                    <Route path="/user/:id/" element={<Groups/>}/>
+                    <Route path="/user/:id/" element={<Dashboard/>}/>
+                    <Route path="/user/:id/Dashboard" element={<Dashboard/>}/>
                     <Route path="/user/:id/groups" element={<Groups/>}/>
                       <Route path="/user/:id/groups/:groupId/groups-dashboard" element={<GroupsDashboard/>}/>
                     <Route path="/user/:id/expenses" element={<Expenses/>}/>
