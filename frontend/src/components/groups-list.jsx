@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "../styles/groups.css"
 import { GroupsListItem } from "./groups-list-item";
+import { Link, useNavigate } from "react-router-dom";
 
 export function GroupsList({userId}) {
   const [data, setData] = useState([]);
@@ -36,19 +37,19 @@ export function GroupsList({userId}) {
   console.log(data); //printing the data to the console
 
   return (
-    <div className="groups-list-wrapper">
+    <div>
       <ul>
         {data.map((e) => (
           <li key={e.groupId}>
-            <GroupsListItem
-                userId={userId}
-                groupId={e.groupId}
-                groupName={e.groupName}
-                dateCreated={e.dateCreated}
-                updatedAt={e.updatedAt}
-                numberOfUsers={e.numberOfUsers}
-                totalSpent={e.totalSpent}
-            />
+            <Link to={`/user/${userId}/groups/${e.groupId}/groups-dashboard`}>
+                <GroupsListItem
+                    groupName={e.groupName}
+                    dateCreated={e.dateCreated}
+                    updatedAt={e.updatedAt}
+                    numberOfUsers={e.numberOfUsers}
+                    totalSpent={e.totalSpent}
+                />
+            </Link>
           </li>
         ))}
       </ul>
