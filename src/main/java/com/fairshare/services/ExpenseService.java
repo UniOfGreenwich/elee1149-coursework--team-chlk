@@ -1,5 +1,6 @@
 package com.fairshare.services;
 
+import com.fairshare.Requests.CreateExpenseRequest;
 import com.fairshare.entity.Expense;
 import com.fairshare.entity.User;
 import com.fairshare.entity.UserShare;
@@ -8,10 +9,10 @@ import com.fairshare.repository.UserRepository;
 import com.fairshare.repository.UserShareRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class ExpenseService {
@@ -24,21 +25,43 @@ public class ExpenseService {
 
     @Autowired
     private BalanceService balanceService;
+
     @Autowired
     private UserRepository userRepository;
 
     @Transactional
-    public void addExpense(Expense expense, Integer payerId) {
-        // Save the expense from the Payer
-        expenseRepository.save(expense);
+    public Expense addExpense(CreateExpenseRequest createExpenseRequest) {
+        String expenseName = createExpenseRequest.getExpenseName();
+        Integer payerId = createExpenseRequest.getPayerId();
+        Integer categoryId = createExpenseRequest.getCategoryId();
+        Integer expenseId = createExpenseRequest.getExpenseId();
 
-        //Update the balances of other users
-        for (UserShare userShare : expense.getUserShares()) {
-            userShare.setExpenseId(expense.getExpenseId());
-            userShareRepository.save(userShare);
-            balanceService.updateBalance(payerId, userShare.getUserId(), userShare.getShareAmount());
+        User user = userRepository.findById(payerId)
+                .orElse(null);
 
+        if (user == null) {
+            return null; //indicates payer/user not found
         }
+
+        if (expenseRepository.existsByExpenseName(expenseName) || expenseRepository.existsByExpenseId(expenseId)) {
+            Expense errorExpense = new Expense();
+            errorExpense.setExpenseName("ExpenseExistsError");
+            return errorExpense; // Indicate Expense exists
+        }
+
+        Expense newExpense = new Expense();
+        newExpense.setExpenseName(expenseName);
+        newExpense.setPayerId(payerId);
+        newExpense.setCategoryId(categoryId);
+        newExpense.setExpenseId(expenseId);
+
+        for (UserShare userShare : newExpense.getUserShares()) {
+            userShare.setExpenseId(newExpense);
+            userShareRepository.save(userShare);
+            balanceService.updateBalance(payerId, userShare.getUserId(), userShare.getShareAmount()); // Access userId through User object
+        }
+
+        return newExpense; // Return the saved expense
     }
 
     public List<Expense> getExpensesByGroupId(Integer groupId) {
@@ -57,5 +80,8 @@ public class ExpenseService {
             total += expense.getAmount();
         }
         return total;
+
     }
 }
+
+
