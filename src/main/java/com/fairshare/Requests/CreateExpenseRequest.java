@@ -1,6 +1,12 @@
 package com.fairshare.Requests;
 
+import com.fairshare.entity.UserShare;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.OneToMany;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class CreateExpenseRequest {
 
@@ -11,7 +17,9 @@ public class CreateExpenseRequest {
     private String currency;
     private Integer payerId;
     private Integer categoryId;
+    private Integer groupId;
     private Date date;
+    private List<UserShare> userShares = new ArrayList<>();
 
     public String getExpenseName() {
         return expenseName;
@@ -75,6 +83,22 @@ public class CreateExpenseRequest {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Integer getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(Integer groupId) {
+        this.groupId = groupId;
+    }
+
+    public List<UserShare> getUserShares() {
+        return userShares;
+    }
+
+    public void setUserShares(List<UserShare> userShares) {
+        this.userShares = userShares;
     }
 }
 
