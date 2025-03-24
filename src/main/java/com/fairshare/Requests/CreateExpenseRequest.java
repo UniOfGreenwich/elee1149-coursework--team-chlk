@@ -1,10 +1,17 @@
 package com.fairshare.Requests;
 
+import java.util.Date;
+
 public class CreateExpenseRequest {
 
-        private String expenseName;
-        private Integer expenseId;
-        private Integer categoryId;
+    private String expenseName;
+    private Integer expenseId;
+    private String description;
+    private Double amount;
+    private String currency;
+    private Integer payerId;
+    private Integer categoryId;
+    private Date date;
 
     public String getExpenseName() {
         return expenseName;
@@ -22,6 +29,38 @@ public class CreateExpenseRequest {
         this.expenseId = expenseId;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    public Integer getPayerId() {
+        return payerId;
+    }
+
+    public void setPayerId(Integer payerId) {
+        this.payerId = payerId;
+    }
+
     public Integer getCategoryId() {
         return categoryId;
     }
@@ -29,6 +68,16 @@ public class CreateExpenseRequest {
     public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
     }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }
+
+
 
 
