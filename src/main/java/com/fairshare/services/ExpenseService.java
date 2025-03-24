@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -32,15 +33,24 @@ public class ExpenseService {
     @Transactional
     public Expense addExpense(CreateExpenseRequest createExpenseRequest) {
         String expenseName = createExpenseRequest.getExpenseName();
+        Integer expenseId = createExpenseRequest.getExpenseId();
+        String description = createExpenseRequest.getDescription();
+        Double amount = createExpenseRequest.getAmount();
+        String currency = createExpenseRequest.getCurrency();
+        Date date = createExpenseRequest.getDate();
         Integer payerId = createExpenseRequest.getPayerId();
         Integer categoryId = createExpenseRequest.getCategoryId();
-        Integer expenseId = createExpenseRequest.getExpenseId();
+
 
         User user = userRepository.findById(payerId)
                 .orElse(null);
 
         if (user == null) {
             return null; //indicates payer/user not found
+        }
+
+        if (createExpenseRequest.getCategoryId() == null) {
+            createExpenseRequest.setCategoryId(1); // Use default category
         }
 
         if (expenseRepository.existsByExpenseName(expenseName) || expenseRepository.existsByExpenseId(expenseId)) {
@@ -51,6 +61,11 @@ public class ExpenseService {
 
         Expense newExpense = new Expense();
         newExpense.setExpenseName(expenseName);
+        newExpense.setExpenseId(expenseId);
+        newExpense.setDescription(description);
+        newExpense.setAmount(amount);
+        newExpense.setCurrency(currency);
+        newExpense.setDate(date);
         newExpense.setPayerId(payerId);
         newExpense.setCategoryId(categoryId);
         newExpense.setExpenseId(expenseId);
