@@ -9,6 +9,7 @@ import com.fairshare.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -53,8 +54,8 @@ public class GroupService {
 
         Group newGroup = new Group();
         newGroup.setGroupName(groupName);
+        newGroup.setDateCreated(new Date());
         newGroup.getUsers().add(user); // Add the user who created the group to the users set as well
-
         return groupRepository.save(newGroup);
     }
 
@@ -70,10 +71,8 @@ public class GroupService {
         }
 
         public Group addUserToGroup (Integer groupId, Integer userId){
-            Group group = groupRepository.findById(groupId)
-                    .orElse(null);
-            User user = userRepository.findById(userId)
-                    .orElse(null);
+            Group group = groupRepository.findById(groupId).orElse(null);
+            User user = userRepository.findById(userId).orElse(null);
 
             if (group == null && user == null) {
                 Group errorGroup = new Group();
@@ -96,6 +95,8 @@ public class GroupService {
             }
 
             group.getUsers().add(user);
+            group.setUpdatedAt(new Date());
+            group.setMessage("User: " + user.getUsername() + " added to group");
             groupRepository.save(group);
             return group;
         }

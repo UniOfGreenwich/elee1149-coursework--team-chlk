@@ -2,15 +2,13 @@ import { useEffect, useState } from "react";
 import "../styles/dashboard-recent-expenses.css"
 import { RecentExpensesRow } from "./dashboard-recent-expenses-row";
 
-const currentUserId = 1
-
-export function RecentExpenses() {
+export function RecentExpenses({userId, groupId}) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:8080/expense/all-expenses?groupId=1") // fetching the data
+    fetch(`http://localhost:8080/expense/all-expenses?groupId=${groupId}`) // fetching the data
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch data");
@@ -47,10 +45,10 @@ export function RecentExpenses() {
               {data.map((e) => (
                 <li key={e.expenseId}>
                   <RecentExpensesRow
-                    currentUser = {currentUserId}
+                    currentUser = {userId}
                     expenseName={e.description}
                     category={e.categoryId}
-                    date={getDateFromString(e.date)}
+                    date={e.date}
                     userPaid={e.amount}
                     split={e.userShares}
                     payerId={e.userId}
@@ -61,11 +59,6 @@ export function RecentExpenses() {
             </ul>
     </div>
   );
-}
-
-const getDateFromString = (dateString) => {
-  const [day, month, year] = dateString.split("-");
-  return new Date(year, month -1, day, 0, 0, 0, 0)
 }
 
 
