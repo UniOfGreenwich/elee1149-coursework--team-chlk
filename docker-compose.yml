@@ -13,8 +13,6 @@ services:
       dockerfile: Dockerfile.frontend
     ports:
       - "3000:3000"
-    environment:
-      - REACT_APP_BACKEND_URL=https://${CODESPACE_NAME}-8080.githubpreview.dev
     depends_on:
       - backend
 
