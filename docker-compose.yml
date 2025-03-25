@@ -15,6 +15,6 @@ services:
       - "3000:3000"
     depends_on:
       - backend
-    environment:
-        - REACT_APP_BACKEND_URL=${CODESPACE_NAME:-localhost}:8080
+    env_file:
+      - ./frontend/.env
 
