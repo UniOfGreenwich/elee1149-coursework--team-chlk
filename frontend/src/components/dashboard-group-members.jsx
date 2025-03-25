@@ -7,6 +7,7 @@ export function GroupMembers() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
     fetch(`${BACKEND_URL}/group/1/1/users`) // fetching the data
       .then((response) => {
         if (!response.ok) {
