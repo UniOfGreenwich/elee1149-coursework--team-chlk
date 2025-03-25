@@ -47,7 +47,7 @@ public class Expense {
     @Column(name = "group_id")
     private Integer groupId;
 
-    @Column(name = "user_id")
+    @Column(name = "payer_id")
     private Integer userId;
 
     @Transient
