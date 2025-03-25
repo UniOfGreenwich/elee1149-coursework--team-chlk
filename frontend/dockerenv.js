@@ -1,3 +1,6 @@
-// // frontend/src/constants.js
-// const BACKEND_URL = ${CODESPACE_NAME:-localhost}:8080;
-//
+const CODESPACE_NAME = process.env.CODESPACE_NAME || 'localhost';
+const BACKEND_URL = `https://${CODESPACE_NAME}-8080.app.github.dev`;
+
+module.exports = {
+    REACT_APP_BACKEND_URL: BACKEND_URL
+};
