@@ -30,14 +30,14 @@ function getLastUpdated (updatedDate) {
         return "Today"
     } else if(isYesterday(updatedDate)) {
         return "Yesterday"
-    } else if(differenceInCalendarYears(today, updatedDate)>0){
-        return `${differenceInCalendarYears(today, updatedDate)} Years Ago`
-    } else if(differenceInCalendarMonths(today, updatedDate)>0) {
-        return `${differenceInCalendarYears(today, updatedDate)} Months Ago`
-    } else if(differenceInCalendarWeeks(today, updatedDate)>0) {
-        return `${differenceInCalendarYears(today, updatedDate)} Weeks Ago`
+    } else if(differenceInCalendarYears(today, updatedDate)-1>0){
+        return `${differenceInCalendarYears(today, updatedDate)-1} Year(s) Ago`
+    } else if(differenceInCalendarMonths(today, updatedDate)-1>0) {
+        return `${differenceInCalendarMonths(today, updatedDate)-1} Month(s) Ago`
+    } else if(differenceInCalendarWeeks(today, updatedDate)-1>0) {
+        return `${differenceInCalendarWeeks(today, updatedDate)-1} Week(s) Ago`
     } else {
-        return `${differenceInCalendarDays(today, updatedDate)} Days Ago`
+        return `${differenceInCalendarDays(today, updatedDate)-1} Day(s) Ago`
     }
 }
 
