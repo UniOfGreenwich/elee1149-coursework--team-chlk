@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import "../styles/dashboard-recent-expenses.css"
+import "../styles/dashboard-recent-expenses.css";
+import "../styles/dashboard-recent-expenses.css";
 import { RecentExpensesRow } from "./dashboard-recent-expenses-row";
 
-export function RecentExpenses({userId, groupId}) {
+export function RecentExpenses({ userId, groupId }) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -36,29 +37,29 @@ export function RecentExpenses({userId, groupId}) {
   console.log(data); //printing the data to the console
 
   return (
-    <div className="dashboard-grid-component">
-      <h2 className="component-title">Recent Expenses</h2>
-      <div className="component-options">
-        <p className="all-expenses">All</p>
+    <div className="dashboard-grid-component scroll">
+      <div className="dashboard-grid-component scroll">
+        <h2 className="component-title">Recent Expenses</h2>
+        <div className="component-options">
+          <p className="all-expenses">All</p>
+        </div>
+        <ul>
+          {data.map((e) => (
+            <li key={e.expenseId}>
+              <RecentExpensesRow
+                currentUser={userId}
+                expenseName={e.description}
+                category={e.categoryId}
+                date={e.date}
+                userPaid={e.amount}
+                split={e.userShares}
+                payerId={e.userId}
+                payerName={e.userName}
+              />
+            </li>
+          ))}
+        </ul>
       </div>
-            <ul>
-              {data.map((e) => (
-                <li key={e.expenseId}>
-                  <RecentExpensesRow
-                    currentUser = {userId}
-                    expenseName={e.description}
-                    category={e.categoryId}
-                    date={e.date}
-                    userPaid={e.amount}
-                    split={e.userShares}
-                    payerId={e.userId}
-                    payerName={e.userName}
-                  />
-                </li>
-              ))}
-            </ul>
     </div>
   );
 }
-
-

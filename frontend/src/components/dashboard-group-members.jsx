@@ -36,7 +36,7 @@ export function GroupMembers({userId, groupId}) {
   console.log(data); //printing the data to the console
 
   return (
-    <div className="dashboard-grid-component">
+    <div className="dashboard-grid-component scroll">
       <h2 className="component-title">Group Members</h2>
       <p className="balance-title">Balance</p>
       <ul>

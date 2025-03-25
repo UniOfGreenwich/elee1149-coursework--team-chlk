@@ -78,12 +78,12 @@ input[type="submit"] {
   font-weight: bold;
   font-size: 1rem;
   width: max-content;
-  margin-top: 1rem;
   border: none;
   outline: none;
   padding: 1rem;
   cursor: pointer;
   transition: background-color 100ms ease-in;
+  margin: 1rem auto;
 }
 
 input[type="submit"]:hover {
@@ -164,3 +164,50 @@ input[type="radio"] {
 #submit.hide {
   visibility: hidden;
 }
+
+.expense-user-field {
+  width: 100%;
+  overflow: scroll;
+  height: 70px;
+  padding: 6px;
+  border: 1px solid rgb(158, 158, 158);
+  border-radius: 4px;
+}
+
+.custom-amounts {
+  position: absolute;
+  width: 300px;
+  top: 20%;
+  left: 100%;
+  background-color: rgb(249, 249, 249);
+  padding: 1rem;
+  border-radius: 10px;
+
+}
+
+.custom-user-name {
+  text-align: left;
+  width: 100%;
+}
+
+.custom-amount-field {
+  margin-bottom: 1rem;
+}
+
+.selected-users {
+  background-color: #ffdee4;
+  width: 100%;
+  padding: 5px;
+  color: black;
+  text-align: left;
+  border-radius: 5px;
+  margin-top: 1rem;
+}
+
+.selected-users-title {
+  color: black;
+  font-weight: 600;
+}
+
+
+
