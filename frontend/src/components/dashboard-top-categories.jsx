@@ -3,13 +3,13 @@ import "../styles/dashboard-top-categories.css"
 import { TopCategoriesItem } from "./dashboard-top-categories-item";
 import categories from "../data/category-map"
 
-export function TopCategories() {
+export function TopCategories({userId, groupId}) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:8080/expense/all-expenses?groupId=1") // fetching the data
+    fetch(`http://localhost:8080/expense/all-expenses?groupId=${groupId}`) // fetching the data
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch data");

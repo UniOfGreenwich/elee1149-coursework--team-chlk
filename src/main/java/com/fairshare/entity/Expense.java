@@ -25,6 +25,9 @@ public class Expense {
     @Column(name = "expense_id")
     private Integer expenseId;
 
+    @Column(name = "expense_name")
+    private String expenseName;
+
     @Column(name = "description")
     private String description;
 
@@ -35,7 +38,7 @@ public class Expense {
     private String currency;
 
     @Column(name = "date")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date date;
 
     @Column(name = "category_id", nullable = false)
@@ -44,7 +47,7 @@ public class Expense {
     @Column(name = "group_id")
     private Integer groupId;
 
-    @Column(name = "user_id")
+    @Column(name = "payer_id")
     private Integer userId;
 
     @Transient
@@ -60,6 +63,14 @@ public class Expense {
 
     public void setExpenseId(Integer expenseId) {
         this.expenseId = expenseId;
+    }
+
+    public String getExpenseName() {
+        return expenseName;
+    }
+
+    public void setExpenseName(String expenseName) {
+        this.expenseName = expenseName;
     }
 
     public String getDescription() {
