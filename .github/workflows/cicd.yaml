@@ -1,54 +1,57 @@
-name: Deploy to Cloud Run
-
-env:
-  SERVICE_NAME: faishare-backend-service
-  PROJECT_ID: atomic-hash-455114-v1
-  DOCKER_IMAGE_URL: us-central1-docker.pkg.dev/atomic-hash-455114-v1/fairshare-backend-service
+name: 'Build and Deploy to Cloud Run'
 
 on:
   push:
     branches:
-      - GCP-deployment
-  pull_request:
-    branches:
-      - GCP-deployment
+      - 'develop'
+
+env:
+  PROJECT_ID: 'atomic-hash-455114-v1' # TODO: update to your Google Cloud project ID
+  REGION: 'us-central1' # TODO: update to your region
+  SERVICE: 'fairshare-backend-service' # TODO: update to your service name
 
 jobs:
-  dockerize-and-deploy:
-    runs-on: ubuntu-latest
+  deploy:
+    runs-on: 'ubuntu-latest'
+
+    permissions:
+      contents: 'read'
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - name: 'Checkout'
+        uses: 'actions/checkout@v4'
 
-      - name: Google Cloud Auth
-        uses: 'google-github-actions/auth@v2'
+      - name: 'Set up Google Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v1'
         with:
-          credentials_json: '${{ secrets.GCP_SA_KEY }}'
-          project_id: ${{ env.PROJECT_ID }}
+          version: 'latest'
+          project_id: '${{ env.PROJECT_ID }}'
+          service_account_key: '${{ secrets.GCP_SA_KEY }}'
 
-      - name: Set up Cloud SDK
-        uses: 'google-github-actions/setup-gcloud@v2'
-
-      - name: Configure Docker
+      - name: 'Authenticate to Google Cloud'
         run: |
-          gcloud auth configure-docker us-central1-docker.pkg.dev
+          echo "${{ secrets.GCP_SA_KEY }}" > "${HOME}/gcloud-service-key.json"
+          gcloud auth activate-service-account --key-file="${HOME}/gcloud-service-key.json"
 
-      - name: Authenticate Docker
-        run: |
-          echo "${{ secrets.GCP_SA_KEY }}" | docker login -u _json_key --password-stdin https://us-central1-docker.pkg.dev
-          
+      - name: 'Docker Auth'
+        uses: 'docker/login-action@v3'
+        with:
+          username: 'oauth2accesstoken'
+          password: '${{ secrets.GCP_SA_KEY }}'
+          registry: '${{ env.REGION }}-docker.pkg.dev'
 
-      - name: Build and Push Docker Image
-        run: |
-          docker build -t ${{ env.DOCKER_IMAGE_URL }}:latest -f dockerfile.prod .
-          docker push ${{ env.DOCKER_IMAGE_URL }}:latest
+      - name: 'Build and Push Container'
+        run: |-
+          DOCKER_TAG="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}"
+          docker build --tag "${DOCKER_TAG}" .
+          docker push "${DOCKER_TAG}"
 
-      - name: Deploy to Cloud Run
-        run: |
-          echo SERVICE_NAME $SERVICE_NAME
-          gcloud run deploy $SERVICE_NAME \
-            --image ${{ env.DOCKER_IMAGE_URL }}:latest \
-            --platform managed \
-            --region us-east1 \
-            --allow-unauthenticated
+      - name: 'Deploy to Cloud Run'
+        uses: 'google-github-actions/deploy-cloudrun@v2'
+        with:
+          service: '${{ env.SERVICE }}'
+          region: '${{ env.REGION }}'
+          image: '${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}'
+
+      - name: 'Show output'
+        run: echo ${{ steps.deploy.outputs.url }}
