@@ -1,12 +1,14 @@
 ### CategoryEntity:
 ```mermaid
 classDiagram
-Category: +Integer category_id
-Category: +String category_name
-Category: +getId()
-Category: +getCategoryName()
-Category: +setId()
-Category: +setCategoryName()
+class Category {
+    +Integer categoryId
+    +String categoryName
+    +getId() Integer
+    +setId(Integer id)
+    +getCategoryId() String
+    +setCategoryName(String groupName)
+}
 ```
 
 
