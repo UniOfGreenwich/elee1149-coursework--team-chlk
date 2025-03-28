@@ -3,7 +3,7 @@ name: Deploy to Cloud Run
 env:
   SERVICE_NAME: faishare-backend-service
   PROJECT_ID: atomic-hash-455114-v1
-  DOCKER_IMAGE_URL: us-central1-docker.pkg.dev/fairshare/fairshare-backend-service/fairshare-backend-service
+  DOCKER_IMAGE_URL: us-central1-docker.pkg.dev/atomic-hash-455114-v1/fairshare-backend-service
 
 on:
   push:
