@@ -124,7 +124,7 @@ In addition to automated test, we have followed some manual testing procedures t
 applications UI. We have maintained documentation of these testing documents that outline various
 test cases, expected results and actual results. These documents help to maintain record
 of manual testing and verify the application works. You can located these testing documents
-in the [testing_documents](testing_documents) directory.
+in the [testing-documents](testing_documents) directory.
 
 ### Hopscotch Testing
 #### What is Hopscotch
@@ -145,7 +145,7 @@ data the Frontend. Here is the process of using Hopscotch to test our API's:
 By using Hopscotch, we were able to quickly and easily test out API's ensuring reliablity and working status of our
 backend services. 
 
-More details can be found in the [hopscotch_testing](hopscotch_testing) directory.
+More details can be found in the [hopscotch](hopscotch_testing) directory.
 
 
 
