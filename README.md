@@ -99,6 +99,11 @@ Fairshare is designed to run within a [Docker](https://www.docker.com/resources/
 See the [Dependencies section](#dependencies) below for details on the project's Gradle dependencies.
 
 <a id="dependencies"></a>
+
+## Class Diagrams
+
+For detailed class diagrams, please refer to the [class_diagrams](class_diagrams) folder.
+
 ## Dependencies
 
 <details>
