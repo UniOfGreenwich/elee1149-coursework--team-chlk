@@ -93,4 +93,16 @@ public class FriendsControllerTest {
         verify(friendsService, times(1)).getPendingFriendRequests(userId);
     }
 
+    @Test
+    void testAreFriends() {
+        Integer userId = 1;
+        Integer friendUserId = 2;
+        when(friendsService.areFriends(userId, friendUserId)).thenReturn(true);
+
+        ResponseEntity<Boolean> response = friendsController.areFriends(userId, friendUserId);
+
+        assertEquals(ResponseEntity.ok(true), response);
+        verify(friendsService, times(1)).areFriends(userId, friendUserId);
+    }
+
 }
