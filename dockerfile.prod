@@ -1,14 +1,15 @@
-# Use an official OpenJDK runtime as a parent image
-FROM openjdk:17-jdk-alpine
+FROM openjdk:17-jdk-slim
 
-# Set the working directory in the container
 WORKDIR /app
 
-# Copy the build artifact from the host machine to the container
-COPY build/libs/*.jar app.jar
+COPY gradlew /app/
+COPY gradle /app/gradle
+COPY build.gradle settings.gradle /app/
+COPY src /app/src
 
-# Expose the port the application runs on
+RUN chmod +x gradlew
+RUN ./gradlew build
+
 EXPOSE 8080
 
-# Run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "build/libs/fairshare.jar"]
