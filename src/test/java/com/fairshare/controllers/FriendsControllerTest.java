@@ -54,4 +54,15 @@ public class FriendsControllerTest {
         verify(friendsService, times(1)).acceptFriendRequest(requestId);
     }
 
+    @Test
+    void testDeclineFriendRequest() {
+        Integer requestId = 1;
+        doNothing().when(friendsService).declineFriendRequest(requestId);
+
+        ResponseEntity<String> response = friendsController.declineFriendRequest(requestId);
+
+        assertEquals(ResponseEntity.ok("Friend request deleted"), response);
+        verify(friendsService, times(1)).declineFriendRequest(requestId);
+    }
+
 }
