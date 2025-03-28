@@ -104,5 +104,4 @@ public class FriendsControllerTest {
         assertEquals(ResponseEntity.ok(true), response);
         verify(friendsService, times(1)).areFriends(userId, friendUserId);
     }
-
 }
