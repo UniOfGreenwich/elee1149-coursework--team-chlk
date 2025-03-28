@@ -1,5 +1,6 @@
 package com.fairshare.controllers;
 
+import com.fairshare.DTO.UserWithBalance;
 import com.fairshare.Requests.AddUserToGroupRequest;
 import com.fairshare.Requests.CreateGroupRequest;
 import com.fairshare.Requests.CreateGroupResponse;
@@ -75,13 +76,14 @@ public class GroupControllerTests {
     @Test
     void testGetUsersByGroupId() {
         Integer groupId = 123;
-        Set<User> users = new HashSet<>();
+        Integer userId = 1;
+        Set<UserWithBalance> users = new HashSet<>();
 
-        User user1 = new User();
+        UserWithBalance user1 = new UserWithBalance();
         user1.setUserId(1);
         user1.setUsername("User1");
 
-        User user2 = new User();
+        UserWithBalance user2 = new UserWithBalance();
         user1.setUserId(2);
         user1.setUsername("User2");
 
@@ -89,9 +91,9 @@ public class GroupControllerTests {
         users.add(user2);
 
 
-        when(groupService.getUsersByGroupId(groupId)).thenReturn(users);
+        when(groupService.getUsersByGroupId(groupId, userId)).thenReturn(users);
 
-        Set<User> result = groupController.getUsersByGroupId(groupId);
+        Set<UserWithBalance> result = groupController.getUsersByGroupId(groupId,userId);
 
         assertEquals(users, result);
     }
