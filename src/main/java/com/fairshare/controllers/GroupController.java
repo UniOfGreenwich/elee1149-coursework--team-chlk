@@ -1,12 +1,11 @@
 package com.fairshare.controllers;
 
-import com.fairshare.Requests.AddUserToGroupResponse;
+import com.fairshare.Responses.AddUserToGroupResponse;
 import com.fairshare.Requests.AddUserToGroupRequest;
 import com.fairshare.DTO.UserWithBalance;
 import com.fairshare.Requests.CreateGroupRequest;
-import com.fairshare.Requests.CreateGroupResponse;
+import com.fairshare.Responses.CreateGroupResponse;
 import com.fairshare.entity.Group;
-import com.fairshare.entity.User;
 import com.fairshare.services.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
