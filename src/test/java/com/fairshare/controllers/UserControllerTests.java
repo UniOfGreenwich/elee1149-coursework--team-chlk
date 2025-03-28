@@ -1,9 +1,9 @@
 package com.fairshare.controllers;
 
 import com.fairshare.Requests.CreateUserRequest;
-import com.fairshare.Requests.CreateUserResponse;
+import com.fairshare.Responses.CreateUserResponse;
 import com.fairshare.Requests.LoginRequest;
-import com.fairshare.Requests.LoginResponse;
+import com.fairshare.Responses.LoginResponse;
 import com.fairshare.entity.User;
 import com.fairshare.services.UserService;
 import org.junit.jupiter.api.Test;
