@@ -9,8 +9,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.ResponseEntity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -39,7 +41,17 @@ public class FriendsControllerTest {
 
         assertEquals(response, result);
         verify(friendsService, times(1)).sendFriendRequest(userId, friendUserId);
-
-
     }
+
+    @Test
+    void testAcceptFriendRequest() {
+        Integer requestId = 1;
+        doNothing().when(friendsService).acceptFriendRequest(requestId);
+
+        ResponseEntity<String> response = friendsController.acceptFriendRequest(requestId);
+
+        assertEquals(ResponseEntity.ok("Friend request accepted."), response);
+        verify(friendsService, times(1)).acceptFriendRequest(requestId);
+    }
+
 }
