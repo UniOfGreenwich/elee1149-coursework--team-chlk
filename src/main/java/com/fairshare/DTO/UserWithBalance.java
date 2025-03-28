@@ -11,6 +11,10 @@ public class UserWithBalance extends User {
         this.balance = balance;
     }
 
+    public UserWithBalance() {
+
+    }
+
     public Double getBalance() {
         return balance;
     }
