@@ -36,3 +36,42 @@ class Expense {
     +setUserShares(List~UserShare~ userShares)
 }
 ```
+
+### ExpenseController
+```mermaid
+classDiagram
+class ExpenseController {
+    -ExpenseService expenseService
+    +ExpenseController(ExpenseService expenseService)
+    +addExpense(Expense expense, Integer payerId)
+    +getAllExpenses(Integer groupId)
+}
+ExpenseController --> ExpenseService
+```
+
+### ExpenseRepository
+```mermaid
+classDiagram
+class ExpenseRepository {
+    +List~Expense~ findByGroupId(Integer groupId)
+}
+ExpenseRepository ..|> JpaRepository
+```
+
+### ExpenseService
+```mermaid
+classDiagram
+class ExpenseService {
+    -ExpenseRepository expenseRepository
+    -UserShareRepository userShareRepository
+    -BalanceService balanceService
+    -UserRepository userRepository
+    +addExpense(Expense expense, Integer payerId)
+    +getExpensesByGroupId(Integer groupId)
+    +getTotalExpensesByGroupId(Integer groupId)
+}
+ExpenseService --> ExpenseRepository
+ExpenseService --> UserShareRepository
+ExpenseService --> BalanceService
+ExpenseService --> UserRepository
+```
