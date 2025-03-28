@@ -1,14 +1,14 @@
-package com.fairshare.Requests;
+package com.fairshare.Responses;
 
-public class AddUserToGroupResponse {
+public class CreateGroupResponse {
     private String message;
     private Boolean success;
-    private Integer userId;
+    private Integer groupId;
 
-    public AddUserToGroupResponse(String message, Boolean success, Integer userId) {
+    public CreateGroupResponse(String message, Boolean success, Integer userId) {
         this.message = message;
         this.success = success;
-        this.userId = userId;
+        this.groupId = groupId;
     }
 
     public String getMessage() {
@@ -28,10 +28,10 @@ public class AddUserToGroupResponse {
     }
 
     public Integer getGroupId() {
-        return userId;
+        return groupId;
     }
     public void setGroupId(Integer groupId) {
-        this.userId = groupId;
+        this.groupId = groupId;
     }
 }
 
