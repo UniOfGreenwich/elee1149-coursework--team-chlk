@@ -65,10 +65,9 @@ public class GroupControllerTests {
         Integer groupId = 1;
         Integer userId = 1;
 
-        
-
-        groupController.addUserToGroup(groupId, userId);
-
+        AddUserToGroupRequest request = new AddUserToGroupRequest();
+        request.setUserId(userId);
+        groupController.addUserToGroup(groupId, request);
         //Verify that the service method was called
         verify(groupService).addUserToGroup(groupId, userId);
     }
