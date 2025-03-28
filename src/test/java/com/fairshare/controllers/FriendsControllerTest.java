@@ -1,6 +1,7 @@
 package com.fairshare.controllers;
 
 import com.fairshare.Responses.FriendsResponse;
+import com.fairshare.entity.Friends;
 import com.fairshare.services.FriendsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,6 +11,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doNothing;
@@ -63,6 +67,18 @@ public class FriendsControllerTest {
 
         assertEquals(ResponseEntity.ok("Friend request deleted"), response);
         verify(friendsService, times(1)).declineFriendRequest(requestId);
+    }
+
+    @Test
+    void testGetFriendsList() {
+        Integer userId = 1;
+        List<Friends> friendsList = Arrays.asList(new Friends(), new Friends());
+        when(friendsService.getFriendsList(userId)).thenReturn(friendsList);
+
+        ResponseEntity<List<Friends>> response = friendsController.getFriendsList(userId);
+
+        assertEquals(ResponseEntity.ok(friendsList), response);
+        verify(friendsService, times(1)).getFriendsList(userId);
     }
 
 }
