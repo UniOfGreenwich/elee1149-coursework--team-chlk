@@ -3,7 +3,7 @@ name: 'Build and Deploy to Cloud Run'
 on:
   push:
     branches:
-      - 'develop'
+      - 'GCP=deployment'
 
 env:
   PROJECT_ID: 'atomic-hash-455114-v1' # TODO: update to your Google Cloud project ID
