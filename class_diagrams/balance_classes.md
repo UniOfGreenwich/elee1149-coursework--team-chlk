@@ -1,41 +1,52 @@
 ### BalanceEntity:
 ```mermaid
 classDiagram
-Balance: +Integer id
-Balance: +Integer user1Id
-Balance: +Integer user2Id
-Balance: +Double netAmount
-Balance: +getId()
-Balance: +setId(Integer id)
-Balance: +getUser1Id()
-Balance: +setUser1Id(Integer user1Id)
-Balance: +getUser2Id()
-Balance: +setUser2Id(Integer user2Id)
-Balance: +getNetAmount()
-Balance: +setNetAmount(Double netAmount)
+class Balance {
+    +Integer id
+    +Integer user1Id
+    +Integer user2Id
+    +Double netAmount
+    +getId() Integer
+    +setId(Integer id)
+    +getUser1Id() Integer
+    +setUser1Id(Integer user1Id)
+    +getUser2Id() Integer
+    +setUser2Id(Integer user2Id)
+    +getNetAmount() Double
+    +setNetAmount(Double netAmount)
+}
 ```
 
 ### BalanceController:
 ```mermaid
-    classDiagram
-    BalanceController: +BalanceService BalanceService
-    BalanceController: +BalanceController()
-    BalanceController: +updateBalance()
-    BalanceController: +getNetBalance()
-```
-
-### BalanceService:
-```mermaid
-    classDiagram
-    BalanceService: +BalanceRepository BalanceRepository
-    BalanceService: +BalanceService()
-    BalanceService: +updateBalance()
-    BalanceService: +getNetBalance()
+classDiagram
+class BalanceController {
+    -BalanceService balanceService
+    +BalanceController(BalanceService balanceService)
+    +updateBalance(Integer payerId, Integer payeeId, double amount) void
+    +getNetBalance(Integer user1, Integer user2) Double
+}
+BalanceController --> BalanceService
 ```
 
 ### BalanceRepository:
 ```mermaid
-    classDiagram
-    BalanceRepository: +findByUsers()
+classDiagram
+class BalanceRepository {
+    +findByUsers(@Param("user1") Integer user1, @Param("user2") Integer user2) : Balance
+}
+BalanceRepository ..|> JpaRepository
+```
+
+### BalanceService:
+```mermaid
+classDiagram
+class BalanceService {
+    -BalanceRepository balanceRepository
+    +BalanceService(BalanceRepository balanceRepository)
+    +updateBalance(Integer payerId, Integer payeeId, double amount) void
+    +getNetBalance(Integer user1, Integer user2) Double
+}
+BalanceService --> BalanceRepository
 ```
 
