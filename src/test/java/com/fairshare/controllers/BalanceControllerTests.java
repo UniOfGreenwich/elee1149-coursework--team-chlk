@@ -24,7 +24,18 @@ public class BalanceControllerTests {
     @InjectMocks
     private BalanceController balanceController;
 
-    
+    @Test
+    void testUpdateBalance() {
+        Integer payerId = 1;
+        Integer payeeId = 2;
+        Double amount = 50.0;
+
+        doNothing().when(balanceService).updateBalance(payerId, payeeId, amount);
+
+        balanceController.updateBalance(payerId, payeeId, amount);
+
+        verify(balanceService, times(1)).updateBalance(payerId, payeeId, amount);
+    }
 
 
 
