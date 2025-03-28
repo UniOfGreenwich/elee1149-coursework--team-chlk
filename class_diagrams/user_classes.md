@@ -1,57 +1,70 @@
 ### UserEntity:
 ```mermaid
 classDiagram
-User: +Integer userId
-User: +String firstName
-User: +String lastName
-User: +String email
-User: +String username
-User: +String passwordHash
-User: +String password
-User: +Set<Group> groups
-User: +getUserId()
-User: +setUserId(Integer userId)
-User: +getFirstName()
-User: +setFirstName(String firstName)
-User: +getLastName()
-User: +setLastName(String lastName)
-User: +getEmail()
-User: +setEmail(String email)
-User: +getUsername()
-User: +setUsername(String username)
-User: +getPasswordHash()
-User: +setPasswordHash(String passwordHash)
-User: +getPassword()
-User: +setPassword(String password)
-User: +getGroups()
-User: +setGroups(Set<Group> groups)
+class User {
+    +Integer userId
+    +String firstName
+    +String lastName
+    +String email
+    +String username
+    +String passwordHash
+    +String password
+    +Set<Group> groups
+    +getUserId() Integer
+    +setUserId(Integer userId)
+    +getFirstName() String
+    +setFirstName(String firstName)
+    +getLastName() String
+    +setLastName(String lastName)
+    +getEmail() String
+    +setEmail(String email)
+    +getUsername() String
+    +setUsername(String username)
+    +getPasswordHash() String
+    +setPasswordHash(String passwordHash)
+    +getPassword() String
+    +setPassword(String password)
+    +getGroups() Set<Group>
+    +setGroups(Set<Group> groups)
+}
 ```
 
 ### UserController:
 ```mermaid
 classDiagram
-UserController: +UserService userService
-UserController: +login()
-UserController: +newUser()
-UserController: +getUserGroups()
+class UserController {
+    -UserService userService
+    +login(LoginRequest request) : LoginResponse
+    +newUser(CreateUserRequest request) : CreateUserResponse
+    +getUsersGroups(Integer userId) : List~GroupResponse~
+}
+UserController --> UserService
 ```
 
 ### UserRepository:
 ```mermaid
 classDiagram
-UserRepository: +findByEmail()
+class UserRepository {
+    +findByEmail(String email) : User
+}
+UserRepository ..|> JpaRepository
 ```
 
 ### UserService:
 ```mermaid
 classDiagram
-UserService: +UserRepository userRepository
-UserService: +GroupRepository groupRepository
-UserService: +ExpenseService expenseService
-UserService: +authenticateLogin()
-UserService: +createUser()
-UserService: +getUserGroups()
-UserService: +getNumOfUsersInGroup()
+class UserService {
+    -UserRepository userRepository
+    -GroupRepository groupRepository
+    -ExpenseService expenseService
+    +authenticateLogin(String email, String password) : User
+    +createUser(CreateUserRequest createUserRequest) : User
+    +getUsersGroups(Integer userId) : List~GroupResponse~
+    +getNumOfUsersInGroup(Integer groupId) : int
+}
+UserService --> UserRepository
+UserService --> GroupRepository
+UserService --> ExpenseService
 ```
 
 
