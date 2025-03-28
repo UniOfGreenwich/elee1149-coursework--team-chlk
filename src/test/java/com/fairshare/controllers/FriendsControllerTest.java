@@ -81,4 +81,16 @@ public class FriendsControllerTest {
         verify(friendsService, times(1)).getFriendsList(userId);
     }
 
+    @Test
+    void testGetPendingFriendRequests() {
+        Integer userId = 1;
+        List<Friends> pendingRequestsList = Arrays.asList(new Friends(), new Friends());
+        when(friendsService.getPendingFriendRequests(userId)).thenReturn(pendingRequestsList);
+
+        ResponseEntity<List<Friends>> response = friendsController.getPendingFriendRequests(userId);
+
+        assertEquals(ResponseEntity.ok(pendingRequestsList), response);
+        verify(friendsService, times(1)).getPendingFriendRequests(userId);
+    }
+
 }
