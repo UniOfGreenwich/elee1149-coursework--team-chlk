@@ -42,11 +42,10 @@ class ExpenseServiceTest {
         request.setExpenseName("Test Expense");
         request.setAmount(100.0);
         request.setCurrency("GBP");
-        request.setDate(new Date());
+        //request.setDate(new Date());
         request.setCategoryId(1);
         request.setGroupId(1);
         request.setPayerId(1);
-        request.setUserShares(Collections.emptyList());
 
         User payer = new User();
         payer.setUserId(1);
@@ -58,7 +57,7 @@ class ExpenseServiceTest {
         expectedExpense.setExpenseName("Test Expense");
         expectedExpense.setAmount(100.0);
         expectedExpense.setCurrency("GBP");
-        expectedExpense.setDate(new Date());
+       // expectedExpense.setDate(new Date());
         expectedExpense.setCategoryId(1);
         expectedExpense.setGroupId(1);
         expectedExpense.setPayerId(payer.getUserId()); // Set the payer object
@@ -81,10 +80,10 @@ class ExpenseServiceTest {
         expense.setDescription("Test Expense");
         expense.setAmount(100.0);
         expense.setCurrency("GBP");
-        expense.setDate(new Date());
+        //expense.setDate(new Date());
         expense.setCategoryId(1);
         expense.setGroupId(1);
-        expense.setUserId(1);
+        expense.setPayerId(1);
 
         when(expenseRepository.findByGroupId(anyInt())).thenReturn(Collections.singletonList(expense));
         when(userRepository.findById(anyInt())).thenReturn(Optional.of(new User())); // Mock userRepository

@@ -18,8 +18,8 @@ public class CreateExpenseRequest {
     private Integer payerId;
     private Integer categoryId;
     private Integer groupId;
-    private Date date;
-    private List<UserShare> userShares = new ArrayList<>();
+    //private Date date;
+
 
     public String getExpenseName() {
         return expenseName;
@@ -77,13 +77,13 @@ public class CreateExpenseRequest {
         this.categoryId = categoryId;
     }
 
-    public Date getDate() {
-        return date;
-    }
+    //public Date getDate() {
+      //return date;
+    //}
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+    //public void setDate(Date date) {
+      // this.date = date;
+    //}
 
     public Integer getGroupId() {
         return groupId;
@@ -91,14 +91,6 @@ public class CreateExpenseRequest {
 
     public void setGroupId(Integer groupId) {
         this.groupId = groupId;
-    }
-
-    public List<UserShare> getUserShares() {
-        return userShares;
-    }
-
-    public void setUserShares(List<UserShare> userShares) {
-        this.userShares = userShares;
     }
 }
 

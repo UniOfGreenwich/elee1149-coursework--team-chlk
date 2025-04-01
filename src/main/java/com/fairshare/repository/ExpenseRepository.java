@@ -11,9 +11,9 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 import java.util.Optional;
 
-public interface ExpenseRepository extends JpaRepository<Expense, Long> {
+public interface ExpenseRepository extends JpaRepository<Expense, Integer> {
 
-    boolean existsByExpenseName(String expenseName);
+    boolean existsByExpenseNameAndGroupId(String expenseName, Integer groupId);
     boolean existsByExpenseId(Integer expenseId);
     Optional<Expense> findByExpenseName(String expenseName);
     Integer expenseId(Integer expenseId);

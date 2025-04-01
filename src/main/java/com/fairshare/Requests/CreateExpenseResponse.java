@@ -5,7 +5,7 @@ public class CreateExpenseResponse {
         private Boolean success;
         private Integer expenseId;
 
-        public CreateExpenseResponse(String message, Boolean success, Integer userId) {
+        public CreateExpenseResponse(String message, Boolean success, Integer expenseId) {
             this.message = message;
             this.success = success;
             this.expenseId = expenseId;
