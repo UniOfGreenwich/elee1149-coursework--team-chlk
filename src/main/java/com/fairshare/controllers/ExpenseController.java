@@ -1,6 +1,6 @@
 package com.fairshare.controllers;
 import com.fairshare.Requests.CreateExpenseRequest;
-import com.fairshare.Requests.CreateExpenseResponse;
+import com.fairshare.Responses.CreateExpenseResponse;
 import com.fairshare.entity.Expense;
 import com.fairshare.services.ExpenseService;
 import org.springframework.web.bind.annotation.*;
