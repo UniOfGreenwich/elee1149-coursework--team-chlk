@@ -1,0 +1,126 @@
+.friends-wrapper {
+    width: 100%;
+}
+
+.friends-header {
+    display: flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom: 16px;
+}
+
+.add-friend-button {
+    background-color: #4495c7;
+    padding: 1rem;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.request-list-wrapper {
+    min-height: 100%;
+    background-color: #222645;
+    padding: 1rem;
+    border-radius: 8px;
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.request-component {
+    width: 100%;
+}
+
+.request-component-list {
+    width: 100%;
+}
+
+.friend-request-item {
+    border-bottom: 1px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+    margin-top: 8px;
+}
+
+.request-name {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.request-email {
+    font-size: 12px;
+    font-weight: 300;
+}
+
+.request-user-decision {
+    display: flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.request-accept-button {
+    display: flex;
+    height: 40px;
+    width: 75px;
+    background-color: #4495c7;
+    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px
+}
+
+.button-name {
+    font-weight: bold;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.request-decline-button {
+    display: flex;
+    height: 40px;
+    width: 75px;
+    background-color: #fe6789;
+    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
+}
+
+.friend-list-wrapper {
+    min-height: 100%;
+    background-color: #222645;
+    padding: 1rem;
+    border-radius: 8px;
+    width: 100%;
+}
+
+.friend-status-title {
+    font-size: 10px;
+    text-align: right;
+}
+
+.friends-component {
+    width: 100%;
+}
+
+.friends-component-list {
+    width: 100%;
+}
+
+.friend-list-item {
+    border-bottom: 1px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+}
+
+.friend-name {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.friend-email {
+    font-size: 12px;
+    font-weight: 300;
+}

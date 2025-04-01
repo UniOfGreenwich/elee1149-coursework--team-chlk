@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import "../styles/dashboard-all-groups.css";
-import { GroupsRow } from "./dashboard-all-groups-row";
+import "../styles/groups.css"
+import { GroupsListItem } from "./groups-list-item";
 import { Link, useNavigate } from "react-router-dom";
 
-export function Groups({userId}) {
+export function GroupsList({userId}) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -37,17 +37,17 @@ export function Groups({userId}) {
   console.log(data); //printing the data to the console
 
   return (
-    <div className="dashboard-grid-component">
-      <h2 className="component-title">Groups</h2>
-      <p className="balance-title">No. of Members</p>
+    <div>
       <ul>
         {data.map((e) => (
           <li key={e.groupId}>
             <Link to={`/user/${userId}/groups/${e.groupId}/groups-dashboard`}>
-                <GroupsRow
-                    name={e.groupName}
-                    created={e.dateCreated}
-                    members={e.numberOfUsers}
+                <GroupsListItem
+                    groupName={e.groupName}
+                    dateCreated={e.dateCreated}
+                    updatedAt={e.updatedAt}
+                    numberOfUsers={e.numberOfUsers}
+                    totalSpent={e.totalSpent}
                 />
             </Link>
           </li>
@@ -55,18 +55,4 @@ export function Groups({userId}) {
       </ul>
     </div>
   );
-}
-
-function getStatus(dataObj) {
-  let status = "";
-
-  if (dataObj.balance > 0) {
-    status = "owes you";
-  } else if (dataObj.balance < 0) {
-    status = "is owed";
-  } else {
-    status = "settled";
-  }
-
-  return status;
 }
