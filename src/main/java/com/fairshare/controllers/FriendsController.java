@@ -1,5 +1,7 @@
 package com.fairshare.controllers;
 
+import com.fairshare.DTO.FriendsDTO;
+import com.fairshare.DTO.FriendsListDTO;
 import com.fairshare.Responses.FriendsResponse;
 import com.fairshare.entity.Friends;
 import com.fairshare.services.FriendsService;
@@ -25,8 +27,8 @@ public class FriendsController {
     //Methods:
     //1. sendFriendRequest
     @PostMapping("/sendRequest")
-    public FriendsResponse sendFriendRequest(@RequestParam Integer userId, @RequestParam Integer friendUserId) {
-        return friendsService.sendFriendRequest(userId, friendUserId);
+    public FriendsResponse sendFriendRequest(@RequestParam Integer userId, @RequestParam String friendEmail) {
+        return friendsService.sendFriendRequest(userId, friendEmail);
     }
 
     @PostMapping("/acceptFriendRequest")
@@ -42,14 +44,14 @@ public class FriendsController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<Friends>> getFriendsList(@RequestParam Integer userId) {
-        List<Friends> friendsList = friendsService.getFriendsList(userId);
+    public ResponseEntity<FriendsListDTO> getFriendsList(@RequestParam Integer userId) {
+        FriendsListDTO friendsList = friendsService.getUserWithFriends(userId);
         return ResponseEntity.ok(friendsList);
     }
 
     @GetMapping("pendingRequests")
-    public ResponseEntity<List<Friends>> getPendingFriendRequests(@RequestParam Integer userId) {
-        List<Friends> pendingRequestsList = friendsService.getPendingFriendRequests(userId);
+    public ResponseEntity<FriendsListDTO> getPendingFriendRequests(@RequestParam Integer userId) {
+        FriendsListDTO pendingRequestsList = friendsService.getPendingFriendRequests(userId);
         return ResponseEntity.ok(pendingRequestsList);
     }
 
