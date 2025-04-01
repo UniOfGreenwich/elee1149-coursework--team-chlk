@@ -37,7 +37,7 @@ public class UserController {
             return new LoginResponse("Successful Login", true, user.getUserId());
         } else {
             return new LoginResponse("Invalid Login", false, null);
-        }
+        } // Are we going to specify what is invalid - the username or password
     }
     @PostMapping("/newUser")
     public CreateUserResponse newUser(@RequestBody CreateUserRequest request) {

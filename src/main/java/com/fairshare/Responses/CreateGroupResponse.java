@@ -30,6 +30,7 @@ public class CreateGroupResponse {
     public Integer getGroupId() {
         return groupId;
     }
+
     public void setGroupId(Integer groupId) {
         this.groupId = groupId;
     }

@@ -48,14 +48,13 @@ public class Expense {
     private Integer groupId;
 
     @Column(name = "payer_id")
-    private Integer userId;
+    private Integer payerId;
 
     @Transient
     private String userName;
 
     @OneToMany(mappedBy = "expenseId", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserShare> userShares = new ArrayList<>();
-
 
     public Integer getExpenseId() {
         return expenseId;
@@ -121,12 +120,12 @@ public class Expense {
         this.groupId = groupId;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getPayerId() { // Correct getter
+        return payerId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setPayerId(Integer payerId) { // Correct setter
+        this.payerId = payerId;
     }
 
     public String getUserName() {
@@ -144,4 +143,5 @@ public class Expense {
     public void setUserShares(List<UserShare> userShares) {
         this.userShares = userShares;
     }
+
 }

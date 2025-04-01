@@ -38,7 +38,7 @@ class ExpenseControllerTests {
         expense.setDate(dateFormat.parse("2025-03-03T00:00:00.000+00:00"));
         expense.setCategoryId(1);
         expense.setGroupId(1);
-        expense.setUserId(1);
+        expense.setPayerId(1);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/expense/add-expense")
                         .contentType("application/json")
@@ -56,7 +56,7 @@ class ExpenseControllerTests {
         expense.setDate(dateFormat.parse("2025-03-03T00:00:00.000+00:00"));
         expense.setCategoryId(1);
         expense.setGroupId(1);
-        expense.setUserId(1);
+        expense.setPayerId(1);
 
         Mockito.when(expenseService.getExpensesByGroupId(1)).thenReturn(Collections.singletonList(expense));
 
