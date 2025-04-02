@@ -12,6 +12,7 @@ public class FriendsDTO {
     private String username;
     private Integer senderId;
     private Integer recieverId;
+    private Integer requestId;
 
     public FriendsDTO(Integer userId, String firstName, String lastName, String email, String username) {
         this.userId = userId;
@@ -22,7 +23,7 @@ public class FriendsDTO {
     }
 
 
-    public FriendsDTO(Integer userId, String firstName, String lastName, String email, String username, Integer senderId, Integer recieverId) {
+    public FriendsDTO(Integer userId, String firstName, String lastName, String email, String username, Integer senderId, Integer recieverId, Integer requestId) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -30,6 +31,7 @@ public class FriendsDTO {
         this.username = username;
         this.senderId = senderId;
         this.recieverId = recieverId;
+        this.requestId = requestId;
     }
 
     public FriendsDTO() {
@@ -91,5 +93,13 @@ public class FriendsDTO {
 
     public void setRecieverId(Integer recieverId) {
         this.recieverId = recieverId;
+    }
+
+    public Integer getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(Integer requestId) {
+        this.requestId = requestId;
     }
 }
