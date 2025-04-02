@@ -30,7 +30,7 @@ export function ExpensesList({userId, loading, data, error}) {
                       date={e.date}
                       userPaid={e.amount}
                       split={e.userShares}
-                      payerId={e.userId}
+                      payerId={e.payerId}
                       payerName={e.userName}
                       groupName={e.groupName}
                 />

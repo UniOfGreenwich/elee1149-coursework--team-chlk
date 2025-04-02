@@ -51,7 +51,7 @@ interface Expense {
   expenseId: number;
   expenseName: string;
   groupId: number;
-  userId: number;
+  payerId: number;
   userName: string;
   userShares: UserShare[];
   groupName?: string;
@@ -182,6 +182,32 @@ export const AllMembersData = <GroupMemberListResponse>(userId: number): [boolea
             })
             .finally(() => setLoading(false));
     };
+
+    return [loading, data, error, request];
+}
+
+interface Friend {
+    userId: number;
+    firstName: string;
+    LastName: string;
+    email: string;
+    username: string;
+    senderId: number;
+    recieverId: number;
+}
+  
+interface FriendListResponse {
+    friends : Friend[];
+}
+
+export const FriendsListData = (userId) => {
+    const [loading, data, error, request] = useAxios<FriendListResponse>({method: 'GET', url: `friends/list?userId=${userId}`})
+
+    return [loading, data, error, request];
+}
+
+export const PendingRequestData = (userId) => {
+    const [loading, data, error, request] = useAxios<FriendListResponse>({method: 'GET', url: `friends/pendingRequests?userId=${userId}`})
 
     return [loading, data, error, request];
 }

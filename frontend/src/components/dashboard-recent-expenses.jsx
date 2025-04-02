@@ -43,7 +43,7 @@ export function RecentExpenses({userId, groupId, loading, data, error}) {
                     date={e.date}
                     userPaid={e.amount}
                     split={e.userShares}
-                    payerId={e.userId}
+                    payerId={e.payerId}
                     payerName={e.userName}
                   />
                 </li>
