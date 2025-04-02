@@ -57,12 +57,12 @@ public class FriendsService {
     }
 
     public FriendsListDTO getUserWithFriends(Integer userId) {
-        User user = userRepository.findById(userId).orElseThrow();
-        List<Friends> friendsList = friendsRepository.findByFriendUserIdAndStatus(userId, true);
+        List<Friends> friendsList = friendsRepository.findFriendsByUserId(userId);
         List<FriendsDTO> friendsDTOList = friendsList.stream()
                 .map(friend -> {
-                    User friendUser = userRepository.findById(friend.getFriendUserId()).orElseThrow();
-                    return new FriendsDTO(friendUser.getUserId(), friendUser.getFirstName(), friendUser.getLastName(), friendUser.getEmail(), friendUser.getUsername(), null);
+                    Integer friendUserId = friend.getUserId().equals(userId) ? friend.getFriendUserId() : friend.getUserId();
+                    User friendUser = userRepository.findById(friendUserId).orElseThrow();
+                    return new FriendsDTO(friendUser.getUserId(), friendUser.getFirstName(), friendUser.getLastName(), friendUser.getEmail(), friendUser.getUsername());
                 })
                 .collect(Collectors.toList());
         return new FriendsListDTO(friendsDTOList);
@@ -70,11 +70,12 @@ public class FriendsService {
 
 
     public FriendsListDTO getPendingFriendRequests(Integer userId) {
-        List<Friends> pendingRequestsList = friendsRepository.findByFriendUserIdAndStatus(userId, false);
+        List<Friends> pendingRequestsList = friendsRepository.findPendingRequestsByUserId(userId);
         List<FriendsDTO> pendingRequestsDTOList = pendingRequestsList.stream()
                 .map(friend -> {
-                    User user = userRepository.findById(friend.getFriendUserId()).orElseThrow();
-                    return new FriendsDTO(user.getUserId(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getUsername(), null);
+                    Integer friendUserId = friend.getUserId().equals(userId) ? friend.getFriendUserId() : friend.getUserId();
+                    User user = userRepository.findById(friendUserId).orElseThrow();
+                    return new FriendsDTO(user.getUserId(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getUsername(), friend.getUserId(), friend.getFriendUserId());
                 })
                 .collect(Collectors.toList());
         return new FriendsListDTO(pendingRequestsDTOList);
