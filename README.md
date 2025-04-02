@@ -99,6 +99,11 @@ Fairshare is designed to run within a [Docker](https://www.docker.com/resources/
 See the [Dependencies section](#dependencies) below for details on the project's Gradle dependencies.
 
 <a id="dependencies"></a>
+
+## Class Diagrams
+
+For detailed class diagrams, please refer to the [class_diagrams](class_diagrams) folder.
+
 ## Dependencies
 
 <details>
@@ -145,6 +150,9 @@ See the [Dependencies section](#dependencies) below for details on the project's
 - [Spring-boot-docker](https://spring.io/guides/gs/spring-boot-docker)
 - [Tech Badges](https://marwin1991.github.io/profile-technology-icons/)
 - [Animated badges](https://techstack-generator.vercel.app/)
+- [Mermaid](https://mermaid.live/edit#pako:eNpFj8FuwyAQRH-lmjOywAQMXJNrfqDigsLWsVpDRLCU1vK_lziquqcZ7b4dzYpLjgQHn3x6awOGsUwRrpaFGGYqc3harM-9R73STB6uyRjKp2_g1phbSO85z39Yyct4hfsIX_fmllsMlU5TGEv4P6EUqRzzkiqc3D_ArXjACSM70wtt1GAFF0r3DN9wlneWSyUEPwxSy95sDD97Ju-05AdprRq40sZoxUBxqrmcX-X2jtsvuCpGDA)
+- [Github Mermaid](https://github.blog/developer-skills/github/include-diagrams-markdown-files-mermaid/)
+
 
 
 ## Licence

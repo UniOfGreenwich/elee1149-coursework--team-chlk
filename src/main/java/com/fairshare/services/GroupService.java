@@ -78,10 +78,12 @@ public class GroupService {
                 Group errorGroup = new Group();
                 errorGroup.setGroupName("GroupAndUserError");
                 return errorGroup;
+
             } else if (group == null) {
                 Group errorGroup = new Group();
                 errorGroup.setGroupName("GroupNotFoundError");
                 return errorGroup;
+
             } else if (user == null) {
                 Group errorGroup = new Group();
                 errorGroup.setGroupName("UserNotFoundError");

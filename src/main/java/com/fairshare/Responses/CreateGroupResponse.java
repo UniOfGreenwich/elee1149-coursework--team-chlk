@@ -1,4 +1,4 @@
-package com.fairshare.Requests;
+package com.fairshare.Responses;
 
 public class CreateGroupResponse {
     private String message;
@@ -30,6 +30,7 @@ public class CreateGroupResponse {
     public Integer getGroupId() {
         return groupId;
     }
+
     public void setGroupId(Integer groupId) {
         this.groupId = groupId;
     }
