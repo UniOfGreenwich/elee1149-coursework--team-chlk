@@ -10,15 +10,14 @@ public class FriendsDTO {
     private String lastName;
     private String email;
     private String username;
-    private List<FriendsDTO> friends;
+    
 
-    public FriendsDTO(Integer userId, String firstName, String lastName, String email, String username, List<FriendsDTO> friendsDTOList) {
+    public FriendsDTO(Integer userId, String firstName, String lastName, String email, String username) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.username = username;
-        this.friends = friendsDTOList;
     }
 
     public FriendsDTO() {
@@ -66,11 +65,6 @@ public class FriendsDTO {
         this.username = username;
     }
 
-    public List<FriendsDTO> getFriends() {
-        return friends;
-    }
 
-    public void setFriends(List<FriendsDTO> friends) {
-        this.friends = friends;
-    }
+
 }
