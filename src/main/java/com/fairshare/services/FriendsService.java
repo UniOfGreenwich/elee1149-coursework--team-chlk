@@ -75,7 +75,7 @@ public class FriendsService {
                 .map(friend -> {
                     Integer friendUserId = friend.getUserId().equals(userId) ? friend.getFriendUserId() : friend.getUserId();
                     User user = userRepository.findById(friendUserId).orElseThrow();
-                    return new FriendsDTO(user.getUserId(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getUsername());
+                    return new FriendsDTO(user.getUserId(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getUsername(), friend.getUserId(), friend.getFriendUserId());
                 })
                 .collect(Collectors.toList());
         return new FriendsListDTO(pendingRequestsDTOList);
