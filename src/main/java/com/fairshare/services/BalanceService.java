@@ -34,6 +34,7 @@ public class BalanceService {
         balanceRepository.save(balance);
 
     }
+
     public Double getNetBalance(Integer user1, Integer user2) {
         Balance balance = balanceRepository.findByUsers(user1, user2);
         if (balance != null) {

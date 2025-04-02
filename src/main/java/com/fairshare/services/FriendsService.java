@@ -1,35 +1,22 @@
 package com.fairshare.services;
 
-import com.fairshare.DTO.FriendsDTO;
-import com.fairshare.DTO.FriendsListDTO;
-import com.fairshare.DTO.UserWithBalance;
 import com.fairshare.Responses.FriendsResponse;
 import com.fairshare.entity.Friends;
-import com.fairshare.entity.User;
 import com.fairshare.repository.FriendsRepository;
-import com.fairshare.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class FriendsService {
 
     @Autowired
     private FriendsRepository friendsRepository;
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private UserRepository userRepository;
 
     @Transactional
-    public FriendsResponse sendFriendRequest(Integer userId, String friendEmail) {
-       User friendUser = userRepository.findByEmail(friendEmail);
-       Integer friendUserId = friendUser.getUserId();
-
+    public FriendsResponse sendFriendRequest(Integer userId, Integer friendUserId) {
         if (friendsRepository.existsFriendship(userId, friendUserId)) {
             return new FriendsResponse("Friend request already sent", false);
         }
@@ -38,7 +25,6 @@ public class FriendsService {
         friend.setFriendUserId(friendUserId);
         friend.setStatus(false); //set as 'PENDING'
         friendsRepository.save(friend);
-
         return new FriendsResponse("Friend request sent", true);
     }
 
@@ -56,30 +42,9 @@ public class FriendsService {
         return friendsRepository.findByFriendUserIdAndStatus(userId, true);
     }
 
-    public FriendsListDTO getUserWithFriends(Integer userId) {
-        User user = userRepository.findById(userId).orElseThrow();
-        List<Friends> friendsList = friendsRepository.findByFriendUserIdAndStatus(userId, true);
-        List<FriendsDTO> friendsDTOList = friendsList.stream()
-                .map(friend -> {
-                    User friendUser = userRepository.findById(friend.getFriendUserId()).orElseThrow();
-                    return new FriendsDTO(friendUser.getUserId(), friendUser.getFirstName(), friendUser.getLastName(), friendUser.getEmail(), friendUser.getUsername(), null);
-                })
-                .collect(Collectors.toList());
-        return new FriendsListDTO(friendsDTOList);
+    public List<Friends> getPendingFriendRequests(Integer userId) {
+        return friendsRepository.findByFriendUserIdAndStatus(userId, false);
     }
-
-
-    public FriendsListDTO getPendingFriendRequests(Integer userId) {
-        List<Friends> pendingRequestsList = friendsRepository.findByFriendUserIdAndStatus(userId, false);
-        List<FriendsDTO> pendingRequestsDTOList = pendingRequestsList.stream()
-                .map(friend -> {
-                    User user = userRepository.findById(friend.getFriendUserId()).orElseThrow();
-                    return new FriendsDTO(user.getUserId(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getUsername(), null);
-                })
-                .collect(Collectors.toList());
-        return new FriendsListDTO(pendingRequestsDTOList);
-    }
-
 
     public boolean areFriends(Integer userId, Integer friendUserId) {
         return friendsRepository.existsFriendship(userId, friendUserId);

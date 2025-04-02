@@ -1,4 +1,4 @@
-package com.fairshare.Responses;
+package com.fairshare.Requests;
 
 public class LoginResponse {
     private String message;

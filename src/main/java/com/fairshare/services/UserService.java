@@ -1,7 +1,8 @@
 package com.fairshare.services;
 
 import com.fairshare.Requests.CreateUserRequest;
-import com.fairshare.Responses.GroupResponse;
+import com.fairshare.Requests.GroupResponse;
+import com.fairshare.entity.Expense;
 import com.fairshare.entity.Group;
 import com.fairshare.entity.User;
 import com.fairshare.repository.GroupRepository;
@@ -10,7 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import static java.lang.Double.sum;
 
 @Service
 public class UserService {

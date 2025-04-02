@@ -1,18 +1,17 @@
 package com.fairshare.services;
-import com.fairshare.Requests.CreateExpenseRequest;
+
 import com.fairshare.entity.Expense;
-import com.fairshare.entity.Group;
 import com.fairshare.entity.User;
 import com.fairshare.entity.UserShare;
 import com.fairshare.repository.ExpenseRepository;
-import com.fairshare.repository.GroupRepository;
 import com.fairshare.repository.UserRepository;
 import com.fairshare.repository.UserShareRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.Date;
+
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ExpenseService {
@@ -25,81 +24,27 @@ public class ExpenseService {
 
     @Autowired
     private BalanceService balanceService;
-
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private GroupRepository groupRepository;
-
     @Transactional
-    public Expense addExpense(CreateExpenseRequest createExpenseRequest) {
-        String expenseName = createExpenseRequest.getExpenseName();
-        Integer expenseId = createExpenseRequest.getExpenseId();
-        String description = createExpenseRequest.getDescription();
-        Double amount = createExpenseRequest.getAmount();
-        String currency = createExpenseRequest.getCurrency();
-        //Date date = createExpenseRequest.getDate();
-        Integer payerId = createExpenseRequest.getPayerId();
-        Integer categoryId = createExpenseRequest.getCategoryId();
-        Integer groupId = createExpenseRequest.getGroupId();
+    public void addExpense(Expense expense, Integer payerId) {
+        // Save the expense from the Payer
+        expenseRepository.save(expense);
 
-        Group group = groupRepository.findById(groupId).orElse(null);
-        User user = userRepository.findById(payerId).orElse(null);
-
-        Expense errorExpense = new Expense();
-
-        if (user == null && group == null) {
-            errorExpense.setExpenseName("GroupAndUserNotFoundError");
-            return errorExpense;
-        } else if (user == null) {
-            errorExpense.setExpenseName("UserNotFoundError");
-            return errorExpense;
-        } else if (group == null) {
-            errorExpense.setExpenseName("GroupNotFoundError");
-            return errorExpense;
-        }
-
-        if (!group.getUsers().contains(user)) {
-            errorExpense.setExpenseName("PayerNotInGroupError");
-            return errorExpense;
-        }
-
-        if (expenseRepository.existsByExpenseNameAndGroupId(expenseName, groupId) ||
-                expenseRepository.existsByExpenseId(expenseId)) {
-            errorExpense.setExpenseName("ExpenseExistsInGroupError"); // Indicates this expense name exists in this group
-            return errorExpense;
-        }
-
-        if (createExpenseRequest.getCategoryId() == null) {
-            createExpenseRequest.setCategoryId(1); // Use the default category
-        }
-
-        Expense newExpense = new Expense();
-        newExpense.setExpenseName(expenseName);
-        newExpense.setExpenseId(expenseId);
-        newExpense.setDescription(description);
-        newExpense.setAmount(amount);
-        newExpense.setCurrency(currency);
-        //newExpense.setDate(date);
-        newExpense.setPayerId(payerId);
-        newExpense.setCategoryId(categoryId);
-        newExpense.setExpenseId(expenseId);
-        newExpense.setGroupId(groupId);
-
-        for (UserShare userShare : newExpense.getUserShares()) {
-            userShare.setExpenseId(newExpense.getExpenseId());
+        //Update the balances of other users
+        for (UserShare userShare : expense.getUserShares()) {
+            userShare.setExpenseId(expense.getExpenseId());
             userShareRepository.save(userShare);
-            balanceService.updateBalance(payerId, userShare.getUserId(), userShare.getShareAmount()); // Access userId through User object
-       }
-        expenseRepository.save(newExpense);
-        return newExpense; // Return the saved expense
+            balanceService.updateBalance(payerId, userShare.getUserId(), userShare.getShareAmount());
+
+        }
     }
 
     public List<Expense> getExpensesByGroupId(Integer groupId) {
         List<Expense> expenses = expenseRepository.findByGroupId(groupId);
         for (Expense expense : expenses) {
-            User user = userRepository.findById(expense.getPayerId()).orElse(new User());
+            User user = userRepository.findById(expense.getUserId()).orElse(new User());
             expense.setUserName(user.getFirstName());
         }
         return expenses;
@@ -114,5 +59,3 @@ public class ExpenseService {
         return total;
     }
 }
-
-

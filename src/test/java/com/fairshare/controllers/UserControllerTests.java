@@ -1,10 +1,9 @@
 package com.fairshare.controllers;
 
 import com.fairshare.Requests.CreateUserRequest;
-import com.fairshare.Responses.CreateUserResponse;
+import com.fairshare.Requests.CreateUserResponse;
 import com.fairshare.Requests.LoginRequest;
-import com.fairshare.Responses.GroupResponse;
-import com.fairshare.Responses.LoginResponse;
+import com.fairshare.Requests.LoginResponse;
 import com.fairshare.entity.User;
 import com.fairshare.services.UserService;
 import org.junit.jupiter.api.Test;
@@ -12,9 +11,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -102,18 +98,5 @@ public class UserControllerTests {
         assertEquals("User already exists", testResponse.getMessage());
         assertEquals(false, testResponse.getSuccess());
         assertNull(testResponse.getUserId());
-    }
-
-    @Test
-    void getUsersGroups() {
-        Integer userId = 1;
-        List<GroupResponse> expectedGroups = Arrays.asList(new GroupResponse(), new GroupResponse());
-
-        when(userService.getUsersGroups(userId)).thenReturn(expectedGroups);
-
-        List<GroupResponse> actualGroups = userController.getUsersGroups(userId);
-
-        assertEquals(expectedGroups, actualGroups);
-
     }
 }
