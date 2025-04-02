@@ -10,15 +10,26 @@ public class FriendsDTO {
     private String lastName;
     private String email;
     private String username;
-    private List<FriendsDTO> friends;
+    private Integer senderId;
+    private Integer recieverId;
 
-    public FriendsDTO(Integer userId, String firstName, String lastName, String email, String username, List<FriendsDTO> friendsDTOList) {
+    public FriendsDTO(Integer userId, String firstName, String lastName, String email, String username) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.username = username;
-        this.friends = friendsDTOList;
+    }
+
+
+    public FriendsDTO(Integer userId, String firstName, String lastName, String email, String username, Integer senderId, Integer recieverId) {
+        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.username = username;
+        this.senderId = senderId;
+        this.recieverId = recieverId;
     }
 
     public FriendsDTO() {
@@ -66,11 +77,19 @@ public class FriendsDTO {
         this.username = username;
     }
 
-    public List<FriendsDTO> getFriends() {
-        return friends;
+    public Integer getSenderId() {
+        return senderId;
     }
 
-    public void setFriends(List<FriendsDTO> friends) {
-        this.friends = friends;
+    public void setSenderId(Integer senderId) {
+        this.senderId = senderId;
+    }
+
+    public Integer getRecieverId() {
+        return recieverId;
+    }
+
+    public void setRecieverId(Integer recieverId) {
+        this.recieverId = recieverId;
     }
 }
