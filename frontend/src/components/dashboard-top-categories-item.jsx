@@ -13,7 +13,6 @@ export function TopCategoriesItem(props) {
                 <p className="category-name">{foundCategory.categoryName}</p>
                 <p className="category-amount">£{props.amount.toFixed(2)}</p>
             </div>
-            <img className="category-button" src={arrowRight} alt="" />
         </div>
     )
 }

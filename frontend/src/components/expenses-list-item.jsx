@@ -2,7 +2,7 @@ import "../styles/dashboard-recent-expenses.css"
 import categories from "../data/category-map"
 import {format} from "date-fns"
 
-export function RecentExpensesRow(props) {
+export function ExpensesListItem(props) {
     const foundCategory = categories.find(category => category.categoryId === props.category)
     const userSplit = !props.split.find(item => item.userId.toString() === props.currentUser) ? 0 : props.split.find(item => item.userId.toString() === props.currentUser)
     const nonUserSplit = props.split.filter(item => item.userId.toString() !== props.currentUser).reduce((accumulator, currentAmount) => {
@@ -18,6 +18,10 @@ export function RecentExpensesRow(props) {
                 <p className="expense-name">{props.expenseName}</p>
                 <p className="category">{foundCategory.categoryName}</p>
             </div>
+        </div>
+        <div className="expense-group">
+            <p className="expense-group-title">group:</p>
+            <p className="expense-group-name">{props.groupName}</p>
         </div>
         <p className="expense-date">{format(props.date, "dd MMM yyyy")}</p>
         <div className="expense-values">
@@ -45,4 +49,3 @@ export function RecentExpensesRow(props) {
       </div>
     );
   }
-

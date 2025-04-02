@@ -1,30 +1,9 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/groups.css"
-import { GroupsListItem } from "./groups-list-item";
+import { GroupsListItem } from "./groups-list-item.jsx";
 import { Link, useNavigate } from "react-router-dom";
 
-export function GroupsList({userId}) {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    fetch(`http://localhost:8080/users/groups?userId=${userId}`) // fetching the data
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to fetch data");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setData(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setError(error.message);
-        setLoading(false);
-      });
-  }, []);
+export function GroupsList({userId, loading, data, error}) {
 
   if (loading) {
     return <p>Loading...</p>;
@@ -36,12 +15,16 @@ export function GroupsList({userId}) {
 
   console.log(data); //printing the data to the console
 
+  const sortedGroups = data.sort((a,b) => new Date(a.updatedAt) - new Date(b.updatedAt)).reverse()
+
+  console.log(sortedGroups)
+
   return (
     <div>
       <ul>
-        {data.map((e) => (
+        {sortedGroups.map((e) => (
           <li key={e.groupId}>
-            <Link to={`/user/${userId}/groups/${e.groupId}/groups-dashboard`}>
+            <Link to={`/user/${userId}/groups/${e.groupId}/`}>
                 <GroupsListItem
                     groupName={e.groupName}
                     dateCreated={e.dateCreated}
@@ -56,3 +39,5 @@ export function GroupsList({userId}) {
     </div>
   );
 }
+
+
