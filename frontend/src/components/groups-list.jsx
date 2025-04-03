@@ -24,7 +24,7 @@ export function GroupsList({userId, loading, data, error}) {
       <ul>
         {sortedGroups.map((e) => (
           <li key={e.groupId}>
-            <Link to={`/user/${userId}/groups/${e.groupId}/`}>
+            <Link to={`/user/${userId}/groups/${e.groupId}/`} state={{ groupName: e.groupName} }>
                 <GroupsListItem
                     groupName={e.groupName}
                     dateCreated={e.dateCreated}

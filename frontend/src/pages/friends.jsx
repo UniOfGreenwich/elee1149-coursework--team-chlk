@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { FriendsRequest } from "../components/friends-request";
 import { FriendsList } from "../components/friends-list";
 import { FriendsListData, PendingRequestData } from "../methods/use-axios.ts";
+import { TopBar } from "../components/dashboard-topbar";
 
 
 export function Friends() {
@@ -18,6 +19,10 @@ export function Friends() {
   const combinedError = pendingError || friendError ? pendingError === friendError ? pendingError : pendingError + friendError : null;
 
   return (
+    <div className="dashboard-content">
+    <div className="topbar">
+      <TopBar pageName="Friends" />
+    </div>
     <div className="friends-wrapper">
       <div className="friends-header">
         <h1 className="friends-title">Friends</h1>
@@ -43,6 +48,6 @@ export function Friends() {
         </ul>
       </div>
     </div>
-
+</div>
   );
 }

@@ -70,7 +70,7 @@ export function SideBar( { token, setToken } ) {
             className="profile-image"
           />
           <div className="profile-user">
-            <p className="name">Hamza Khan</p>
+            <p className="name">{`${token.firstName} ${token.lastName}`}</p>
             <p className="view-profile">View Profile</p>
           </div>
         </div>

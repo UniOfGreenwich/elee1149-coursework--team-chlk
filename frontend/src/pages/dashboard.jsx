@@ -10,6 +10,7 @@ import { QuickActions } from "../components/dashboard-quick-actions";
 import { RecentExpenses } from "../components/dashboard-recent-expenses";
 import { Groups } from "../components/dashboard-all-groups";
 import { GroupsData, AllExpenseData, AllMembersData } from "../methods/use-axios.ts";
+import { TopBar } from "../components/dashboard-topbar";
 
 
 export function Dashboard() {
@@ -23,6 +24,10 @@ export function Dashboard() {
   console.log(expensesData)
 
   return (
+    <div className="dashboard-content">
+    <div className="topbar">
+      <TopBar pageName="Dashboard" />
+    </div>
         <ul className="dashboard-grid-wrapper">
           <li className="grid-component overview">
             <Overview userId={params.id} loading={balancesLoading} data={balancesData} error={balancesError}/>
@@ -40,5 +45,6 @@ export function Dashboard() {
             <Groups userId={params.id} loading={groupsLoading} data={groupsData} error={groupsError}/>
           </li>
         </ul>
+        </div>
   );
 }

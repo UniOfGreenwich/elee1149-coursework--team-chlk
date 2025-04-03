@@ -2,6 +2,7 @@ import "../styles/dashboard.css";
 import { GroupsList } from "../components/groups-list";
 import { useParams } from "react-router-dom";
 import { GroupsData } from "../methods/use-axios.ts";
+import { TopBar } from "../components/dashboard-topbar";
 
 export function Groups() {
   let params = useParams()
@@ -9,6 +10,10 @@ export function Groups() {
 
   console.log(data.entries())
   return (
+    <div className="dashboard-content">
+    <div className="topbar">
+      <TopBar pageName="Groups" />
+    </div>
     <div className="groups-wrapper">
       <div className="groups-header">
         <h1 className="groups-title">Groups</h1>
@@ -22,6 +27,7 @@ export function Groups() {
           </li>
         </ul>
       </div>
+    </div>
     </div>
 
   );

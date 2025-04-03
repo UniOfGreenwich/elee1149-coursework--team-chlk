@@ -16,6 +16,10 @@ export function Expenses() {
   const categoryFilteredData = !params.categoryId ? groupFilteredData : groupFilteredData.filter(item => item.categoryId.toString() === params.categoryId)
     
   return (
+    <div className="dashboard-content">
+    <div className="topbar">
+      <TopBar pageName="Expenses" />
+    </div>
 <div className="expenses-wrapper">
       <div className="expenses-header">
         <h1 className="expenses-title">Expenses</h1>
@@ -27,6 +31,7 @@ export function Expenses() {
           </li>
         </ul>
       </div>
+    </div>
     </div>
 
   );

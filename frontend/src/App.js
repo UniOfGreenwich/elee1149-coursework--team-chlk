@@ -47,10 +47,7 @@ function App() {
                 token={token} 
                 setToken={setToken}
               />
-              <div className="dashboard-content">
-                <div className="topbar">
-                  <TopBar pageName="Dashboard" />
-                </div>
+
 
                   <Routes>
                     <Route path="/user/:id/" element={<Dashboard/>}/>
@@ -65,7 +62,7 @@ function App() {
                   </Routes>
                           
               </div>
-            </div>
+
         </Router>
         
       </div>
