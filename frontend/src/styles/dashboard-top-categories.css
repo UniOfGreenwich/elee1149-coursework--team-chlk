@@ -6,12 +6,21 @@
 }
 
 .category-grid-item {
-    padding-top:10%;
+    padding-top: 16px;
+    padding-bottom: 16px;
     width: 50%;
     height: 50%;
 }
 
+.category-grid-item:hover {
+    opacity: 1;
+    background-color: #333864;
+    border-radius: 8px;
+}
+
 .top-categories-item {
+
+    padding: 8px;
     display: flex;
 }
 

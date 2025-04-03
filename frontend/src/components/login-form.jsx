@@ -2,16 +2,15 @@ import "../styles/login-signup-page.css";
 import { Link, useNavigate } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import axios from "axios";
 
 async function userLogin(credentials) {
-  return fetch('http://localhost:8080/users/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(credentials)
-  })
-  .then(data => data.json())
+  return axios.post(
+    "users/login",
+    credentials,
+    {'Content-Type': 'application/json'}
+  )
+  .then(response => response.data)
 }
 
 export function LoginForm( { setToken } ) {

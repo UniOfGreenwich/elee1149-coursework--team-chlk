@@ -10,33 +10,12 @@ import DoughnutChart from "./dashboard-overview-chart";
 // importing style sheet
 import "../styles/dashboard-overview.css";
 
-export function Overview({userId, groupId}) {
+export function Overview({userId, groupId, loading, data, error}) {
   const date = getCurrentMonthYear();
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   let overallBalance = 0;
   let positiveBalance = 0;
   let negativeBalance = 0;
 
-  // importing the data
-  useEffect(() => {
-    fetch(`http://localhost:8080/group/${groupId}/${userId}/users`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to fetch data");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setData(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setError(error.message);
-        setLoading(false);
-      });
-  }, []);
 
   if (loading) {
     return <p>Loading...</p>;

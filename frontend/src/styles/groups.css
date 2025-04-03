@@ -18,9 +18,11 @@
 }
 
 .groups-list-wrapper {
-    min-height: 100%;
+    max-height:calc(80vh - 1rem);
     background-color: #222645;
-    padding: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
     border-radius: 8px;
     width: 100%;
 }
@@ -28,11 +30,15 @@
 .group-members-title {
     font-size: 10px;
     text-align: right;
+    padding-right: 22px;
 
 }
 
 .groups-component {
-    width: 100%;
+    max-height:calc(80vh - 5rem);
+    overflow-y: scroll;
+    scrollbar-color: #333864 #222645;
+    scrollbar-width: 1rem;
 }
 
 .groups-component-list {
@@ -40,22 +46,20 @@
 }
 
 .group-list-item {
-    border-bottom: 1px solid #0f0f0f;
+    border-bottom: 1px solid white;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 1rem 0;
     margin-top: 8px;
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
 .group-list-item:hover {
     opacity: 1;
-    background-color: #4495c7;
+    background-color: #333864;
     border-radius: 8px;
-}
-
-.group-details-column {
-    margin-left: 8px;
 }
 
 .group-name {
