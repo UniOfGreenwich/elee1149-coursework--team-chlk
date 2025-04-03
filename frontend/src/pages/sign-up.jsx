@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 
 import logo from "../assets/Fairshare-logo.png";
 
-export function SignUp() {
+export function SignUp({setSignedUp}) {
   return (
     <div className="form-page-wrapper">
       <Link to="/">
         <img src={logo} alt="logo in white" className="logo" />
       </Link>
 
-      <SignupForm />
+      <SignupForm setSignedUp={setSignedUp}/>
     </div>
   );
 }

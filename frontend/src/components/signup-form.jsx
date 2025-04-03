@@ -34,21 +34,23 @@ export function SignupForm({setSignedUp}) {
     });
     if(signUp.success) {
       setSignedUp(signUp)
-      navigate(`/home/`)
+      navigate(`/login`)
     } else {
       setError(signUp.message)
     }
     
     console.log(signUp)
+    console.log(error)
   }
 
 
   return (
     <>
-    {error ? 
-    <Snackbar autoHideDuration={6000}>
-      <Alert severity="error">{error}</Alert>
-      </Snackbar> 
+    {error ?
+    // <Snackbar autoHideDuration={6000}>
+      <p className="error">{error}</p>
+      // {/* <Alert severity="error">{error}</Alert> */}
+      // {/* </Snackbar>  */}
       : null}
       <form action="#" className="login-form" onSubmit={handleSubmit}>
           <div className="input-block">

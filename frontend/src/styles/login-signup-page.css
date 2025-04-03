@@ -86,6 +86,10 @@ input[type='checkbox'] {
     text-align: center;
 }
 
-.invalid-login {
-    color: rgb(180, 37, 37);
+.error {
+    color: #fe6789;
+}
+
+.signed-up {
+    color: #4495c7;
 }
