@@ -194,6 +194,7 @@ interface Friend {
     username: string;
     senderId: number;
     recieverId: number;
+    requestId: number;
 }
   
 interface FriendListResponse {

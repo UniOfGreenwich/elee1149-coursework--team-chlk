@@ -22,6 +22,7 @@ export function FriendsRequest({userId, loading, data, error}) {
                     lastName={e.lastName}
                     email={e.email}
                     username={e.username}
+                    requestId={e.requestId}
                   />
             </li>
           ))}

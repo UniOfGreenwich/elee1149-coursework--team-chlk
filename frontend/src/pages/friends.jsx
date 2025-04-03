@@ -9,10 +9,9 @@ export function Friends() {
   let params = useParams()
   const [friendLoading, friendData, friendError, friendRequest] = FriendsListData(params.id)
   const [pendingLoading, pendingData, pendingError, pendingRequest] = PendingRequestData(params.id)
-
   
-  const pendingRecievedData = !pendingData.friends.filter(item => item.recieverId.toString() === params.id) ? null : pendingData.friends.filter(item => item.recieverId.toString() === params.id)
-  const pendingSentData = !pendingData.friends.filter(item => item.senderId.toString() === params.id)  ? null : pendingData.friends.filter(item => item.senderId.toString() === params.id)
+  const pendingRecievedData = pendingData.friends !== undefined ? !pendingData.friends.filter(item => item.recieverId.toString() === params.id) ? null : pendingData.friends.filter(item => item.recieverId.toString() === params.id) : null
+  const pendingSentData = pendingData.friends !== undefined ? !pendingData.friends.filter(item => item.senderId.toString() === params.id) ? null : pendingData.friends.filter(item => item.senderId.toString() === params.id) : null
 
   const combinedLoading = pendingLoading || friendLoading ? true : false;
 
@@ -24,7 +23,7 @@ export function Friends() {
         <h1 className="friends-title">Friends</h1>
         <p className="add-friend-button">+ New Friend</p>
       </div>
-      {pendingRecievedData.length !== 0 ? (
+      {pendingRecievedData !== null ? pendingRecievedData.length !== 0 ? (
       <div className="request-list-wrapper">
         <h2 className="friends-request-header">Friend Requests</h2>
           <ul className="request-component">
@@ -33,11 +32,11 @@ export function Friends() {
             </li>
           </ul>
         </div>
-    ):null}
-      <div className={"friend-list-wrapper-" + (pendingRecievedData.length !== 0 ? "with-requests" : "without-requests")}>
+    ): null : null }
+      <div className={"friend-list-wrapper-" + (pendingRecievedData !== null ? pendingRecievedData.length !== 0 ? "with-requests" : "without-requests" : "without-requests" )}>
         <h2 className="friends-list-header">Your Friends</h2>
         <p className="friend-status-title">Status</p>
-        <ul className={"friends-component-" + (pendingRecievedData.length !== 0 ? "with-requests" : "without-requests")}>
+        <ul className={"friends-component-" + (pendingRecievedData !== null ? pendingRecievedData.length !== 0 ? "with-requests" : "without-requests" : "without-requests" )}>
           <li className="friends-component-list">
             <FriendsList userId={params.id} loading={combinedLoading} activeData={friendData.friends} pendingData={pendingSentData} error={combinedError}/>
           </li>
