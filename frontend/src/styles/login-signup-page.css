@@ -29,6 +29,18 @@ input::placeholder {
     color: white;
 }
 
+.full-name-block {
+    display:flex;
+}
+
+.first-name {
+    margin-right: 12px;
+}
+
+.last-name {
+    margin-left: 12px;
+}
+
 .submit-button {
     color: white;
     font-weight: 700;
