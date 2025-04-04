@@ -36,7 +36,6 @@ export const useAxios = <T>(config: AxiosRequestConfig<any>): [boolean, T | unde
 }
 
 interface UserShare {
-    expenseId: number;
     id: number;
     shareAmount: number;
     userId: number;

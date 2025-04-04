@@ -38,7 +38,7 @@ export function LoginForm( { setToken, signedUp, setSignedUp} ) {
     });
     if(token.success) {
       setToken(token)
-      navigate(`/user/${token.userId}`)
+      navigate(`/user/${token.userId}/`)
     } else {
       setError(token.message)
     }
