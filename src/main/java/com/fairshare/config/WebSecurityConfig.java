@@ -15,7 +15,7 @@ public class WebSecurityConfig {
         http
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/", "/home", "/login", "/group-dashboard", "/group/**", "/users/**", "/expense/**", "/balances/**" ).permitAll()
+                                .requestMatchers("/", "/home", "/login", "/group-dashboard", "/group/**", "/users/**", "/expense/**", "/balances/**", "/friends/**" ).permitAll()
                                 .anyRequest().authenticated()
                 )
                 .formLogin(formLogin ->
