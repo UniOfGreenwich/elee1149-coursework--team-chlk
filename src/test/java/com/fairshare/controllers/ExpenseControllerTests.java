@@ -27,7 +27,7 @@ class ExpenseControllerTests {
     @MockitoBean
     private ExpenseService expenseService;
 
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
 
     @Test
     void testAddExpense() throws Exception {
@@ -35,14 +35,14 @@ class ExpenseControllerTests {
         expense.setDescription("Test Expense");
         expense.setAmount(100.0);
         expense.setCurrency("GBP");
-        expense.setDate(dateFormat.parse("03-03-2025"));
+        expense.setDate(dateFormat.parse("2025-03-03T00:00:00.000+00:00"));
         expense.setCategoryId(1);
         expense.setGroupId(1);
-        expense.setUserId(1);
+        expense.setPayerId(1);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/expense/add-expense")
                         .contentType("application/json")
-                        .content("{\"description\":\"Test Expense\",\"amount\":100.0,\"currency\":\"GBP\",\"date\":\"03-03-2025\",\"categoryId\":1,\"groupId\":1,\"userId\":1}")
+                        .content("{\"description\":\"Test Expense\",\"amount\":100.0,\"currency\":\"GBP\",\"date\":\"2025-03-03T00:00:00.000+00:00\",\"categoryId\":1,\"groupId\":1,\"payerId\":1}")
                         .param("payerId", "1"))
                         .andExpect(status().isOk());
 
@@ -53,16 +53,16 @@ class ExpenseControllerTests {
         expense.setDescription("Test Expense");
         expense.setAmount(100.0);
         expense.setCurrency("GBP");
-        expense.setDate(dateFormat.parse("03-03-2025"));
+        expense.setDate(dateFormat.parse("2025-03-03T00:00:00.000+00:00"));
         expense.setCategoryId(1);
         expense.setGroupId(1);
-        expense.setUserId(1);
+        expense.setPayerId(1);
 
         Mockito.when(expenseService.getExpensesByGroupId(1)).thenReturn(Collections.singletonList(expense));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/expense/all-expenses")
                         .param("groupId", "1"))
                 .andExpect(status().isOk())
-                .andExpect(content().json("[{\"description\":\"Test Expense\",\"amount\":100.0,\"currency\":\"GBP\",\"date\":\"03-03-2025\",\"categoryId\":1,\"groupId\":1,\"userId\":1}]"));
+                .andExpect(content().json("[{\"description\":\"Test Expense\",\"amount\":100.0,\"currency\":\"GBP\",\"date\":\"2025-03-03T00:00:00.000+00:00\",\"categoryId\":1,\"groupId\":1,\"payerId\":1}]"));
     }
 }

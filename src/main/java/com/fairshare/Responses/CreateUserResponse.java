@@ -1,4 +1,4 @@
-package com.fairshare.Requests;
+package com.fairshare.Responses;
 
 public class CreateUserResponse {
     private String message;

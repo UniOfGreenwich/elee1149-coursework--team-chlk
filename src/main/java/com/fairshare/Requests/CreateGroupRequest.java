@@ -2,6 +2,7 @@ package com.fairshare.Requests;
 
 public class CreateGroupRequest {
     private String groupName;
+    private Integer groupId;
     private Integer userId;
 
     public String getGroupName() {
@@ -10,6 +11,14 @@ public class CreateGroupRequest {
 
     public void setGroupName(String groupName) {
         this.groupName = groupName;
+    }
+
+    public Integer getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(Integer groupId) {
+        this.groupId = groupId;
     }
 
     public Integer getUserId() {
