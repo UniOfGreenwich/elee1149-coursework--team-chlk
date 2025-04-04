@@ -1,0 +1,11 @@
+sequenceDiagram
+    title Update Balance and User Shares
+    participant ExpenseService
+    participant UserShareRepository
+    participant BalanceService
+
+    loop For each UserShare in newExpense
+        ExpenseService->>UserShareRepository: save(userShare)
+        UserShareRepository-->>ExpenseService: UserShare saved
+        ExpenseService->>BalanceService: updateBalance(payerId, userId, shareAmount)
+    end
