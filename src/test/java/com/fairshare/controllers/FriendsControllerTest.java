@@ -1,5 +1,7 @@
 package com.fairshare.controllers;
 
+import com.fairshare.DTO.FriendsDTO;
+import com.fairshare.DTO.FriendsListDTO;
 import com.fairshare.Responses.FriendsResponse;
 import com.fairshare.entity.Friends;
 import com.fairshare.services.FriendsService;
@@ -37,14 +39,14 @@ public class FriendsControllerTest {
     @Test
     void testSendFriendRequest() {
         Integer userId = 1;
-        Integer friendUserId = 2;
+        String friendEmail = "friend@example.com";
         FriendsResponse response = new FriendsResponse("Request Send", true);
-        when(friendsService.sendFriendRequest(userId, friendUserId)).thenReturn(response);
+        when(friendsService.sendFriendRequest(userId, friendEmail)).thenReturn(response);
 
-        FriendsResponse result = friendsController.sendFriendRequest(userId, friendUserId);
+        FriendsResponse result = friendsController.sendFriendRequest(userId, friendEmail);
 
         assertEquals(response, result);
-        verify(friendsService, times(1)).sendFriendRequest(userId, friendUserId);
+        verify(friendsService, times(1)).sendFriendRequest(userId, friendEmail);
     }
 
     @Test
@@ -72,22 +74,24 @@ public class FriendsControllerTest {
     @Test
     void testGetFriendsList() {
         Integer userId = 1;
-        List<Friends> friendsList = Arrays.asList(new Friends(), new Friends());
-        when(friendsService.getFriendsList(userId)).thenReturn(friendsList);
+        List<FriendsDTO> friendsDTOList = Arrays.asList(new FriendsDTO(), new FriendsDTO());
+        FriendsListDTO friendsList = new FriendsListDTO(friendsDTOList);
+        when(friendsService.getUserWithFriends(userId)).thenReturn(friendsList);
 
-        ResponseEntity<List<Friends>> response = friendsController.getFriendsList(userId);
+        ResponseEntity<FriendsListDTO> response = friendsController.getFriendsList(userId);
 
         assertEquals(ResponseEntity.ok(friendsList), response);
-        verify(friendsService, times(1)).getFriendsList(userId);
+        verify(friendsService, times(1)).getUserWithFriends(userId);
     }
 
     @Test
     void testGetPendingFriendRequests() {
         Integer userId = 1;
-        List<Friends> pendingRequestsList = Arrays.asList(new Friends(), new Friends());
+        List<FriendsDTO> pendingRequestsDTOList = Arrays.asList(new FriendsDTO(), new FriendsDTO());
+        FriendsListDTO pendingRequestsList = new FriendsListDTO(pendingRequestsDTOList);
         when(friendsService.getPendingFriendRequests(userId)).thenReturn(pendingRequestsList);
 
-        ResponseEntity<List<Friends>> response = friendsController.getPendingFriendRequests(userId);
+        ResponseEntity<FriendsListDTO> response = friendsController.getPendingFriendRequests(userId);
 
         assertEquals(ResponseEntity.ok(pendingRequestsList), response);
         verify(friendsService, times(1)).getPendingFriendRequests(userId);

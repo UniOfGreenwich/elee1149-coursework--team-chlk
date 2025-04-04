@@ -3,9 +3,8 @@ package com.fairshare.controllers;
 import com.fairshare.DTO.UserWithBalance;
 import com.fairshare.Requests.AddUserToGroupRequest;
 import com.fairshare.Requests.CreateGroupRequest;
-import com.fairshare.Requests.CreateGroupResponse;
+import com.fairshare.Responses.CreateGroupResponse;
 import com.fairshare.entity.Group;
-import com.fairshare.entity.User;
 import com.fairshare.services.GroupService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -54,7 +53,7 @@ public class GroupControllerTests {
 
         when(groupService.createGroup(testRequest)).thenReturn(testGroup);
 
-        CreateGroupResponse expectedResponse = new CreateGroupResponse("Group created successfully", true, testGroup.getGroupId());
+        CreateGroupResponse expectedResponse = new CreateGroupResponse("New group created!", true, testGroup.getGroupId());
 
         CreateGroupResponse result = groupController.createGroup(testRequest);
 

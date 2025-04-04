@@ -49,6 +49,7 @@ export function SignupForm({setSignedUp}) {
   }
 
 
+export function SignupForm() {
   return (
     <>
       {error ? 
@@ -98,8 +99,4 @@ export function SignupForm({setSignedUp}) {
       </form>
     </>
   );
-}
-
-SignupForm.propTypes = {
-  setSignedUp: PropTypes.func.isRequired
 }
