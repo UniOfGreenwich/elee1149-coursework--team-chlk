@@ -59,7 +59,8 @@
 }
 
 .action-form input,
-.expense-category, select {
+.expense-category,
+select {
   display: inline;
   border: 1px solid rgb(158, 158, 158);
   width: 100%;
@@ -186,7 +187,6 @@ input[type="radio"] {
   background-color: rgb(249, 249, 249);
   padding: 1rem;
   border-radius: 10px;
-
 }
 
 .custom-user-name {
@@ -213,5 +213,6 @@ input[type="radio"] {
   font-weight: 600;
 }
 
-
-
+.error-message {
+  color: red;
+}

@@ -10,6 +10,8 @@ export function GroupMembers({ userId, groupId, loading, data, error }) {
   const openModal = (type) => setModalType(type);
   const closeModal = () => setModalType(null);
   let params = useParams();
+  const location = useLocation();
+  const { groupName } = location.state;
 
   if (loading) {
     return <p>Loading...</p>;
@@ -19,15 +21,20 @@ export function GroupMembers({ userId, groupId, loading, data, error }) {
     return <p>Error: {error}</p>;
   }
 
-  console.log(data); //printing the data to the console
+  // Filter out the logged-in user
+  const filteredMembers = data.filter(
+    (member) => member.userId !== parseInt(userId)
+  );
 
-  const sortedMembers = data.sort((a, b) => a.balance - b.balance);
+  console.log(filteredMembers); //printing the filtered data to the console
+
+  const sortedMembers = filteredMembers.sort((a, b) => a.balance - b.balance);
 
   return (
     <div className="dashboard-grid-component">
       <div className="component-header">
         <h2 className="component-title">Group Members</h2>
-        <Link to={`${window.location.href}`}>
+        <Link to={`${window.location.href}`} state={{ groupName: groupName }}>
           <button
             onClick={() => openModal("AddMember")}
             className="add-member-button"

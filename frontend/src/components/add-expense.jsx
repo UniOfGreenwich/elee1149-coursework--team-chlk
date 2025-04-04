@@ -19,14 +19,21 @@ const AddExpense = ({ closeModal, userId, groupId }) => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
+        const parsedGroupId = parseInt(groupId, 10);
+        const parsedUserId = parseInt(userId, 10);
         const response = await fetch(
-          `http://localhost:8080/group/${groupId}/${userId}/users`
+          `http://localhost:8080/group/${parsedGroupId}/${parsedUserId}/users`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch users");
         }
         const data = await response.json();
-        setUsers(data);
+
+        // Filter out the logged-in user
+        const filteredUsers = data.filter(
+          (user) => user.userId !== parsedUserId
+        );
+        setUsers(filteredUsers);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
@@ -48,8 +55,6 @@ const AddExpense = ({ closeModal, userId, groupId }) => {
       splitEqually(selectedUserObjects, amount);
     }
   };
-
-  function handleCategoryOptions() {}
 
   const handleShareOptionChange = (e) => {
     setShareOption(e.target.value);
@@ -133,11 +138,10 @@ const AddExpense = ({ closeModal, userId, groupId }) => {
       const responseData = await response.json(); // Or response.text() if the backend doesn't return JSON
       console.log("Expense added successfully:", responseData);
 
-      // Optionally:  Close the modal, clear the form, etc.
+      window.location.reload(); // refreshing the page after expense is added
       closeModal();
     } catch (error) {
       console.error("Error adding expense:", error);
-      // Handle the error (e.g., display an error message to the user)
     }
   };
 

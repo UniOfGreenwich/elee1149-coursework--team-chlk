@@ -10,36 +10,34 @@ export default function AddNewFriend({ closeModal, userId }) {
     e.preventDefault();
     setErrorMessage(""); // Clear any previous error message
 
-    // Check if the email exists in the database
-    const userExists = await checkIfUserExists(friendEmail);
-
-    if (!userExists) {
-      setErrorMessage("User doesn't exist");
-      return;
-    }
-
-    const friendData = {
-      userId: userId,
-      friendEmail: friendEmail,
-    };
+    // const friendData = {
+    //   userId: userId,
+    //   friendEmail: friendEmail,
+    // };
 
     try {
       const response = await fetch(
-        "http://localhost:8080/friends/sendRequest",
+        `http://localhost:8080/friends/sendRequest?userId=${userId}&friendEmail=${friendEmail}`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(friendData),
+          // body: JSON.stringify(friendData),
         }
       );
 
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        const errorData = await response.json();
+        if (errorData.message) {
+          setErrorMessage(errorData.message); // Display backend error message
+        } else {
+          setErrorMessage(`HTTP error! Status: ${response.status}`);
+        }
+        return;
       }
 
-      const responseData = await response.json(); // Or response.text()
+      const responseData = await response.json();
       console.log("Friend request sent successfully:", responseData);
 
       // Clearing the form and close the modal
@@ -48,25 +46,6 @@ export default function AddNewFriend({ closeModal, userId }) {
     } catch (error) {
       console.error("Error sending friend request:", error);
       setErrorMessage("An error occurred while sending the request.");
-      // Handle the error (e.g., display an error message)
-    }
-  };
-
-  const checkIfUserExists = async (email) => {
-    try {
-      const response = await fetch(
-        `http://localhost:8080/friends/list?userId=${userId}`
-      );
-      if (!response.ok) {
-        throw new Error("Failed to fetch friends list");
-      }
-      const friends = await response.json();
-
-      // Check if the email exists in the friends list
-      return friends.some((friend) => friend.email === email);
-    } catch (error) {
-      console.error("Error checking if user exists:", error);
-      return false; // Assume user doesn't exist in case of an error
     }
   };
 
