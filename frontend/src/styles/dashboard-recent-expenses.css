@@ -45,20 +45,14 @@
 }
 
 .category-tile {
-  display: flex;
-  height: 40px;
-  width: 40px;
-  background-color: #d2d2d240;
-  border-radius: 8px;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  height: 40px;
-  width: 40px;
-  background-color: #d2d2d240;
-  border-radius: 8px;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    height: 40px;
+    width: 40px;
+    min-width: 40px;
+    background-color: #D2D2D240;
+    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
 }
 
 .expense-titles {
@@ -66,8 +60,10 @@
 }
 
 .expense-name {
-  font-weight: bold;
-  font-size: 1rem;
+    font-weight: bold;
+    font-size: 1rem;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
 }
 
 .category {

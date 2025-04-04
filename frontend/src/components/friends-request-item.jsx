@@ -39,7 +39,7 @@ export function FriendsRequestItem(props) {
 
     return (
         <div className="friend-request-item">
-            <p className="request-username">{props.requestId}</p>
+            <p className="request-username">{props.username}</p>
             <p className="request-name">{`${props.firstName} ${props.lastName}`}</p>
             <p className="request-email">{props.email}</p>
             <div className="request-user-decision">

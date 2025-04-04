@@ -1,5 +1,6 @@
 package com.fairshare.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,6 +25,7 @@ public class UserShare {
 
     @ManyToOne
     @JoinColumn(name = "expense_id")
+    @JsonIgnore 
     private Expense expenseId;
 
     @Column(name = "share_amount")
