@@ -13,14 +13,13 @@ async function userLogin(credentials) {
   .then(response => response.data)
 }
 
-export function LoginForm( { setToken, signedUp, setSignedUp} ) {
+export function LoginForm( { setToken } ) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [error, setError] = useState();
   let navigate = useNavigate();
 
   const handleSubmit = async e => {
-    setSignedUp(undefined)
     e.preventDefault();
     const token = await userLogin({
       "email": email,
@@ -38,18 +37,7 @@ export function LoginForm( { setToken, signedUp, setSignedUp} ) {
 
   return (
     <>
-          {error ?
-    // <Snackbar autoHideDuration={6000}>
-      <p className="error">{error}</p>
-      // {/* <Alert severity="error">{error}</Alert> */}
-      // {/* </Snackbar>  */}
-      : null}
-                {signedUp ?
-    // <Snackbar autoHideDuration={6000}>
-      <p className="signed-up">{`${signedUp.message} please log in`}</p>
-      // {/* <Alert severity="error">{error}</Alert> */}
-      // {/* </Snackbar>  */}
-      : null}
+      <p className="invalid-login">{error}</p>
       <form action="#" className="login-form" onSubmit={handleSubmit}>
         <div className="input-block">
           <label htmlFor="email">Email Address</label>
@@ -80,6 +68,5 @@ export function LoginForm( { setToken, signedUp, setSignedUp} ) {
 }
 
 LoginForm.propTypes = {
-  setToken: PropTypes.func.isRequired,
-  setSignedUp: PropTypes.func.isRequired
+  setToken: PropTypes.func.isRequired
 }

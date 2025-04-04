@@ -29,18 +29,6 @@ input::placeholder {
     color: white;
 }
 
-.full-name-block {
-    display:flex;
-}
-
-.first-name {
-    margin-right: 12px;
-}
-
-.last-name {
-    margin-left: 12px;
-}
-
 .submit-button {
     color: white;
     font-weight: 700;
@@ -86,10 +74,6 @@ input[type='checkbox'] {
     text-align: center;
 }
 
-.error {
-    color: #fe6789;
-}
-
-.signed-up {
-    color: #4495c7;
+.invalid-login {
+    color: rgb(180, 37, 37);
 }
