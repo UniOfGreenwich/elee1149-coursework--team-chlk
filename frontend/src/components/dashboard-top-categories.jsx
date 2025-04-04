@@ -24,12 +24,12 @@ export function TopCategories({userId, groupId, loading, data, error}) {
     })
   }
 
-  const sortedCategories = categories.sort((a,b) => a.amount - b.Amount).slice(0,4)
+  const sortedCategories = categories.filter(category => category.categoryId !== 6).sort((a,b) => a.amount - b.Amount).slice(0,4)
 
   console.log(sortedCategories)
 
   return (
-    <div className="dashboard-grid-component">
+    <div className="dashboard-grid-component-scroll">
       <h2 className="component-title">Top Categories</h2>
       <div className="component-content">
         <ul className="categories-grid">

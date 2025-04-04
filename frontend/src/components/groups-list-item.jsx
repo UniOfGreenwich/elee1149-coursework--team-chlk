@@ -15,7 +15,7 @@ export function GroupsListItem(props) {
             </div>
             <div className="group-spent-column">
                 <p className="group-total-spent-title">Total Spent:</p>
-                <p className="group-total-spent">£{props.totalSpent.toFixed(2)}</p>
+                <p className="group-total-spent">{Intl.NumberFormat("en-GB", {style: "currency", currency: "GBP", minimumFractionDigits: 2, maximumFractionDigits: 2}).format(props.totalSpent)}</p>
             </div>
             <div className="group-users-box">
                 <p className="group-user">{props.numberOfUsers}</p>
@@ -31,13 +31,13 @@ function getLastUpdated (updatedDate) {
     } else if(isYesterday(updatedDate)) {
         return "Yesterday"
     } else if(differenceInYears(today, updatedDate)>0){
-        return `${differenceInYears(today, updatedDate)} Year(s) Ago`
+        return `${differenceInYears(today, updatedDate)} Year${differenceInYears(today, updatedDate) > 1 ? "s" : null } Ago`
     } else if(differenceInMonths(today, updatedDate)>0) {
-        return `${differenceInMonths(today, updatedDate)} Month(s) Ago`
-    } else if(differenceInWeeks(today, updatedDate)-1>0) {
-        return `${differenceInWeeks(today, updatedDate)} Week(s) Ago`
+        return `${differenceInMonths(today, updatedDate)} Month${differenceInMonths(today, updatedDate) > 1 ? "s" : null } Ago`
+    } else if(differenceInWeeks(today, updatedDate)>0) {
+        return `${differenceInWeeks(today, updatedDate)} Week${differenceInWeeks(today, updatedDate) > 1 ? "s" : "" } Ago`
     } else {
-        return `${differenceInDays(today, updatedDate)} Day(s) Ago`
+        return `${differenceInDays(today, updatedDate)} Days Ago`
     } 
 }
 

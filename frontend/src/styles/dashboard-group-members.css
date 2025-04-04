@@ -1,4 +1,5 @@
 .add-member-button {
+  margin-right: 1rem;
   font-size: 12px;
   font-weight: 300;
   padding: 8px;
@@ -13,7 +14,7 @@
 .balance-title {
   font-size: 10px;
   text-align: right;
-  padding-right: 8px;
+  padding-right: calc(8px + 1rem);
 }
 
 .group-members-row {

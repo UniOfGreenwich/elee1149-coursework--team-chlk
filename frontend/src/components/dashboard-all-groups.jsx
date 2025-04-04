@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "../styles/dashboard-all-groups.css";
-import { GroupsRow } from "./dashboard-all-groups-row";
+import GroupsRow from "./dashboard-all-groups-row";
 import { Link, useNavigate } from "react-router-dom";
 import chevron from "../assets/chevron-icon.png"
 

@@ -31,7 +31,6 @@ export function RecentExpenses({userId, groupId, loading, data, error}) {
           </div>
         </Link>
       </div>
-      <div className="component-content">
         <div className="expense-list">
         <ul>
               {sortedExpenses.map((e) => (
@@ -52,7 +51,6 @@ export function RecentExpenses({userId, groupId, loading, data, error}) {
         </div>
             
           </div>
-    </div>
   );
 }
 

@@ -58,6 +58,15 @@
   border-radius: 8px;
 }
 
+.dashboard-grid-component-scroll {
+  height: 100%;
+  background-color: #222645;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+  border-radius: 8px;
+}
+
 .component-header {
   display: flex;
   justify-content: space-between;
@@ -70,5 +79,9 @@
 }
 
 .component-content {
-  height: calc(100%-28px);
+  max-height: calc(100%-28px);
+  overflow-y: scroll;
+  scrollbar-color: #333864 #222645;
+  scrollbar-width: 1rem;
+
 }

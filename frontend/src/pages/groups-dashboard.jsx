@@ -37,7 +37,7 @@ export function GroupsDashboard() {
             <RecentExpenses userId={params.id} groupId={params.groupId} loading={expensesLoading} data={expensesData} error={expensesError}/>
           </li>
           <li className="grid-component group">
-            <GroupMembers userId={params.id} groupId={params.groupId} loading={groupMembersLoading} data={groupMembersData} error={groupMembersError}/>
+            <GroupMembers currentUserId={params.id} groupId={params.groupId} loading={groupMembersLoading} data={groupMembersData} error={groupMembersError}/>
           </li>
         </ul>
         </div>

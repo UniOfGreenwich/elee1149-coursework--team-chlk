@@ -10,7 +10,7 @@ export function TopCategoriesItem(props) {
             </div>
             <div className="category-details">
                 <p className="category-name">{props.categoryName}</p>
-                <p className="category-amount">£{props.amount.toFixed(2)}</p>
+                <p className="category-amount">{Intl.NumberFormat("en-GB", {style: "currency", currency: "GBP", minimumFractionDigits: 2, maximumFractionDigits: 2}).format(props.amount)}</p>
             </div>
         </div>
     )

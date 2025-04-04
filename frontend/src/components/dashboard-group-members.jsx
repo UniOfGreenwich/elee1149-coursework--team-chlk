@@ -3,7 +3,7 @@ import "../styles/dashboard-group-members.css";
 import { GroupMembersRow } from "./dashboard-group-members-row";
 import { Link, useNavigate } from "react-router-dom";
 
-export function GroupMembers({userId, groupId, loading, data, error}) {
+export function GroupMembers({currentUserId, groupId, loading, data, error}) {
 
   if (loading) {
     return <p>Loading...</p>;
@@ -15,10 +15,10 @@ export function GroupMembers({userId, groupId, loading, data, error}) {
 
   console.log(data); //printing the data to the console
 
-  const sortedMembers= data.sort((a, b) => a.balance - b.balance)
+  const sortedMembers=data.filter(item => item.userId.toString() !== currentUserId).sort((a, b) => a.balance - b.balance)
 
   return (
-    <div className="dashboard-grid-component">
+    <div className="dashboard-grid-component-scroll">
             <div className="component-header">
               <h2 className="component-title">Group Members</h2>
               <Link to={`${window.location.href}`}>
@@ -26,7 +26,7 @@ export function GroupMembers({userId, groupId, loading, data, error}) {
               </Link>
             </div>
       <p className="balance-title">Balance</p>
-      <ul>
+      <ul className="component-content">
         {sortedMembers.map((e) => (
           <li key={e.userId}>
             <GroupMembersRow
