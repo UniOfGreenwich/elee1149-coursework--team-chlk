@@ -2,9 +2,13 @@ package com.fairshare.services;
 
 import com.fairshare.Requests.CreateExpenseRequest;
 import com.fairshare.entity.Expense;
+import com.fairshare.entity.Group;
 import com.fairshare.entity.User;
+import com.fairshare.entity.UserShare;
 import com.fairshare.repository.ExpenseRepository;
+import com.fairshare.repository.GroupRepository;
 import com.fairshare.repository.UserRepository;
+import com.fairshare.repository.UserShareRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,9 +21,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyDouble;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -33,45 +41,55 @@ class ExpenseServiceTest {
     ExpenseRepository expenseRepository;
 
     @Mock
+    UserShareRepository userShareRepository;
+
+    @Mock
     UserRepository userRepository;
+
+    @Mock
+    GroupRepository groupRepository;
+
+    @Mock
+    BalanceService balanceService;
 
     @Test
     void testAddExpense() {
-        // Create a CreateExpenseRequest object
         CreateExpenseRequest request = new CreateExpenseRequest();
         request.setExpenseName("Test Expense");
+        request.setExpenseId(1);
+        request.setDescription("Test Description");
         request.setAmount(100.0);
-        request.setCurrency("GBP");
-        //request.setDate(new Date());
+        request.setCurrency("USD");
+        request.setPayerId(1);
         request.setCategoryId(1);
         request.setGroupId(1);
-        request.setPayerId(1);
 
-        User payer = new User();
-        payer.setUserId(1);
-        // Mock the userRepository to return a user when findById is called
-        when(userRepository.findById(1)).thenReturn(Optional.of(payer));
+        User user = new User();
+        user.setUserId(1);
 
-        // Create the expected Expense object
-        Expense expectedExpense = new Expense();
-        expectedExpense.setExpenseName("Test Expense");
-        expectedExpense.setAmount(100.0);
-        expectedExpense.setCurrency("GBP");
-       // expectedExpense.setDate(new Date());
-        expectedExpense.setCategoryId(1);
-        expectedExpense.setGroupId(1);
-        expectedExpense.setPayerId(payer.getUserId()); // Set the payer object
+        Group group = new Group();
+        group.setGroupId(1);
+        group.setUsers(Collections.singleton(user));
 
-        // Mocks the expenseRepository's 'save' method
-        when(expenseRepository.save(any(Expense.class))).thenReturn(expectedExpense);
+        when(groupRepository.findById(anyInt())).thenReturn(Optional.of(group));
+        when(userRepository.findById(anyInt())).thenReturn(Optional.of(user));
+        when(expenseRepository.existsByExpenseNameAndGroupId(anyString(), anyInt())).thenReturn(false);
+        when(expenseRepository.existsByExpenseId(anyInt())).thenReturn(false);
 
-        // Calls the addExpense method with the request object
-        Expense actualExpense = expenseService.addExpense(request);
+        Expense result = expenseService.addExpense(request);
 
-        // Assertions
-        assertEquals(expectedExpense, actualExpense);
-        verify(expenseRepository, Mockito.times(1)).save(any(Expense.class));
+        assertEquals("Test Expense", result.getExpenseName());
+        assertEquals(1, result.getExpenseId());
+        assertEquals("Test Description", result.getDescription());
+        assertEquals(100.0, result.getAmount());
+        assertEquals("USD", result.getCurrency());
+        assertEquals(1, result.getPayerId());
+        assertEquals(1, result.getCategoryId());
+        assertEquals(1, result.getGroupId());
 
+        verify(expenseRepository, times(1)).save(any(Expense.class));
+        verify(userShareRepository, times(result.getUserShares().size())).save(any(UserShare.class));
+        verify(balanceService, times(result.getUserShares().size())).updateBalance(anyInt(), anyInt(), anyDouble());
     }
 
     @Test

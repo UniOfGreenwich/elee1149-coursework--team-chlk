@@ -42,7 +42,7 @@ class ExpenseControllerTests {
 
         mockMvc.perform(MockMvcRequestBuilders.post("/expense/add-expense")
                         .contentType("application/json")
-                        .content("{\"description\":\"Test Expense\",\"amount\":100.0,\"currency\":\"GBP\",\"date\":\"2025-03-03T00:00:00.000+00:00\",\"categoryId\":1,\"groupId\":1,\"userId\":1}")
+                        .content("{\"description\":\"Test Expense\",\"amount\":100.0,\"currency\":\"GBP\",\"date\":\"2025-03-03T00:00:00.000+00:00\",\"categoryId\":1,\"groupId\":1,\"payerId\":1}")
                         .param("payerId", "1"))
                         .andExpect(status().isOk());
 
@@ -63,6 +63,6 @@ class ExpenseControllerTests {
         mockMvc.perform(MockMvcRequestBuilders.get("/expense/all-expenses")
                         .param("groupId", "1"))
                 .andExpect(status().isOk())
-                .andExpect(content().json("[{\"description\":\"Test Expense\",\"amount\":100.0,\"currency\":\"GBP\",\"date\":\"2025-03-03T00:00:00.000+00:00\",\"categoryId\":1,\"groupId\":1,\"userId\":1}]"));
+                .andExpect(content().json("[{\"description\":\"Test Expense\",\"amount\":100.0,\"currency\":\"GBP\",\"date\":\"2025-03-03T00:00:00.000+00:00\",\"categoryId\":1,\"groupId\":1,\"payerId\":1}]"));
     }
 }
