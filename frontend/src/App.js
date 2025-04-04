@@ -32,8 +32,8 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home/>}/>
-          <Route path="/home" element={<Home/>}/>
-          <Route path="/login" element={<Login setToken={setToken} signedUp={signedUp} setSignedUp={setSignedUp}/>}/>
+          <Route path="/home" element={<Home signedUp={signedUp}/>}/>
+          <Route path="/login" element={<Login setToken={setToken}/>}/>
           <Route path="/sign-up" element={<SignUp setSignedUp={setSignedUp}/>}/>
           <Route path="/*" element={<Home/>}/>
         </Routes>
