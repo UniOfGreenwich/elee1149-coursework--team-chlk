@@ -45,9 +45,7 @@ public class UserShare {
         return expenseId;
     }
 
-    public void setExpenseId(Integer expenseId) {
-        this.expenseId = expenseId;
-    }
+    public void setExpenseId(Integer expenseId) {this.expenseId = expenseId;}
 
     public Double getShareAmount() {
         return shareAmount;

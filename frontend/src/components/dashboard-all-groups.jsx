@@ -2,29 +2,9 @@ import { useEffect, useState } from "react";
 import "../styles/dashboard-all-groups.css";
 import { GroupsRow } from "./dashboard-all-groups-row";
 import { Link, useNavigate } from "react-router-dom";
+import chevron from "../assets/chevron-icon.png"
 
-export function Groups({userId}) {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    fetch(`http://localhost:8080/users/groups?userId=${userId}`) // fetching the data
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to fetch data");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setData(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setError(error.message);
-        setLoading(false);
-      });
-  }, []);
+export function Groups({userId, loading, data, error}) {
 
   if (loading) {
     return <p>Loading...</p>;
@@ -36,14 +16,26 @@ export function Groups({userId}) {
 
   console.log(data); //printing the data to the console
 
+  const sortedGroups = data.sort((a,b) => new Date(a.updatedAt) - new Date(b.updatedAt)).reverse().slice(0,5)
+
+  console.log(sortedGroups)
+
   return (
     <div className="dashboard-grid-component">
-      <h2 className="component-title">Groups</h2>
+            <div className="component-header">
+              <h2 className="component-title">Groups</h2>
+              <Link to={`${window.location.href}groups`}>
+                <div className="view-all-button">
+                  <p className="view-all">View All</p>
+                  <img src={chevron} alt="" />
+                </div>
+              </Link>
+            </div>
       <p className="balance-title">No. of Members</p>
       <ul>
-        {data.map((e) => (
+        {sortedGroups.map((e) => (
           <li key={e.groupId}>
-            <Link to={`/user/${userId}/groups/${e.groupId}/groups-dashboard`}>
+            <Link to={`/user/${userId}/groups/${e.groupId}`}>
                 <GroupsRow
                     name={e.groupName}
                     created={e.dateCreated}

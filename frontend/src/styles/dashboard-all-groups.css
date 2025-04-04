@@ -1,6 +1,7 @@
 .balance-title {
     font-size: 10px;
     text-align: right;
+    padding-top: 8px;
   }
   
   .group-row {
@@ -10,17 +11,15 @@
     align-items: center;
     padding: 1rem 0;
     margin-top: 8px;
-  }
-
-  .group-row:hover {
-    opacity: 1;
-    background-color: #4495c7;
-    border-radius: 8px;
+    padding-left: 8px;
+  padding-right: 8px;
 }
 
-  .group-details {
-    margin-left: 8px;
-  }
+.group-row:hover {
+  opacity: 1;
+  background-color: #333864;
+  border-radius: 8px;
+}
 
   .group-name {
     font-weight: bold;

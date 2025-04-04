@@ -73,14 +73,6 @@ public class GroupController {
             return new AddUserToGroupResponse("User added to group successfully", true, addUserToGroupRequest.getUserId());
         }
     }
-    /*
-    Notes:
-    Make sure you add @Schema to the join table part this took me an hour to find out.
-    Make sure PK columns are set to Serial and have no data in them when trying to run calls
-    it messes with the auto increment.\
-    Add @JsonIgnore to avoid massive response
-    Ensure passing right variables to Service to not get null name
-     */
 }
 
 

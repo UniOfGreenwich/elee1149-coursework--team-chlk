@@ -16,7 +16,7 @@ import { GroupsDashboard } from './pages/groups-dashboard';
 import { Expenses } from './pages/expenses';
 import { Friends } from './pages/friends';
 
-import useToken from './components/use-token';
+import useToken from './methods/use-token';
 
 import { SideBar } from "./components/dashboard-sidebar";
 import { TopBar } from "./components/dashboard-topbar";
@@ -47,23 +47,22 @@ function App() {
                 token={token} 
                 setToken={setToken}
               />
-              <div className="dashboard-content">
-                <div className="topbar">
-                  <TopBar pageName="Dashboard" />
-                </div>
+
 
                   <Routes>
                     <Route path="/user/:id/" element={<Dashboard/>}/>
-                    <Route path="/user/:id/Dashboard" element={<Dashboard/>}/>
                     <Route path="/user/:id/groups" element={<Groups/>}/>
-                      <Route path="/user/:id/groups/:groupId/groups-dashboard" element={<GroupsDashboard/>}/>
+                    <Route path="/user/:id/groups/:groupId/" element={<GroupsDashboard/>}/>
                     <Route path="/user/:id/expenses" element={<Expenses/>}/>
+                    <Route path="/user/:id/expenses?category=:categoryId" element={<Expenses/>}/>
+                    <Route path="/user/:id/groups/:groupId/expenses" element={<Expenses/>}/>
+                    <Route path="/user/:id/groups/:groupId/expenses?category=:categoryId" element={<Expenses/>}/>
                     <Route path="/user/:id/friends" element={<Friends/>}/>
                     <Route path="/*" element={<Error/>}/>
                   </Routes>
                           
               </div>
-            </div>
+
         </Router>
         
       </div>
