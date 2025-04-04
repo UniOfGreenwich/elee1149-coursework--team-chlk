@@ -14,7 +14,7 @@ import java.util.Optional;
 public interface ExpenseRepository extends JpaRepository<Expense, Integer> {
 
     boolean existsByExpenseNameAndGroupId(String expenseName, Integer groupId);
-    boolean existsByExpenseId(Integer expenseId);
+    boolean existsByExpenseId(Expense expenseId);
     Optional<Expense> findByExpenseName(String expenseName);
     Integer expenseId(Integer expenseId);
     List<Expense> findByGroupId(Integer groupId);

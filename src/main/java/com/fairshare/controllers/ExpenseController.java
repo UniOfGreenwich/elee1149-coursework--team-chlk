@@ -19,7 +19,7 @@ public class ExpenseController {
     }
 
     @PostMapping("/add-expense")
-    public CreateExpenseResponse addExpense(@RequestBody CreateExpenseRequest request) {
+    public CreateExpenseResponse addExpense(@RequestBody CreateExpenseRequest request, @RequestParam Integer payerId) {
         Expense createdExpense = expenseService.addExpense(request);
 
         if (createdExpense == null) {

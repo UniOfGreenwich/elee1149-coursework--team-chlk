@@ -35,7 +35,7 @@ public class ExpenseService {
     @Transactional
     public Expense addExpense(CreateExpenseRequest createExpenseRequest) {
         String expenseName = createExpenseRequest.getExpenseName();
-        Integer expenseId = createExpenseRequest.getExpenseId();
+       //Integer expenseId = createExpenseRequest.getExpenseId();
         String description = createExpenseRequest.getDescription();
         Double amount = createExpenseRequest.getAmount();
         String currency = createExpenseRequest.getCurrency();
@@ -65,8 +65,7 @@ public class ExpenseService {
             return errorExpense;
         }
 
-        if (expenseRepository.existsByExpenseNameAndGroupId(expenseName, groupId) ||
-                expenseRepository.existsByExpenseId(expenseId)) {
+        if (expenseRepository.existsByExpenseNameAndGroupId(expenseName, groupId)) {
             errorExpense.setExpenseName("ExpenseExistsInGroupError"); // Indicates this expense name exists in this group
             return errorExpense;
         }
@@ -77,22 +76,30 @@ public class ExpenseService {
 
         Expense newExpense = new Expense();
         newExpense.setExpenseName(expenseName);
-        newExpense.setExpenseId(expenseId);
+        //newExpense.setExpenseId(expenseId);
         newExpense.setDescription(description);
         newExpense.setAmount(amount);
         newExpense.setCurrency(currency);
         //newExpense.setDate(date);
         newExpense.setPayerId(payerId);
         newExpense.setCategoryId(categoryId);
-        newExpense.setExpenseId(expenseId);
+        //newExpense.setExpenseId(expenseId);
         newExpense.setGroupId(groupId);
 
+        List<UserShare> userShares = createExpenseRequest.getUserShares();
+        for (UserShare userShare : userShares) {
+            userShare.setExpenseId(newExpense);
+        }
+        newExpense.setUserShares(userShares);
+
+        expenseRepository.save(newExpense);
+
+
         for (UserShare userShare : newExpense.getUserShares()) {
-            userShare.setExpenseId(newExpense.getExpenseId());
             userShareRepository.save(userShare);
             balanceService.updateBalance(payerId, userShare.getUserId(), userShare.getShareAmount()); // Access userId through User object
        }
-        expenseRepository.save(newExpense);
+
         return newExpense; // Return the saved expense
     }
 
