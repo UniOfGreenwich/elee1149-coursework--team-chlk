@@ -1,5 +1,5 @@
 sequenceDiagram
-    title Send Friend Request
+    title Friend Request Operations
     actor User
     participant FriendsController
     participant FriendsService
@@ -26,3 +26,16 @@ sequenceDiagram
             FriendsService-->>FriendsController: FriendsResponse("Friend request sent", true)
         end
     end
+
+    User->>FriendsController: POST /friends/acceptFriendRequest with requestId
+    FriendsController->>FriendsService: acceptFriendRequest(requestId)
+    FriendsService->>FriendsRepository: findById(requestId)
+    FriendsRepository-->>FriendsService: Friends object
+    FriendsService->>FriendsRepository: save(Friends with status ACCEPTED)
+    FriendsService-->>FriendsController: ResponseEntity.ok("Friend request accepted.")
+
+    User->>FriendsController: DELETE /friends/declineRequest with requestId
+    FriendsController->>FriendsService: declineFriendRequest(requestId)
+    FriendsService->>FriendsRepository: deleteById(requestId)
+    FriendsRepository-->>FriendsService: Request deleted
+    FriendsService-->>FriendsController: ResponseEntity.ok("Friend request deleted")
