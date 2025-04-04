@@ -14,6 +14,14 @@ export function Groups({userId, loading, data, error}) {
     return <p>Error: {error}</p>;
   }
 
+  if(data !== undefined) {
+    data.forEach(item => {
+      if(item.updatedAt === null) {
+        item.updatedAt = item.dateCreated
+      }
+    })
+  }
+
   console.log(data); //printing the data to the console
 
   const sortedGroups = data.sort((a,b) => new Date(a.updatedAt) - new Date(b.updatedAt)).reverse().slice(0,5)
@@ -47,18 +55,4 @@ export function Groups({userId, loading, data, error}) {
       </ul>
     </div>
   );
-}
-
-function getStatus(dataObj) {
-  let status = "";
-
-  if (dataObj.balance > 0) {
-    status = "owes you";
-  } else if (dataObj.balance < 0) {
-    status = "is owed";
-  } else {
-    status = "settled";
-  }
-
-  return status;
 }
