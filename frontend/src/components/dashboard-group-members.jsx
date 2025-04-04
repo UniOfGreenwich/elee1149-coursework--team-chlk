@@ -44,7 +44,7 @@ export function GroupMembers({ userId, groupId, loading, data, error }) {
         </Link>
       </div>
       <p className="balance-title">Balance</p>
-      <ul>
+      <ul className="component-content">
         {sortedMembers.map((e) => (
           <li key={e.userId}>
             <GroupMembersRow

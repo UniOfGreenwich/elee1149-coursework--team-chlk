@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios'
 import { useEffect, useState } from 'react'
 
+// axios.defaults.baseURL = 'https://fairshare-backend-174597868590.us-central1.run.app'
 axios.defaults.baseURL = 'http://localhost:8080/'
 
 export const useAxios = <T>(config: AxiosRequestConfig<any>): [boolean, T | undefined, string, () => void] => {

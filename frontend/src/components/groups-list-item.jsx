@@ -1,5 +1,5 @@
 import "../styles/groups.css"
-import {differenceInCalendarWeeks, differenceInCalendarYears, differenceInCalendarMonths, differenceInCalendarDays, format, isToday, isYesterday} from "date-fns"
+import {differenceInWeeks, differenceInYears, differenceInMonths, differenceInDays, format, isToday, isYesterday} from "date-fns"
 
 
 export function GroupsListItem(props) {
@@ -15,7 +15,7 @@ export function GroupsListItem(props) {
             </div>
             <div className="group-spent-column">
                 <p className="group-total-spent-title">Total Spent:</p>
-                <p className="group-total-spent">£{props.totalSpent.toFixed(2)}</p>
+                <p className="group-total-spent">{Intl.NumberFormat("en-GB", {style: "currency", currency: "GBP", minimumFractionDigits: 2, maximumFractionDigits: 2}).format(props.totalSpent)}</p>
             </div>
             <div className="group-users-box">
                 <p className="group-user">{props.numberOfUsers}</p>
@@ -30,14 +30,14 @@ function getLastUpdated (updatedDate) {
         return "Today"
     } else if(isYesterday(updatedDate)) {
         return "Yesterday"
-    } else if(differenceInCalendarYears(today, updatedDate)-1>0){
-        return `${differenceInCalendarYears(today, updatedDate)-1} Year(s) Ago`
-    } else if(differenceInCalendarMonths(today, updatedDate)-1>0) {
-        return `${differenceInCalendarMonths(today, updatedDate)-1} Month(s) Ago`
-    } else if(differenceInCalendarWeeks(today, updatedDate)-1>0) {
-        return `${differenceInCalendarWeeks(today, updatedDate)-1} Week(s) Ago`
+    } else if(differenceInYears(today, updatedDate)>0){
+        return `${differenceInYears(today, updatedDate)} Year${differenceInYears(today, updatedDate) > 1 ? "s" : null } Ago`
+    } else if(differenceInMonths(today, updatedDate)>0) {
+        return `${differenceInMonths(today, updatedDate)} Month${differenceInMonths(today, updatedDate) > 1 ? "s" : null } Ago`
+    } else if(differenceInWeeks(today, updatedDate)>0) {
+        return `${differenceInWeeks(today, updatedDate)} Week${differenceInWeeks(today, updatedDate) > 1 ? "s" : "" } Ago`
     } else {
-        return `${differenceInCalendarDays(today, updatedDate)-1} Day(s) Ago`
-    }
+        return `${differenceInDays(today, updatedDate)} Days Ago`
+    } 
 }
 

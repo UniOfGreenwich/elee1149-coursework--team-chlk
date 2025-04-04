@@ -32,6 +32,17 @@
     font-weight: 300;
 }
 
+.expense-group-title-settlement {
+    font-size: 12px;
+    font-weight: 300;
+    color: #9976FF;
+}
+
 .expense-group-name {
     font-size: 1rem;
+}
+
+.expense-group-name-settlement {
+    font-size: 1rem;
+    color: #9976FF;
 }

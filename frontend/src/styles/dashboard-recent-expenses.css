@@ -66,16 +66,32 @@
     text-overflow: ellipsis;
 }
 
+.expense-name-settlement {
+    font-weight: bold;
+    font-size: 1rem;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+    color: #9976FF;
+}
+
 .category {
   font-size: 12px;
   font-weight: 300;
 }
 
 .expense-date {
-  width: 40%;
-  font-size: 12px;
-  font-weight: 300;
-  text-align: center;
+    width: 40%;
+    font-size: 12px;
+    font-weight: 300;
+    text-align: center;
+}
+
+.expense-date-settlement {
+    width: 40%;
+    font-size: 12px;
+    font-weight: 300;
+    text-align: center;
+    color: #9976FF;
 }
 
 .expense-values {
@@ -95,10 +111,24 @@
   text-align: center;
 }
 
+.expense-amount-settlement {
+    font-weight: bold;
+    font-size: 1rem;
+    text-align: center;
+    color: #9976FF;
+}
+
 .expense-payer {
   font-size: 10px;
   font-weight: 300;
   text-align: center;
+}
+
+.expense-payer-settlement {
+    font-size: 10px;
+    font-weight: 300;
+    text-align: center;
+    color: #9976FF;
 }
 
 .expense-split {

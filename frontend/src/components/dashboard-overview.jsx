@@ -36,10 +36,12 @@ export function Overview({userId, groupId, loading, data, error}) {
     }
   });
 
+  const status = getStatus(overallBalance)
+
   // formatting the balance to 2 decimal place
-  overallBalance = overallBalance.toFixed(2);
-  positiveBalance = positiveBalance.toFixed(2);
-  negativeBalance = Math.abs(negativeBalance).toFixed(2);
+  const formattedOverallBalance = Intl.NumberFormat("en-GB", {style: "currency", currency: "GBP", minimumFractionDigits: 2, maximumFractionDigits: 2}).format(Math.abs(overallBalance));
+  const formattedPositiveBalance = Intl.NumberFormat("en-GB", {style: "currency", currency: "GBP", minimumFractionDigits: 2, maximumFractionDigits: 2}).format(Math.abs(positiveBalance));
+  const formattedNegativeBalance = Intl.NumberFormat("en-GB", {style: "currency", currency: "GBP", minimumFractionDigits: 2, maximumFractionDigits: 2}).format(Math.abs(negativeBalance));
 
   console.log(typeof negativeBalance);
 
@@ -49,7 +51,10 @@ export function Overview({userId, groupId, loading, data, error}) {
 
       {/* Overall Container */}
       <div className="overall">
-        <div className="overall-balance">£ {overallBalance}</div>
+        <div className="overall-information">
+          <div className="overall-balance">{formattedOverallBalance}</div>
+          <div className="overall-balance-status">{status}</div>
+        </div>
         <div className="date">{date}</div>
       </div>
 
@@ -62,7 +67,7 @@ export function Overview({userId, groupId, loading, data, error}) {
             </div>
             <div className="content">
               <div className="sub-heading">Owed to me</div>
-              <div className="amount blue">£{positiveBalance}</div>
+              <div className="amount blue">{formattedPositiveBalance}</div>
             </div>
           </div>
           <div className="i-owe">
@@ -71,15 +76,15 @@ export function Overview({userId, groupId, loading, data, error}) {
             </div>
             <div className="content">
               <div className="sub-heading">Total I Owe</div>
-              <div className="amount red">£{negativeBalance}</div>
+              <div className="amount red">{formattedNegativeBalance}</div>
             </div>
           </div>
         </div>
         <div className="graph">
           <div className="chart">
             <DoughnutChart
-              owe={parseFloat(negativeBalance)}
-              owedToMe={parseFloat(positiveBalance)}
+              owe={parseFloat(Math.abs(negativeBalance).toFixed(2))}
+              owedToMe={parseFloat(positiveBalance).toFixed(2)}
             />
           </div>
           <div className="legend">
@@ -98,4 +103,18 @@ function getCurrentMonthYear() {
   const year = date.getFullYear();
 
   return `${month}, ${year}`;
+}
+
+function getStatus(dataObj) {
+  let status = "";
+
+  if (dataObj > 0) {
+    status = "is owed to me";
+  } else if (dataObj < 0) {
+    status = "I owe";
+  } else {
+    status = "";
+  }
+
+  return status;
 }

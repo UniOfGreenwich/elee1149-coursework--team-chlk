@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "../styles/dashboard-all-groups.css";
-import { GroupsRow } from "./dashboard-all-groups-row";
+import GroupsRow from "./dashboard-all-groups-row";
 import { Link, useNavigate } from "react-router-dom";
 import chevron from "../assets/chevron-icon.png"
 
@@ -12,6 +12,14 @@ export function Groups({userId, loading, data, error}) {
 
   if (error) {
     return <p>Error: {error}</p>;
+  }
+
+  if(data !== undefined) {
+    data.forEach(item => {
+      if(item.updatedAt === null) {
+        item.updatedAt = item.dateCreated
+      }
+    })
   }
 
   console.log(data); //printing the data to the console
@@ -47,18 +55,4 @@ export function Groups({userId, loading, data, error}) {
       </ul>
     </div>
   );
-}
-
-function getStatus(dataObj) {
-  let status = "";
-
-  if (dataObj.balance > 0) {
-    status = "owes you";
-  } else if (dataObj.balance < 0) {
-    status = "is owed";
-  } else {
-    status = "settled";
-  }
-
-  return status;
 }
