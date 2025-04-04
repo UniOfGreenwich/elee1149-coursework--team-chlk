@@ -7,7 +7,7 @@ public class CreateGroupResponse {
     private Boolean success;
     private Integer groupId;
 
-    public CreateGroupResponse(String message, Boolean success, Integer userId) {
+    public CreateGroupResponse(String message, Boolean success, Integer groupId) {
         this.message = message;
         this.success = success;
         this.groupId = groupId;
