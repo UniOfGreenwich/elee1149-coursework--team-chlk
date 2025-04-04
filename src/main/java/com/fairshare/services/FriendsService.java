@@ -27,6 +27,10 @@ public class FriendsService {
 
     @Transactional
     public FriendsResponse sendFriendRequest(Integer userId, String friendEmail) {
+        if(!userRepository.existsByEmail(friendEmail)) {
+            return new FriendsResponse("User not found", false);
+        }
+
        User friendUser = userRepository.findByEmail(friendEmail);
        Integer friendUserId = friendUser.getUserId();
 
