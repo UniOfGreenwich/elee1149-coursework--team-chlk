@@ -1,22 +1,40 @@
 import "../styles/friends.css";
 import { FriendsListItem } from "./friends-list-item";
 
-export function FriendsList({userId}) {
-    const data = [
-        {friendId: 1, friendFName: "Lewis", friendLName: "Walker", friendEmail: "lewis@gmail.com", status: "Pending"},
-        {friendId: 2, friendFName: "Lewis", friendLName: "Walker", friendEmail: "lewis@gmail.com", status: "Active"},
-    ]
+export function FriendsList({userId, loading, activeData, pendingData, error}) {
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
 
     return (
       <div>
         <ul>
-          {data.map((e) => (
-            <li key={e.friendId}>
+          {pendingData.map((e) => (
+            <li key={e.userId}>
                   <FriendsListItem
-                      firstName={e.friendFName}
-                      lastName={e.friendLName}
-                      email={e.friendEmail}
-                      status={e.status}
+                    userId={e.userId}
+                    firstName={e.firstName}
+                    lastName={e.lastName}
+                    email={e.email}
+                    username={e.username}
+                    status={"Pending"}
+                  />
+            </li>
+          ))}
+          {activeData.map((e) => (
+            <li key={e.userId}>
+                  <FriendsListItem
+                    userId={e.userId}
+                    firstName={e.firstName}
+                    lastName={e.lastName}
+                    email={e.email}
+                    username={e.username}
+                    status={"Active"}
                   />
             </li>
           ))}

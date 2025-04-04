@@ -1,6 +1,4 @@
-package com.fairshare.Requests;
-
-import com.fairshare.entity.Group;
+package com.fairshare.Responses;
 
 import java.util.Date;
 

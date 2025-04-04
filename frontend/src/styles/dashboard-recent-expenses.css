@@ -8,6 +8,29 @@
   border-bottom: 1px solid white;
 }
 
+.view-all-button {
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.view-all-button:hover {
+  opacity: 1;
+  background-color: #333864;
+  border-radius: 8px;
+}
+
+.view-all {
+  font-size: 12px;
+  font-weight: 300;
+  padding-right: 8px;
+}
+
+.expense-list {
+  padding-top: 24px;
+}
+
 .recent-expenses-row {
   border-bottom: 1px solid white;
   display: flex;
@@ -22,6 +45,13 @@
 }
 
 .category-tile {
+  display: flex;
+  height: 40px;
+  width: 40px;
+  background-color: #d2d2d240;
+  border-radius: 8px;
+  align-items: center;
+  justify-content: center;
   display: flex;
   height: 40px;
   width: 40px;

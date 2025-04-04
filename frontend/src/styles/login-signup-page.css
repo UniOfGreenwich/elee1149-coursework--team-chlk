@@ -8,6 +8,17 @@ form {
     margin: 24px 0;
     color: #f3f3f3;
 }
+.input-with-button {
+    position: relative;
+
+}
+
+.input-with-button img {
+    position: absolute;
+    right: 0;
+    height: 60%;
+    margin: 7px;
+}
 
 label {
     display: block;
@@ -27,6 +38,18 @@ input {
 
 input::placeholder {
     color: white;
+}
+
+.split-block {
+    display:flex;
+}
+
+.left-input {
+    margin-right: 12px;
+}
+
+.right-input {
+    margin-left: 12px;
 }
 
 .submit-button {
@@ -74,6 +97,9 @@ input[type='checkbox'] {
     text-align: center;
 }
 
-.invalid-login {
-    color: rgb(180, 37, 37);
+.error {
+    color: #fe6789;
+}
+.signed-up {
+    color: #4495c7;
 }
