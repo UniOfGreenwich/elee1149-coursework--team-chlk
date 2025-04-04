@@ -24,7 +24,6 @@ import { TopBar } from "./components/dashboard-topbar";
 
 function App() {
   const { token, setToken } = useToken();
-  const [signedUp, setSignedUp] = useState();
   console.log(token)
   
   if(!token) {
@@ -33,8 +32,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/home" element={<Home/>}/>
-          <Route path="/login" element={<Login setToken={setToken} signedUp={signedUp} setSignedUp={setSignedUp}/>}/>
-          <Route path="/sign-up" element={<SignUp setSignedUp={setSignedUp}/>}/>
+          <Route path="/login" element={<Login setToken={setToken}/>}/>
+          <Route path="/sign-up" element={<SignUp/>}/>
           <Route path="/*" element={<Home/>}/>
         </Routes>
       </Router>
