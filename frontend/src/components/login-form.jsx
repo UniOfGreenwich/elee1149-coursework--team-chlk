@@ -16,7 +16,7 @@ async function userLogin(credentials) {
   .then(response => response.data)
 }
 
-export function LoginForm( { setToken } ) {
+export function LoginForm( { setToken, signedUp, setSignedUp} ) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [error, setError] = useState();
@@ -31,6 +31,7 @@ export function LoginForm( { setToken } ) {
 
   const handleSubmit = async e => {
     e.preventDefault();
+    setSignedUp(undefined)
     const token = await userLogin({
       "email": email,
       "password": password
@@ -86,5 +87,6 @@ export function LoginForm( { setToken } ) {
 }
 
 LoginForm.propTypes = {
-  setToken: PropTypes.func.isRequired
+  setToken: PropTypes.func.isRequired,
+  setSignedUp: PropTypes.func.isRequired
 }
