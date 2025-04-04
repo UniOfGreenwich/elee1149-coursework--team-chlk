@@ -3,7 +3,7 @@ import "../styles/quick-action-buttons.css";
 import closeIcon from "../assets/close-icon.png";
 import React, { useState, useEffect } from "react";
 
-const SettlePayment = ({ closeModal }) => {
+const SettlePayment = ({ closeModal, userId, groupId }) => {
   const [users, setUsers] = useState([]); // List of users in the group
   const [selectedRecipient, setSelectedRecipient] = useState(null); // Selected recipient object
   const [amount, setAmount] = useState(""); // Amount field value
@@ -14,7 +14,9 @@ const SettlePayment = ({ closeModal }) => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch("http://localhost:8080/group/1/1/users");
+        const response = await fetch(
+          `http://localhost:8080/group/${groupId}/${userId}/users`
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch users");
         }
@@ -43,7 +45,7 @@ const SettlePayment = ({ closeModal }) => {
 
   // updating the submit button visibility based on selected group members
   useEffect(() => {
-    if (selectedRecipient && selectedRecipient.balance > 0) {
+    if (selectedRecipient && selectedRecipient.balance >= 0) {
       // alert(`${selectedRecipient.firstName} owes you money`);
       setIsSubmitDisabled(true);
       document.getElementById("submit").classList.add("hide");
@@ -96,9 +98,10 @@ const SettlePayment = ({ closeModal }) => {
       currency: "GBP",
       date: "2025-12-10",
       categoryId: null,
-      groupId: 1, // Update as per group ID logic
-      userId: 1, // The recipient's ID
+      groupId: groupId, // dynamic group id
+      userId: userId, // The senders Id
       userShares: [
+        // for loop
         {
           userId: selectedRecipient.userId,
           shareAmount: parseFloat(Math.abs(amount).toFixed(2)), // Negative for recipient
@@ -111,7 +114,7 @@ const SettlePayment = ({ closeModal }) => {
     // sending the data to the backend end-point
     try {
       const response = await fetch(
-        "http://localhost:8080/expense/add-expense?payerId=1",
+        `http://localhost:8080/expense/add-expense?payerId=${userId}`,
         {
           method: "POST",
           headers: {
@@ -137,7 +140,7 @@ const SettlePayment = ({ closeModal }) => {
     <div className="modal-overlay" onClick={closeModal}>
       <div className="modal-box" onClick={(e) => e.stopPropagation()}>
         <h3 className="action-title">Settle Payment</h3>
-        <form className="expense-form" onSubmit={handleSubmit}>
+        <form className="action-form" onSubmit={handleSubmit}>
           <div className="form-row">
             <label htmlFor="recipient">Select Recipient:</label>
             <select id="recipient" onChange={handleRecipientChange} required>

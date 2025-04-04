@@ -38,7 +38,7 @@
   font-size: 1.5rem;
 }
 
-.expense-form {
+.action-form {
   color: black;
   margin-top: 2rem;
   min-width: 100%;
@@ -58,8 +58,8 @@
   font-weight: 400;
 }
 
-.expense-form input,
-.expense-category {
+.action-form input,
+.expense-category, select {
   display: inline;
   border: 1px solid rgb(158, 158, 158);
   width: 100%;
@@ -68,7 +68,7 @@
   border-radius: 4px;
 }
 
-.expense-form input::placeholder {
+.action-form input::placeholder {
   color: rgb(157, 157, 157);
 }
 
@@ -84,6 +84,10 @@ input[type="submit"] {
   cursor: pointer;
   transition: background-color 100ms ease-in;
   margin: 1rem auto;
+}
+
+.new-group-form input[type="submit"] {
+  margin: 3rem auto;
 }
 
 input[type="submit"]:hover {

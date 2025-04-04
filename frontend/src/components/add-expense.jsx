@@ -1,23 +1,27 @@
 import React, { useState, useEffect } from "react";
-
 import closeIcon from "../assets/close-icon.png";
-
-// importing styles
 import "../styles/quick-action-buttons.css";
+import categories from "../data/category-map";
 
-const AddExpense = ({ closeModal }) => {
-  const [users, setUsers] = useState([]); // Store fetched users
-  const [selectedUsers, setSelectedUsers] = useState([]); // Store selected users
-  const [shareOption, setShareOption] = useState("equal"); // Radio button selection
-  const [customAmounts, setCustomAmounts] = useState({}); // Store custom amounts for each user
-  const [splitAmounts, setSplitAmounts] = useState({}); // Stores split amounts per user
-  const [amount, setAmount] = useState(0); // Store the total expense amount
+const AddExpense = ({ closeModal, userId, groupId }) => {
+  const [users, setUsers] = useState([]);
+  const [selectedUsers, setSelectedUsers] = useState([]);
+  const [shareOption, setShareOption] = useState("equal");
+  const [customAmounts, setCustomAmounts] = useState({});
+  const [splitAmounts, setSplitAmounts] = useState({});
+  const [amount, setAmount] = useState(0);
+  const [expenseName, setExpenseName] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState(null); // Store the categoryId
+  const [date, setDate] = useState("");
+  const [currency, setCurrency] = useState("GBP");
 
-  // getting the users in the group
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch("http://localhost:8080/group/1/1/users");
+        const response = await fetch(
+          `http://localhost:8080/group/${groupId}/${userId}/users`
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch users");
         }
@@ -29,28 +33,24 @@ const AddExpense = ({ closeModal }) => {
     };
 
     fetchUsers();
-  }, []);
+  }, [groupId, userId]);
 
-  // handling user selection from the dropdown
   const handleUserSelection = (e) => {
     const selectedUserIds = Array.from(e.target.selectedOptions, (option) =>
       parseInt(option.value)
     );
-
-    // Get full user objects from selected IDs
     const selectedUserObjects = users.filter((user) =>
       selectedUserIds.includes(user.userId)
     );
-
     setSelectedUsers(selectedUserObjects);
 
-    // If "Equal" is selected, update the split amounts
     if (shareOption === "equal") {
       splitEqually(selectedUserObjects, amount);
     }
   };
 
-  // handling the share option (Equal or custom)
+  function handleCategoryOptions() {}
+
   const handleShareOptionChange = (e) => {
     setShareOption(e.target.value);
 
@@ -59,7 +59,6 @@ const AddExpense = ({ closeModal }) => {
     }
   };
 
-  // Handling custom amount input for each user
   const handleCustomAmountChange = (userId, amount) => {
     setCustomAmounts((prev) => ({
       ...prev,
@@ -67,7 +66,6 @@ const AddExpense = ({ closeModal }) => {
     }));
   };
 
-  // handling amount input change
   const handleAmountChange = (e) => {
     const newAmount = parseFloat(e.target.value) || 0;
     setAmount(newAmount);
@@ -77,7 +75,6 @@ const AddExpense = ({ closeModal }) => {
     }
   };
 
-  // Function to split amount equally
   const splitEqually = (selectedUsers, totalAmount) => {
     if (selectedUsers.length === 0 || totalAmount === 0) {
       setSplitAmounts({});
@@ -93,20 +90,55 @@ const AddExpense = ({ closeModal }) => {
     setSplitAmounts(splitData);
   };
 
-  // Handling form submit
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const userShares = selectedUsers.map((user) => ({
+      userId: user.userId,
+      amount:
+        shareOption === "equal"
+          ? parseFloat(splitAmounts[user.userId] || 0) // Use splitAmounts for equal shares
+          : parseFloat(customAmounts[user.userId] || 0), // Use customAmounts for custom shares
+    }));
+
     const expenseData = {
-      // Collect necessary data and prepare it for backend
-      users: selectedUsers.map((user) => ({
-        userId: user.userId,
-        amount:
-          shareOption === "equal"
-            ? amount / selectedUsers.length
-            : customAmounts[user.userId] || 0,
-      })),
+      description: description, // From the input field
+      amount: parseFloat(amount), // From the amount input
+      currency: currency,
+      date: date, // Ensure date is in ISO format
+      categoryId: category,
+      groupId: parseInt(groupId),
+      userId: parseInt(userId),
+      userShares: userShares,
     };
+
     console.log(expenseData);
+
+    try {
+      const response = await fetch(
+        `http://localhost:8080/expense/add-expense?payerId=${userId}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(expenseData),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const responseData = await response.json(); // Or response.text() if the backend doesn't return JSON
+      console.log("Expense added successfully:", responseData);
+
+      // Optionally:  Close the modal, clear the form, etc.
+      closeModal();
+    } catch (error) {
+      console.error("Error adding expense:", error);
+      // Handle the error (e.g., display an error message to the user)
+    }
   };
 
   return (
@@ -114,7 +146,7 @@ const AddExpense = ({ closeModal }) => {
       <div className="modal-box" onClick={(e) => e.stopPropagation()}>
         <h3 className="action-title">Add Expense</h3>
         <div className="modal-content">
-          <form action="#" className="expense-form" onSubmit={handleSubmit}>
+          <form className="action-form" onSubmit={handleSubmit}>
             <div className="form-row">
               <label htmlFor="user" className="expense-user">
                 Select Users:
@@ -130,11 +162,6 @@ const AddExpense = ({ closeModal }) => {
                   </option>
                 ))}
               </select>
-              {console.log(
-                selectedUsers
-                  .map((user) => `${user.firstName} ${user.lastName}`)
-                  .join(", ")
-              )}
             </div>
 
             <div className="form-row settle-container">
@@ -165,27 +192,17 @@ const AddExpense = ({ closeModal }) => {
                 </div>
               </div>
             </div>
-
             <div className="form-row">
-              <label htmlFor="name" className="expense-name">
+              <label htmlFor="description" className="expense-description">
                 Expense Name:
               </label>
               <input
                 type="text"
-                id="name"
-                placeholder="Enter Expense Name"
-                required
-              />
-            </div>
-            <div className="form-row">
-              <label htmlFor="description" className="expense-description">
-                Description:
-              </label>
-              <input
-                type="text"
-                id="description "
+                id="description"
                 placeholder="Enter Description"
                 required
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
               />
             </div>
             <div className="form-row">
@@ -195,16 +212,29 @@ const AddExpense = ({ closeModal }) => {
                 id="category"
                 className="expense-category"
                 required
+                value={category || ""} // Use categoryId or empty string
+                onChange={(e) => setCategory(parseInt(e.target.value))} // Store categoryId as a number
               >
-                <option selected disabled value="">
+                <option value="" disabled>
                   Select Category
                 </option>
-                <option value="Transportation">Transportation</option>
-                <option value="Entertainment">Entertainment</option>
-                <option value="Food and Drink">Food and Drink</option>
-                <option value="Utilities">Utilities</option>
-                <option value="Miscellaneous">Miscellaneous</option>
+                {categories.map((cat) => (
+                  <option key={cat.categoryId} value={cat.categoryId}>
+                    {cat.categoryName}
+                  </option>
+                ))}
               </select>
+            </div>
+
+            <div className="form-row">
+              <label htmlFor="date">Date:</label>
+              <input
+                type="date" // Or use a date picker component
+                id="date"
+                required
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+              />
             </div>
             <div className="form-row">
               <label htmlFor="amount" className="expense-description">
@@ -220,7 +250,6 @@ const AddExpense = ({ closeModal }) => {
               />
             </div>
 
-            {/* Show Custom Inputs if Custom option is selected */}
             {shareOption === "custom" && selectedUsers.length > 0 && (
               <div className="custom-amounts">
                 <h4 className="action-title">Custom Amounts</h4>
