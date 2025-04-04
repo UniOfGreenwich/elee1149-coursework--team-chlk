@@ -16,7 +16,7 @@ public class CreateExpenseRequest {
     private String description;
     private Double amount;
     private String currency;
-    private Integer payerId;
+    //private Integer payerId;
     private Integer categoryId;
     private Integer groupId;
     private List<UserShare> userShares;
@@ -63,13 +63,13 @@ public class CreateExpenseRequest {
         this.currency = currency;
     }
 
-    public Integer getPayerId() {
-        return payerId;
-    }
-
-    public void setPayerId(Integer payerId) {
-        this.payerId = payerId;
-    }
+//    public Integer getPayerId() {
+//        return payerId;
+//    }
+//
+//    public void setPayerId(Integer payerId) {
+//        this.payerId = payerId;
+//    }
 
     public Integer getCategoryId() {
         return categoryId;

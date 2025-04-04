@@ -19,8 +19,8 @@ public class ExpenseController {
     }
 
     @PostMapping("/add-expense")
-    public CreateExpenseResponse addExpense(@RequestBody CreateExpenseRequest request, @RequestParam Integer payerId) {
-        Expense createdExpense = expenseService.addExpense(request);
+    public CreateExpenseResponse addExpense(@RequestParam Integer payerId, @RequestBody CreateExpenseRequest request) {
+        Expense createdExpense = expenseService.addExpense(payerId, request);
 
         if (createdExpense == null) {
             return new CreateExpenseResponse("User or group not found", false, null);

@@ -33,14 +33,14 @@ public class ExpenseService {
     private GroupRepository groupRepository;
 
     @Transactional
-    public Expense addExpense(CreateExpenseRequest createExpenseRequest) {
+    public Expense addExpense(Integer payerId, CreateExpenseRequest createExpenseRequest) {
         String expenseName = createExpenseRequest.getExpenseName();
        //Integer expenseId = createExpenseRequest.getExpenseId();
         String description = createExpenseRequest.getDescription();
         Double amount = createExpenseRequest.getAmount();
         String currency = createExpenseRequest.getCurrency();
         //Date date = createExpenseRequest.getDate();
-        Integer payerId = createExpenseRequest.getPayerId();
+        //Integer payerId = createExpenseRequest.getPayerId();
         Integer categoryId = createExpenseRequest.getCategoryId();
         Integer groupId = createExpenseRequest.getGroupId();
 
