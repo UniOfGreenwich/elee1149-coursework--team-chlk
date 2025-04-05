@@ -149,7 +149,7 @@ More details can be found in the [hopscotch](testing-documents/hopscotch) direct
 
 ### Physical Application Tests
 Application test were performed as a group on 05/04/25 in person/virtual. A testing table was created by: Kyle, and listed the definitions of each
-test and the expected vs actual results. The testing table can be found [table](testing-documents/test-table). 
+test and the expected vs actual results. The testing table can be found [table](testing-documents/test-table.md).  
 
 
 
