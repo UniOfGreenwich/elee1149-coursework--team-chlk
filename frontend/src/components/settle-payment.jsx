@@ -79,6 +79,12 @@ const SettlePayment = ({ closeModal, userId, groupId, recipient=null, balance=nu
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission
 
+    // handling amount error
+    if (isNaN(amount) || amount <= 0) {
+      alert("Please enter an amount above 0");
+      return;
+    }
+
     if (!selectedRecipient) {
       alert("Please select a recipient.");
       return;

@@ -4,14 +4,14 @@ import "../styles/quick-action-buttons.css";
 import categories from "../data/category-map";
 import { GroupMembersData } from "../methods/use-axios.ts";
 import axios from "axios";
+import { Dialog } from "@mui/material";
 
 async function userExpense(expenseDetails, userId) {
-  return axios.post(
-    `expense/add-expense?payerId=${userId}`,
-    expenseDetails,
-    {'Content-Type': 'application/json'}
-  )
-  .then(response => response.data)
+  return axios
+    .post(`expense/add-expense?payerId=${userId}`, expenseDetails, {
+      "Content-Type": "application/json",
+    })
+    .then((response) => response.data);
 }
 
 const AddExpense = ({ closeModal, userId, groupId }) => {
@@ -25,15 +25,15 @@ const AddExpense = ({ closeModal, userId, groupId }) => {
   const [date, setDate] = useState("");
   const [currency, setCurrency] = useState("GBP");
 
-  const [loading, data, error, request] = GroupMembersData(groupId, userId)
+  const [loading, data, error, request] = GroupMembersData(groupId, userId);
 
   if (error) {
-    console.log("Error fetching users:", error)
+    console.log("Error fetching users:", error);
   }
 
   const filteredUsers = data.filter(
     (user) => user.userId !== parseInt(userId, 10)
-  )
+  );
 
   const handleUserSelection = (e) => {
     const selectedUserIds = Array.from(e.target.selectedOptions, (option) =>
@@ -91,38 +91,44 @@ const AddExpense = ({ closeModal, userId, groupId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // handling amount error
+    if (isNaN(amount) || amount <= 0) {
+      alert("Please enter an amount above 0");
+      return;
+    }
+
     const userShares = selectedUsers.map((user) => ({
-      "userId": user.userId,
-      "shareAmount":
+      userId: user.userId,
+      shareAmount:
         shareOption === "equal"
           ? parseFloat(splitAmounts[user.userId] || 0) // Use splitAmounts for equal shares
           : parseFloat(customAmounts[user.userId] || 0), // Use customAmounts for custom shares
     }));
 
-    const formattedDate = new Date(date).toISOString()
+    const formattedDate = new Date(date).toISOString();
 
     const expenseData = {
-      "description": description, // From the input field
-      "amount": parseFloat(amount), // From the amount input
-      "currency": currency,
-      "date": formattedDate, // Ensure date is in ISO format
-      "categoryId": category,
-      "groupId": parseInt(groupId),
-      "userId": parseInt(userId),
-      "userShares": userShares,
+      description: description, // From the input field
+      amount: parseFloat(amount), // From the amount input
+      currency: currency,
+      date: formattedDate, // Ensure date is in ISO format
+      categoryId: category,
+      groupId: parseInt(groupId),
+      userId: parseInt(userId),
+      userShares: userShares,
     };
 
     console.log(expenseData);
 
-    const newExpense = await userExpense(expenseData, userId)
+    const newExpense = await userExpense(expenseData, userId);
     if (newExpense.success) {
-      console.log("Expense added successfully:", newExpense)
+      console.log("Expense added successfully:", newExpense);
       window.location.reload();
       closeModal();
     } else {
-      console.log("Error adding expense:", newExpense.message)
+      console.log("Error adding expense:", newExpense.message);
     }
-  }
+  };
 
   return (
     <div className="modal-overlay" onClick={closeModal}>
@@ -135,6 +141,7 @@ const AddExpense = ({ closeModal, userId, groupId }) => {
                 Select Users:
               </label>
               <select
+                required
                 className="expense-user-field"
                 multiple
                 onChange={handleUserSelection}
@@ -201,11 +208,13 @@ const AddExpense = ({ closeModal, userId, groupId }) => {
                 <option value="" disabled>
                   Select Category
                 </option>
-                {categories.filter(cat => cat.categoryId !== 6).map((cat) => (
-                  <option key={cat.categoryId} value={cat.categoryId}>
-                    {cat.categoryName}
-                  </option>
-                ))}
+                {categories
+                  .filter((cat) => cat.categoryId !== 6)
+                  .map((cat) => (
+                    <option key={cat.categoryId} value={cat.categoryId}>
+                      {cat.categoryName}
+                    </option>
+                  ))}
               </select>
             </div>
 
