@@ -34,7 +34,7 @@ public class ExpenseService {
 
     @Transactional
     public Expense addExpense(Integer payerId, CreateExpenseRequest createExpenseRequest) {
-        String expenseName = createExpenseRequest.getExpenseName();
+        //String expenseName = createExpenseRequest.getExpenseName();
        //Integer expenseId = createExpenseRequest.getExpenseId();
         String description = createExpenseRequest.getDescription();
         Double amount = createExpenseRequest.getAmount();
@@ -50,32 +50,32 @@ public class ExpenseService {
         Expense errorExpense = new Expense();
 
         if (user == null && group == null) {
-            errorExpense.setExpenseName("GroupAndUserNotFoundError");
+            errorExpense.setDescription("GroupAndUserNotFoundError");
             return errorExpense;
         } else if (user == null) {
-            errorExpense.setExpenseName("UserNotFoundError");
+            errorExpense.setDescription("UserNotFoundError");
             return errorExpense;
         } else if (group == null) {
-            errorExpense.setExpenseName("GroupNotFoundError");
+            errorExpense.setDescription("GroupNotFoundError");
             return errorExpense;
         }
 
         if (!group.getUsers().contains(user)) {
-            errorExpense.setExpenseName("PayerNotInGroupError");
+            errorExpense.setDescription("PayerNotInGroupError");
             return errorExpense;
         }
 
-        if (expenseRepository.existsByExpenseNameAndGroupId(expenseName, groupId)) {
-            errorExpense.setExpenseName("ExpenseExistsInGroupError"); // Indicates this expense name exists in this group
-            return errorExpense;
-        }
+//        if (expenseRepository.existsByExpenseNameAndGroupId(description, groupId)) {
+//            errorExpense.setDescription("ExpenseExistsInGroupError"); // Indicates this expense name exists in this group
+//            return errorExpense;
+//        }
 
         if (createExpenseRequest.getCategoryId() == null) {
             createExpenseRequest.setCategoryId(1); // Use the default category
         }
 
         Expense newExpense = new Expense();
-        newExpense.setExpenseName(expenseName);
+        newExpense.setDescription(description);
         //newExpense.setExpenseId(expenseId);
         newExpense.setDescription(description);
         newExpense.setAmount(amount);

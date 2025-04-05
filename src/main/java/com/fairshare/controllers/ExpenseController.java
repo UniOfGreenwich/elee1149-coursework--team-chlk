@@ -24,15 +24,13 @@ public class ExpenseController {
 
         if (createdExpense == null) {
             return new CreateExpenseResponse("User or group not found", false, null);
-        } else if ("PayerNotInGroupError".equals(createdExpense.getExpenseName())) {
+        } else if ("PayerNotInGroupError".equals(createdExpense.getDescription())) {
             return new CreateExpenseResponse("Payer is not a member of this group", false, null);
-        } else if ("ExpenseExistsInGroupError".equals(createdExpense.getExpenseName())) {
-            return new CreateExpenseResponse("Expense with this name or ID already exists in this group", false, null);
-        } else if ("GroupAndUserNotFoundError".equals(createdExpense.getExpenseName())) {
+        } else if ("GroupAndUserNotFoundError".equals(createdExpense.getDescription())) {
             return new CreateExpenseResponse("Group and User not found", false, null);
-        } else if ("UserNotFoundError".equals(createdExpense.getExpenseName())) {
+        } else if ("UserNotFoundError".equals(createdExpense.getDescription())) {
             return new CreateExpenseResponse("User not found", false, null);
-        } else if ("GroupNotFoundError".equals(createdExpense.getExpenseName())) {
+        } else if ("GroupNotFoundError".equals(createdExpense.getDescription())) {
             return new CreateExpenseResponse("Group not found", false, null);
         } else { // Success
             return new CreateExpenseResponse("New expense created!", true, createdExpense.getExpenseId());

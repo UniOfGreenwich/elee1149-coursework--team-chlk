@@ -11,7 +11,7 @@ import java.util.List;
 
 public class CreateExpenseRequest {
 
-    private String expenseName;
+    //private String expenseName;
     private Integer expenseId;
     private String description;
     private Double amount;
@@ -23,13 +23,13 @@ public class CreateExpenseRequest {
     //private Date date;
 
 
-    public String getExpenseName() {
-        return expenseName;
-    }
+//    public String getExpenseName() {
+//        return expenseName;
+//    }
 
-    public void setExpenseName(String expenseName) {
-        this.expenseName = expenseName;
-    }
+//    //public void setExpenseName(String expenseName) {
+//        this.expenseName = expenseName;
+//    }
 
     public Integer getExpenseId() {
         return expenseId;
