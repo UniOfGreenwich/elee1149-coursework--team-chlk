@@ -1,6 +1,20 @@
+.add-member-button {
+  margin-right: 1rem;
+  font-size: 12px;
+  font-weight: 300;
+  padding: 8px;
+}
+
+.add-member-button:hover {
+  opacity: 1;
+  background-color: #333864;
+  border-radius: 8px;
+}
+
 .balance-title {
   font-size: 10px;
   text-align: right;
+  padding-right: calc(8px + 1rem);
 }
 
 .group-members-row {
@@ -10,6 +24,14 @@
   align-items: center;
   padding: 1rem 0;
   margin-top: 8px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.group-members-row:hover {
+  opacity: 1;
+  background-color: #333864;
+  border-radius: 8px;
 }
 
 .member-name {

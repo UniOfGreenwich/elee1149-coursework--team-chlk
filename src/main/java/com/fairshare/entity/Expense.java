@@ -9,20 +9,25 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Entity
-@Table(name = "expense", schema = "fairdbo")
+@Table(name = "expenses", schema = "fairdbo")
 public class Expense {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "expense_id")
     private Integer expenseId;
+
+//    @Column(name = "expense_name")
+//    private String expenseName;
 
     @Column(name = "description")
     private String description;
@@ -34,7 +39,7 @@ public class Expense {
     private String currency;
 
     @Column(name = "date")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date date;
 
     @Column(name = "category_id", nullable = false)
@@ -43,12 +48,14 @@ public class Expense {
     @Column(name = "group_id")
     private Integer groupId;
 
-    @Column(name = "user_id")
-    private Integer userId;
+    @Column(name = "payer_id")
+    private Integer payerId;
+
+    @Transient
+    private String userName;
 
     @OneToMany(mappedBy = "expenseId", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserShare> userShares = new ArrayList<>();
-
 
     public Integer getExpenseId() {
         return expenseId;
@@ -57,6 +64,14 @@ public class Expense {
     public void setExpenseId(Integer expenseId) {
         this.expenseId = expenseId;
     }
+
+//    public String getExpenseName() {
+//        return expenseName;
+//    }
+//
+//    public void setExpenseName(String expenseName) {
+//        this.expenseName = expenseName;
+//    }
 
     public String getDescription() {
         return description;
@@ -106,12 +121,20 @@ public class Expense {
         this.groupId = groupId;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getPayerId() { // Correct getter
+        return payerId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setPayerId(Integer payerId) { // Correct setter
+        this.payerId = payerId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public List<UserShare> getUserShares() {

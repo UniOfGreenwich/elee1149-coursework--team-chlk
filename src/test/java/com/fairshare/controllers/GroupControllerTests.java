@@ -1,9 +1,10 @@
 package com.fairshare.controllers;
 
 import com.fairshare.DTO.UserWithBalance;
+import com.fairshare.Requests.AddUserToGroupRequest;
 import com.fairshare.Requests.CreateGroupRequest;
+import com.fairshare.Responses.CreateGroupResponse;
 import com.fairshare.entity.Group;
-import com.fairshare.entity.User;
 import com.fairshare.services.GroupService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -46,15 +47,17 @@ public class GroupControllerTests {
         Integer userId = 1;
         Group testGroup = new Group(1, groupName);
 
-        when(groupService.createGroup(groupName, userId)).thenReturn(testGroup);
-
         CreateGroupRequest testRequest = new CreateGroupRequest();
         testRequest.setGroupName(groupName);
         testRequest.setUserId(userId);
 
-        Group result = groupController.createGroup(testRequest);
+        when(groupService.createGroup(testRequest)).thenReturn(testGroup);
 
-        assertEquals(testGroup, result);
+        CreateGroupResponse expectedResponse = new CreateGroupResponse("New group created!", true, testGroup.getGroupId());
+
+        CreateGroupResponse result = groupController.createGroup(testRequest);
+
+        assertEquals(expectedResponse, result);
     }
 
     @Test
@@ -62,8 +65,9 @@ public class GroupControllerTests {
         Integer groupId = 1;
         Integer userId = 1;
 
-        groupController.addUserToGroup(groupId, userId);
-
+        AddUserToGroupRequest request = new AddUserToGroupRequest();
+        request.setUserId(userId);
+        groupController.addUserToGroup(groupId, request);
         //Verify that the service method was called
         verify(groupService).addUserToGroup(groupId, userId);
     }
@@ -78,7 +82,6 @@ public class GroupControllerTests {
         user1.setUserId(1);
         user1.setUsername("User1");
 
-
         UserWithBalance user2 = new UserWithBalance();
         user1.setUserId(2);
         user1.setUsername("User2");
@@ -89,7 +92,7 @@ public class GroupControllerTests {
 
         when(groupService.getUsersByGroupId(groupId, userId)).thenReturn(users);
 
-        Set<UserWithBalance> result = groupController.getUsersByGroupId(groupId, userId);
+        Set<UserWithBalance> result = groupController.getUsersByGroupId(groupId,userId);
 
         assertEquals(users, result);
     }

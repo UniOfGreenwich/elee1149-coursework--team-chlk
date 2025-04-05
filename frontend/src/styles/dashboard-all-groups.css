@@ -1,0 +1,48 @@
+.balance-title {
+    font-size: 10px;
+    text-align: right;
+    padding-top: 8px;
+  }
+  
+  .group-row {
+    border-bottom: 1px solid white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    margin-top: 8px;
+    padding-left: 8px;
+  padding-right: 8px;
+}
+
+.group-row:hover {
+  opacity: 1;
+  background-color: #333864;
+  border-radius: 8px;
+}
+
+  .group-name {
+    font-weight: bold;
+    font-size: 1rem;
+  }
+  
+  .group-created {
+    font-size: 12px;
+    font-weight: 300;
+  }
+
+  .group-members-box {
+    display: flex;
+    height: 40px;
+    width: 75px;
+    background-color: #4495c7;
+    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
+}
+
+.group-members {
+    font-weight: bold;
+    font-size: 1rem;
+    text-align: center;
+}

@@ -1,29 +1,9 @@
 import { useEffect, useState } from "react";
 import "../styles/dashboard-group-members.css";
 import { GroupMembersRow } from "./dashboard-group-members-row";
-export function GroupMembers() {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+import { Link, useNavigate } from "react-router-dom";
 
-  useEffect(() => {
-    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-    fetch(`${BACKEND_URL}/group/1/1/users`) // fetching the data
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to fetch data");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setData(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setError(error.message);
-        setLoading(false);
-      });
-  }, []);
+export function GroupMembers({currentUserId, groupId, loading, data, error}) {
 
 
   if (loading) {
@@ -36,12 +16,19 @@ export function GroupMembers() {
 
   console.log(data); //printing the data to the console
 
+  const sortedMembers=data.filter(item => item.userId.toString() !== currentUserId).sort((a, b) => a.balance - b.balance)
+
   return (
-    <div className="dashboard-grid-component">
-      <h2 className="component-title">Group Members</h2>
+    <div className="dashboard-grid-component-scroll">
+            <div className="component-header">
+              <h2 className="component-title">Group Members</h2>
+              <Link to={`${window.location.href}`}>
+                  <p className="add-member-button">+ Member</p>
+              </Link>
+            </div>
       <p className="balance-title">Balance</p>
-      <ul>
-        {data.map((e) => (
+      <ul className="component-content">
+        {sortedMembers.map((e) => (
           <li key={e.userId}>
             <GroupMembersRow
               name={e.firstName}

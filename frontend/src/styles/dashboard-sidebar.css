@@ -2,7 +2,7 @@
     height: 100vh;
     max-width: 280px;
     padding: 48px 28px;
-    background-color: #0f0f0f;
+    /* background-color: #0f0f0f; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -75,6 +75,7 @@ p {
 .name {
     font-size: 1rem;
     font-weight: 600;
+    text-overflow: ellipsis;
 }
 
 .view-profile {

@@ -1,11 +1,11 @@
 package com.fairshare.controllers;
 
+import com.fairshare.Responses.AddUserToGroupResponse;
+import com.fairshare.Requests.AddUserToGroupRequest;
 import com.fairshare.DTO.UserWithBalance;
 import com.fairshare.Requests.CreateGroupRequest;
+import com.fairshare.Responses.CreateGroupResponse;
 import com.fairshare.entity.Group;
-import com.fairshare.entity.User;
-import com.fairshare.repository.GroupRepository;
-import com.fairshare.repository.UserRepository;
 import com.fairshare.services.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 @RestController
@@ -26,9 +24,12 @@ import java.util.Set;
 public class GroupController {
 
     @Autowired
-    private GroupService groupService;
+    private final GroupService groupService;
+
     @Autowired
-    private GroupRepository groupRepository;
+    public GroupController(GroupService groupService) {
+        this.groupService = groupService;
+    }
 
     @GetMapping("/{groupId}/name") //(Working with Hopscotch 24/02/25)
     public String getGroupName(@PathVariable Integer groupId) {
@@ -41,26 +42,37 @@ public class GroupController {
     }
 
     @PostMapping("/create") //(Working with Hopscotch 24/02/25)
-    public Group createGroup(@RequestBody CreateGroupRequest request) {
-        String groupName = request.getGroupName();
-        Integer userId = request.getUserId();
-        return groupService.createGroup(groupName, userId);
+    public CreateGroupResponse createGroup(@RequestBody CreateGroupRequest request) {
+        Group createdGroup = groupService.createGroup(request);
+        if (createdGroup != null) {
+            if (createdGroup.getGroupName() != null && createdGroup.getGroupName().equals("GroupExistsError")) {
+                return new CreateGroupResponse("A group with this name already exists", false, null);
+            } else {
+                return new CreateGroupResponse("New group created!", true, createdGroup.getGroupId());
+            }
+        } else {
+            return new CreateGroupResponse("User not found", false, null);
+        }
     }
 
     @PostMapping("/{groupId}/addUser") //(Working with Hopscotch 24/02/25)
-    /*
-    Notes:
-    Make sure you add @Schema to the join table part this took me an hour to find out.
-    Make sure PK columns are set to Serial and have no data in them when trying to run calls
-    it messes with the auto increment.\
-    Add @JsonIgnore to avoid massive response
-    Ensure passing right variables to Service to not get null name
-     */
-    public void addUserToGroup(@PathVariable Integer groupId, @RequestBody Integer userId) {
-        groupService.addUserToGroup(groupId, userId);
+    public AddUserToGroupResponse addUserToGroup(@PathVariable Integer groupId, @RequestBody AddUserToGroupRequest addUserToGroupRequest) {
+        Group result = groupService.addUserToGroup(groupId, addUserToGroupRequest.getUserId());
+
+        if (result == null) {
+            return new AddUserToGroupResponse("Either the user or group id was incorrect", false, null);
+        } else if (result.getGroupName() != null && result.getGroupName().equals("GroupNotFoundError")) {
+            return new AddUserToGroupResponse("Group not found", false, null);
+        } else if (result.getGroupName() != null && result.getGroupName().equals("UserNotFoundError")) {
+            return new AddUserToGroupResponse("User not found", false, null);
+        } else if (result.getGroupName() != null && result.getGroupName().equals("GroupAndUserError")) {
+            return new AddUserToGroupResponse("Group and User not found", false, null);
+        } else if (result.getGroupName() != null && result.getGroupName().equals("UserAlreadyInGroup")) {
+            return new AddUserToGroupResponse("User is already in this group", false, addUserToGroupRequest.getUserId());
+        } else {
+            return new AddUserToGroupResponse("User added to group successfully", true, addUserToGroupRequest.getUserId());
+        }
     }
-
-
 }
 
 
