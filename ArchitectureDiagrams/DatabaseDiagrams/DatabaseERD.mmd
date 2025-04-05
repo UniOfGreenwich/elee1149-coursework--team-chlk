@@ -1,0 +1,70 @@
+erDiagram
+    Users {
+        int userID PK
+        string firstName
+        string lastName
+        string email
+        string username
+        string passwordHash
+        string password
+    }
+
+    Balances {
+        int balance_id PK
+        double amount
+        int payer_id FK
+        int payee_id FK
+    }
+
+    Expenses {
+        int expense_Id PK
+        string description
+        double amount
+        string currency
+        int payer_id FK
+        int category_id FK
+        int group_id FK
+    }
+
+    Categories {
+        int category_Id PK
+        string categoryName
+    }
+
+    Groups {
+        int group_Id PK
+        string group_name
+        date date_created
+        date updated_at
+        string message
+    }
+
+    User_share {
+        int expense_Id PK
+        int user_id PK
+        double share_amount
+    }
+
+    User_group {
+        int user_id PK
+        int group_Id PK
+    }
+
+    Friends {
+        int friend_id PK
+        int user_id FK
+        int friend_user_id FK
+        boolean status
+    }
+
+    Users ||--o{ Balances : payer
+    Users ||--o{ Balances : payee
+    Users ||--o{ User_share : ""
+    Expenses ||--o{ User_share : ""
+    Users ||--o{ Expenses : payer
+    Categories ||--o{ Expenses : ""
+    Groups ||--o{ Expenses : ""
+    Users ||--o{ User_group : ""
+    Groups ||--o{ User_group : ""
+    Users ||--o{ Friends : user
+    Users ||--o{ Friends : friend
