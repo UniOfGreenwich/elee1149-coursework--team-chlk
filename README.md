@@ -113,6 +113,9 @@ See the [Dependencies section](#dependencies) below for details on the project's
 
 For detailed class diagrams, please refer to the [class_diagrams](class_diagrams) folder.
 
+## Requirements Engineering
+The requirements engineering documentation can be found here: [requirements-engineering](requirements-engineering/requirements-engineering.md)
+
 ## Security
 Currently security features Password Ecnryption using [Encryption](https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/crypto/bcrypt/BCryptPasswordEncoder.html)
 
@@ -224,6 +227,13 @@ test and the expected vs actual results. The testing table can be found [table](
 Charu:
 
 Hamza:
+- Tech Stack: React, JSX, CSS and HTML
+- Created application wireframe and design
+- Documentation: Requirements Engineering
+- Front-end pages: Home, Login, Sign-up, Dashboards 
+- Dashboard component: Overview, Action Buttons, Group Members
+- Styling and decoration: CSS
+- Application walkthrough and testing
 
 Lewis:
 
