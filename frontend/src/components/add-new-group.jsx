@@ -2,6 +2,16 @@ import React, { useState } from "react";
 import closeIcon from "../assets/close-icon.png";
 import "../styles/quick-action-buttons.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+async function userNewGroup(groupInformation) {
+  return axios.post(
+    `group/create`,
+    groupInformation,
+    {'Content-Type': 'application/json'}
+  )
+  .then(response => response.data)
+}
 
 export default function AddNewGroup({ closeModal, userId }) {
   const [groupName, setGroupName] = useState("");
@@ -15,35 +25,17 @@ export default function AddNewGroup({ closeModal, userId }) {
       userId: userId,
     };
 
-    try {
-      const response = await fetch("http://localhost:8080/group/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(groupData),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const responseData = await response.json();
-      console.log("Group created successfully:", responseData);
-
-      // new groupId from the responseData
-      const newGroupId = responseData.groupId;
-
-      // redirecting to the newly created group's page
-      navigate(`/user/${userId}/groups/${newGroupId}`, {
-        state: { groupName: groupName },
-      });
-
-      setGroupName("");
-      closeModal();
-    } catch (error) {
-      console.error("Error creating group:", error);
-      // Handle the error (e.g., display an error message)
+    const newGroup = await userNewGroup(groupData)
+    if (newGroup.success) {
+      console.log("Group created successfully:", newGroup)
+      navigate(`/user/${userId}/groups/${newGroup.groupId}`, {
+            state: { groupName: groupName },
+          });
+    
+          setGroupName("");
+          closeModal();
+    } else {
+      console.log("Error creating group:", newGroup.message)
     }
   };
 

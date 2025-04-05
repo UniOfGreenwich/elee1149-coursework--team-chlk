@@ -1,85 +1,38 @@
 import React, { useState, useEffect } from "react";
 import "../styles/quick-action-buttons.css";
 import closeIcon from "../assets/close-icon.png";
+import { FriendsListData, GroupMembersData } from "../methods/use-axios.ts";
+import axios from "axios";
+
+async function userAddMember(friendInformation, groupId) {
+  return axios.post(
+  `group/${groupId}/addUser`,
+  friendInformation,
+  {'Content-Type': 'application/json'}
+  )
+  .then(response => response.data)
+}
 
 export default function AddMember({ userId, groupId, closeModal }) {
   const [friends, setFriends] = useState([]);
   const [groupMembers, setGroupMembers] = useState([]);
   const [selectedFriend, setSelectedFriend] = useState("");
 
-  useEffect(() => {
-    const fetchFriends = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:8080/friends/list?userId=${userId}`
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch friends list");
-        }
-        const data = await response.json();
+  const [friendsLoading, friendsData, friendsError, friendsRequest] = FriendsListData(userId)
 
-        if (data && Array.isArray(data.friends)) {
-          setFriends(data.friends);
-        } else {
-          console.warn("Friends data is not in the expected format:", data);
-          setFriends([]); // Set to empty array to avoid errors
-        }
-      } catch (error) {
-        console.error("Error fetching friends:", error);
-        setFriends([]); // Set to empty array to avoid errors
-      }
-    };
-
-    const fetchGroupMembers = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:8080/group/${groupId}/users`
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch group members");
-        }
-        const data = await response.json();
-        setGroupMembers(data);
-      } catch (error) {
-        console.error("Error fetching group members:", error);
-        setGroupMembers([]);
-      }
-    };
-
-    fetchFriends();
-    fetchGroupMembers();
-  }, [userId, groupId]);
+  const [groupMembersLoading, groupMembersData, groupMembersError, groupMembersRequest] = GroupMembersData(groupId, userId)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    try {
-      const response = await fetch(
-        `http://localhost:8080/group/${groupId}/addUser`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ userId: selectedFriend }), // Send selectedFriend as userId
-        }
-      );
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.error("Error adding user to group:", errorData);
-        // Handle error (e.g., display an error message to the user)
-        return;
-      }
-
-      const responseData = await response.json();
-      console.log("User added to group successfully:", responseData);
-
-      // Reload the page after successful group creation
+    const newMember = await userAddMember({
+      "userId": selectedFriend
+    }, groupId)
+    if (newMember.success) {
+      console.log("user added to group successfully:", newMember)
       window.location.reload();
-    } catch (error) {
-      console.error("Error adding user to group:", error);
-      // Handle error (e.g., display an error message to the user)
+      closeModal();
+    } else {
+      console.log("error adding user to group:", newMember.message)
     }
   };
 
@@ -96,8 +49,8 @@ export default function AddMember({ userId, groupId, closeModal }) {
   };
 
   // Filter out friends who are already in the group
-  const availableFriends = friends.filter(
-    (friend) => !groupMembers.some((member) => member.userId === friend.userId)
+  const availableFriends = friendsData.friends === undefined ? undefined : friendsData.friends.filter(
+    (friend) => !groupMembersData.some((member) => member.userId === friend.userId)
   );
 
   return (
@@ -115,11 +68,14 @@ export default function AddMember({ userId, groupId, closeModal }) {
                 onChange={(e) => setSelectedFriend(e.target.value)}
               >
                 <option value="">Select a friend</option>
-                {availableFriends.map((friend) => (
-                  <option key={friend.userId} value={friend.userId}>
-                    {getFriendDisplayName(friend)}
-                  </option>
-                ))}
+                {availableFriends !== undefined ?
+                  availableFriends.map((friend) => (
+                    <option key={friend.userId} value={friend.userId}>
+                      {getFriendDisplayName(friend)}
+                    </option>
+                  )) : null
+                } 
+
               </select>
             </div>
             <input type="submit" value="Add User to Group" id="submit" />

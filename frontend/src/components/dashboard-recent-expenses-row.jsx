@@ -50,42 +50,6 @@ export function RecentExpensesRow(props) {
             </div>
         </div>
       </div>
-      <p className="expense-date">{format(props.date, "dd MMM yyyy")}</p>
-      <div className="expense-values">
-        <div className="total-expense">
-          <p className="expense-amount">£{props.userPaid.toFixed(2)}</p>
-          <p className="expense-payer">
-            {props.payerId === props.currentUser ? "You" : props.payerName} Paid
-          </p>
-        </div>
-        <div className="expense-split">
-          <p
-            className="split-amount"
-            id="split-amount"
-            style={{
-              color:
-                props.payerId === props.currentUser
-                  ? "#4495C7"
-                  : !userSplit
-                  ? "white"
-                  : "#FE6789",
-            }}
-          >
-            {props.payerId === props.currentUser
-              ? "£" + nonUserSplit.toFixed(2)
-              : !userSplit
-              ? "-"
-              : "£" + userSplit.shareAmount.toFixed(2)}
-          </p>
-          <p className="expense-payer">
-            {props.payerId === props.currentUser
-              ? "You Lent"
-              : !userSplit
-              ? ""
-              : "You Borrowed"}
-          </p>
-        </div>
-      </div>
-    </div>
+     </div>
   );
 }

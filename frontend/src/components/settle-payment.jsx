@@ -2,33 +2,31 @@
 import "../styles/quick-action-buttons.css";
 import closeIcon from "../assets/close-icon.png";
 import React, { useState, useEffect } from "react";
+import { GroupMembersData } from "../methods/use-axios.ts";
+import axios from "axios";
 
-const SettlePayment = ({ closeModal, userId, groupId }) => {
-  const [users, setUsers] = useState([]); // List of users in the group
-  const [selectedRecipient, setSelectedRecipient] = useState(null); // Selected recipient object
+async function userSettlement(expenseDetails, userId) {
+  return axios.post(
+    `expense/add-expense?payerId=${userId}`,
+    expenseDetails,
+    {'Content-Type': 'application/json'}
+  )
+  .then(response => response.data)
+}
+
+const SettlePayment = ({ closeModal, userId, groupId, recipient=null, balance=null}) => {
+  const [selectedRecipient, setSelectedRecipient] = useState(recipient ? recipient : null); // Selected recipient object
   const [amount, setAmount] = useState(""); // Amount field value
   const [settleOption, setSettleOption] = useState("outstanding"); // Radio button selection
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(false); // State to disable button
 
   // getting the data
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:8080/group/${groupId}/${userId}/users`
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch users");
-        }
-        const data = await response.json();
-        setUsers(data);
-      } catch (error) {
-        console.error("Error fetching users:", error);
-      }
-    };
+  const [loading, data, error, request] = GroupMembersData(groupId, userId)
 
-    fetchUsers();
-  }, []);
+  if (error) {
+    console.log("Error fetching users:", error)
+  }
+
 
   // Update amount when recipient or settlement option changes
   useEffect(() => {
@@ -57,7 +55,7 @@ const SettlePayment = ({ closeModal, userId, groupId }) => {
 
   const handleRecipientChange = (e) => {
     const userId = Number(e.target.value);
-    const selectedUser = users.find((user) => user.userId === userId);
+    const selectedUser = data.find((user) => user.userId === userId);
     setSelectedRecipient(selectedUser || null);
   };
 
@@ -86,18 +84,13 @@ const SettlePayment = ({ closeModal, userId, groupId }) => {
       return;
     }
 
-    const today = new Date();
-    const formattedDate = `${today.getFullYear()} - ${String(
-      today.getMonth() + 1
-    ).padStart(2, "0")} - ${String(today.getDate()).padStart(2, "0")}`;
-
     // formatting the input data for payload to backend
     const payload = {
       description: "Settling Payment",
       amount: parseFloat(Math.abs(amount).toFixed(2)),
       currency: "GBP",
-      date: "2025-12-10",
-      categoryId: null,
+      date: new Date().toISOString(),
+      categoryId: null, // to be set to 6 once db is updated
       groupId: groupId, // dynamic group id
       userId: userId, // The senders Id
       userShares: [
@@ -111,29 +104,38 @@ const SettlePayment = ({ closeModal, userId, groupId }) => {
 
     console.log(JSON.stringify(payload, null, 2)); // Debugging
 
-    // sending the data to the backend end-point
-    try {
-      const response = await fetch(
-        `http://localhost:8080/expense/add-expense?payerId=${userId}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Failed to submit payment");
-      }
-
-      const data = await response.json();
-      alert("Payment settled successfully!");
-      closeModal(); // Close modal on success
-    } catch (error) {
-      alert("An error occurred while processing your payment.");
+    const newSettlement = await userSettlement(payload, userId)
+    if (newSettlement.success) {
+      console.log("Settlement added successfully:", newSettlement)
+      window.location.reload();
+      closeModal();
+    } else {
+      console.log("Error adding Settlement:", newSettlement.message)
     }
+
+    // sending the data to the backend end-point
+    // try {
+    //   const response = await fetch(
+    //     `http://localhost:8080/expense/add-expense?payerId=${userId}`,
+    //     {
+    //       method: "POST",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //       body: JSON.stringify(payload),
+    //     }
+    //   );
+
+    //   if (!response.ok) {
+    //     throw new Error("Failed to submit payment");
+    //   }
+
+    //   const data = await response.json();
+    //   alert("Payment settled successfully!");
+    //   closeModal(); // Close modal on success
+    // } catch (error) {
+    //   alert("An error occurred while processing your payment.");
+    // }
   };
 
   return (
@@ -143,9 +145,9 @@ const SettlePayment = ({ closeModal, userId, groupId }) => {
         <form className="action-form" onSubmit={handleSubmit}>
           <div className="form-row">
             <label htmlFor="recipient">Select Recipient:</label>
-            <select id="recipient" onChange={handleRecipientChange} required>
-              <option value="">-- Select a Recipient --</option>
-              {users.map((user) => (
+            <select id="recipient" onChange={handleRecipientChange}>
+              <option value="">{recipient ? recipient.firstName : "-- Select a Recipient --"}</option>
+              {data.filter(user => user.userId.toString() !== userId).map((user) => (
                 <option key={user.userId} value={user.userId}>
                   {user.firstName}
                 </option>

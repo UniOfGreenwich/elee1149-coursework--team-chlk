@@ -2,9 +2,19 @@ import React, { useState, useEffect } from "react";
 import closeIcon from "../assets/close-icon.png";
 import "../styles/quick-action-buttons.css";
 import categories from "../data/category-map";
+import { GroupMembersData } from "../methods/use-axios.ts";
+import axios from "axios";
+
+async function userExpense(expenseDetails, userId) {
+  return axios.post(
+    `expense/add-expense?payerId=${userId}`,
+    expenseDetails,
+    {'Content-Type': 'application/json'}
+  )
+  .then(response => response.data)
+}
 
 const AddExpense = ({ closeModal, userId, groupId }) => {
-  const [users, setUsers] = useState([]);
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [shareOption, setShareOption] = useState("equal");
   const [customAmounts, setCustomAmounts] = useState({});
@@ -16,37 +26,21 @@ const AddExpense = ({ closeModal, userId, groupId }) => {
   const [date, setDate] = useState("");
   const [currency, setCurrency] = useState("GBP");
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const parsedGroupId = parseInt(groupId, 10);
-        const parsedUserId = parseInt(userId, 10);
-        const response = await fetch(
-          `http://localhost:8080/group/${parsedGroupId}/${parsedUserId}/users`
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch users");
-        }
-        const data = await response.json();
+  const [loading, data, error, request] = GroupMembersData(groupId, userId)
 
-        // Filter out the logged-in user
-        const filteredUsers = data.filter(
-          (user) => user.userId !== parsedUserId
-        );
-        setUsers(filteredUsers);
-      } catch (error) {
-        console.error("Error fetching users:", error);
-      }
-    };
+  if (error) {
+    console.log("Error fetching users:", error)
+  }
 
-    fetchUsers();
-  }, [groupId, userId]);
+  const filteredUsers = data.filter(
+    (user) => user.userId !== parseInt(userId, 10)
+  )
 
   const handleUserSelection = (e) => {
     const selectedUserIds = Array.from(e.target.selectedOptions, (option) =>
       parseInt(option.value)
     );
-    const selectedUserObjects = users.filter((user) =>
+    const selectedUserObjects = filteredUsers.filter((user) =>
       selectedUserIds.includes(user.userId)
     );
     setSelectedUsers(selectedUserObjects);
@@ -99,51 +93,35 @@ const AddExpense = ({ closeModal, userId, groupId }) => {
     e.preventDefault();
 
     const userShares = selectedUsers.map((user) => ({
-      userId: user.userId,
-      amount:
+      "userId": user.userId,
+      "amount":
         shareOption === "equal"
           ? parseFloat(splitAmounts[user.userId] || 0) // Use splitAmounts for equal shares
           : parseFloat(customAmounts[user.userId] || 0), // Use customAmounts for custom shares
     }));
 
     const expenseData = {
-      description: description, // From the input field
-      amount: parseFloat(amount), // From the amount input
-      currency: currency,
-      date: date, // Ensure date is in ISO format
-      categoryId: category,
-      groupId: parseInt(groupId),
-      userId: parseInt(userId),
-      userShares: userShares,
+      "description": description, // From the input field
+      "amount": parseFloat(amount), // From the amount input
+      "currency": currency,
+      "date": new Date(date).toISOString(), // Ensure date is in ISO format
+      "categoryId": category,
+      "groupId": parseInt(groupId),
+      "userId": parseInt(userId),
+      "userShares": userShares,
     };
 
     console.log(expenseData);
 
-    try {
-      const response = await fetch(
-        `http://localhost:8080/expense/add-expense?payerId=${userId}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(expenseData),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const responseData = await response.json(); // Or response.text() if the backend doesn't return JSON
-      console.log("Expense added successfully:", responseData);
-
-      window.location.reload(); // refreshing the page after expense is added
+    const newExpense = await userExpense(expenseData, userId)
+    if (newExpense.success) {
+      console.log("Expense added successfully:", newExpense)
+      window.location.reload();
       closeModal();
-    } catch (error) {
-      console.error("Error adding expense:", error);
+    } else {
+      console.log("Error adding expense:", newExpense.message)
     }
-  };
+  }
 
   return (
     <div className="modal-overlay" onClick={closeModal}>
@@ -160,7 +138,7 @@ const AddExpense = ({ closeModal, userId, groupId }) => {
                 multiple
                 onChange={handleUserSelection}
               >
-                {users.map((user) => (
+                {filteredUsers.map((user) => (
                   <option key={user.userId} value={user.userId}>
                     {user.firstName} {user.lastName}
                   </option>

@@ -31,7 +31,7 @@ export function GroupMembers({ userId, groupId, loading, data, error }) {
   const sortedMembers = filteredMembers.sort((a, b) => a.balance - b.balance);
 
   return (
-    <div className="dashboard-grid-component">
+    <div className="dashboard-grid-component-scroll">
       <div className="component-header">
         <h2 className="component-title">Group Members</h2>
         <Link to={`${window.location.href}`} state={{ groupName: groupName }}>
@@ -51,6 +51,9 @@ export function GroupMembers({ userId, groupId, loading, data, error }) {
               name={e.firstName}
               status={getStatus(e)}
               balance={e.balance}
+              user={e}
+              currentUser={userId}
+              groupId={groupId}
             />
           </li>
         ))}

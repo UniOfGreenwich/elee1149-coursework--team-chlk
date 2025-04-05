@@ -1,6 +1,16 @@
 import React, { useState } from "react";
 import closeIcon from "../assets/close-icon.png";
 import "../styles/quick-action-buttons.css";
+import axios from "axios";
+
+async function userNewFriend(userId, friendEmail) {
+  return axios.post(
+    `friends/sendRequest?userId=${userId}&friendEmail=${friendEmail}`,
+    null,
+    {'Content-Type': 'application/json'}
+  )
+  .then(response => response.data)
+}
 
 export default function AddNewFriend({ closeModal, userId }) {
   const [friendEmail, setFriendEmail] = useState("");
@@ -10,42 +20,15 @@ export default function AddNewFriend({ closeModal, userId }) {
     e.preventDefault();
     setErrorMessage(""); // Clear any previous error message
 
-    // const friendData = {
-    //   userId: userId,
-    //   friendEmail: friendEmail,
-    // };
-
-    try {
-      const response = await fetch(
-        `http://localhost:8080/friends/sendRequest?userId=${userId}&friendEmail=${friendEmail}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          // body: JSON.stringify(friendData),
-        }
-      );
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        if (errorData.message) {
-          setErrorMessage(errorData.message); // Display backend error message
-        } else {
-          setErrorMessage(`HTTP error! Status: ${response.status}`);
-        }
-        return;
-      }
-
-      const responseData = await response.json();
-      console.log("Friend request sent successfully:", responseData);
-
-      // Clearing the form and close the modal
+    const newFriend = await userNewFriend(userId, friendEmail)
+    if (newFriend.success) {
+      console.log("friend request sent successfully:", newFriend)
       setFriendEmail("");
+      window.location.reload();
       closeModal();
-    } catch (error) {
-      console.error("Error sending friend request:", error);
-      setErrorMessage("An error occurred while sending the request.");
+    } else {
+      console.log("Error sending friend request:", newFriend.message)
+      setErrorMessage(newFriend.message)
     }
   };
 
