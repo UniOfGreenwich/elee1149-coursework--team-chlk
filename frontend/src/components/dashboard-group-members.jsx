@@ -13,6 +13,7 @@ export function GroupMembers({ userId, groupId, loading, data, error }) {
   const location = useLocation();
   const { groupName } = location.state;
 
+
   if (loading) {
     return <p>Loading...</p>;
   }
