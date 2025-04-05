@@ -1,0 +1,5 @@
+| Test Number | Test Description                | Expected Result              | Actual Result | Working Status | Fix Case | Date Tested | Tested By | Comments | Priority | Test Environment |
+|-------------|---------------------------------|------------------------------| ------------- | -------------- | -------- | ----------- | --------- | -------- | -------- | ---------------- |
+| 1           |Verify user can create new group | Group is created succesfully |               |                |          |             |           |          |          |                  |
+| 2           |                                 |                              |               |                |          |             |           |          |          |                  |
+| 3           |                                 |                              |               |                |          |             |           |          |          |                  |
