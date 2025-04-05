@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 export function GroupMembers({currentUserId, groupId, loading, data, error}) {
 
+
   if (loading) {
     return <p>Loading...</p>;
   }
