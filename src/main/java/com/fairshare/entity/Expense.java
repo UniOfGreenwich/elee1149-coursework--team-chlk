@@ -26,8 +26,8 @@ public class Expense {
     @Column(name = "expense_id")
     private Integer expenseId;
 
-    @Column(name = "expense_name")
-    private String expenseName;
+//    @Column(name = "expense_name")
+//    private String expenseName;
 
     @Column(name = "description")
     private String description;
@@ -65,13 +65,13 @@ public class Expense {
         this.expenseId = expenseId;
     }
 
-    public String getExpenseName() {
-        return expenseName;
-    }
-
-    public void setExpenseName(String expenseName) {
-        this.expenseName = expenseName;
-    }
+//    public String getExpenseName() {
+//        return expenseName;
+//    }
+//
+//    public void setExpenseName(String expenseName) {
+//        this.expenseName = expenseName;
+//    }
 
     public String getDescription() {
         return description;
