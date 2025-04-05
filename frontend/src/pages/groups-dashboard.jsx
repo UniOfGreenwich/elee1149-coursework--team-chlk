@@ -13,33 +13,63 @@ import { TopBar } from "../components/dashboard-topbar";
 import { GroupExpensesData, GroupMembersData } from "../methods/use-axios.ts";
 
 export function GroupsDashboard() {
-  let params = useParams()
-  const [expensesLoading, expensesData, expensesError, expensesRequest] = GroupExpensesData(params.groupId)
-  const [groupMembersLoading, groupMembersData, groupMembersError, groupMembersRequest] = GroupMembersData(params.groupId, params.id)
-  const location = useLocation()
-  const { groupName } = location.state
+  let params = useParams();
+  const [expensesLoading, expensesData, expensesError, expensesRequest] =
+    GroupExpensesData(params.groupId);
+  const [
+    groupMembersLoading,
+    groupMembersData,
+    groupMembersError,
+    groupMembersRequest,
+  ] = GroupMembersData(params.groupId, params.id);
+  const location = useLocation();
+  const { groupName } = location.state;
   return (
     <div className="dashboard-content">
-    <div className="topbar">
-      <TopBar pageName={groupName} />
+      <div className="topbar">
+        <TopBar pageName={groupName} />
+      </div>
+      <ul className="dashboard-grid-wrapper">
+        <li className="grid-component overview">
+          <Overview
+            userId={params.id}
+            groupId={params.groupId}
+            loading={groupMembersLoading}
+            data={groupMembersData}
+            error={groupMembersError}
+          />
+        </li>
+        <li className="grid-component categories">
+          <TopCategories
+            userId={params.id}
+            groupId={params.groupId}
+            loading={expensesLoading}
+            data={expensesData}
+            error={expensesError}
+          />
+        </li>
+        <li className="grid-component quick-actions">
+          <QuickActions userId={params.id} groupId={params.groupId} />
+        </li>
+        <li className="grid-component recent-expenses">
+          <RecentExpenses
+            userId={params.id}
+            groupId={params.groupId}
+            loading={expensesLoading}
+            data={expensesData}
+            error={expensesError}
+          />
+        </li>
+        <li className="grid-component group">
+          <GroupMembers
+            userId={params.id}
+            groupId={params.groupId}
+            loading={groupMembersLoading}
+            data={groupMembersData}
+            error={groupMembersError}
+          />
+        </li>
+      </ul>
     </div>
-        <ul className="dashboard-grid-wrapper">
-          <li className="grid-component overview">
-            <Overview userId={params.id} groupId={params.groupId} loading={groupMembersLoading} data={groupMembersData} error={groupMembersError}/>
-          </li>
-          <li className="grid-component categories">
-            <TopCategories userId={params.id} groupId={params.groupId} loading={expensesLoading} data={expensesData} error={expensesError}/>
-          </li>
-          <li className="grid-component quick-actions">
-            <QuickActions />
-          </li>
-          <li className="grid-component recent-expenses">
-            <RecentExpenses userId={params.id} groupId={params.groupId} loading={expensesLoading} data={expensesData} error={expensesError}/>
-          </li>
-          <li className="grid-component group">
-            <GroupMembers currentUserId={params.id} groupId={params.groupId} loading={groupMembersLoading} data={groupMembersData} error={groupMembersError}/>
-          </li>
-        </ul>
-        </div>
   );
 }

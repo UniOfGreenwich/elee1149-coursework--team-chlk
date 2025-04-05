@@ -4,9 +4,15 @@ import { FriendsRequest } from "../components/friends-request";
 import { FriendsList } from "../components/friends-list";
 import { FriendsListData, PendingRequestData } from "../methods/use-axios.ts";
 import { TopBar } from "../components/dashboard-topbar";
+import React, { useState } from "react";
+import AddNewFriend from "../components/add-new-friend";
 
 
 export function Friends() {
+  const [modalType, setModalType] = useState(null); // null means no modal is open
+
+  const openModal = (type) => setModalType(type);
+  const closeModal = () => setModalType(null);
   let params = useParams()
   const [friendLoading, friendData, friendError, friendRequest] = FriendsListData(params.id)
   const [pendingLoading, pendingData, pendingError, pendingRequest] = PendingRequestData(params.id)
@@ -26,7 +32,12 @@ export function Friends() {
     <div className="friends-wrapper">
       <div className="friends-header">
         <h1 className="friends-title">Friends</h1>
-        <p className="add-friend-button">+ New Friend</p>
+        <button
+          onClick={() => openModal("AddNewFriend")}
+          className="add-friend-button"
+        >
+          + New Friend
+        </button>
       </div>
       {pendingRecievedData !== null ? pendingRecievedData.length !== 0 ? (
       <div className="request-list-wrapper">
@@ -47,6 +58,9 @@ export function Friends() {
           </li>
         </ul>
       </div>
+      {modalType === "AddNewFriend" && (
+        <AddNewFriend userId={params.id} groupId={params.groupId} closeModal={closeModal} />
+      )}
     </div>
 </div>
   );

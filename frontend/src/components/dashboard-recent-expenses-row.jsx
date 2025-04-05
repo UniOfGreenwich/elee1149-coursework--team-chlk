@@ -1,6 +1,6 @@
-import "../styles/dashboard-recent-expenses.css"
-import categories from "../data/category-map"
-import {format} from "date-fns"
+import "../styles/dashboard-recent-expenses.css";
+import categories from "../data/category-map";
+import { format } from "date-fns";
 
 export function RecentExpensesRow(props) {
     const foundCategory = categories.find(category => category.categoryId === props.category)
@@ -11,6 +11,7 @@ export function RecentExpensesRow(props) {
 
     const settlementCategoryId = 6
     return (
+      <div>
       <div className="recent-expenses-row">
         <div className="expense-details">
           { props.category !== settlementCategoryId ?
@@ -49,6 +50,6 @@ export function RecentExpensesRow(props) {
             </div>
         </div>
       </div>
-    );
-  }
-
+     </div>
+  );
+}

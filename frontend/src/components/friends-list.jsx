@@ -11,6 +11,7 @@ export function FriendsList({userId, loading, activeData, pendingData, error}) {
     return <p>Error: {error}</p>;
   }
 
+  console.log(pendingData)
     return (
       <div>
         <ul>

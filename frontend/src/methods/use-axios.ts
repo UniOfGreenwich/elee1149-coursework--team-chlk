@@ -49,7 +49,6 @@ interface Expense {
   date: Date;
   description: string;
   expenseId: number;
-  expenseName: string;
   groupId: number;
   payerId: number;
   userName: string;

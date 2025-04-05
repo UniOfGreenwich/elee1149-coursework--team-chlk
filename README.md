@@ -104,6 +104,52 @@ See the [Dependencies section](#dependencies) below for details on the project's
 
 For detailed class diagrams, please refer to the [class_diagrams](class_diagrams) folder.
 
+## Testing
+Fairshare includes comprehensive testing in order to ensure the app is reliable and working at each stage of development.
+
+### Backend Unit Tests
+Unit tests for the backend services have been created to verify the functionality
+of individual components. These tests can be found in the [test](src/test) directory.
+To run theses tests, they will run when building the gradle file:
+```bash
+./gradlew build
+```
+or you can run the tests individually by executing the following command:
+```bash
+./gradlew test
+```
+
+### Testing Documents
+In addition to automated test, we have followed some manual testing procedures through the
+applications UI. We have maintained documentation of these testing documents that outline various
+test cases, expected results and actual results. These documents help to maintain record
+of manual testing and verify the application works. You can located these testing documents
+in the [testing-documents](testing-documents) directory.
+
+### Hopscotch Testing
+#### What is Hopscotch
+Hopscotch is an open-source API development tool that simplifies the process of testing and interacting
+with APIs. Is provides a user-friendly interfact to send HTTP requests and view responses, making it easy to debug
+and test API's. 
+
+#### How we used Hopscotch
+We used Hopscotch to test all our API endpoints for the Fairshare Application. This allowed us to ensure
+our backend services were functioning correctly and returning the expected results, before passing in any 
+data the Frontend. Here is the process of using Hopscotch to test our API's:
+
+1. Setup Requests: We created various HTTP requests (GET, POST, DELETE, etc...) to interact with our API endpoints.
+2. Send Requests: We sent these requests to the API and viewed the responses to ensure they were correct.
+3. Validate Responses: We compared the actual responses with th expected results to verify the API was working correctly.
+4. Debugging: If any issues were found, we used Hopscotch to debug the API and identify the root cause of the problem.
+
+By using Hopscotch, we were able to quickly and easily test out API's ensuring reliablity and working status of our
+backend services. 
+
+More details can be found in the [hopscotch](testing-documents/hopscotch) directory.
+
+
+
+
 ## Dependencies
 
 <details>
