@@ -6,8 +6,8 @@ import React, { useState } from "react";
 // importing components
 import AddExpense from "./add-expense";
 import SettlePayment from "./settle-payment";
-import AddNewFriend from "./add-new-friend.jsx";
-import AddNewGroup from "./add-new-group.jsx";
+import AddNewFriend from "./add-new-friend";
+import AddNewGroup from "./add-new-group";
 
 export function QuickActions({ userId, groupId = undefined }) {
   const [modalType, setModalType] = useState(null); // null means no modal is open

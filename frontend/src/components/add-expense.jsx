@@ -20,7 +20,6 @@ const AddExpense = ({ closeModal, userId, groupId }) => {
   const [customAmounts, setCustomAmounts] = useState({});
   const [splitAmounts, setSplitAmounts] = useState({});
   const [amount, setAmount] = useState(0);
-  const [expenseName, setExpenseName] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState(null); // Store the categoryId
   const [date, setDate] = useState("");
@@ -94,17 +93,19 @@ const AddExpense = ({ closeModal, userId, groupId }) => {
 
     const userShares = selectedUsers.map((user) => ({
       "userId": user.userId,
-      "amount":
+      "shareAmount":
         shareOption === "equal"
           ? parseFloat(splitAmounts[user.userId] || 0) // Use splitAmounts for equal shares
           : parseFloat(customAmounts[user.userId] || 0), // Use customAmounts for custom shares
     }));
 
+    const formattedDate = new Date(date).toISOString()
+
     const expenseData = {
       "description": description, // From the input field
       "amount": parseFloat(amount), // From the amount input
       "currency": currency,
-      "date": new Date(date).toISOString(), // Ensure date is in ISO format
+      "date": formattedDate, // Ensure date is in ISO format
       "categoryId": category,
       "groupId": parseInt(groupId),
       "userId": parseInt(userId),
@@ -200,7 +201,7 @@ const AddExpense = ({ closeModal, userId, groupId }) => {
                 <option value="" disabled>
                   Select Category
                 </option>
-                {categories.map((cat) => (
+                {categories.filter(cat => cat.categoryId !== 6).map((cat) => (
                   <option key={cat.categoryId} value={cat.categoryId}>
                     {cat.categoryName}
                   </option>

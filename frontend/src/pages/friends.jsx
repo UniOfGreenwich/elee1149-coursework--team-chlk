@@ -5,7 +5,7 @@ import { FriendsList } from "../components/friends-list";
 import { FriendsListData, PendingRequestData } from "../methods/use-axios.ts";
 import { TopBar } from "../components/dashboard-topbar";
 import React, { useState } from "react";
-import AddNewFriend from "../components/add-new-friend.jsx";
+import AddNewFriend from "../components/add-new-friend";
 
 
 export function Friends() {

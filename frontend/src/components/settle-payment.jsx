@@ -84,16 +84,18 @@ const SettlePayment = ({ closeModal, userId, groupId, recipient=null, balance=nu
       return;
     }
 
+    const today = new Date().toISOString()
+
     // formatting the input data for payload to backend
     const payload = {
-      description: "Settling Payment",
-      amount: parseFloat(Math.abs(amount).toFixed(2)),
-      currency: "GBP",
-      date: new Date().toISOString(),
-      categoryId: null, // to be set to 6 once db is updated
-      groupId: groupId, // dynamic group id
-      userId: userId, // The senders Id
-      userShares: [
+      "description": "Settling Payment",
+      "amount": parseFloat(Math.abs(amount).toFixed(2)),
+      "currency": "GBP",
+      "date": today,
+      "categoryId": 6, // to be set to 6 once db is updated
+      "groupId": groupId, // dynamic group id
+      "userId": userId, // The senders Id
+      "userShares": [
         // for loop
         {
           userId: selectedRecipient.userId,
@@ -102,13 +104,13 @@ const SettlePayment = ({ closeModal, userId, groupId, recipient=null, balance=nu
       ],
     };
 
-    console.log(JSON.stringify(payload, null, 2)); // Debugging
+    console.log(JSON.stringify(payload)); // Debugging
 
     const newSettlement = await userSettlement(payload, userId)
     if (newSettlement.success) {
       console.log("Settlement added successfully:", newSettlement)
-      window.location.reload();
-      closeModal();
+      // window.location.reload();
+      // closeModal();
     } else {
       console.log("Error adding Settlement:", newSettlement.message)
     }

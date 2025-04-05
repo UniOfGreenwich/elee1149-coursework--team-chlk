@@ -5,7 +5,7 @@ import { GroupsData } from "../methods/use-axios.ts";
 import { TopBar } from "../components/dashboard-topbar";
 import React, { useState } from "react";
 
-import AddNewGroup from "../components/add-new-group.jsx";
+import AddNewGroup from "../components/add-new-group";
 
 export function Groups() {
   const [modalType, setModalType] = useState(null); // null means no modal is open
