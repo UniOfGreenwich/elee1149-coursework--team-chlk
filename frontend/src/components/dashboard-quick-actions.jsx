@@ -6,8 +6,10 @@ import React, { useState } from "react";
 // importing components
 import AddExpense from "./add-expense";
 import SettlePayment from "./settle-payment";
+import AddNewFriend from "./add-new-friend.jsx";
+import AddNewGroup from "./add-new-group.jsx";
 
-export function QuickActions({ userId, groupId }) {
+export function QuickActions({ userId, groupId = undefined }) {
   const [modalType, setModalType] = useState(null); // null means no modal is open
 
   const openModal = (type) => setModalType(type);
@@ -16,6 +18,7 @@ export function QuickActions({ userId, groupId }) {
   return (
     <div className="dashboard-grid-component">
       <h2 className="component-title">Quick Actions</h2>
+      {groupId ? 
       <div className="button-container">
         <button
           onClick={() => openModal("AddExpense")}
@@ -29,7 +32,21 @@ export function QuickActions({ userId, groupId }) {
         >
           Settle Payment
         </button>
-      </div>
+      </div> :
+      <div className="button-container">
+      <button
+        onClick={() => openModal("AddNewGroup")}
+        className="button add-expense"
+      >
+        Add Group
+      </button>
+      <button
+        onClick={() => openModal("AddNewFriend")}
+        className="button settle-payment"
+      >
+        Add Friend
+      </button>
+    </div> }
 
       {/* Conditionally Render Modals */}
       {modalType === "AddExpense" && (
@@ -42,6 +59,16 @@ export function QuickActions({ userId, groupId }) {
           closeModal={closeModal}
         />
       )}
+      {modalType === "AddNewFriend" && (
+              <AddNewFriend userId={userId} groupId={groupId} closeModal={closeModal} />
+            )}
+            {modalType === "AddNewGroup" && (
+                      <AddNewGroup
+                        userId={userId}
+                        groupId={groupId}
+                        closeModal={closeModal}
+                      />
+                    )}
     </div>
   );
 }

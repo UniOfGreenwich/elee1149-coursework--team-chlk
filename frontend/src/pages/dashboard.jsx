@@ -36,7 +36,7 @@ export function Dashboard() {
             <TopCategories userId={params.id} loading={expensesLoading} data={expensesData} error={expensesError}/>
           </li>
           <li className="grid-component quick-actions">
-            <QuickActions />
+            <QuickActions userId={params.id}/>
           </li>
           <li className="grid-component recent-expenses">
             <RecentExpenses userId={params.id} loading={expensesLoading} data={expensesData} error={expensesError}/>
