@@ -28,7 +28,10 @@ Fairshare offers a streamlined approach to managing shared expenses, eliminating
 </details>
 
 ## Usage
-Currently, Fairshare is a locally hosted product. To get started, follow the [Installation instructions](#installation)
+Fairshare can be accessed through GitHub pages and ran online [Github pages](https://github.com/UniOfGreenwich/elee1149-coursework--team-chlk/settings/pages)
+
+
+Alternatively, Fairshare is a locally hosted product. To get started, follow the [Installation instructions](#installation)
 
 <a id="installation"></a>
 ## Installation
