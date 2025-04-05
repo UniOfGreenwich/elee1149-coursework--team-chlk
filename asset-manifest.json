@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/elee1149-coursework--team-chlk/static/css/main.d86c171c.css",
-    "main.js": "/elee1149-coursework--team-chlk/static/js/main.ef8b229e.js",
+    "main.js": "/elee1149-coursework--team-chlk/static/js/main.0b4d811d.js",
     "static/media/credit-card.png": "/elee1149-coursework--team-chlk/static/media/credit-card.88ea33ce3cd67867cbb6.png",
     "static/media/feature-2.png": "/elee1149-coursework--team-chlk/static/media/feature-2.dcceaacc35fd1e4aeb7a.png",
     "static/media/feature-1.png": "/elee1149-coursework--team-chlk/static/media/feature-1.72ccd40712e667a1d997.png",
@@ -9,10 +9,10 @@
     "static/media/logo.svg": "/elee1149-coursework--team-chlk/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/elee1149-coursework--team-chlk/index.html",
     "main.d86c171c.css.map": "/elee1149-coursework--team-chlk/static/css/main.d86c171c.css.map",
-    "main.ef8b229e.js.map": "/elee1149-coursework--team-chlk/static/js/main.ef8b229e.js.map"
+    "main.0b4d811d.js.map": "/elee1149-coursework--team-chlk/static/js/main.0b4d811d.js.map"
   },
   "entrypoints": [
     "static/css/main.d86c171c.css",
-    "static/js/main.ef8b229e.js"
+    "static/js/main.0b4d811d.js"
   ]
 }
