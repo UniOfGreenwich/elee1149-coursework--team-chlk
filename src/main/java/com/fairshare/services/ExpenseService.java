@@ -80,7 +80,7 @@ public class ExpenseService {
         newExpense.setDescription(description);
         newExpense.setAmount(amount);
         newExpense.setCurrency(currency);
-        //newExpense.setDate(date);
+        newExpense.setDate(createExpenseRequest.getDate());
         newExpense.setPayerId(payerId);
         newExpense.setCategoryId(categoryId);
         //newExpense.setExpenseId(expenseId);

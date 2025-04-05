@@ -20,7 +20,7 @@ public class CreateExpenseRequest {
     private Integer categoryId;
     private Integer groupId;
     private List<UserShare> userShares;
-    //private Date date;
+    private Date date;
 
 
 //    public String getExpenseName() {
@@ -79,13 +79,13 @@ public class CreateExpenseRequest {
         this.categoryId = categoryId;
     }
 
-    //public Date getDate() {
-      //return date;
-    //}
+    public Date getDate() {
+      return date;
+    }
 
-    //public void setDate(Date date) {
-      // this.date = date;
-    //}
+    public void setDate(Date date) {
+       this.date = date;
+    }
 
     public Integer getGroupId() {
         return groupId;
