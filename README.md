@@ -47,12 +47,11 @@ Fairshare is designed to run within a [Docker](https://www.docker.com/resources/
 - **Internet Connection:** Required to pull Docker images.
 -  **Basic Command-Line Familiarity:** You'll need to use basic command-line commands.
 
-   Ensure the following line is set to:
-   ```
-   axios.defaults.baseURL = 'http://localhost:8080/'
-   ```
-
-  To run the app locally. [azios.ts](frontend/src/methods/use-axios.ts) 
+Ensure the following line is set to:
+```
+axios.defaults.baseURL = 'http://localhost:8080/'
+```
+To run the app locally: [axios.ts](frontend/src/methods/use-axios.ts) 
 </details>
 
 
