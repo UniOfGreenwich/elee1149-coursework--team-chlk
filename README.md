@@ -203,6 +203,23 @@ test and the expected vs actual results. The testing table can be found [table](
 </details>
 
 ## Contributers
+#### Kyle: 
+- Spring boot initialisation
+- Java backend: Controllers, Services, Repositorys, Entitys
+- Java unit tests
+- Security Encryption
+- GCP Deployment
+- Docker Configuration
+- Documentation: ReadMe 
+- Documentation: Testing Table
+- Documentation: Class Digrams
+- GCP Deployment
+
+Charu:
+
+Hamza:
+
+Lewis:
 
 ## References
 
