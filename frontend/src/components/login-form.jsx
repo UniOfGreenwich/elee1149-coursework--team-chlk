@@ -2,33 +2,43 @@ import "../styles/login-signup-page.css";
 import { Link, useNavigate } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import axios from "axios";
+import eyeIcon from "../assets/eye-icon.png"
+import eyeOffIcon from "../assets/eye-off-icon.png"
+import { Button, Dialog } from "@mui/material";
 
 async function userLogin(credentials) {
-  return fetch('http://localhost:8080/users/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(credentials)
-  })
-  .then(data => data.json())
+  return axios.post(
+    "users/login",
+    credentials,
+    {'Content-Type': 'application/json'}
+  )
+  .then(response => response.data)
 }
 
-export function LoginForm( { setToken } ) {
+export function LoginForm( { setToken, signedUp, setSignedUp} ) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [error, setError] = useState();
+  const [textboxType, setTextboxType] = useState('password')
+  const [iconName, setIconName] = useState(eyeIcon)
   let navigate = useNavigate();
+
+  const handleClick = () => {
+    setTextboxType(textboxType === 'password' ? 'text' : 'password')
+    setIconName(iconName === eyeIcon ? eyeOffIcon : eyeIcon)
+  }
 
   const handleSubmit = async e => {
     e.preventDefault();
+    setSignedUp(undefined)
     const token = await userLogin({
       "email": email,
       "password": password
     });
     if(token.success) {
       setToken(token)
-      navigate(`/user/${token.userId}`)
+      navigate(`/user/${token.userId}/`)
     } else {
       setError(token.message)
     }
@@ -38,7 +48,12 @@ export function LoginForm( { setToken } ) {
 
   return (
     <>
-      <p className="invalid-login">{error}</p>
+      {error ?
+        <p className="error">{error}</p>
+      : null}
+      {signedUp ?
+        <p className="signed-up">{`${signedUp.message} Please login`}</p>
+      : null} 
       <form action="#" className="login-form" onSubmit={handleSubmit}>
         <div className="input-block">
           <label htmlFor="email">Email Address</label>
@@ -47,7 +62,10 @@ export function LoginForm( { setToken } ) {
 
         <div className="input-block">
           <label htmlFor="password">Password</label>
-          <input type="password" id="password" onChange={e => setPassword(e.target.value)}/>
+          <div className="input-with-button">
+            <input type={textboxType} id="password" onChange={e => setPassword(e.target.value)}/>
+            <img src={iconName} alt="" onClick={handleClick}/>
+          </div>
         </div>
 
         {/* <div className="input-block check-box">
@@ -69,5 +87,6 @@ export function LoginForm( { setToken } ) {
 }
 
 LoginForm.propTypes = {
-  setToken: PropTypes.func.isRequired
+  setToken: PropTypes.func.isRequired,
+  setSignedUp: PropTypes.func.isRequired
 }

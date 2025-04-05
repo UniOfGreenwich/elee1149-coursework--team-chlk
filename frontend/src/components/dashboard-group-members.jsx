@@ -1,29 +1,18 @@
 import { useEffect, useState } from "react";
 import "../styles/dashboard-group-members.css";
 import { GroupMembersRow } from "./dashboard-group-members-row";
+import { Link, useNavigate } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
+import AddMember from "./add-member";
 
-export function GroupMembers({userId, groupId}) {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+export function GroupMembers({ userId, groupId, loading, data, error }) {
+  const [modalType, setModalType] = useState(null); // null means no modal is open
+  const openModal = (type) => setModalType(type);
+  const closeModal = () => setModalType(null);
+  let params = useParams();
+  const location = useLocation();
+  const { groupName } = location.state;
 
-  useEffect(() => {
-    fetch(`http://localhost:8080/group/${groupId}/${userId}/users`) // fetching the data
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to fetch data");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setData(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setError(error.message);
-        setLoading(false);
-      });
-  }, []);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -33,23 +22,50 @@ export function GroupMembers({userId, groupId}) {
     return <p>Error: {error}</p>;
   }
 
-  console.log(data); //printing the data to the console
+  // Filter out the logged-in user
+  const filteredMembers = data.filter(
+    (member) => member.userId !== parseInt(userId)
+  );
+
+  console.log(filteredMembers); //printing the filtered data to the console
+
+  const sortedMembers = filteredMembers.sort((a, b) => a.balance - b.balance);
 
   return (
-    <div className="dashboard-grid-component">
-      <h2 className="component-title">Group Members</h2>
+    <div className="dashboard-grid-component-scroll">
+      <div className="component-header">
+        <h2 className="component-title">Group Members</h2>
+        <Link to={`${window.location.href}`} state={{ groupName: groupName }}>
+          <button
+            onClick={() => openModal("AddMember")}
+            className="add-member-button"
+          >
+            + Member
+          </button>
+        </Link>
+      </div>
       <p className="balance-title">Balance</p>
-      <ul>
-        {data.map((e) => (
+      <ul className="component-content">
+        {sortedMembers.map((e) => (
           <li key={e.userId}>
             <GroupMembersRow
               name={e.firstName}
               status={getStatus(e)}
               balance={e.balance}
+              user={e}
+              currentUser={userId}
+              groupId={groupId}
             />
           </li>
         ))}
       </ul>
+      {modalType === "AddMember" && (
+        <AddMember
+          userId={params.id}
+          groupId={params.groupId}
+          closeModal={closeModal}
+        />
+      )}
     </div>
   );
 }

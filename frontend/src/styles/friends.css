@@ -18,16 +18,21 @@
 }
 
 .request-list-wrapper {
-    min-height: 100%;
+    max-height: calc(30vh - 2rem);
     background-color: #222645;
-    padding: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
     border-radius: 8px;
     width: 100%;
     margin-bottom: 16px;
 }
 
 .request-component {
-    width: 100%;
+    max-height: calc(30vh - 6rem);
+    overflow-y: scroll;
+    scrollbar-width: 1rem;
+    scrollbar-color: #333864 #222645; 
 }
 
 .request-component-list {
@@ -43,8 +48,12 @@
     margin-top: 8px;
 }
 
-.request-name {
+.request-username {
     font-weight: bold;
+    font-size: 1rem;
+}
+
+.request-name {
     font-size: 1rem;
 }
 
@@ -86,10 +95,22 @@
     justify-content: center;
 }
 
-.friend-list-wrapper {
-    min-height: 100%;
+.friend-list-wrapper-with-requests {
+    max-height: calc(50vh - 0.5rem);
     background-color: #222645;
-    padding: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    border-radius: 8px;
+    width: 100%;
+}
+
+.friend-list-wrapper-without-requests {
+    max-height: calc(80vh - 2rem);
+    background-color: #222645;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
     border-radius: 8px;
     width: 100%;
 }
@@ -97,10 +118,21 @@
 .friend-status-title {
     font-size: 10px;
     text-align: right;
+    padding-right: 1rem;
 }
 
-.friends-component {
-    width: 100%;
+.friends-component-with-requests {
+    max-height: calc(40vh + 1rem);
+    overflow-y: scroll;
+    scrollbar-width: 1rem;
+    scrollbar-color: #333864 #222645;
+}
+
+.friends-component-without-requests {
+    max-height: calc(70vh - 1.5rem);
+    overflow-y: scroll;
+    scrollbar-width: 1rem;
+    scrollbar-color: #333864 #222645;
 }
 
 .friends-component-list {
@@ -115,8 +147,12 @@
     padding: 1rem 0;
 }
 
-.friend-name {
+.friend-username {
     font-weight: bold;
+    font-size: 1rem;
+}
+
+.friend-name {
     font-size: 1rem;
 }
 

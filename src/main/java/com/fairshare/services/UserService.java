@@ -1,20 +1,17 @@
 package com.fairshare.services;
 
 import com.fairshare.Requests.CreateUserRequest;
-import com.fairshare.Requests.GroupResponse;
-import com.fairshare.entity.Expense;
+import com.fairshare.Responses.GroupResponse;
 import com.fairshare.entity.Group;
 import com.fairshare.entity.User;
 import com.fairshare.repository.GroupRepository;
 import com.fairshare.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import static java.lang.Double.sum;
 
 @Service
 public class UserService {
@@ -26,9 +23,12 @@ public class UserService {
     @Autowired
     private ExpenseService expenseService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public User authenticateLogin (String email, String password) {
         User user = userRepository.findByEmail(email);
-        if (user != null && user.getPassword().equals(password)) {
+        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
             return user;
         }
         else {
@@ -44,7 +44,7 @@ public class UserService {
             newUser.setLastName(createUserRequest.getLastName());
             newUser.setUsername(createUserRequest.getUsername());
             newUser.setEmail(createUserRequest.getEmail());
-            newUser.setPassword(createUserRequest.getPassword()); // need to ensure we can do password hashing here for security
+            newUser.setPassword(passwordEncoder.encode(createUserRequest.getPassword())); // need to ensure we can do password hashing here for security
 
             return userRepository.save(newUser);
         }

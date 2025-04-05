@@ -2,8 +2,8 @@ package com.fairshare.Requests;
 
 public class CreateUserRequest {
 
-    private String FirstName;
-    private String LastName;
+    private String firstName;
+    private String lastName;
     private String username;
     private String email;
     private String password;
@@ -12,20 +12,20 @@ public class CreateUserRequest {
     }
 
     public CreateUserRequest(String firstName, String lastName, String username, String email, String password) {
-        this.FirstName = firstName;
-        this.LastName = lastName;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.username = username;
         this.email = email;
         this.password = password;
     }
 
-    public String getFirstName() {return FirstName;}
+    public String getFirstName() {return firstName;}
 
-    public void setFirstName(String FirstName) {this.FirstName = FirstName;}
+    public void setFirstName(String FirstName) {this.firstName = FirstName;}
 
-    public String getLastName() {return LastName;}
+    public String getLastName() {return lastName;}
 
-    public void setLastName(String LastName) {this.LastName = LastName;}
+    public void setLastName(String LastName) {this.lastName = LastName;}
 
     public String getUsername() {return username;}
 

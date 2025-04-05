@@ -1,21 +1,28 @@
 import "../styles/friends.css";
 import { FriendsRequestItem } from "./friends-request-item";
 
-export function FriendsRequest({userId}) {
-    const data = [
-        {friendId: 1, friendFName: "Lewis", friendLName: "Walker", friendEmail: "lewis@gmail.com"},
-        {friendId: 2, friendFName: "Lewis", friendLName: "Walker", friendEmail: "lewis@gmail.com"},
-    ]
+export function FriendsRequest({userId, loading, data, error}) {
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
 
     return (
       <div>
         <ul>
           {data.map((e) => (
-            <li key={e.friendId}>
+            <li key={e.userId}>
                   <FriendsRequestItem
-                      firstName={e.friendFName}
-                      lastName={e.friendLName}
-                      email={e.friendEmail}
+                    userId={e.userId}
+                    firstName={e.firstName}
+                    lastName={e.lastName}
+                    email={e.email}
+                    username={e.username}
+                    requestId={e.requestId}
                   />
             </li>
           ))}

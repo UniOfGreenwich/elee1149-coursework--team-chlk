@@ -6,9 +6,19 @@
   padding-bottom: 12px;
 }
 
+.overall-information {
+  display: flex;
+  align-items: center;
+}
+
 .overall-balance {
   font-size: 22px;
   font-weight: 700;
+}
+
+.overall-balance-status {
+  padding-left: 16px;
+  font-size: 14px;
 }
 
 .overview-details {

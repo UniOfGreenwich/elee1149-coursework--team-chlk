@@ -31,7 +31,7 @@ export function SideBar( { token, setToken } ) {
         <div className="side-bar-navigation">
           <ul className="sidebar-navigation-list">
             <li className="nav-item">
-              <Link to={`/user/${token.userId}/dashboard`}>
+              <Link to={`/user/${token.userId}/`}>
                 <SideBarNavItem
                   navPageName="Dashboard"
                   navIcon={dashboardIcon}
@@ -70,7 +70,7 @@ export function SideBar( { token, setToken } ) {
             className="profile-image"
           />
           <div className="profile-user">
-            <p className="name">Hamza Khan</p>
+            <p className="name">{`${token.firstName} ${token.lastName}`}</p>
             <p className="view-profile">View Profile</p>
           </div>
         </div>
