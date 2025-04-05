@@ -107,6 +107,14 @@ See the [Dependencies section](#dependencies) below for details on the project's
 
 For detailed class diagrams, please refer to the [class_diagrams](class_diagrams) folder.
 
+## Security
+Currently security features Password Ecnryption using [Encryption](https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/crypto/bcrypt/BCryptPasswordEncoder.html)
+
+In an ideal world the following feaures would have been added:
+- Secret Manager to store the DB password (If we made the website public this should be hidden as is bad security showing the secret) Note this was attempted but GCP secret manager was not accepting it.
+- API authentication (authenticate users before allowing api usage)
+- Locking down endpoint (Only allow endpoints to be hit through the app internally and not through external means)
+
 ## Testing
 Fairshare includes comprehensive testing in order to ensure the app is reliable and working at each stage of development.
 
