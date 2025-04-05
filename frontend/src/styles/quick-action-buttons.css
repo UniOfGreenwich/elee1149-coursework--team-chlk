@@ -1,0 +1,218 @@
+/* Copied from gpt */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-box {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  min-height: 500px;
+  width: 500px;
+  position: relative;
+}
+
+.close-button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  border: none;
+  background: #fe6789;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.action-title {
+  color: black;
+  margin: 1rem 0;
+  font-size: 1.5rem;
+}
+
+.action-form {
+  color: black;
+  margin-top: 2rem;
+  min-width: 100%;
+}
+
+.form-row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  margin: 0.5rem 0;
+}
+
+.form-row label {
+  width: 200px;
+  text-align: left;
+  font-weight: 400;
+}
+
+.action-form input,
+.expense-category,
+select {
+  display: inline;
+  border: 1px solid rgb(158, 158, 158);
+  width: 100%;
+  color: black;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.action-form input::placeholder {
+  color: rgb(157, 157, 157);
+}
+
+input[type="submit"] {
+  background-color: #4495c7;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  width: max-content;
+  border: none;
+  outline: none;
+  padding: 1rem;
+  cursor: pointer;
+  transition: background-color 100ms ease-in;
+  margin: 1rem auto;
+}
+
+.new-group-form input[type="submit"] {
+  margin: 3rem auto;
+}
+
+input[type="submit"]:hover {
+  background-color: #387ea9;
+}
+
+.close-icon {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+  opacity: 0.3;
+  transition: opacity 100ms ease;
+}
+
+.close-icon:hover {
+  opacity: 0.8;
+}
+
+select#recipient {
+  width: 100%;
+  padding: 8px;
+}
+
+.balance-message {
+  color: black;
+  text-align: center;
+  font-weight: bold;
+}
+
+.settlement-option {
+  color: black;
+  text-align: left;
+  max-width: 200px;
+}
+
+.alert {
+  color: red;
+}
+
+.balance-box {
+  position: absolute;
+  font-size: 0.9rem;
+  bottom: 2rem;
+  left: 0;
+  width: 100%;
+  background-color: #ffdee4;
+  padding: 5px;
+}
+
+.settle-container {
+  display: flex;
+  align-items: center;
+}
+
+.radio-inputs {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2rem;
+}
+
+.radio-input {
+  display: flex;
+  align-items: center;
+}
+
+input[type="radio"] {
+  width: 20px;
+  margin-right: 0.5rem;
+}
+
+.radio-input label {
+  width: max-content;
+  margin: 0;
+}
+
+#submit.hide {
+  visibility: hidden;
+}
+
+.expense-user-field {
+  width: 100%;
+  overflow: scroll;
+  height: 70px;
+  padding: 6px;
+  border: 1px solid rgb(158, 158, 158);
+  border-radius: 4px;
+}
+
+.custom-amounts {
+  position: absolute;
+  width: 300px;
+  top: 20%;
+  left: 100%;
+  background-color: rgb(249, 249, 249);
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.custom-user-name {
+  text-align: left;
+  width: 100%;
+}
+
+.custom-amount-field {
+  margin-bottom: 1rem;
+}
+
+.selected-users {
+  background-color: #ffdee4;
+  width: 100%;
+  padding: 5px;
+  color: black;
+  text-align: left;
+  border-radius: 5px;
+  margin-top: 1rem;
+}
+
+.selected-users-title {
+  color: black;
+  font-weight: 600;
+}
+
+.error-message {
+  color: red;
+}

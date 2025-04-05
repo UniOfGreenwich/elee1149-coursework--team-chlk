@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import "../styles/dashboard-recent-expenses.css"
+import "../styles/dashboard-recent-expenses.css";
+import "../styles/dashboard-recent-expenses.css";
 import { RecentExpensesRow } from "./dashboard-recent-expenses-row";
 import chevron from "../assets/chevron-icon.png"
 import { Link, useNavigate } from "react-router-dom";
@@ -53,5 +54,3 @@ export function RecentExpenses({userId, groupId, loading, data, error}) {
           </div>
   );
 }
-
-
