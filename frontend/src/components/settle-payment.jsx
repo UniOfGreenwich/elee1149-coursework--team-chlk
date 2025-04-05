@@ -115,8 +115,8 @@ const SettlePayment = ({ closeModal, userId, groupId, recipient=null, balance=nu
     const newSettlement = await userSettlement(payload, userId)
     if (newSettlement.success) {
       console.log("Settlement added successfully:", newSettlement)
-      // window.location.reload();
-      // closeModal();
+      window.location.reload();
+      closeModal();
     } else {
       console.log("Error adding Settlement:", newSettlement.message)
     }
