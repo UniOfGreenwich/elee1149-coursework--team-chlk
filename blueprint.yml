@@ -1,0 +1,12 @@
+services:
+  - type: web  # Or whatever service type you're using
+    name: fairsharedraft  # Replace with your app's name on Render
+    env:
+      - key: SPRING_DATASOURCE_URL
+        value: jdbc:postgresql://${dpg-cuq5vg0gph6c73curdog-a}:5432/fairsharedraft  # Your database URL env variable
+      - key: SPRING_DATASOURCE_USERNAME
+        value: ${fairsharedraft_user}  # Your username env variable
+      - key: SPRING_DATASOURCE_PASSWORD
+        value: ${Pq8Et77mwnRsE7y2a11KS9U6l964E4NK}  # Your password env variable
+        # ... any other environment variables you need
+    # ... other service configuration (build command, health check, etc.)

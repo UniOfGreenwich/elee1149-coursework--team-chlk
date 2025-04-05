@@ -1,0 +1,104 @@
+.overall {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid white;
+  padding-bottom: 12px;
+}
+
+.overall-information {
+  display: flex;
+  align-items: center;
+}
+
+.overall-balance {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.overall-balance-status {
+  padding-left: 16px;
+  font-size: 14px;
+}
+
+.overview-details {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.overall .date {
+  font-size: 14px;
+}
+
+.owed-to-me,
+.i-owe {
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+  margin-top: 1.3rem;
+}
+
+.overview-details .sub-heading {
+  font-size: 1rem;
+  font-size: 12px;
+  margin-bottom: 4px;
+  line-height: 1;
+}
+
+.amount {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.icon {
+  width: 24px;
+}
+
+.blue {
+  color: #4495c7;
+}
+
+.red {
+  color: #fe6789;
+}
+
+.graph {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  margin-top: 0.5rem;
+}
+
+.legend {
+  display: flex;
+  gap: 2.5rem;
+  margin-top: -3rem;
+  position: relative;
+  right: 1.5rem;
+  z-index: 0;
+}
+
+.legend-title {
+  font-size: 12px;
+  font-weight: 600;
+  position: relative;
+}
+
+.legend-title::before {
+  position: absolute;
+  content: "";
+  width: 10px;
+  height: 10px;
+  background-color: gold;
+  border-radius: 50%;
+  top: 25%;
+  left: -15px;
+}
+
+.blue::before {
+  background-color: #4495c7;
+}
+
+.red::before {
+  background-color: #fe6789;
+}

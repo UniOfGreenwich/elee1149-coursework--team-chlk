@@ -1,0 +1,45 @@
+.categories-grid {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.category-grid-item {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    width: 50%;
+    height: 50%;
+}
+
+.category-grid-item:hover {
+    opacity: 1;
+    background-color: #333864;
+    border-radius: 8px;
+}
+
+.top-categories-item {
+
+    padding: 8px;
+    display: flex;
+}
+
+.category-details {
+    padding-left: 16px;
+    width: 60%;
+}
+
+.category-name {
+    font-size: 12px;
+    font-weight: 300;
+}
+
+.category-amount {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.category-button {
+    padding: 5%;
+    height: 50%;
+}

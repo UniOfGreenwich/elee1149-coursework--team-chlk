@@ -1,0 +1,48 @@
+.expenses-header {
+    display: flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom: 16px;
+}
+
+.expenses-list-wrapper {
+    max-height:calc(80vh - 1rem);
+    background-color: #222645;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    border-radius: 8px;
+    width: 100%;
+}
+
+.expenses-component {
+    max-height:calc(80vh - 3rem);
+    overflow-y: scroll;
+    scrollbar-color: #333864 #222645;
+    scrollbar-width: 1rem;
+}
+
+.expense-group {
+    width: 30%;
+    text-align: center;
+}
+
+.expense-group-title {
+    font-size: 12px;
+    font-weight: 300;
+}
+
+.expense-group-title-settlement {
+    font-size: 12px;
+    font-weight: 300;
+    color: #9976FF;
+}
+
+.expense-group-name {
+    font-size: 1rem;
+}
+
+.expense-group-name-settlement {
+    font-size: 1rem;
+    color: #9976FF;
+}
