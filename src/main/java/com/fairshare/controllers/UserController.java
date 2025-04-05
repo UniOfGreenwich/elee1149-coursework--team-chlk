@@ -23,7 +23,7 @@ import java.util.List;
 //When they make a request will hit the controller first
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "https://uniofgreenwich.github.io"})
 @RequestMapping("/users")
 public class UserController {
 
