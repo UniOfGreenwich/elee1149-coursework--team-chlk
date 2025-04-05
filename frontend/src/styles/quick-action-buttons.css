@@ -78,7 +78,7 @@ input[type="submit"] {
   color: white;
   font-weight: bold;
   font-size: 1rem;
-  width: max-content;
+  width: 100%;
   border: none;
   outline: none;
   padding: 1rem;
@@ -89,6 +89,7 @@ input[type="submit"] {
 
 .new-group-form input[type="submit"] {
   margin: 3rem auto;
+  width: max-content;
 }
 
 input[type="submit"]:hover {
