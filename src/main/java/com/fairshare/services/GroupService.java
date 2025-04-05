@@ -23,7 +23,7 @@ public class GroupService {
     private UserRepository userRepository;
 
     @Autowired
-    private BalanceService balanceService;
+    private BalanceService  balanceService;
 
     public GroupService(GroupRepository groupRepository, UserRepository userRepository) {
         this.groupRepository = groupRepository;
