@@ -20,7 +20,6 @@ import { SideBar } from "./components/dashboard-sidebar";
 
 function App() {
   const { token, setToken } = useToken();
-  console.log(token);
 
     return (
       <div className="app">

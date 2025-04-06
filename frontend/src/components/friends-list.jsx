@@ -3,7 +3,6 @@ import { FriendsListItem } from "./friends-list-item";
 
 export function FriendsList({activeData, pendingData }) {
 
-  console.log(pendingData)
     return (
       <div>
         <ul>

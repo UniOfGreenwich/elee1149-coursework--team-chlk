@@ -81,7 +81,7 @@ export function SignupForm() {
           <label htmlFor="password">Password</label>
           <div className="split-block">
             <input className="left-input" type="password" id="password" required={true} onChange={e => setPassword(e.target.value)}/>
-            <input className="right-input" type="password" placeholder="Re-enter password" id="password" required={true} onChange={e => setPasswordCheck(e.target.value)}/>
+            <input className="right-input" type="password" placeholder="Re-enter password" id="check-password" required={true} onChange={e => setPasswordCheck(e.target.value)}/>
           </div>
 
         </div>

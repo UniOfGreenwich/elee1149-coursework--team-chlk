@@ -14,11 +14,7 @@ export function RecentExpenses({userId, loading, data, error}) {
     return <p>Unable to load, see error</p>;
   }
 
-  console.log(JSON.stringify(data));
-
   const sortedExpenses = data.sort((a,b) => new Date(a.date) - new Date(b.date)).reverse().slice(0,5)
-
-  console.log(sortedExpenses)
 
   return (
     <div className="dashboard-grid-component">

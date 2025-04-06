@@ -12,8 +12,6 @@ export function TopCategories({ loading, data, error }) {
     return <p>Unable to load, see error</p>;
   }
 
-  console.log(data);
-
   if (data !== undefined) {
     categories.forEach((category) => {
       category.amount = !data.filter(
@@ -33,8 +31,6 @@ export function TopCategories({ loading, data, error }) {
     .sort((a, b) => a.amount - b.amount)
     .reverse()
     .slice(0, 4);
-
-  console.log(sortedCategories);
 
   return (
     <div className="dashboard-grid-component-scroll">

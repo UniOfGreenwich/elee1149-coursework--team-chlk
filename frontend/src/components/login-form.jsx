@@ -26,7 +26,6 @@ export function LoginForm( { setToken } ) {
   }
 
   const [loading, data, error, request, setData] = LoginRequest(payload)
-console.log(data)
   if(trigger) {
     if(data && JSON.stringify(data) !== '[]' ) {
       if(data.success) {
@@ -43,20 +42,16 @@ console.log(data)
 
   const sendLogin = useCallback(() => {
     request()
-    console.log("usecallback check")
     })
 
   useEffect(() => {
-    console.log("useeffect check 2")
     if (trigger) {
       sendLogin()
-      console.log("useeffect check")
     }
   }, [trigger])
 
   const handleSubmit = async e => {
     e.preventDefault()
-    console.log("handlesubmit check")
     setTrigger(true)
   }
 

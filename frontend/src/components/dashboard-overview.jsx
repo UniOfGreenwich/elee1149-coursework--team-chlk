@@ -19,7 +19,6 @@ export function Overview({loading, data, error}) {
   }
 
   data.forEach((e) => {
-    console.log(e.balance);
     overallBalance += e.balance;
     if (e.balance > 0) {
       positiveBalance += e.balance;
@@ -33,8 +32,6 @@ export function Overview({loading, data, error}) {
   const formattedOverallBalance = Intl.NumberFormat("en-GB", {style: "currency", currency: "GBP", minimumFractionDigits: 2, maximumFractionDigits: 2}).format(Math.abs(overallBalance));
   const formattedPositiveBalance = Intl.NumberFormat("en-GB", {style: "currency", currency: "GBP", minimumFractionDigits: 2, maximumFractionDigits: 2}).format(Math.abs(positiveBalance));
   const formattedNegativeBalance = Intl.NumberFormat("en-GB", {style: "currency", currency: "GBP", minimumFractionDigits: 2, maximumFractionDigits: 2}).format(Math.abs(negativeBalance));
-
-  console.log(typeof negativeBalance);
 
   return (
     <div className="dashboard-grid-component">

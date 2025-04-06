@@ -21,11 +21,7 @@ export function GroupsList({userId, loading, data, error}) {
     })
   }
 
-  console.log(data);
-
   const sortedGroups = data.sort((a,b) => new Date(a.updatedAt) - new Date(b.updatedAt)).reverse()
-
-  console.log(sortedGroups)
 
   return (
     <div>

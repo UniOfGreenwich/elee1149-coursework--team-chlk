@@ -14,7 +14,6 @@ export function Groups() {
   let params = useParams();
   const [loading, data, error, request] = GroupsData(params.id);
 
-  console.log(data.entries());
   return (
     <div className="dashboard-content">
       <div className="topbar">

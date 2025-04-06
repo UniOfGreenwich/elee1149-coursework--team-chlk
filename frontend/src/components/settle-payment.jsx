@@ -191,8 +191,6 @@ const SettlePayment = ({ closeModal, userId, groupId, recipient=null, reload}) =
               required
             />
           </div>
-          {console.log("Selected recipient:", selectedRecipient)}
-          {console.log("Balance:", selectedRecipient?.balance)}
           <input
             type="submit"
             value="Settle Payment"
