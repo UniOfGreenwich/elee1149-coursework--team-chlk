@@ -230,6 +230,7 @@ Hamza:
 - Tech Stack: React, JSX, CSS and HTML
 - Created application wireframe and design
 - Documentation: Requirements Engineering
+- Documentation: Styling Guide for the application
 - Front-end pages: Home, Login, Sign-up, Dashboards 
 - Dashboard component: Overview, Action Buttons, Group Members
 - Styling and decoration: CSS
