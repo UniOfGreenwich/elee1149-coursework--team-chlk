@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 
 public interface GroupRepository extends JpaRepository<Group, Integer> {
-    boolean existsByGroupName(String groupName);
+    //boolean existsByGroupName(String groupName);
     boolean existsByGroupId(Integer groupId);
     Integer groupId(Integer groupId);
 }

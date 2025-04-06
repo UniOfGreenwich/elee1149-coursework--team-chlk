@@ -28,7 +28,10 @@ Fairshare offers a streamlined approach to managing shared expenses, eliminating
 </details>
 
 ## Usage
-Currently, Fairshare is a locally hosted product. To get started, follow the [Installation instructions](#installation)
+Fairshare can be accessed through GitHub pages and ran online [Github pages](https://github.com/UniOfGreenwich/elee1149-coursework--team-chlk/settings/pages)
+
+
+Alternatively, Fairshare is a locally hosted product. To get started, follow the [Installation instructions](#installation)
 
 <a id="installation"></a>
 ## Installation
@@ -43,6 +46,12 @@ Fairshare is designed to run within a [Docker](https://www.docker.com/resources/
 - **Docker:** Ensure Docker is installed and running. Download it from the [official Docker website](https://www.docker.com)
 - **Internet Connection:** Required to pull Docker images.
 -  **Basic Command-Line Familiarity:** You'll need to use basic command-line commands.
+
+Ensure the following line is set to:
+```
+axios.defaults.baseURL = 'http://localhost:8080/'
+```
+To run the app locally: [axios.ts](frontend/src/methods/use-axios.ts) 
 </details>
 
 
@@ -104,6 +113,17 @@ See the [Dependencies section](#dependencies) below for details on the project's
 
 For detailed class diagrams, please refer to the [class_diagrams](class_diagrams) folder.
 
+## Requirements Engineering
+The requirements engineering documentation can be found here: [requirements-engineering](requirements-engineering/requirements-engineering.md)
+
+## Security
+Currently security features Password Ecnryption using [Encryption](https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/crypto/bcrypt/BCryptPasswordEncoder.html)
+
+In an ideal world the following feaures would have been added:
+- Secret Manager to store the DB password (If we made the website public this should be hidden as is bad security showing the secret) Note this was attempted but GCP secret manager was not accepting it.
+- API authentication (authenticate users before allowing api usage)
+- Locking down endpoint (Only allow endpoints to be hit through the app internally and not through external means)
+
 ## Testing
 Fairshare includes comprehensive testing in order to ensure the app is reliable and working at each stage of development.
 
@@ -147,6 +167,10 @@ backend services.
 
 More details can be found in the [hopscotch](testing-documents/hopscotch) directory.
 
+### Physical Application Tests
+Application test were performed as a group on 05/04/25 in person/virtual. A testing table was created by: Kyle, and listed the definitions of each
+test and the expected vs actual results. The testing table can be found [table](testing-documents/test-table.md).  
+
 
 
 
@@ -188,6 +212,31 @@ More details can be found in the [hopscotch](testing-documents/hopscotch) direct
 </details>
 
 ## Contributers
+#### Kyle: 
+- Spring boot initialisation
+- Java backend: Controllers, Services, Repositorys, Entitys
+- Java unit tests
+- Security Encryption
+- GCP Deployment
+- Docker Configuration
+- Documentation: ReadMe 
+- Documentation: Testing Table
+- Documentation: Class Digrams
+- GCP Deployment
+
+Charu:
+
+Hamza:
+- Tech Stack: React, JSX, CSS and HTML
+- Created application wireframe and design
+- Documentation: Requirements Engineering
+- Documentation: Styling Guide for the application
+- Front-end pages: Home, Login, Sign-up, Dashboards 
+- Dashboard component: Overview, Action Buttons, Group Members
+- Styling and decoration: CSS
+- Application walkthrough and testing
+
+Lewis:
 
 ## References
 
