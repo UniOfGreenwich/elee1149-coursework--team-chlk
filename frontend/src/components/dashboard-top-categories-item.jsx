@@ -1,6 +1,4 @@
 import "../styles/dashboard-top-categories.css"
-import categories from "../data/category-map"
-import arrowRight from "../assets/arrow-right.png"
 
 export function TopCategoriesItem(props) {
     return (

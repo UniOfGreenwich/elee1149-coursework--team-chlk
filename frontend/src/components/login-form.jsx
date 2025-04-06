@@ -1,25 +1,16 @@
 import "../styles/login-signup-page.css";
 import { Link, useNavigate } from "react-router-dom";
 import PropTypes from 'prop-types';
-import { useState } from 'react';
-import axios from "axios";
+import { useEffect, useState, useCallback } from 'react';
 import eyeIcon from "../assets/eye-icon.png"
 import eyeOffIcon from "../assets/eye-off-icon.png"
-import { Button, Dialog } from "@mui/material";
+import { LoginRequest } from "../methods/use-axios.ts";
+import { showErrorToast, showSuccessToast } from "../methods/http-error-handler";
 
-async function userLogin(credentials) {
-  return axios.post(
-    "users/login",
-    credentials,
-    {'Content-Type': 'application/json'}
-  )
-  .then(response => response.data)
-}
-
-export function LoginForm( { setToken, signedUp, setSignedUp} ) {
+export function LoginForm( { setToken } ) {
+  const [trigger, setTrigger] = useState(false)
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [error, setError] = useState();
   const [textboxType, setTextboxType] = useState('password')
   const [iconName, setIconName] = useState(eyeIcon)
   let navigate = useNavigate();
@@ -29,31 +20,48 @@ export function LoginForm( { setToken, signedUp, setSignedUp} ) {
     setIconName(iconName === eyeIcon ? eyeOffIcon : eyeIcon)
   }
 
-  const handleSubmit = async e => {
-    e.preventDefault();
-    setSignedUp(undefined)
-    const token = await userLogin({
-      "email": email,
-      "password": password
-    });
-    if(token.success) {
-      setToken(token)
-      navigate(`/user/${token.userId}/`)
-    } else {
-      setError(token.message)
+  const payload = {
+    "email": email,
+    "password": password
+  }
+
+  const [loading, data, error, request, setData] = LoginRequest(payload)
+console.log(data)
+  if(trigger) {
+    if(data && JSON.stringify(data) !== '[]' ) {
+      if(data.success) {
+        setToken(data)
+        showSuccessToast(`${data.message}, welcome ${data.firstName}`)
+        navigate(`/user/${data.userId}/`)
+      } else {
+        showErrorToast(data.message)
+        setTrigger(false)
+        setData([])
+      }
     }
-    
-    console.log(token)
+  }
+
+  const sendLogin = useCallback(() => {
+    request()
+    console.log("usecallback check")
+    })
+
+  useEffect(() => {
+    console.log("useeffect check 2")
+    if (trigger) {
+      sendLogin()
+      console.log("useeffect check")
+    }
+  }, [trigger])
+
+  const handleSubmit = async e => {
+    e.preventDefault()
+    console.log("handlesubmit check")
+    setTrigger(true)
   }
 
   return (
     <>
-      {error ?
-        <p className="error">{error}</p>
-      : null}
-      {signedUp ?
-        <p className="signed-up">{`${signedUp.message} Please login`}</p>
-      : null} 
       <form action="#" className="login-form" onSubmit={handleSubmit}>
         <div className="input-block">
           <label htmlFor="email">Email Address</label>
@@ -67,11 +75,6 @@ export function LoginForm( { setToken, signedUp, setSignedUp} ) {
             <img src={iconName} alt="" onClick={handleClick}/>
           </div>
         </div>
-
-        {/* <div className="input-block check-box">
-                <input type="checkbox" id="check"/>
-                <label htmlFor="check">Keep me signed in</label>
-            </div> */}
 
         <div className="input-block">
           <input type="submit" value="Login" className="submit-button" />
@@ -88,5 +91,4 @@ export function LoginForm( { setToken, signedUp, setSignedUp} ) {
 
 LoginForm.propTypes = {
   setToken: PropTypes.func.isRequired,
-  setSignedUp: PropTypes.func.isRequired
 }

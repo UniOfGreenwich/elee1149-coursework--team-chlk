@@ -1,17 +1,9 @@
-// Components
 import { SideBarNavItem } from "./dashboard-sidebar-navitem";
-
-// Styles
 import "../styles/dashboard-sidebar.css";
-
-// Link Router
-import { Link, useNavigate } from "react-router-dom";
-
-// Images
+import { Link } from "react-router-dom";
 import logo from "../assets/Fairshare-logo.png";
 import dashboardIcon from "../assets/dashboard-icon.png";
 import expensesIcon from "../assets/expenses-icon.png";
-import transactionsIcon from "../assets/transactions-icon.png";
 import friendsIcon from "../assets/friends-icon.png";
 import groupsIcon from "../assets/groups-icon.png";
 import logoutIcon from "../assets/logout-icon.png";

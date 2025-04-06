@@ -1,34 +1,19 @@
-// importing styles
 import "../styles/quick-action-buttons.css";
 import closeIcon from "../assets/close-icon.png";
-import React, { useState, useEffect } from "react";
-import { GroupMembersData } from "../methods/use-axios.ts";
-import axios from "axios";
+import React, { useState, useEffect, useCallback } from "react";
+import { AddExpenseRequest, GroupMembersData } from "../methods/use-axios.ts";
+import PropTypes from 'prop-types';
+import { showErrorToast, showSuccessToast } from "../methods/http-error-handler";
 
-async function userSettlement(expenseDetails, userId) {
-  return axios.post(
-    `expense/add-expense?payerId=${userId}`,
-    expenseDetails,
-    {'Content-Type': 'application/json'}
-  )
-  .then(response => response.data)
-}
+const SettlePayment = ({ closeModal, userId, groupId, recipient=null, reload}) => {
+  const [trigger, setTrigger] = useState(false)
+  const [selectedRecipient, setSelectedRecipient] = useState(recipient ? recipient : null);
+  const [amount, setAmount] = useState("");
+  const [settleOption, setSettleOption] = useState("outstanding");
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
 
-const SettlePayment = ({ closeModal, userId, groupId, recipient=null, balance=null}) => {
-  const [selectedRecipient, setSelectedRecipient] = useState(recipient ? recipient : null); // Selected recipient object
-  const [amount, setAmount] = useState(""); // Amount field value
-  const [settleOption, setSettleOption] = useState("outstanding"); // Radio button selection
-  const [isSubmitDisabled, setIsSubmitDisabled] = useState(false); // State to disable button
-
-  // getting the data
   const [loading, data, error, request] = GroupMembersData(groupId, userId)
 
-  if (error) {
-    console.log("Error fetching users:", error)
-  }
-
-
-  // Update amount when recipient or settlement option changes
   useEffect(() => {
     if (selectedRecipient) {
       if (settleOption === "outstanding") {
@@ -36,15 +21,13 @@ const SettlePayment = ({ closeModal, userId, groupId, recipient=null, balance=nu
           selectedRecipient.balance < 0 ? selectedRecipient.balance : ""
         );
       } else {
-        setAmount(""); // Clear input for 'custom'
+        setAmount("");
       }
     }
   }, [selectedRecipient, settleOption]);
 
-  // updating the submit button visibility based on selected group members
   useEffect(() => {
     if (selectedRecipient && selectedRecipient.balance >= 0) {
-      // alert(`${selectedRecipient.firstName} owes you money`);
       setIsSubmitDisabled(true);
       document.getElementById("submit").classList.add("hide");
     } else {
@@ -63,87 +46,69 @@ const SettlePayment = ({ closeModal, userId, groupId, recipient=null, balance=nu
     setSettleOption(e.target.value);
   };
 
-  // updating amount field if it exceeds outstanding balance
   const handleAmountChange = (e) => {
     let enteredAmount = Number(e.target.value);
     if (selectedRecipient && settleOption === "custom") {
-      const maxAmount = Math.abs(selectedRecipient.balance); // Max you can pay is what you owe
+      const maxAmount = Math.abs(selectedRecipient.balance);
       if (enteredAmount > maxAmount) {
-        enteredAmount = maxAmount; // Prevent overpaying
+        enteredAmount = maxAmount;
       }
     }
-    setAmount(enteredAmount); // Ensure the value updates correctly
+    setAmount(enteredAmount);
   };
 
-  //handling form submission
+  const today = new Date().toISOString()
+
+  const payload = {
+    description: "Settling Payment",
+    amount: parseFloat(Math.abs(amount).toFixed(2)),
+    currency: "GBP",
+    date: today,
+    categoryId: 6, 
+    groupId: groupId, 
+    userId: userId, 
+    userShares: [
+      {
+        userId: selectedRecipient ? selectedRecipient.userId : null,
+        shareAmount: parseFloat(Math.abs(amount).toFixed(2)),
+      },
+    ],
+  };
+
+  const [newSettlementLoading, newSettlementData, newSettlementError, newSettlementRequest] = AddExpenseRequest(userId, payload)
+
+  if(newSettlementData && JSON.stringify(newSettlementData) !== '[]' ) {
+        if(newSettlementData.success) {
+          showSuccessToast("New settlement made!")
+        } else {
+          showErrorToast(newSettlementData.message)
+        }
+        reload();
+        closeModal();
+      }  
+  
+    const sendSettlement = useCallback(() => {
+      newSettlementRequest()
+      })
+  
+    useEffect(() => {
+      if (trigger) {
+        sendSettlement()
+        setTrigger(false)
+      }
+    }, [trigger]) 
+
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission
-
-    // handling amount error
+    e.preventDefault();
     if (isNaN(amount) || amount <= 0) {
-      alert("Please enter an amount above 0");
+      showErrorToast("Please enter an amount above 0");
       return;
     }
-
     if (!selectedRecipient) {
-      alert("Please select a recipient.");
+      showErrorToast("Please select a recipient.");
       return;
     }
-
-    const today = new Date().toISOString()
-
-    // formatting the input data for payload to backend
-    const payload = {
-      "description": "Settling Payment",
-      "amount": parseFloat(Math.abs(amount).toFixed(2)),
-      "currency": "GBP",
-      "date": today,
-      "categoryId": 6, // to be set to 6 once db is updated
-      "groupId": groupId, // dynamic group id
-      "userId": userId, // The senders Id
-      "userShares": [
-        // for loop
-        {
-          userId: selectedRecipient.userId,
-          shareAmount: parseFloat(Math.abs(amount).toFixed(2)), // Negative for recipient
-        },
-      ],
-    };
-
-    console.log(JSON.stringify(payload)); // Debugging
-
-    const newSettlement = await userSettlement(payload, userId)
-    if (newSettlement.success) {
-      console.log("Settlement added successfully:", newSettlement)
-      window.location.reload();
-      closeModal();
-    } else {
-      console.log("Error adding Settlement:", newSettlement.message)
-    }
-
-    // sending the data to the backend end-point
-    // try {
-    //   const response = await fetch(
-    //     `http://localhost:8080/expense/add-expense?payerId=${userId}`,
-    //     {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify(payload),
-    //     }
-    //   );
-
-    //   if (!response.ok) {
-    //     throw new Error("Failed to submit payment");
-    //   }
-
-    //   const data = await response.json();
-    //   alert("Payment settled successfully!");
-    //   closeModal(); // Close modal on success
-    // } catch (error) {
-    //   alert("An error occurred while processing your payment.");
-    // }
+    setTrigger(true)
   };
 
   return (
@@ -245,5 +210,9 @@ const SettlePayment = ({ closeModal, userId, groupId, recipient=null, balance=nu
     </div>
   );
 };
+
+SettlePayment.propTypes = {
+  reload: PropTypes.func.isRequired,
+}
 
 export default SettlePayment;

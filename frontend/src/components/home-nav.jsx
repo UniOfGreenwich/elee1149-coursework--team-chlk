@@ -1,6 +1,5 @@
-import "../styles/home-nav.css"; // importing the styles file
-import "../styles/reset.css"; // importing the styles file
-
+import "../styles/home-nav.css"; 
+import "../styles/reset.css"; 
 import { Link } from "react-router-dom";
 
 import logo from "../assets/Fairshare-logo.png";

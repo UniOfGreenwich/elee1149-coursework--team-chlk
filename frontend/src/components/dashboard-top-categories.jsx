@@ -1,19 +1,18 @@
-import { useEffect, useState } from "react";
 import "../styles/dashboard-top-categories.css";
 import { TopCategoriesItem } from "./dashboard-top-categories-item";
 import categories from "../data/category-map";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-export function TopCategories({ userId, groupId, loading, data, error }) {
+export function TopCategories({ loading, data, error }) {
   if (loading) {
     return <p>Loading...</p>;
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return <p>Unable to load, see error</p>;
   }
 
-  console.log(data); //printing the data to the console
+  console.log(data);
 
   if (data !== undefined) {
     categories.forEach((category) => {

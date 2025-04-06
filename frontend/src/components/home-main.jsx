@@ -1,15 +1,12 @@
-import "../styles/reset.css"; // importing the styles file
-import "../styles/home-main.css"; // importing the styles file
-
+import "../styles/reset.css";
+import "../styles/home-main.css"; 
 import { Link } from "react-router-dom";
 
 export function HomeMain() {
   return (
     <>
-      {/* hero section */}
       <main>
         <section className="hero">
-          {/* <img src={require('../assets/ellipse-1.png')} alt="" className='ellipse-1 ellipse'/> */}
           <div className="hero-content">
             <p className="greetings">Hi, there!</p>
             <h1 className="hero-title">Your smarter way to split costs</h1>
@@ -29,10 +26,7 @@ export function HomeMain() {
             />
           </div>
         </section>
-
-        {/* feature 1 */}
         <section className="feature feature-1">
-          {/* <img src={require('../assets/ellipse-2.png')} alt="" className='ellipse-2 ellipse'/> */}
           <div className="image-container">
             <img src={require("../assets/feature-1.png")} alt="" />
           </div>
@@ -46,8 +40,6 @@ export function HomeMain() {
             </p>
           </div>
         </section>
-
-        {/* feature 2 */}
         <section className="feature feature-2">
           <div className="content">
             <p className="tagline">feature</p>
@@ -62,8 +54,6 @@ export function HomeMain() {
             <img src={require("../assets/feature-2.png")} alt="" />
           </div>
         </section>
-
-        {/* feature 3 */}
         <section className="feature feature-3">
           <div className="image-container">
             <img src={require("../assets/feature-3.png")} alt="" />
@@ -78,8 +68,6 @@ export function HomeMain() {
             </p>
           </div>
         </section>
-
-        {/* Signup Section */}
         <section className="signup">
           <p className="cta">join us today</p>
           <h3>Easily track, split and settle - together</h3>

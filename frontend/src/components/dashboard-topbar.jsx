@@ -1,12 +1,11 @@
 import notificationIcon from "../assets/notification-icon.png";
-import searchIcon from "../assets/search-icon.png";
 import dateIcon from "../assets/date-arrow-icon.png";
 
 import "../styles/dashboard-topbar.css";
 
 export function TopBar(props) {
   const today = new Date();
-  const formattedDate = new Intl.DateTimeFormat("en-GB").format(today); // UK format (DD/MM/YYYY)
+  const formattedDate = new Intl.DateTimeFormat("en-GB").format(today);
 
   return (
     <div className="topbar-container">

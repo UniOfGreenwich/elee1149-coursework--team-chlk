@@ -1,7 +1,7 @@
 import React from "react";
 import { PieChart, Pie, Cell, Tooltip } from "recharts";
 
-const COLORS = ["#FE6789", "#4495C7"]; // Red for 'Owe', Blue for 'Owed to me'
+const COLORS = ["#FE6789", "#4495C7"];
 
 export function DoughnutChart({ owe, owedToMe }) {
   const data = [
@@ -14,8 +14,8 @@ export function DoughnutChart({ owe, owedToMe }) {
       <PieChart
         width={200}
         height={150}
-        viewBox="0 0 200 150" // Removes unwanted padding
-        preserveAspectRatio="xMidYMid meet" // Ensures proper responsiveness
+        viewBox="0 0 200 150"
+        preserveAspectRatio="xMidYMid meet"
       >
         <Pie
           data={data}

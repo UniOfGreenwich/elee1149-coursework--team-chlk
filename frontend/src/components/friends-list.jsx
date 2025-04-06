@@ -1,15 +1,7 @@
 import "../styles/friends.css";
 import { FriendsListItem } from "./friends-list-item";
 
-export function FriendsList({userId, loading, activeData, pendingData, error}) {
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    return <p>Error: {error}</p>;
-  }
+export function FriendsList({activeData, pendingData }) {
 
   console.log(pendingData)
     return (
@@ -40,6 +32,6 @@ export function FriendsList({userId, loading, activeData, pendingData, error}) {
             </li>
           ))}
         </ul>
-      </div>
+      </div> 
     );
   }

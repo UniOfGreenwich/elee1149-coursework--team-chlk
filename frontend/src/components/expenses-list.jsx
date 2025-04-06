@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "../styles/groups.css"
 import { ExpensesListItem } from "./expenses-list-item.jsx";
-import { Link, useNavigate } from "react-router-dom";
 
 export function ExpensesList({userId, loading, data, error}) {
 
@@ -10,15 +9,15 @@ export function ExpensesList({userId, loading, data, error}) {
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return <p>Unable to load, see error</p>;
   }
-
-  console.log(data); //printing the data to the console
 
   const sortedExpenses = data.sort((a,b) => new Date(a.date) - new Date(b.date)).reverse()
 
 
   return (
+    <div>
+    {data && JSON.stringify(data) !== '[]' ? 
     <div>
       <ul>
         {sortedExpenses.map((e) => (
@@ -37,6 +36,9 @@ export function ExpensesList({userId, loading, data, error}) {
           </li>
         ))}
       </ul>
+    </div> :
+    <p className="no-data-message">No expenses have been added</p>
+    } 
     </div>
   );
 }

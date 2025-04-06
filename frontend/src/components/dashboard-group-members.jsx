@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "../styles/dashboard-group-members.css";
 import { GroupMembersRow } from "./dashboard-group-members-row";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useLocation, useParams } from "react-router-dom";
 import AddMember from "./add-member";
 
-export function GroupMembers({ userId, groupId, loading, data, error }) {
-  const [modalType, setModalType] = useState(null); // null means no modal is open
+export function GroupMembers({ userId, groupId, loading, data, error, reload}) {
+  const [modalType, setModalType] = useState(null);
   const openModal = (type) => setModalType(type);
   const closeModal = () => setModalType(null);
   let params = useParams();
@@ -19,15 +19,12 @@ export function GroupMembers({ userId, groupId, loading, data, error }) {
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return <p>Unable to load, see error</p>;
   }
 
-  // Filter out the logged-in user
   const filteredMembers = data.filter(
     (member) => member.userId !== parseInt(userId)
   );
-
-  console.log(filteredMembers); //printing the filtered data to the console
 
   const sortedMembers = filteredMembers.sort((a, b) => a.balance - b.balance);
 
@@ -44,6 +41,8 @@ export function GroupMembers({ userId, groupId, loading, data, error }) {
           </button>
         </Link>
       </div>
+      {data && JSON.stringify(filteredMembers) !== '[]' ? 
+      <div>
       <p className="balance-title">Balance</p>
       <ul className="component-content">
         {sortedMembers.map((e) => (
@@ -59,11 +58,15 @@ export function GroupMembers({ userId, groupId, loading, data, error }) {
           </li>
         ))}
       </ul>
+      </div> :
+      <p className="no-data-message">No other members have been added</p>
+}
       {modalType === "AddMember" && (
         <AddMember
           userId={params.id}
           groupId={params.groupId}
           closeModal={closeModal}
+          reload={reload}
         />
       )}
     </div>

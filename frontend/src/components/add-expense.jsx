@@ -1,35 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import closeIcon from "../assets/close-icon.png";
 import "../styles/quick-action-buttons.css";
 import categories from "../data/category-map";
-import { GroupMembersData } from "../methods/use-axios.ts";
-import axios from "axios";
-import { Dialog } from "@mui/material";
+import { AddExpenseRequest, GroupMembersData } from "../methods/use-axios.ts";
+import PropTypes from 'prop-types';
+import { showErrorToast, showSuccessToast } from "../methods/http-error-handler";
 
-async function userExpense(expenseDetails, userId) {
-  return axios
-    .post(`expense/add-expense?payerId=${userId}`, expenseDetails, {
-      "Content-Type": "application/json",
-    })
-    .then((response) => response.data);
-}
-
-const AddExpense = ({ closeModal, userId, groupId }) => {
+const AddExpense = ({ closeModal, userId, groupId, reload}) => {
+  const [trigger, setTrigger] = useState(false)
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [shareOption, setShareOption] = useState("equal");
   const [customAmounts, setCustomAmounts] = useState({});
   const [splitAmounts, setSplitAmounts] = useState({});
   const [amount, setAmount] = useState(0);
   const [description, setDescription] = useState("");
-  const [category, setCategory] = useState(null); // Store the categoryId
+  const [category, setCategory] = useState(null);
   const [date, setDate] = useState("");
   const [currency, setCurrency] = useState("GBP");
 
   const [loading, data, error, request] = GroupMembersData(groupId, userId);
-
-  if (error) {
-    console.log("Error fetching users:", error);
-  }
 
   const filteredUsers = data.filter(
     (user) => user.userId !== parseInt(userId, 10)
@@ -88,46 +77,57 @@ const AddExpense = ({ closeModal, userId, groupId }) => {
     setSplitAmounts(splitData);
   };
 
+  const userShares = selectedUsers.map((user) => ({
+    userId: user.userId,
+    shareAmount:
+      shareOption === "equal"
+        ? parseFloat(splitAmounts[user.userId] || 0) 
+        : parseFloat(customAmounts[user.userId] || 0), 
+  }));
+
+  const formattedDate = date === "" ? "" : new Date(date).toISOString();
+
+  const expenseData = {
+    description: description, 
+    amount: parseFloat(amount), 
+    currency: currency,
+    date: formattedDate, 
+    categoryId: category,
+    groupId: parseInt(groupId),
+    userId: parseInt(userId),
+    userShares: userShares,
+  };
+
+  const [newExpenseLoading, newExpenseData, newExpenseError, newExpenseRequest] = AddExpenseRequest(userId, expenseData)
+
+  if(newExpenseData && JSON.stringify(newExpenseData) !== '[]' ) {
+      if(newExpenseData.success) {
+        showSuccessToast(newExpenseData.message)
+      } else {
+        showErrorToast(newExpenseData.message)
+      }
+      reload();
+      closeModal();
+    }  
+
+  const sendExpense = useCallback(() => {
+    newExpenseRequest()
+    })
+
+  useEffect(() => {
+    if (trigger) {
+      sendExpense()
+      setTrigger(false)
+    }
+  }, [trigger]) 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // handling amount error
     if (isNaN(amount) || amount <= 0) {
-      alert("Please enter an amount above 0");
+      showErrorToast("Please enter an amount above 0");
       return;
     }
-
-    const userShares = selectedUsers.map((user) => ({
-      userId: user.userId,
-      shareAmount:
-        shareOption === "equal"
-          ? parseFloat(splitAmounts[user.userId] || 0) // Use splitAmounts for equal shares
-          : parseFloat(customAmounts[user.userId] || 0), // Use customAmounts for custom shares
-    }));
-
-    const formattedDate = new Date(date).toISOString();
-
-    const expenseData = {
-      description: description, // From the input field
-      amount: parseFloat(amount), // From the amount input
-      currency: currency,
-      date: formattedDate, // Ensure date is in ISO format
-      categoryId: category,
-      groupId: parseInt(groupId),
-      userId: parseInt(userId),
-      userShares: userShares,
-    };
-
-    console.log(expenseData);
-
-    const newExpense = await userExpense(expenseData, userId);
-    if (newExpense.success) {
-      console.log("Expense added successfully:", newExpense);
-      window.location.reload();
-      closeModal();
-    } else {
-      console.log("Error adding expense:", newExpense.message);
-    }
+    setTrigger(true)
   };
 
   return (
@@ -202,8 +202,8 @@ const AddExpense = ({ closeModal, userId, groupId }) => {
                 id="category"
                 className="expense-category"
                 required
-                value={category || ""} // Use categoryId or empty string
-                onChange={(e) => setCategory(parseInt(e.target.value))} // Store categoryId as a number
+                value={category || ""}
+                onChange={(e) => setCategory(parseInt(e.target.value))}
               >
                 <option value="" disabled>
                   Select Category
@@ -221,7 +221,7 @@ const AddExpense = ({ closeModal, userId, groupId }) => {
             <div className="form-row">
               <label htmlFor="date">Date:</label>
               <input
-                type="date" // Or use a date picker component
+                type="date"
                 id="date"
                 required
                 value={date}
@@ -304,5 +304,9 @@ const AddExpense = ({ closeModal, userId, groupId }) => {
     </div>
   );
 };
+
+AddExpense.propTypes = {
+  reload: PropTypes.func.isRequired,
+}
 
 export default AddExpense;

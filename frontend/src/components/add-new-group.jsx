@@ -1,42 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import closeIcon from "../assets/close-icon.png";
 import "../styles/quick-action-buttons.css";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-
-async function userNewGroup(groupInformation) {
-  return axios.post(
-    `group/create`,
-    groupInformation,
-    {'Content-Type': 'application/json'}
-  )
-  .then(response => response.data)
-}
+import { AddNewGroupRequest } from "../methods/use-axios.ts";
+import { showErrorToast, showSuccessToast } from "../methods/http-error-handler";
 
 export default function AddNewGroup({ closeModal, userId }) {
+  const [trigger, setTrigger] = useState(false)
   const [groupName, setGroupName] = useState("");
   const navigate = useNavigate();
 
+  const payload = {
+    groupName: groupName,
+    userId: userId,
+  };
+
+  const [loading, data, error, request] = AddNewGroupRequest(payload)
+
+  if(data && JSON.stringify(data) !== '[]' ) {
+    if(data.success) {
+      showSuccessToast(data.message)
+      navigate(`/user/${userId}/groups/${data.groupId}`, { state: { groupName: groupName }, });
+    } else {
+      showErrorToast(data.message)
+    }
+    closeModal();
+  }
+
+  const sendGroup = useCallback(() => {
+    request()
+    })
+  
+  useEffect(() => {
+    if (trigger) {
+      sendGroup()
+      setTrigger(false)
+    }
+  }, [trigger])
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const groupData = {
-      groupName: groupName,
-      userId: userId,
-    };
-
-    const newGroup = await userNewGroup(groupData)
-    if (newGroup.success) {
-      console.log("Group created successfully:", newGroup)
-      navigate(`/user/${userId}/groups/${newGroup.groupId}`, {
-            state: { groupName: groupName },
-          });
-    
-          setGroupName("");
-          closeModal();
-    } else {
-      console.log("Error creating group:", newGroup.message)
-    }
+    setTrigger(true)
   };
 
   return (

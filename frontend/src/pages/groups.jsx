@@ -4,11 +4,10 @@ import { useParams } from "react-router-dom";
 import { GroupsData } from "../methods/use-axios.ts";
 import { TopBar } from "../components/dashboard-topbar";
 import React, { useState } from "react";
-
 import AddNewGroup from "../components/add-new-group";
 
 export function Groups() {
-  const [modalType, setModalType] = useState(null); // null means no modal is open
+  const [modalType, setModalType] = useState(null);
 
   const openModal = (type) => setModalType(type);
   const closeModal = () => setModalType(null);
@@ -32,17 +31,26 @@ export function Groups() {
           </button>
         </div>
         <div className="groups-list-wrapper">
-          <p className="group-members-title">No. of Members</p>
-          <ul className="groups-component">
-            <li className="groups-component-list">
-              <GroupsList
-                userId={params.id}
-                loading={loading}
-                data={data}
-                error={error}
-              />
-            </li>
-          </ul>
+          {loading ?
+            <p>Loading...</p> :
+            error ?
+              <p>Unable to load, see error</p> :
+              !data || JSON.stringify(data) === '[]' ? 
+              <p className="no-data-message">No groups have been created</p> :
+              <div>
+                <p className="group-members-title">No. of Members</p>
+                <ul className="groups-component">
+                  <li className="groups-component-list">
+                    <GroupsList
+                      userId={params.id}
+                      loading={loading}
+                      data={data}
+                      error={error}
+                    />
+                  </li>
+                </ul>
+              </div>
+          }
         </div>
         {modalType === "AddNewGroup" && (
           <AddNewGroup

@@ -19,7 +19,7 @@ export function ExpensesListItem(props) {
               <img src={foundCategory.categoryIcon} alt="" />
             </div>
           : null}
-          <div className="expense-titles">
+          <div className={"expense-titles" + (props.category === settlementCategoryId ? "-settlement" : "")}>
               <p className={"expense-name" + (props.category === settlementCategoryId ? "-settlement" : "")}>{props.expenseName}</p>
               { props.category !== settlementCategoryId ?
                 <p className="category">{foundCategory.categoryName}</p>

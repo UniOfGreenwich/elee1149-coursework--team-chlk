@@ -4,18 +4,25 @@ import { FriendsRequest } from "../components/friends-request";
 import { FriendsList } from "../components/friends-list";
 import { FriendsListData, PendingRequestData } from "../methods/use-axios.ts";
 import { TopBar } from "../components/dashboard-topbar";
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import AddNewFriend from "../components/add-new-friend";
 
 
 export function Friends() {
-  const [modalType, setModalType] = useState(null); // null means no modal is open
+  const [modalType, setModalType] = useState(null);
 
   const openModal = (type) => setModalType(type);
   const closeModal = () => setModalType(null);
   let params = useParams()
   const [friendLoading, friendData, friendError, friendRequest] = FriendsListData(params.id)
   const [pendingLoading, pendingData, pendingError, pendingRequest] = PendingRequestData(params.id)
+
+  const reloadData = useCallback(() => {
+    friendRequest()
+    pendingRequest()
+  })
+
+  useEffect(() => reloadData(), [])
   
   const pendingRecievedData = pendingData.friends !== undefined ? !pendingData.friends.filter(item => item.recieverId.toString() === params.id) ? null : pendingData.friends.filter(item => item.recieverId.toString() === params.id) : null
   const pendingSentData = pendingData.friends !== undefined ? !pendingData.friends.filter(item => item.senderId.toString() === params.id) ? null : pendingData.friends.filter(item => item.senderId.toString() === params.id) : null
@@ -41,26 +48,48 @@ export function Friends() {
       </div>
       {pendingRecievedData !== null ? pendingRecievedData.length !== 0 ? (
       <div className="request-list-wrapper">
-        <h2 className="friends-request-header">Friend Requests</h2>
-          <ul className="request-component">
-            <li className="request-component-list">
-              <FriendsRequest userId={params.id} loading={pendingLoading} data={pendingRecievedData} error={pendingError}/>
-            </li>
-          </ul>
-        </div>
+        {pendingLoading ?
+          <p>Loading...</p> :
+          pendingError ?
+            <p>Unable to load, see error</p> :
+            <div>
+              <h2 className="friends-request-header">Friend Requests</h2>
+              <ul className="request-component">
+                <li className="request-component-list">
+                  <FriendsRequest userId={params.id} data={pendingRecievedData} reload={reloadData}/>
+                </li>
+              </ul>
+            </div>
+        }
+      </div>
     ): null : null }
       <div className={"friend-list-wrapper-" + (pendingRecievedData !== null ? pendingRecievedData.length !== 0 ? "with-requests" : "without-requests" : "without-requests" )}>
-        <h2 className="friends-list-header">Your Friends</h2>
-        <p className="friend-status-title">Status</p>
-        <ul className={"friends-component-" + (pendingRecievedData !== null ? pendingRecievedData.length !== 0 ? "with-requests" : "without-requests" : "without-requests" )}>
-          <li className="friends-component-list">
-            <FriendsList userId={params.id} loading={combinedLoading} activeData={friendData.friends} pendingData={pendingSentData} error={combinedError}/>
-          </li>
-        </ul>
+        {combinedLoading ?
+          <p>Loading...</p> :
+          combinedError ?
+            <p>Unable to load, see error</p> :
+            <div>
+          <h2 className="friends-list-header">Your Friends</h2>
+          {friendData && pendingSentData && JSON.stringify(friendData) !== '[]' && JSON.stringify(pendingSentData) !== '[]' ? 
+            <div>
+              <p className="friend-status-title">Status</p>
+              <ul className={"friends-component-" + (pendingRecievedData !== null ? pendingRecievedData.length !== 0 ? "with-requests" : "without-requests" : "without-requests" )}>
+                <li className="friends-component-list">
+                  <FriendsList activeData={friendData.friends} pendingData={pendingSentData}/>
+                </li>
+              </ul> 
+            </div> :
+          <p className="no-data-message">No friends have been added</p>
+          }
+        </div>
+        } 
       </div>
       {modalType === "AddNewFriend" && (
-        <AddNewFriend userId={params.id} groupId={params.groupId} closeModal={closeModal} />
+        <AddNewFriend userId={params.id} reload={reloadData} closeModal={closeModal} />
       )}
+      
+        
+        
     </div>
 </div>
   );

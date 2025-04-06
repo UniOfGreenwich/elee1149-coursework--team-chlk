@@ -1,8 +1,6 @@
-import "../styles/reset.css"; // importing the styles file
-import "../styles/home-footer.css"; // importing the styles file
-
+import "../styles/reset.css"; 
+import "../styles/home-footer.css"; 
 import { Link } from "react-router-dom";
-
 import logo from "../assets/Fairshare-logo.png";
 
 export function HomeFooter() {

@@ -1,10 +1,8 @@
 import "../styles/dashboard.css";
-import { SideBar } from "../components/dashboard-sidebar";
 import { TopBar } from "../components/dashboard-topbar";
 import { useParams } from "react-router-dom";
 import { AllExpenseData } from "../methods/use-axios.ts";
 import { ExpensesList } from "../components/expenses-list";
-import { useEffect, useState } from "react";
 import "../styles/expenses.css";
 
 export function Expenses() {

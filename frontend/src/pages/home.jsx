@@ -1,4 +1,3 @@
-// Home Page of the website
 import { HomeNav } from "../components/home-nav";
 import { HomeMain } from "../components/home-main";
 import { HomeFooter } from "../components/home-footer";
