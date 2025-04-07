@@ -7,7 +7,7 @@ import expensesIcon from "../assets/expenses-icon.png";
 import friendsIcon from "../assets/friends-icon.png";
 import groupsIcon from "../assets/groups-icon.png";
 import logoutIcon from "../assets/logout-icon.png";
-import profilePicture from "../assets/profile-picture.png";
+import profilePicture from "../assets/default-profile-picture.png";
 
 export function SideBar( { token, setToken } ) {
   const logout = () => {
