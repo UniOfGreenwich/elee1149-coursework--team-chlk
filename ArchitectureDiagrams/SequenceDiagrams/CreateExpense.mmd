@@ -25,11 +25,6 @@ sequenceDiagram
         ExpenseService-->>ExpenseController: Expense with "GroupNotFoundError"
     else Payer Not in Group
         ExpenseService-->>ExpenseController: Expense with "PayerNotInGroupError"
-    else Expense Exists
-        ExpenseService->>ExpenseRepository: existsByExpenseNameAndGroupId(expenseName, groupId)
-        ExpenseRepository-->>ExpenseService: true / false
-        alt Expense Exists
-            ExpenseService-->>ExpenseController: Expense with "ExpenseExistsInGroupError"
         else Create New Expense
             ExpenseService->>ExpenseRepository: save(newExpense)
             ExpenseRepository-->>ExpenseService: Saved Expense
@@ -39,4 +34,3 @@ sequenceDiagram
             end
             ExpenseService-->>ExpenseController: New Expense created
         end
-    end
