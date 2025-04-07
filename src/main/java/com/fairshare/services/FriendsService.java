@@ -2,7 +2,6 @@ package com.fairshare.services;
 
 import com.fairshare.DTO.FriendsDTO;
 import com.fairshare.DTO.FriendsListDTO;
-import com.fairshare.DTO.UserWithBalance;
 import com.fairshare.Responses.FriendsResponse;
 import com.fairshare.entity.Friends;
 import com.fairshare.entity.User;

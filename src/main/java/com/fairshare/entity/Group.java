@@ -84,14 +84,6 @@ public class Group {
         this.message = message;
     }
 
-    //    public User getUser() {
-//        return userId;
-//    }
-//
-//    public void setUser(User userId) {
-//        this.userId = userId;
-//    }
-
     @JsonIgnore
     public Set<User> getUsers() {
         return users;

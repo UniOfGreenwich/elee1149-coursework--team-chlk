@@ -1,7 +1,6 @@
 package com.fairshare.DTO;
 
 import com.fairshare.entity.User;
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
 public class UserWithBalance extends User {
     private Double balance;
