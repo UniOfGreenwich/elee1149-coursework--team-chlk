@@ -1,0 +1,27 @@
+graph TD
+    A[Start] --> B{"Receive GET /friends/list Request - userId"};
+    B --> C[Extract userId];
+    C --> D(Call Get Friends List Service);
+
+subgraph "FriendsService: getUserWithFriends"
+E[Find List<Friends> using findFriendsByUserId- userId];
+E --> F{Map Friends Stream};
+F -- For Each Friend --> G[Determine friendUserId - other user in pair];
+G --> H[Find friend User entity by friendUserId];
+H --> I{User Found?};
+I -- No --> J[Error- User Not Found];
+I -- Yes --> K[Create FriendsDTO from User details];
+K --> F;
+F -- End Stream --> L[Collect results to List<FriendsDTO>];
+L --> M[Create FriendsListDTO wrapper];
+M --> N[Service Returns FriendsListDTO];
+end
+
+D --> E;
+
+J --> O{Process Service Result};
+N --> O;
+
+O --> P[Create ResponseEntity.ok - FriendsListDTO];
+P --> ZEnd[End];
+
