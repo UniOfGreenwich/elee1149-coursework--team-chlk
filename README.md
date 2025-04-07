@@ -119,10 +119,7 @@ The requirements engineering documentation can be found here: [requirements-engi
 ## Security
 Currently security features Password Ecnryption using [Encryption](https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/crypto/bcrypt/BCryptPasswordEncoder.html)
 
-In an ideal world the following feaures would have been added:
-- Secret Manager to store the DB password (If we made the website public this should be hidden as is bad security showing the secret) Note this was attempted but GCP secret manager was not accepting it.
-- API authentication (authenticate users before allowing api usage)
-- Locking down endpoint (Only allow endpoints to be hit through the app internally and not through external means)
+
 
 ## Testing
 Fairshare includes comprehensive testing in order to ensure the app is reliable and working at each stage of development.
@@ -171,7 +168,29 @@ More details can be found in the [hopscotch](testing-documents/hopscotch) direct
 Application test were performed as a group on 05/04/25 in person/virtual. A testing table was created by: Kyle, and listed the definitions of each
 test and the expected vs actual results. The testing table can be found [table](testing-documents/test-table.md).  
 
+## Future Improvements
+Below is a list of additional features and security we wish to add in future development.
+### Additional Features
+- Profile Customisation
+- Adding profile images
+- Adding additional categories or user able to add their own custom categories
+- Additional payment features: adding bank cards, Paypal etc
+- Adding statistical analysis: Charts etc showing the groups trends etc
 
+### Security Concerns to Address
+In an ideal world the following feaures would have been added:
+
+Due to time restrictions when developing this product security is an area which is currently lacking. Currently the system only encrypts passwords but there are many areas to address.
+
+**Secret Manager:** GCP has a secret manager function which can be used to hold sensitive information such as DB passwords or Code Secrets. I attempted to add our DB password into Google Secret Manager and
+apply changes to the code to use this secret. See [GCP Branch](https://github.com/UniOfGreenwich/elee1149-coursework--team-chlk/tree/GCP-deployment). Unfortunetly due to an issue, secret manager would not authenticate the password. I had troubleshooted many options such as providing the right access and roles to the GCP Service Account, ensure the secret was the correct value by comparing it to our password in a text editor, checked to see if our DB was blocking any external access. None of these seemed to be an issue. Upon inspection I suspect it is a timing issue with the way the app is being deployed to GCP and is timing wrong when using the secret to connect to the DB. If I had more time for development I would have hopefully resolved this issue by using a Pipeline etc for deployment as it is a HIGH security risk having the DB password in the code. My justification for this being okay is this is a University asssignment and all data is test data so therefore doesn't contain any personal data, so no data breaches will be broken. 
+
+**API Authentication:** Additionally Authentication would be added to authenitcate the User on login and then provide a token for API calls. This would make the APIs more secure as they could not be accessed without a token.
+
+
+**Locking Down Endpoints:** The API security should be increased to allow the endpoints to not be hit externally. Locking down the endpoints so the calls can only be made through the app would increase security.
+
+**Vanity URLS:** Currnelty the URLs in the app are still including the endpoints. Going foward with more time we would make vanity URLs. These act as a the name suggest a fake URL hiding the main URL. 
 
 
 ## Dependencies
@@ -212,19 +231,21 @@ test and the expected vs actual results. The testing table can be found [table](
 </details>
 
 ## Contributers
-#### Kyle: 
-- Spring boot initialisation
+#### Kyle (Main Backend Developer, Secondary Database Manager): 
+- Backend Tech Stack: Spring boot initialisation, Java, Postgres/SQL
+- Java backend: Structure decisions, main code setup.
 - Java backend: Controllers, Services, Repositorys, Entitys
-- Java unit tests
+- Java Unit tests: for above
+- 
 - Security Encryption
 - GCP Deployment
 - Docker Configuration
-- Documentation: ReadMe 
-- Documentation: Testing Table
+- Documentation: ReadMe (All Sections)
+- Documentation: Application Testing Table
 - Documentation: Class Digrams
 - GCP Deployment
 
-Charu:
+**Charu (Main Database Manager, Secondary Backend Role):**
 
 Hamza:
 - Tech Stack: React, JSX, CSS and HTML
