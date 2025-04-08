@@ -5,6 +5,15 @@ public class CreateGroupRequest {
     private Integer groupId;
     private Integer userId;
 
+    public CreateGroupRequest(String groupName, Integer groupId, Integer userId) {
+        this.groupName = groupName;
+        this.groupId = groupId;
+        this.userId = userId;
+    }
+
+    public CreateGroupRequest() {
+    }
+
     public String getGroupName() {
         return groupName;
     }
