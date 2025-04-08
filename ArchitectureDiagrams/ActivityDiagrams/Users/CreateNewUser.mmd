@@ -1,0 +1,26 @@
+graph TD
+
+    A[Start] --> B{Receive POST /users/newUser Request};
+    B --> C[Extract user details];
+    C --> D(Call Create User Service);
+
+subgraph "UserService: createUser"
+E[Check if email exists] --> F{Email Exists?};
+F -- Yes --> G[Service Returns Null];
+F -- No --> H[Create User Entity];
+H --> I[Set Details & Encode Pass];
+I --> J[Save User via Repository];
+J --> K[Service Returns Saved User];
+end
+
+D --> E;
+
+K --> L{Result is User?};
+G --> L;
+
+L -- Yes --> M[Create Success Response];
+L -- No --> N[Create Failure Response - User exists];
+M --> O[Return Response];
+N --> O;
+O --> Z[End];
+

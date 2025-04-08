@@ -1,0 +1,158 @@
+.friends-wrapper {
+    width: 100%;
+}
+
+.friends-header {
+    display: flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom: 16px;
+}
+
+.add-friend-button {
+    background-color: #4495c7;
+    padding: 1rem;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    color: white;
+}
+
+.request-list-wrapper {
+    max-height: calc(30vh - 2rem);
+    background-color: #222645;
+    padding: 1rem;
+    border-radius: 8px;
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.request-component {
+    max-height: calc(30vh - 6rem);
+    overflow-y: scroll;
+    scrollbar-width: 1rem;
+    scrollbar-color: #333864 #222645; 
+}
+
+.request-component-list {
+    width: 100%;
+}
+
+.friend-request-item {
+    border-bottom: 1px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+    margin-top: 8px;
+}
+
+.request-username {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.request-name {
+    font-size: 1rem;
+}
+
+.request-email {
+    font-size: 12px;
+    font-weight: 300;
+}
+
+.request-user-decision {
+    display: flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.request-accept-button {
+    display: flex;
+    height: 40px;
+    width: 75px;
+    background-color: #4495c7;
+    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+    font-weight: bold;
+    color: white;
+}
+
+.request-decline-button {
+    display: flex;
+    height: 40px;
+    width: 75px;
+    background-color: #fe6789;
+    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+}
+
+.friend-list-wrapper-with-requests {
+    max-height: calc(50vh - 0.5rem);
+    background-color: #222645;
+    padding: 1rem;
+    border-radius: 8px;
+    width: 100%;
+}
+
+.friend-list-wrapper-without-requests {
+    max-height: calc(80vh - 2rem);
+    background-color: #222645;
+    padding: 1rem;
+    border-radius: 8px;
+    width: 100%;
+}
+
+.friends-list-header {
+    margin-bottom: 8px;
+}
+
+.friend-status-title {
+    font-size: 10px;
+    text-align: right;
+}
+
+.friends-component-with-requests {
+    max-height: calc(40vh + 1rem);
+    overflow-y: scroll;
+    scrollbar-width: 1rem;
+    scrollbar-color: #333864 #222645;
+}
+
+.friends-component-without-requests {
+    max-height: calc(70vh - 1.5rem);
+    overflow-y: scroll;
+    scrollbar-width: 1rem;
+    scrollbar-color: #333864 #222645;
+}
+
+.friends-component-list {
+    width: 100%;
+}
+
+.friend-list-item {
+    border-bottom: 1px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+}
+
+.friend-username {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.friend-name {
+    font-size: 1rem;
+}
+
+.friend-email {
+    font-size: 12px;
+    font-weight: 300;
+}

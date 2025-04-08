@@ -1,0 +1,156 @@
+.component-options {
+  display: flex;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.all-expenses {
+  border-bottom: 1px solid white;
+}
+
+.view-all-button {
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+}
+
+.view-all-button:hover {
+  opacity: 1;
+  background-color: #333864;
+  border-radius: 8px;
+}
+
+.view-all {
+  font-size: 12px;
+  font-weight: 300;
+  padding-right: 8px;
+}
+
+.expense-list {
+  padding-top: 24px;
+}
+
+.recent-expenses-row {
+  border-bottom: 1px solid white;
+  display: flex;
+  align-items: center;
+  padding: 1rem 0;
+  margin-top: 8px;
+}
+
+.expense-details {
+  display: flex;
+  width: 30%;
+}
+
+.category-tile {
+    display: flex;
+    height: 40px;
+    width: 40px;
+    min-width: 40px;
+    background-color: #D2D2D240;
+    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
+}
+
+.expense-titles {
+  padding-left: 16px;
+}
+
+.expense-name {
+    font-weight: bold;
+    font-size: 1rem;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+}
+
+.expense-name-settlement {
+    font-weight: bold;
+    font-size: 1rem;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+    color: #9976FF;
+}
+
+.category {
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.expense-date {
+    width: 40%;
+    font-size: 12px;
+    font-weight: 300;
+    text-align: center;
+}
+
+.expense-date-settlement {
+    width: 40%;
+    font-size: 12px;
+    font-weight: 300;
+    text-align: center;
+    color: #9976FF;
+}
+
+.expense-values {
+  display: flex;
+  justify-content: right;
+  width: 30%;
+}
+
+.total-expense {
+  border-right: 0.2px solid white;
+  padding-right: 16px;
+  width: 50%;
+}
+
+.total-expense-settlement {
+  border-left: 0.2px solid white;
+  padding-left: 16px;
+  width: 50%;
+}
+
+.expense-amount {
+  font-weight: bold;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.expense-amount-settlement {
+    font-weight: bold;
+    font-size: 1rem;
+    text-align: center;
+    color: #9976FF;
+}
+
+.expense-payer {
+  font-size: 10px;
+  font-weight: 300;
+  text-align: center;
+}
+
+.expense-payer-settlement {
+    font-size: 10px;
+    font-weight: 300;
+    text-align: center;
+    color: #9976FF;
+}
+
+.expense-split {
+  padding-left: 16px;
+  width: 50%;
+}
+
+.split-amount {
+  font-weight: bold;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.scroll {
+  max-height: 500px;
+  overflow: scroll;
+}

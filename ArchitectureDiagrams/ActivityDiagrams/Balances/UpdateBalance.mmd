@@ -1,0 +1,30 @@
+graph TD
+    A[Start] --> B{"Receive POST /balances/update Request (payerId, payeeId, amount)"};
+    B --> C[Extract payerId, payeeId, amount];
+    C --> D(Call Update Balance Service);
+
+subgraph "BalanceService: updateBalance"
+E[Find Balance via repository.findByUsers - payerId, payeeId];
+E --> F{Balance Found - is null?};
+F -- Yes Is Null --> G[Create new Balance object];
+G --> H[Set user1Id=payerId, user2Id=payeeId];
+H --> I[Set netAmount = amount];
+
+F -- No Exists --> J{Is balance.user1Id == payerId?};
+J -- Yes --> K[Update netAmount = netAmount + amount];
+J -- No --> L[Update netAmount = netAmount - amount];
+
+I --> M[Save Balance object - New];
+K --> N[Save Balance object - Updated];
+L --> N;
+
+M --> O[Service Completes Successfully];
+N --> O;
+end
+
+D --> E;
+
+O --> P{Process Service Result};
+
+P --> ZEnd[End];
+

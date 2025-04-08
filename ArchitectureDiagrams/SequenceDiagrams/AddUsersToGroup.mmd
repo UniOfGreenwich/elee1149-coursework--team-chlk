@@ -1,0 +1,55 @@
+
+sequenceDiagram
+    title Add users to group
+    actor User
+    participant User Interface
+    participant GroupController
+    participant GroupService
+    participant GroupRepository
+    participant UserRepository
+    participant FairShare Database
+
+    User->>User Interface: Selects group, enters userId to add
+    User Interface->>GroupController: addUserToGroup(groupId, addUserToGroupRequest)
+    GroupController->>GroupService: addUserToGroup(groupId, addUserToGroupRequest.userId)
+
+    alt Group or User not found
+        GroupService->>GroupRepository: findById(groupId)
+        GroupRepository->> FairShare Database: //DB query
+        FairShare Database-->>GroupRepository: Group object (or null if not found)
+        GroupRepository-->>GroupService: Group object (or null)
+        GroupService->>UserRepository: findById(addUserToGroupRequest.userId)
+        UserRepository->>FairShare Database: //DB query
+        FairShare Database-->>UserRepository: User object (or null if not found)
+        UserRepository-->>GroupService: User object (or null)
+        GroupService-->>GroupController: Group with "GroupNotFoundError" or "UserNotFoundError" or "GroupAndUserError"
+        GroupController-->>User Interface: "Group not found" or "User not found" or "Group and User not found"
+    else User already in group
+        GroupService->>GroupRepository: findById(groupId)
+        GroupRepository->>FairShare Database: //DB query
+        FairShare Database-->>GroupRepository: Group object (or null if not found)
+        GroupRepository-->>GroupService: Group object (or null)
+        GroupService->>UserRepository: findById(addUserToGroupRequest.userId)
+        UserRepository->>FairShare Database: //DB query
+        FairShare Database-->>UserRepository: User object (or null if not found)
+        UserRepository-->>GroupService: User object (or null)
+        GroupService->>GroupService: group.getUsers().contains(user)
+        GroupService-->>GroupController: Group with "UserAlreadyInGroup"
+        GroupController-->>User Interface: "User is already in this group"
+    else Add user to group successfully
+        GroupService->>GroupRepository: findById(groupId)
+        GroupRepository->>FairShare Database: //DB query
+        FairShare Database-->>GroupRepository: Group object (or null if not found)
+        GroupRepository-->>GroupService: Group object (or null)
+        GroupService->>UserRepository: findById(addUserToGroupRequest.userId)
+        UserRepository->>FairShare Database: //DB query
+        FairShare Database-->>UserRepository: User object (or null if not found)
+        UserRepository-->>GroupService: User object (or null)
+        GroupService->>GroupService: group.getUsers().add(user)
+        GroupService->>GroupRepository: save(group)
+        GroupRepository->>FairShare Database: //DB interaction
+        FairShare Database-->>GroupRepository: Group object (updated)
+        GroupRepository-->>GroupService: Group object (updated)
+        GroupService-->>GroupController: Group object (updated)
+        GroupController-->>User Interface: "User added to group successfully", userId
+    end

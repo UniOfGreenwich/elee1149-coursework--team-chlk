@@ -1,0 +1,24 @@
+graph TD
+    A[Start] --> B{"Receive GET /balances/[user1]/[user2] Request"};
+B --> C[Extract user1 & user2];
+C --> D(Call Get Net Balance Service);
+
+subgraph "BalanceService: getNetBalance"
+E[Find Balance via repository.findByUsers - user1, user2];
+E --> F{Balance Found - is null?};
+F -- Yes Is Null --> G[Service Returns null];
+
+F -- No Exists --> H{Is balance.user1Id == user1?};
+H -- Yes --> I[Service Returns balance.netAmount];
+H -- No --> J[Service Returns -balance.netAmount];
+end
+
+D --> E;
+
+G --> K{Process Service Result};
+I --> K;
+J --> K;
+
+K --> L[Return Double result or null];
+L --> ZEnd[End];
+

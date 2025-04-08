@@ -1,0 +1,29 @@
+graph TD
+    A[Start] --> B{"Receive POST /friends/sendRequest Request - userId, friendEmail"};
+    B --> C[Extract userId & friendEmail];
+    C --> D(Call Send Friend Request Service);
+
+subgraph "FriendsService: sendFriendRequest"
+E[Check if friendEmail exists via UserRepository];
+E --> F{Email Exists?};
+F -- No --> G[Create Response 'User not found', false];
+F -- Yes --> H[Find Friend User by Email];
+H --> I[Get friendUserId];
+I --> J[Check if friendship exists userId, friendUserId];
+J --> K{Friendship Exists?};
+K -- Yes --> L[Create Response 'Request already sent', false];
+K -- No --> M[Create new Friends entity];
+M --> N[Set userId, friendUserId, status=false Pending];
+N --> O[Save Friends entity via Repository];
+O --> P[Create Response 'Request sent', true];
+end
+
+D --> E;
+
+G --> Q{Process Service Result};
+L --> Q;
+P --> Q;
+
+Q --> R[Return FriendsResponse];
+R --> ZEnd[End];
+

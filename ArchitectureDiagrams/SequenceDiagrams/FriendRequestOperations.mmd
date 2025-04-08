@@ -1,0 +1,42 @@
+
+sequenceDiagram
+    title Friend Request Operations
+    actor User
+    participant FriendsController
+    participant FriendsService
+    participant UserRepository
+    participant FriendsRepository
+
+    User->>FriendsController: POST /friends/sendRequest with userId, friendEmail
+    FriendsController->>FriendsService: sendFriendRequest(userId, friendEmail)
+    FriendsService->>UserRepository: existsByEmail(friendEmail)
+    alt User Not Found
+        UserRepository-->>FriendsService: false
+        FriendsService-->>FriendsController: FriendsResponse("User not found", false)
+    else User Found
+        UserRepository-->>FriendsService: true
+        FriendsService->>UserRepository: findByEmail(friendEmail)
+        UserRepository-->>FriendsService: User object (friendUser)
+        alt Friendship Exists
+            FriendsService->>FriendsRepository: existsFriendship(userId, friendUserId)
+            FriendsRepository-->>FriendsService: true
+            FriendsService-->>FriendsController: FriendsResponse("Friend request already sent", false)
+        else Create Friend Request
+            FriendsService->>FriendsRepository: save(new Friends)
+            FriendsRepository-->>FriendsService: Friends saved
+            FriendsService-->>FriendsController: FriendsResponse("Friend request sent", true)
+        end
+    end
+
+    User->>FriendsController: POST /friends/acceptFriendRequest with requestId
+    FriendsController->>FriendsService: acceptFriendRequest(requestId)
+    FriendsService->>FriendsRepository: findById(requestId)
+    FriendsRepository-->>FriendsService: Friends object
+    FriendsService->>FriendsRepository: save(Friends with status ACCEPTED)
+    FriendsService-->>FriendsController: ResponseEntity.ok("Friend request accepted.")
+
+    User->>FriendsController: DELETE /friends/declineRequest with requestId
+    FriendsController->>FriendsService: declineFriendRequest(requestId)
+    FriendsService->>FriendsRepository: deleteById(requestId)
+    FriendsRepository-->>FriendsService: Request deleted
+    FriendsService-->>FriendsController: ResponseEntity.ok("Friend request deleted")
