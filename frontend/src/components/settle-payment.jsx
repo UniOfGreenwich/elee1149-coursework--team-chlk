@@ -120,7 +120,7 @@ const SettlePayment = ({ closeModal, userId, groupId, recipient=null, reload}) =
             <label htmlFor="recipient">Select Recipient:</label>
             <select id="recipient" onChange={handleRecipientChange}>
               <option value="">{recipient ? recipient.firstName : "-- Select a Recipient --"}</option>
-              {data.filter(user => user.userId.toString() !== userId).map((user) => (
+              {data.filter(user => user.userId !== userId).map((user) => (
                 <option key={user.userId} value={user.userId}>
                   {user.firstName}
                 </option>

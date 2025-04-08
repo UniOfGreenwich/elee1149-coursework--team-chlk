@@ -9,8 +9,10 @@ import { TopBar } from "../components/dashboard-topbar";
 import { GroupExpensesData, GroupMembersData } from "../methods/use-axios.ts";
 import { useCallback, useEffect } from "react";
 
-export function GroupsDashboard() {
+export function GroupsDashboard({userId}) {
+
   let params = useParams();
+  
   const [expensesLoading, expensesData, expensesError, expensesRequest] =
     GroupExpensesData(params.groupId);
   const [
@@ -18,12 +20,12 @@ export function GroupsDashboard() {
     groupMembersData,
     groupMembersError,
     groupMembersRequest,
-  ] = GroupMembersData(params.groupId, params.id);
+  ] = GroupMembersData(params.groupId, userId);
 
   const reloadData = useCallback(() => {
     groupMembersRequest()
     expensesRequest()
-  })
+  }, [])
 
   useEffect(() => reloadData(), [])
 
@@ -44,7 +46,7 @@ export function GroupsDashboard() {
         </li>
         <li className="grid-component categories">
           <TopCategories
-            userId={params.id}
+            userId={userId}
             groupId={params.groupId}
             loading={expensesLoading}
             data={expensesData}
@@ -52,11 +54,11 @@ export function GroupsDashboard() {
           />
         </li>
         <li className="grid-component quick-actions">
-          <QuickActions userId={params.id} groupId={params.groupId} reload={reloadData}/>
+          <QuickActions userId={userId} groupId={params.groupId} reload={reloadData}/>
         </li>
         <li className="grid-component recent-expenses">
           <RecentExpenses
-            userId={params.id}
+            userId={userId}
             loading={expensesLoading}
             data={expensesData}
             error={expensesError}
@@ -64,7 +66,7 @@ export function GroupsDashboard() {
         </li>
         <li className="grid-component group">
           <GroupMembers
-            userId={params.id}
+            userId={userId}
             groupId={params.groupId}
             loading={groupMembersLoading}
             data={groupMembersData}

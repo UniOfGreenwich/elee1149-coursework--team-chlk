@@ -1,7 +1,7 @@
 .balance-title {
   font-size: 10px;
   text-align: right;
-  padding-right: calc(8px + 1rem);
+  padding-right: 8px;
 }
 
 .group-members-row {
@@ -57,7 +57,6 @@ li {
 }
 
 .add-member-button {
-  margin-right: 1rem;
   padding: 0.6rem;
   border: none;
   outline: none;

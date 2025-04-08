@@ -5,9 +5,10 @@ import { AllExpenseData } from "../methods/use-axios.ts";
 import { ExpensesList } from "../components/expenses-list";
 import "../styles/expenses.css";
 
-export function Expenses() {
+export function Expenses({userId}) {
+  
   let params = useParams();
-  const [loading, data, error, request] = AllExpenseData(params.id);
+  const [loading, data, error, request] = AllExpenseData(userId);
 
   const groupFilteredData = !params.groupId
     ? data
@@ -32,7 +33,7 @@ export function Expenses() {
           <ul className="expenses-component">
             <li className="expenses-component-list">
               <ExpensesList
-                userId={params.id}
+                userId={userId}
                 loading={loading}
                 data={categoryFilteredData}
                 error={error}

@@ -5,7 +5,7 @@ import SettlePayment from "./settle-payment";
 import AddNewFriend from "./add-new-friend";
 import AddNewGroup from "./add-new-group";
 
-export function QuickActions({ userId, groupId = undefined, reload}) {
+export function QuickActions({ userId, groupId = undefined, reload = () => null}) {
   const [modalType, setModalType] = useState(null);
 
   const openModal = (type) => setModalType(type);

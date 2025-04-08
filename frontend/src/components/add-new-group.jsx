@@ -20,7 +20,7 @@ export default function AddNewGroup({ closeModal, userId }) {
   if(data && JSON.stringify(data) !== '[]' ) {
     if(data.success) {
       showSuccessToast(data.message)
-      navigate(`/user/${userId}/groups/${data.groupId}`, { state: { groupName: groupName }, });
+      navigate(`/groups/${data.groupId}`, { state: { groupName: groupName }, });
     } else {
       showErrorToast(data.message)
     }

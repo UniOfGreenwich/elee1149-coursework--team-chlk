@@ -88,8 +88,13 @@ export const GroupsData = (userId: any): [boolean, Group[] | undefined, string, 
 }
 
 interface GroupMember {
+    groupId?: number;
     balance: number;
+    email: string;
     firstName: string;
+    lastName: string;
+    userId: number;
+    username: string;
 }
 
 export const GroupMembersData = (groupId: any, userId: any): [boolean, GroupMember[] | undefined, string, () => void] => {
@@ -98,7 +103,7 @@ export const GroupMembersData = (groupId: any, userId: any): [boolean, GroupMemb
     return [loading, data, error, request];
 }
 
-export const AllExpenseData = <Expense>(userId: number): [boolean, Expense[] | undefined, string, () => void]=> {
+export const AllExpenseData = (userId: number): [boolean, Expense[] | undefined, string, () => void]=> {
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState<Expense[]>([]);
     const [error, setError] = useState('');
@@ -108,6 +113,7 @@ export const AllExpenseData = <Expense>(userId: number): [boolean, Expense[] | u
     }, []);
 
     const request = () => {
+        setData([])
         sendRequest();
     }
 
@@ -116,13 +122,13 @@ export const AllExpenseData = <Expense>(userId: number): [boolean, Expense[] | u
         setData([])
 
         axios.get(`users/groups?userId=${userId}`)
-            .then((response) => {
-                    response.data.forEach((group: any) => {
+            .then((groups) => {
+                    groups.data.forEach((group: Group) => {
                         axios.get(`expense/all-expenses?groupId=${group.groupId}`)
-                            .then((response) => {
-                                response.data.forEach((element: any) => {
-                                    element.groupName = group.groupName;
-                                    setData(data => [...data, element])
+                            .then((expenses) => {
+                                expenses.data.forEach((expense: Expense) => {
+                                    expense.groupName = group.groupName;
+                                    setData(data => [...data, expense])
                                 })
                             })
                             .catch((error) => {
@@ -145,13 +151,15 @@ export const AllExpenseData = <Expense>(userId: number): [boolean, Expense[] | u
                     onCustomError: () => console.log('Custom error handling')
                 })
             })
-            .finally(() => setLoading(false));
+            .finally(() => {
+                setLoading(false);
+            })
     };
 
     return [loading, data, error, request];
 }
 
-export const AllMembersData = <GroupMember>(userId: number): [boolean, GroupMember[] | undefined, string, () => void]=> {
+export const AllMembersData = (userId: number): [boolean, GroupMember[] | undefined, string, () => void]=> {
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState<GroupMember[]>([]);
     const [error, setError] = useState('');
@@ -169,12 +177,12 @@ export const AllMembersData = <GroupMember>(userId: number): [boolean, GroupMemb
         setData([])
 
         axios.get(`users/groups?userId=${userId}`)
-            .then((response) => {
-                    response.data.forEach((element: any) => {
-                        axios.get(`group/${element.groupId}/${userId}/users`)
-                            .then((response) => {
-                                response.data.forEach((element: any) => {
-                                    setData(data => [...data, element])
+            .then((groups) => {
+                    groups.data.forEach((group: Group) => {
+                        axios.get(`group/${group.groupId}/${userId}/users`)
+                            .then((groupMembers) => {
+                                groupMembers.data.forEach((groupMember: GroupMember) => {
+                                    setData(data => [...data, groupMember]) 
                                 })
                             })
                             .catch((error) => {

@@ -33,7 +33,7 @@ export function TopCategories({ loading, data, error }) {
     .slice(0, 4);
 
   return (
-    <div className="dashboard-grid-component-scroll">
+    <div className="dashboard-grid-component">
       <h2 className="component-title">Top Categories</h2>
       <div className="component-content">
         <ul className="categories-grid">

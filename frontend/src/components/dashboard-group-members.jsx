@@ -29,7 +29,7 @@ export function GroupMembers({ userId, groupId, loading, data, error, reload}) {
   const sortedMembers = filteredMembers.sort((a, b) => a.balance - b.balance);
 
   return (
-    <div className="dashboard-grid-component-scroll">
+    <div className="dashboard-grid-component">
       <div className="component-header">
         <h2 className="component-title">Group Members</h2>
         <Link to={`${window.location.href}`} state={{ groupName: groupName }}>
@@ -63,7 +63,7 @@ export function GroupMembers({ userId, groupId, loading, data, error, reload}) {
 }
       {modalType === "AddMember" && (
         <AddMember
-          userId={params.id}
+          userId={userId}
           groupId={params.groupId}
           closeModal={closeModal}
           reload={reload}

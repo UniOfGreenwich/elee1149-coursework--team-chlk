@@ -39,14 +39,14 @@ function App() {
             <Router>
             <SideBar token={token} setToken={setToken} />
             <Routes>
-              <Route path="/user/:id/" element={<Dashboard />} />
-              <Route path="/user/:id/groups" element={<Groups />} />
-              <Route path="/user/:id/groups/:groupId/" element={<GroupsDashboard />} />
-              <Route path="/user/:id/expenses" element={<Expenses />} />
-              <Route path="/user/:id/expenses/category/:categoryId" element={<Expenses />} />
-              <Route path="/user/:id/groups/:groupId/expenses" element={<Expenses />} />
-              <Route path="/user/:id/groups/:groupId/expenses/category/:categoryId" element={<Expenses />} />
-              <Route path="/user/:id/friends" element={<Friends />} />
+              <Route path="/" element={<Dashboard userId={token.userId}/>} />
+              <Route path="/groups" element={<Groups userId={token.userId}/>} />
+              <Route path="/groups/:groupId/" element={<GroupsDashboard userId={token.userId}/>} />
+              <Route path="/expenses" element={<Expenses userId={token.userId}/>} />
+              <Route path="/expenses/category/:categoryId" element={<Expenses userId={token.userId}/>} />
+              <Route path="/groups/:groupId/expenses" element={<Expenses userId={token.userId}/>} />
+              <Route path="/groups/:groupId/expenses/category/:categoryId" element={<Expenses userId={token.userId}/>} />
+              <Route path="/friends" element={<Friends userId={token.userId}/>} />
               <Route path="/*" element={<Error />} />
             </Routes>
             </Router>
