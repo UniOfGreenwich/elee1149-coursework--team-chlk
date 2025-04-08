@@ -11,7 +11,6 @@ import com.fairshare.repository.UserShareRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -34,13 +33,9 @@ public class ExpenseService {
 
     @Transactional
     public Expense addExpense(Integer payerId, CreateExpenseRequest createExpenseRequest) {
-        //String expenseName = createExpenseRequest.getExpenseName();
-       //Integer expenseId = createExpenseRequest.getExpenseId();
         String description = createExpenseRequest.getDescription();
         Double amount = createExpenseRequest.getAmount();
         String currency = createExpenseRequest.getCurrency();
-        //Date date = createExpenseRequest.getDate();
-        //Integer payerId = createExpenseRequest.getPayerId();
         Integer categoryId = createExpenseRequest.getCategoryId();
         Integer groupId = createExpenseRequest.getGroupId();
 
@@ -65,18 +60,12 @@ public class ExpenseService {
             return errorExpense;
         }
 
-//        if (expenseRepository.existsByExpenseNameAndGroupId(description, groupId)) {
-//            errorExpense.setDescription("ExpenseExistsInGroupError"); // Indicates this expense name exists in this group
-//            return errorExpense;
-//        }
-
         if (createExpenseRequest.getCategoryId() == null) {
             createExpenseRequest.setCategoryId(1); // Use the default category
         }
 
         Expense newExpense = new Expense();
         newExpense.setDescription(description);
-        //newExpense.setExpenseId(expenseId);
         newExpense.setDescription(description);
         newExpense.setAmount(amount);
         newExpense.setCurrency(currency);

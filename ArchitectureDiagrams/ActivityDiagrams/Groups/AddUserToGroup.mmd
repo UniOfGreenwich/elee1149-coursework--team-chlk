@@ -1,0 +1,63 @@
+graph TD
+    A[Start] --> B{"Receive POST /group/[groupId]/addUser Request"};
+    B --> C[Extract groupId & userId from Request];
+    C --> D(Call Add User To Group Service);
+
+subgraph "GroupService: addUserToGroup"
+E[Find Group by ID]
+F[Find User by ID]
+E --> G{Group Found?};
+F --> H{User Found?};
+
+G -- No --> I{User Also Not Found?};
+H -- No --> I;
+G -- Yes --> J{User Also Found?};
+H -- Yes --> J;
+
+I -- Yes - Both Null --> K[Create Error Group 'GroupAndUserError'];
+I -- No - Group Null, User Found --> L[Create Error Group 'GroupNotFoundError'];
+
+J -- No - Group Found, User Null --> M[Create Error Group 'UserNotFoundError'];
+J -- Yes Both Found --> N[Check if Group already contains User];
+N --> O{User Already In Group?};
+O -- Yes --> P[Create Error Group 'UserAlreadyInGroup'];
+O -- No --> Q[Add User to Group's user set];
+Q --> R[Update Group Timestamps/Message];
+R --> S[Save Group via Repository];
+S --> T[Return Updated Group];
+
+K --> U[Service Returns Error Group];
+L --> U;
+M --> U;
+P --> U;
+T --> V[Service Returns Success Group]
+end
+
+D --> E;
+D --> F;
+
+U --> W{Process Service Result};
+V --> W;
+
+W --> X{Result is Null?};
+X -- Yes --> Y[Create Response 'Incorrect ID', false];
+
+X -- No --> Z1{Result Name == 'GroupNotFoundError'?};
+Z1 -- Yes --> AA[Create Response 'Group not found', false];
+Z1 -- No --> Z2{Result Name == 'UserNotFoundError'?};
+Z2 -- Yes --> BB[Create Response 'User not found', false];
+Z2 -- No --> Z3{Result Name == 'GroupAndUserError'?};
+Z3 -- Yes --> CC[Create Response 'Group and User not found', false];
+Z3 -- No --> Z4{Result Name == 'UserAlreadyInGroup'?};
+Z4 -- Yes --> DD[Create Response 'User already in group', false];
+Z4 -- No - Success Case --> EE[Create Response 'User added', true, userId];
+
+Y --> FF[Return AddUserToGroupResponse];
+AA --> FF;
+BB --> FF;
+CC --> FF;
+DD --> FF;
+EE --> FF;
+
+FF --> ZEnd[End];
+

@@ -1,0 +1,22 @@
+graph TD
+    A[Start] --> B{"Receive GET /expense/all-expenses Request (groupId)"};
+    B --> C[Extract groupId];
+    C --> D(Call Get Expenses Service);
+
+subgraph "ExpenseService: getExpensesByGroupId"
+E[Find List<Expense> by groupId via Repository];
+E --> F{Loop: Found Expenses};
+F -- For Each Expense --> G[Find Payer User by expense.payerId];
+G --> H{Payer User Found?};
+H -- Yes --> I[Set Payer's First Name on Expense object];
+H -- No --> J[Handle User Not Found - e.g., set default name or skip];
+I --> F;
+J --> F;
+F -- End Loop --> K[Return Modified List<Expense>];
+end
+
+D --> E;
+
+K --> L[Return List<Expense>];
+L --> Z[End];
+

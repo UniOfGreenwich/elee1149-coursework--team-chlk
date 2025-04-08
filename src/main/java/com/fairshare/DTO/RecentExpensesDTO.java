@@ -8,9 +8,6 @@ public class RecentExpensesDTO {
     private Double userLent;
     private String payerName;
 
-    // Constructors
-    public RecentExpensesDTO() {}
-
     public RecentExpensesDTO(String expenseName, String category, String date, Double userPaid, Double userLent, String payerName) {
         this.expenseName = expenseName;
         this.category = category;

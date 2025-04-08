@@ -100,6 +100,10 @@ To run the app locally: [axios.ts](frontend/src/methods/use-axios.ts)
 | <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring.png" width="50"> | Backend Framework |
 | <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/postgresql.png" width="50"> | Database Management |
 | <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring_boot.png" width="50"> | Backend Framework |
+| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/postgresql.png" width="50"> | Render (DB Host) |
+| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/gcp.png" width="50"> | GCP (Backend Host) |
+
+
 
 ## Development
 
@@ -109,13 +113,61 @@ See the [Dependencies section](#dependencies) below for details on the project's
 
 <a id="dependencies"></a>
 
+<<<<<<< HEAD
 ## Design
 
 For detailed designs, please refer ro the [Design](Design) folder.
+=======
+## Dependencies
+
+<details>
+<summary>Gradle Dependencies</summary>
+<div></div>
+  <table>
+    <thead>
+      <tr>
+        <th>Dependency</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>org.springframework.boot:spring-boot-starter-web</code></td>
+        <td>Provides the core Spring Boot web starter for building web applications.</td>
+      </tr>
+      <tr>
+        <td><code>org.postgresql:postgresql</code></td>
+        <td>PostgreSQL JDBC driver for database connectivity.</td>
+      </tr>
+      <tr>
+        <td><code>org.springframework.boot:spring-boot-starter-data-jpa</code></td>
+        <td>Spring Data JPA for simplified database interactions.</td>
+      </tr>
+      <tr>
+        <td><code>org.springframework.boot:spring-boot-starter-security</code></td>
+        <td>Spring Security for authentication and authorization.</td>
+      </tr>
+      <tr>
+        <td><code>org.springframework.boot:spring-boot-starter-test</code></td>
+        <td>Spring Boot test utilities for testing.</td>
+      </tr>
+      <tr>
+        <td><code>org.springframework.security:spring-security-test</code></td>
+        <td>Utilities for testing Spring Security components.</td>
+      </tr>
+      <tr>
+        <td><code>org.junit.platform:junit-platform-launcher</code> (testRuntimeOnly)</td>
+        <td>JUnit Platform launcher for running tests.</td>
+      </tr>
+    </tbody>
+  </table>
+</details>
+
+>>>>>>> f2eba2658eaf18485a73b51391d87063653a482b
 
 ## Class Diagrams
 
-For detailed class diagrams, please refer to the [class_diagrams](class_diagrams) folder.
+For detailed class diagrams, please refer to the [class_diagrams](ArchitectureDiagrams/ClassDiagrams) folder.
 
 ## Requirements Engineering
 The requirements engineering documentation can be found here: [requirements-engineering](requirements-engineering/requirements-engineering.md)
@@ -197,6 +249,7 @@ apply changes to the code to use this secret. See [GCP Branch](https://github.co
 **Vanity URLS:** Currnelty the URLs in the app are still including the endpoints. Going foward with more time we would make vanity URLs. These act as a the name suggest a fake URL hiding the main URL. 
 
 
+<<<<<<< HEAD
 ## Dependencies
 
 <details>
@@ -307,6 +360,8 @@ apply changes to the code to use this secret. See [GCP Branch](https://github.co
     </tbody>
   </table>
 </details>
+=======
+>>>>>>> f2eba2658eaf18485a73b51391d87063653a482b
 
 ## Contributers
 #### Kyle (Main Backend Developer, Secondary Database Manager): 

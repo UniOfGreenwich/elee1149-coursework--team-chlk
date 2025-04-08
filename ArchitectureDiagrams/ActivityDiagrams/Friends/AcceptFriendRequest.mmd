@@ -1,0 +1,22 @@
+graph TD
+    A[Start] --> B{"Receive POST /friends/acceptFriendRequest Request (requestId)"};
+    B --> C[Extract requestId];
+    C --> D(Call Accept Request Service);
+
+subgraph "FriendsService: acceptFriendRequest"
+E[Find Friends entity by requestId];
+E --> F{Request Found?};
+F -- No --> G[Error];
+F -- Yes --> H[Set status = true - Accepted];
+H --> I[Save updated Friends entity];
+I --> J[Service Completes Successfully];
+end
+
+D --> E;
+
+G --> K{Process Service Result};
+J --> K;
+
+K --> L[Create ResponseEntity.ok 'Friend request accepted.'];
+L --> ZEnd[End];
+

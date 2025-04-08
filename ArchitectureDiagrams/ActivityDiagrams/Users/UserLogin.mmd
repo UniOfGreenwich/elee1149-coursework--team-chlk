@@ -1,0 +1,25 @@
+graph TD
+    A[Start] --> B{Receive POST /users/login Request};
+    B --> C[Extract email & password];
+    C --> D(Call Authenticate Service);
+
+    subgraph "UserService: authenticateLogin"
+       E[Find User by Email] --> F{User Found?};
+       F -- No --> G[Service Returns Null];
+       F -- Yes --> H[Check Password Match];
+       H --> I{Password Matches?};
+       I -- No --> G;
+       I -- Yes --> J[Service Returns User];
+    end
+
+    D --> E;
+
+    J --> K{Result is User?};
+    G --> K;
+
+    K -- Yes --> L[Create Success Response];
+    K -- No --> M[Create Failure Response];
+    L --> N[Return Response];
+    M --> N;
+    N --> Z[End];
+
