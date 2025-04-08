@@ -27,6 +27,9 @@ Fairshare offers a streamlined approach to managing shared expenses, eliminating
 - **Secure and Reliable:** Your data is safe and accessible whenever you need it.
 </details>
 
+## FairShare App Runthrough video
+Here you can find the full runthrough video for the FairShare app: [FairShare App Runthrough](https://uogcloud-my.sharepoint.com/:v:/g/personal/cs2726g_gre_ac_uk/EYs3ySSc75tMg2-GBZZ6L38BLUrBBxlcjO3uDrvJghuFtAnav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=CPinSy)
+
 ## Usage
 Fairshare can be accessed through GitHub pages and ran online [Github pages](https://github.com/UniOfGreenwich/elee1149-coursework--team-chlk/settings/pages)
 
@@ -88,22 +91,24 @@ To run the app locally: [axios.ts](frontend/src/methods/use-axios.ts)
 </details>
 
 ## Tech Stack 
-| Technology   | Section Used    |
-|--------------|-----------------|
-| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/postman.png" width="50"> | API Testing |
-| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/html.png" width="50"> | Frontend Structure |
-| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/css.png" width="50"> | Frontend Styling |
-| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/javascript.png" width="50"> | Frontend Logic |
-| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/react.png" width="50"> | Frontend Framework |
-| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/npm.png" width="50"> | Package Management |
-| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/java.png" width="50"> | Backend Logic |
-| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring.png" width="50"> | Backend Framework |
-| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/postgresql.png" width="50"> | Database Management |
-| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring_boot.png" width="50"> | Backend Framework |
-| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/postgresql.png" width="50"> | Render (DB Host) |
-| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/gcp.png" width="50"> | GCP (Backend Host) |
 
+| Technology Name | Technology Logo | Section Used  |
+|--------------|-----------------|------------------|
+| Hoppscotch | <img src="[https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/hoppscotch.png]" width="50"> | API Testing ||
+| HTML |<img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/html.png" width="50"> | Frontend Structure ||
+| CSS |<img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/css.png" width="50"> | Frontend Styling |
+| Javascript |<img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/javascript.png" width="50"> | Frontend Logic |
+| React |<img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/react.png" width="50"> | Frontend Framework |
+| NPM |<img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/npm.png" width="50"> | Package Management |
+| Java |<img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/java.png" width="50"> | Backend Logic |
+| Mermaid ||UML Diagrams|
+| Spring |<img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring.png" width="50"> | Backend Framework |
+| PostgreSQL |<img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/postgresql.png" width="50"> | Database Management |
+| Spring Boot |<img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring_boot.png" width="50"> | Backend Framework |
+| Render |<img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/render.png" width="50"> | Render (DB Host) |
+| GCP |<img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/gcp.png" width="50"> | GCP (Backend Host) |
 
+See the [Tech Stack Document](TechStackDocument.md) for information on why these technologies were used to develop FairShare.
 
 ## Development
 
@@ -112,6 +117,48 @@ To run the app locally: [axios.ts](frontend/src/methods/use-axios.ts)
 See the [Dependencies section](#dependencies) below for details on the project's Gradle dependencies.
 
 <a id="dependencies"></a>
+
+## Architecture Diagrams
+
+Several UML diagrams were used for system modelling. The section below explains their purpose within the FairShare application context and where to find each one.
+
+**Activity Diagram**:
+
+Purpose: This diagram models the flow of actions and decisions within a specific process or use case of FairShare.
+
+Activity diagrams were used to illustrate processes like user SignUp, adding a new expense (including how it's split), updating user balances after an expense is added, settling a balance between two users etc.
+
+Here is where you can find the [FairShare Activity Diagrams](ArchitectureDiagrams/ActivityDiagrams)
+
+**Sequence Diagram**:
+
+Purpose: This diagram focuses on the interaction between different objects or components over time for a specific scenario. It shows the sequence of messages (like method calls) passed between objects to accomplish a task.
+
+FairShare Context: Sequence diagrams for showing how a request slows through the system. For example, fetching a balance: from the frontend (React) making an API call, to the BalanceController, which calls the BalanceService, which in turn interacts with the BalanceRepository and the database, and then how the response returns back up the chain. 
+
+Here is where you can find the [FairShare Sequence Diagrams](ArchitectureDiagrams/SequenceDiagrams)
+
+**Class Diagram**:
+
+Purpose: This diagram describes the static structure of the system's codebase. It shows the classes, their attributes (fields), methods (operations), and the relationships between different classes (like association, inheritance, dependency).
+
+FairShare Context: Class diagrams showed the main Java classes in the backend, such as User, Freind, Group, Expense, Balance, Category, along with the Controller, Service, and Repository classes (BalanceController, BalanceService, BalanceRepository, etc.). 
+
+**Entity-Relationship Diagram (ERD)**:
+
+Purpose: An ERD specifically models the structure of the database. It shows the entities (which become database tables), their attributes (columns), primary and foreign keys, and the relationships (one-to-one, one-to-many, many-to-many) between these entities.
+
+FairShare Context: The FairShare ERD provided a visual representation of the PostgreSQL database schema. It clearly showed tables like Users, Groups, Expenses, Balances, UserGroups, UserShares, and how they are linked through foreign keys (e.g., an Expense belongs to one Group and is paid by one User). 
+
+Here is where you can find the [FairShare ERD](ArchitectureDiagrams/DatabaseDiagrams/DatabaseERD)
+
+**Mind Map**:
+
+Purpose: A mind map is good for brainstorming, planning, summarising information, and showing relationships between different ideas or components.
+
+FairShare Context: For FairShare the midnmap diagram was used as a use-case diagram. This is because Mermaid does not recognise 'useCaseDiagrams' so a different way was needed to illustrate the different use cases for FairShare.
+
+Here is where you can find the [FairShare Mindamap_diagram](ArchitectureDiagrams/MermaidDiagram.mmd).
 
 ## Design
 
@@ -238,18 +285,18 @@ For detailed designs, please refer ro the [Design](Design) folder.
   </table>
 </details>
 
-
-## Class Diagrams
-
-For detailed class diagrams, please refer to the [class_diagrams](ArchitectureDiagrams/ClassDiagrams) folder.
-
 ## Requirements Engineering
 The requirements engineering documentation can be found here: [requirements-engineering](requirements-engineering/requirements-engineering.md)
 
+## Database Set Up and Hosting
+
+The FairShare application uses a **PostgreSQL** database hosted on **Render**. 
+The database design and data dictionary can be found here: [FairShare Data Dictionary](DatabaseDocumentation/FairShareDataDictionary.md)
+The schema was created using the SQL scripts, details can be found here:[PostgreSQL Database Creation](DatabaseDocumentation/PostgreSQLDatabaseCreation.md). 
+The Render and PostgreSQL configuation process can be found here: [Render/PostgreSQL Configuration](DatabaseDocumentation/RenderPostgreSQLSetUp.md)
+
 ## Security
 Currently security features Password Ecnryption using [Encryption](https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/crypto/bcrypt/BCryptPasswordEncoder.html)
-
-
 
 ## Testing
 Fairshare includes comprehensive testing in order to ensure the app is reliable and working at each stage of development.
@@ -265,6 +312,23 @@ or you can run the tests individually by executing the following command:
 ```bash
 ./gradlew test
 ```
+## Dummy accounts
+Here are some dummy accounts that can be used to login to FairShare (alternatively, you can sign up and create a new account):
+
+1) **Username:** lwalker@gmail.com
+   **Password:** TestAccount1
+
+2) **Username:** kanderson1@gmail.com
+   **Password:** TestAccount2
+
+3) **Username:** hkhan@gmail.com
+   **Password:** TestAccount3
+
+4) **Username:** csrivastava@gmail.com
+   **Password:** TestAccount4
+
+5) **Username:** sblair@gmail.com
+   **Password:** TestAccount5
 
 ### Testing Documents
 In addition to automated test, we have followed some manual testing procedures through the
@@ -300,6 +364,7 @@ test and the expected vs actual results. The testing table can be found [table](
 
 ## Future Improvements
 Below is a list of additional features and security we wish to add in future development.
+
 ### Additional Features
 - Profile Customisation
 - Adding profile images
@@ -317,7 +382,6 @@ apply changes to the code to use this secret. See [GCP Branch](https://github.co
 
 **API Authentication:** Additionally Authentication would be added to authenitcate the User on login and then provide a token for API calls. This would make the APIs more secure as they could not be accessed without a token.
 
-
 **Locking Down Endpoints:** The API security should be increased to allow the endpoints to not be hit externally. Locking down the endpoints so the calls can only be made through the app would increase security.
 
 **Vanity URLS:** Currnelty the URLs in the app are still including the endpoints. Going foward with more time we would make vanity URLs. These act as a the name suggest a fake URL hiding the main URL. 
@@ -326,9 +390,8 @@ apply changes to the code to use this secret. See [GCP Branch](https://github.co
 #### Kyle (Main Backend Developer, Secondary Database Manager): 
 - Backend Tech Stack: Spring boot initialisation, Java, Postgres/SQL
 - Java backend: Structure decisions, main code setup.
-- Java backend: Controllers, Services, Repositorys, Entitys
+- Java backend: Controllers, Services, Repositories, Entities, DTOs
 - Java Unit tests: for above
-- 
 - Security Encryption
 - GCP Deployment
 - Docker Configuration
@@ -338,6 +401,19 @@ apply changes to the code to use this secret. See [GCP Branch](https://github.co
 - GCP Deployment
 
 **Charu (Main Database Manager, Secondary Backend Role):**
+- Java Backend: 'Controller', 'Service', 'Repository', 'Entity' classes
+- Java Backend: Error handling
+- PostgreSQL SetUp
+- Render SetUp
+- Documentaion: ReadMe (Architecture and Database sections)
+- Documentation: Tech Stack Document
+- Documentation: Data Dictionary
+- Documentation: PostgreSQL Database scripts and setup
+- Documentation: Render - PostgreSQL configuration
+- Architecture diagrams: Activity diagrams
+- Architecture diagrams: Sequence diagrams
+- Architecture diagrams: Entity Relationship diagram
+- Architecture diagrams: MindMap diagram
 
 #### Hamza (Frontend Developer):
 - Tech Stack: NPM, React, JSX, CSS and HTML

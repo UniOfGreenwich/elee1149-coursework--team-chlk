@@ -5,7 +5,7 @@ import { AddExpenseRequest, GroupMembersData } from "../methods/use-axios.ts";
 import PropTypes from 'prop-types';
 import { showErrorToast, showSuccessToast } from "../methods/http-error-handler";
 
-const SettlePayment = ({ closeModal, userId, groupId, recipient=null, reload}) => {
+const SettlePayment = ({ closeModal, userId, groupId, recipient=null, reload = () => null}) => {
   const [trigger, setTrigger] = useState(false)
   const [selectedRecipient, setSelectedRecipient] = useState(recipient ? recipient : null);
   const [amount, setAmount] = useState("");

@@ -2,7 +2,7 @@ import "./App.css";
 import "./styles/dashboard.css";
 import { ToastContainer } from "react-toastify";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Routes,
   Route,
 } from "react-router-dom";
