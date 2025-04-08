@@ -1,56 +1,73 @@
-import axios from "axios";
-import { useEffect, useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import "../styles/friends.css";
-import Alert from '@mui/material/Alert'
+import { AcceptFriendRequest, DeclineFriendRequest } from "../methods/use-axios";
+import { showSuccessToast } from "../methods/http-error-handler";
+import PropTypes from 'prop-types';
 
-async function acceptRequest (requestId) {
-    return axios.post(
-      `friends/acceptFriendRequest?requestId=${requestId}`,
-      {config: {'Content-Type': 'text/plain;charset=UTF-8'}}
-    )
-    .then(response => response.data)
+export function FriendsRequestItem({firstName, lastName, email, username, requestId, reload}) {
+  const [acceptTrigger, setAcceptTrigger] = useState(false)
+  const [declineTrigger, setDeclineTrigger] = useState(false)
+
+  const [acceptLoading, acceptData, acceptError, acceptRequest] = AcceptFriendRequest(requestId)
+  const [declineLoading, declineData, declineError, declineRequest] = DeclineFriendRequest(requestId)
+
+  if(acceptData && JSON.stringify(acceptData) !== '[]' ) {
+    showSuccessToast(acceptData)
+    reload()
   }
 
-  async function declineRequest (requestId) {
-    return axios.delete(
-        `friends/declineRequest?requestId=${requestId}`,
-        {'Content-Type': 'text/plain;charset=UTF-8'}
-    )
-    .then(response => response.data)
+  if(declineData && JSON.stringify(declineData) !== '[]' ) {
+    showSuccessToast(declineData)
+    reload()
   }
 
-export function FriendsRequestItem(props) {
+  const sendAccept = useCallback(() => {
+    acceptRequest()
+  })
+
+  const sendDecline = useCallback(() => {
+    declineRequest()
+  })
+
+  useEffect(() => {
+    if (acceptTrigger) {
+      sendAccept()
+      setAcceptTrigger(false)
+    }
+    if (declineTrigger) {
+      sendDecline()
+      setDeclineTrigger(false)
+    }
+  }, [acceptTrigger, declineTrigger])
 
     const handleDecline = async e => {
         e.preventDefault();
-        const decline = await declineRequest(props.requestId);
-        console.log(decline)
-        window.location.reload()
-        //return <Alert>{decline}</Alert>
+        setDeclineTrigger(true)
       }
 
       const handleAccept = async e => {
         e.preventDefault();
-        const accept = await acceptRequest(props.requestId);
-        console.log(accept)
-        window.location.reload()
-        //return <Alert>{accept}</Alert>
+        setAcceptTrigger(true)
       }
 
     return (
         <div className="friend-request-item">
-            <p className="request-username">{props.username}</p>
-            <p className="request-name">{`${props.firstName} ${props.lastName}`}</p>
-            <p className="request-email">{props.email}</p>
+            <p className="request-username">{username}</p>
+            <p className="request-name">{`${firstName} ${lastName}`}</p>
+            <p className="request-email">{email}</p>
             <div className="request-user-decision">
-                <div className="request-accept-button" onClick={handleAccept}>
-                    <p className="button-name">Accept</p>
-                </div>
-                <div className="request-decline-button" onClick={handleDecline}>
-                    <p className="button-name">Decline</p>
-                </div>
+                <button className="request-accept-button" onClick={handleAccept}>
+                    Accept
+                </button>
+                <button className="request-decline-button" onClick={handleDecline}>
+                    Decline
+                </button>
             </div>
         </div>
     )
+}
+
+FriendsRequestItem.propTypes = {
+  reload: PropTypes.func.isRequired,
 }
 

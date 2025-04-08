@@ -1,0 +1,20 @@
+graph TD
+    A[Start] --> B{"Receive GET /group/[groupId]/name Request"};
+    B --> C[Extract groupId];
+    C --> D(Call Get Group Name Service);
+
+    subgraph "GroupService: getGroupNameById"
+        E[Find Group by ID via Repository] --> F{Group Found?};
+        F -- No --> G[Service Returns null];
+        F -- Yes --> H[Map Group to Group Name];
+        H --> I[Service Returns Group Name];
+    end
+
+    D --> E;
+
+    I --> J[Set Result: Group Name];
+    G --> J;
+
+    J --> K[Return Result - String or null];
+K --> Z[End];
+

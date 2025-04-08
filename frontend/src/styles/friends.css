@@ -15,14 +15,13 @@
     border-radius: 8px;
     font-weight: bold;
     font-size: 1rem;
+    color: white;
 }
 
 .request-list-wrapper {
     max-height: calc(30vh - 2rem);
     background-color: #222645;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    padding-left: 1rem;
+    padding: 1rem;
     border-radius: 8px;
     width: 100%;
     margin-bottom: 16px;
@@ -76,13 +75,9 @@
     border-radius: 8px;
     align-items: center;
     justify-content: center;
-    margin-right: 16px
-}
-
-.button-name {
+    margin-right: 16px;
     font-weight: bold;
-    font-size: 1rem;
-    text-align: center;
+    color: white;
 }
 
 .request-decline-button {
@@ -93,14 +88,14 @@
     border-radius: 8px;
     align-items: center;
     justify-content: center;
+    font-weight: bold;
+    color: white;
 }
 
 .friend-list-wrapper-with-requests {
     max-height: calc(50vh - 0.5rem);
     background-color: #222645;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    padding-left: 1rem;
+    padding: 1rem;
     border-radius: 8px;
     width: 100%;
 }
@@ -108,17 +103,18 @@
 .friend-list-wrapper-without-requests {
     max-height: calc(80vh - 2rem);
     background-color: #222645;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    padding-left: 1rem;
+    padding: 1rem;
     border-radius: 8px;
     width: 100%;
+}
+
+.friends-list-header {
+    margin-bottom: 8px;
 }
 
 .friend-status-title {
     font-size: 10px;
     text-align: right;
-    padding-right: 1rem;
 }
 
 .friends-component-with-requests {

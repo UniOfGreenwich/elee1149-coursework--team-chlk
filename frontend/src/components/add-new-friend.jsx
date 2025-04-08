@@ -1,35 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import closeIcon from "../assets/close-icon.png";
 import "../styles/quick-action-buttons.css";
-import axios from "axios";
+import { showErrorToast, showSuccessToast } from "../methods/http-error-handler";
+import { AddNewFriendRequest } from "../methods/use-axios";
+import PropTypes from 'prop-types';
 
-async function userNewFriend(userId, friendEmail) {
-  return axios.post(
-    `friends/sendRequest?userId=${userId}&friendEmail=${friendEmail}`,
-    null,
-    {'Content-Type': 'application/json'}
-  )
-  .then(response => response.data)
-}
-
-export default function AddNewFriend({ closeModal, userId }) {
+export default function AddNewFriend({ closeModal, userId, reload }) {
+  const [trigger, setTrigger] = useState(false)
   const [friendEmail, setFriendEmail] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+
+   const [loading, data, error, request] = AddNewFriendRequest(userId, friendEmail)
+
+   if(data && JSON.stringify(data) !== '[]' ) {
+    if(data.success) {
+      showSuccessToast(data.message)
+    } else {
+      showErrorToast(data.message)
+    }
+    reload()
+    closeModal();
+  }
+
+  const sendFriend = useCallback(() => {
+    request()
+  })
+    
+  useEffect(() => {
+    if (trigger) {
+      sendFriend()
+      setTrigger(false)
+    }
+  }, [trigger])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrorMessage(""); // Clear any previous error message
-
-    const newFriend = await userNewFriend(userId, friendEmail)
-    if (newFriend.success) {
-      console.log("friend request sent successfully:", newFriend)
-      setFriendEmail("");
-      window.location.reload();
-      closeModal();
-    } else {
-      console.log("Error sending friend request:", newFriend.message)
-      setErrorMessage(newFriend.message)
-    }
+    setTrigger(true)
   };
 
   return (
@@ -49,7 +54,6 @@ export default function AddNewFriend({ closeModal, userId }) {
               />
             </div>
             <input type="submit" value="Add New Friend" id="submit" />
-            {errorMessage && <p className="error-message">{errorMessage}</p>}
           </form>
         </div>
         <img
@@ -61,4 +65,8 @@ export default function AddNewFriend({ closeModal, userId }) {
       </div>
     </div>
   );
+}
+
+AddNewFriend.propTypes = {
+  reload: PropTypes.func.isRequired,
 }

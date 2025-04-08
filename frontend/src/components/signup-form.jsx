@@ -1,58 +1,63 @@
 import "../styles/login-signup-page.css";
 import { Link, useNavigate } from "react-router-dom";
-import PropTypes from 'prop-types';
-import { useState } from 'react';
-import axios from "axios";
-import { Alert, Snackbar } from "@mui/material";
+import { useState, useEffect, useCallback } from 'react';
+import {showErrorToast, showSuccessToast } from "../methods/http-error-handler";
+import { SignupRequest } from "../methods/use-axios.ts";
 
-async function userSignUp(credentials) {
-  return axios.post(
-    "users/newUser",
-    credentials,
-    {'Content-Type': 'application/json'}
-  )
-  .then(response => response.data)
-}
-
-export function SignupForm({setSignedUp}) {
+export function SignupForm() {
+  const [trigger, setTrigger] = useState(false)
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [passwordCheck, setPasswordCheck] = useState()
-  const [error, setError] = useState();
   let navigate = useNavigate();
+
+  const payload = {
+    "firstName": firstName,
+    "lastName": lastName,
+    "email": email,
+    "username": username,
+    "password": password
+  }
+
+  const [loading, data, error, request, setData] = SignupRequest(payload)
+
+  if(trigger) {
+    if(data && JSON.stringify(data) !== '[]' ) {
+      if(data.success) {
+        showSuccessToast(`${data.message} Please login`)
+        navigate(`/login`)
+      } else {
+        showErrorToast(data.message)
+        setTrigger(false)
+        setData([])
+      }
+    }
+  }
+
+    const sendSignup = useCallback(() => {
+      request()
+      })
+
+  useEffect(() => {
+    if (trigger) {
+      sendSignup()
+    }
+  }, [trigger])
 
   const handleSubmit = async e => {
     e.preventDefault();
     if (password === passwordCheck) {
-      const signUp = await userSignUp({
-        "firstName": firstName,
-        "lastName": lastName,
-        "email": email,
-        "username": username,
-        "password": password
-      });
-      if(signUp.success) {
-        setSignedUp(signUp)
-        navigate(`/login`)
-      } else {
-        setError(signUp.message)
-      }
-
-      console.log(signUp)
-    
+    setTrigger(true)
     } else {
-      setError("Passwords do not match")
+      showErrorToast("Passwords do not match")
     }
   }
 
   return (
     <>
-      {error ? 
-        <p className="error">{error}</p>
-      : null}
       <form action="#" className="login-form" onSubmit={handleSubmit}>
           <div className="input-block">
             <label htmlFor="fullName">Name</label>
@@ -76,7 +81,7 @@ export function SignupForm({setSignedUp}) {
           <label htmlFor="password">Password</label>
           <div className="split-block">
             <input className="left-input" type="password" id="password" required={true} onChange={e => setPassword(e.target.value)}/>
-            <input className="right-input" type="password" placeholder="Re-enter password" id="password" required={true} onChange={e => setPasswordCheck(e.target.value)}/>
+            <input className="right-input" type="password" placeholder="Re-enter password" id="check-password" required={true} onChange={e => setPasswordCheck(e.target.value)}/>
           </div>
 
         </div>
@@ -97,8 +102,4 @@ export function SignupForm({setSignedUp}) {
       </form>
     </>
   );
-}
-
-SignupForm.propTypes = {
-  setSignedUp: PropTypes.func.isRequired
 }

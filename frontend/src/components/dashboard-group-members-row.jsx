@@ -8,8 +8,6 @@ export function GroupMembersRow(props) {
   const [modalType, setModalType] = useState(null); // null means no modal is open
   const openModal = (type) => setModalType(type);
   const closeModal = () => setModalType(null);
-  const location = useLocation();
-  const { groupName } = location.state;
 
   const formattedBalance = Intl.NumberFormat("en-GB", {style: "currency", currency: "GBP", minimumFractionDigits: 2, maximumFractionDigits: 2}).format(Math.abs(props.balance));
   return (

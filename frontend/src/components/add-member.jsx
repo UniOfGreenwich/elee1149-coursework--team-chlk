@@ -1,39 +1,48 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "../styles/quick-action-buttons.css";
 import closeIcon from "../assets/close-icon.png";
-import { FriendsListData, GroupMembersData } from "../methods/use-axios.ts";
-import axios from "axios";
+import { AddNewGroupMemberRequest, FriendsListData, GroupMembersData } from "../methods/use-axios.ts";
+import PropTypes from 'prop-types';
+import { showErrorToast, showSuccessToast } from "../methods/http-error-handler";
 
-async function userAddMember(friendInformation, groupId) {
-  return axios.post(
-  `group/${groupId}/addUser`,
-  friendInformation,
-  {'Content-Type': 'application/json'}
-  )
-  .then(response => response.data)
-}
-
-export default function AddMember({ userId, groupId, closeModal }) {
-  const [friends, setFriends] = useState([]);
-  const [groupMembers, setGroupMembers] = useState([]);
+export default function AddMember({ userId, groupId, closeModal, reload}) {
+  const [trigger, setTrigger] = useState(false)
   const [selectedFriend, setSelectedFriend] = useState("");
 
   const [friendsLoading, friendsData, friendsError, friendsRequest] = FriendsListData(userId)
 
   const [groupMembersLoading, groupMembersData, groupMembersError, groupMembersRequest] = GroupMembersData(groupId, userId)
 
+  const payload = {
+    userId: selectedFriend
+  }
+
+  const [newMemberLoading, newMemberData, newMemberError, newMemberRequest] = AddNewGroupMemberRequest(groupId, payload)
+
+  if(newMemberData && JSON.stringify(newMemberData) !== '[]' ) {
+      if(newMemberData.success) {
+        showSuccessToast(newMemberData.message)
+      } else {
+        showErrorToast(newMemberData.message)
+      }
+      reload();
+      closeModal();
+    }
+  
+    const sendMember = useCallback(() => {
+      newMemberRequest()
+      })
+  
+    useEffect(() => {
+      if (trigger) {
+        sendMember()
+        setTrigger(false)
+      }
+    }, [trigger])
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newMember = await userAddMember({
-      "userId": selectedFriend
-    }, groupId)
-    if (newMember.success) {
-      console.log("user added to group successfully:", newMember)
-      window.location.reload();
-      closeModal();
-    } else {
-      console.log("error adding user to group:", newMember.message)
-    }
+    setTrigger(true)
   };
 
   const getFriendDisplayName = (friend) => {
@@ -44,11 +53,10 @@ export default function AddMember({ userId, groupId, closeModal }) {
     } else if (friend.lastName) {
       return friend.lastName;
     } else {
-      return friend.email; // Fallback to email if no name is available
+      return friend.email;
     }
   };
 
-  // Filter out friends who are already in the group
   const availableFriends = friendsData.friends === undefined ? undefined : friendsData.friends.filter(
     (friend) => !groupMembersData.some((member) => member.userId === friend.userId)
   );
@@ -90,4 +98,8 @@ export default function AddMember({ userId, groupId, closeModal }) {
       </div>
     </div>
   );
+}
+
+AddMember.propTypes = {
+  reload: PropTypes.func.isRequired,
 }

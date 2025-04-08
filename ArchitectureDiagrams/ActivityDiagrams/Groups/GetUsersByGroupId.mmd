@@ -1,0 +1,26 @@
+graph TD
+    A[Start] --> B{"Receive GET /group/[groupId]/[userId]/users Request"};
+    B --> C[Extract groupId & userId];
+    C --> D(Call Get Users Service);
+
+subgraph "GroupService: getUsersByGroupId"
+E[Find Group by ID via Repository] --> F{Group Found?};
+F -- No --> G[Service Returns null];
+F -- Yes --> H[Get Set<User> from Group];
+H --> I{Map User Stream};
+I -- For Each User --> J[Call BalanceService.getNetBalance - userId, user.id];
+J --> K[Create UserWithBalance DTO];
+K --> L[Set Balance on DTO];
+L --> I;
+I -- End Stream --> M[Collect Results to Set<UserWithBalance>];
+M --> N[Service Returns Set];
+end
+
+D --> E;
+
+N --> O[Set Result: Set<UserWithBalance>];
+G --> O;
+
+O --> P[Return Result - Set or null];
+P --> Z[End];
+

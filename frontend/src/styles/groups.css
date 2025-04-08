@@ -15,14 +15,13 @@
     border-radius: 8px;
     font-weight: bold;
     font-size: 1rem;
+    color: white;
 }
 
 .groups-list-wrapper {
     max-height:calc(80vh - 1rem);
     background-color: #222645;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    padding-left: 1rem;
+    padding: 1rem;
     border-radius: 8px;
     width: 100%;
 }
@@ -30,7 +29,7 @@
 .group-members-title {
     font-size: 10px;
     text-align: right;
-    padding-right: 22px;
+    padding-right: 8px;
 
 }
 

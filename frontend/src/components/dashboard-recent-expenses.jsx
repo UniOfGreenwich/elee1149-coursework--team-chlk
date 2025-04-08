@@ -1,21 +1,18 @@
-import { useEffect, useState } from "react";
 import "../styles/dashboard-recent-expenses.css";
 import "../styles/dashboard-recent-expenses.css";
 import { RecentExpensesRow } from "./dashboard-recent-expenses-row";
 import chevron from "../assets/chevron-icon.png"
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-export function RecentExpenses({userId, groupId, loading, data, error}) {
+export function RecentExpenses({userId, loading, data, error}) {
 
   if (loading) {
     return <p>Loading...</p>;
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return <p>Unable to load, see error</p>;
   }
-
-  console.log(data); //printing the data to the console
 
   const sortedExpenses = data.sort((a,b) => new Date(a.date) - new Date(b.date)).reverse().slice(0,5)
 
@@ -32,25 +29,27 @@ export function RecentExpenses({userId, groupId, loading, data, error}) {
           </div>
         </Link>
       </div>
-        <div className="expense-list">
-        <ul>
-              {sortedExpenses.map((e) => (
-                <li key={e.expenseId}>
-                  <RecentExpensesRow
-                    currentUser = {userId}
-                    expenseName={e.description}
-                    category={e.categoryId}
-                    date={e.date}
-                    userPaid={e.amount}
-                    split={e.userShares}
-                    payerId={e.payerId}
-                    payerName={e.userName}
-                  />
-                </li>
-              ))}
-            </ul>
-        </div>
-            
-          </div>
+      {data && JSON.stringify(data) !== '[]' ? 
+      <div className="expense-list">
+      <ul>
+            {sortedExpenses.map((e) => (
+              <li key={e.expenseId}>
+                <RecentExpensesRow
+                  currentUser = {userId}
+                  expenseName={e.description}
+                  category={e.categoryId}
+                  date={e.date}
+                  userPaid={e.amount}
+                  split={e.userShares}
+                  payerId={e.payerId}
+                  payerName={e.userName}
+                />
+              </li>
+            ))}
+          </ul>
+      </div> :
+      <p className="no-data-message">No expenses have been added</p>
+    }      
+  </div>
   );
 }

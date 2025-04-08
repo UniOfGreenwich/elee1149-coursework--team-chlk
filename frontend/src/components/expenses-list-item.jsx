@@ -4,8 +4,8 @@ import {format} from "date-fns"
 
 export function ExpensesListItem(props) {
     const foundCategory = categories.find(category => category.categoryId === props.category)
-    const userSplit = !props.split.find(item => item.userId.toString() === props.currentUser) ? 0 : props.split.find(item => item.userId.toString() === props.currentUser)
-    const nonUserSplit = props.split.filter(item => item.userId.toString() !== props.currentUser).reduce((accumulator, currentAmount) => {
+    const userSplit = !props.split.find(item => item.userId === props.currentUser) ? 0 : props.split.find(item => item.userId === props.currentUser)
+    const nonUserSplit = props.split.filter(item => item.userId !== props.currentUser).reduce((accumulator, currentAmount) => {
         return accumulator + currentAmount.shareAmount;
     }, 0)
 
@@ -19,7 +19,7 @@ export function ExpensesListItem(props) {
               <img src={foundCategory.categoryIcon} alt="" />
             </div>
           : null}
-          <div className="expense-titles">
+          <div className={"expense-titles" + (props.category === settlementCategoryId ? "-settlement" : "")}>
               <p className={"expense-name" + (props.category === settlementCategoryId ? "-settlement" : "")}>{props.expenseName}</p>
               { props.category !== settlementCategoryId ?
                 <p className="category">{foundCategory.categoryName}</p>
@@ -32,26 +32,28 @@ export function ExpensesListItem(props) {
             </div>
         <p className={"expense-date" + (props.category === settlementCategoryId ? "-settlement" : "")}>{format(props.date, "dd MMM yyyy")}</p>
         <div className="expense-values">
-            <div className="total-expense">
+            <div className={"total-expense"+ (props.category === settlementCategoryId ? "-settlement" : "")}>
                 <p className={"expense-amount" + (props.category === settlementCategoryId ? "-settlement" : "")}>{Intl.NumberFormat("en-GB", {style: "currency", currency: "GBP", minimumFractionDigits: 2, maximumFractionDigits: 2}).format(props.userPaid)}</p>
-                <p className={"expense-payer" + (props.category === settlementCategoryId ? "-settlement" : "")}>{props.payerId.toString() === props.currentUser ? "You" : props.payerName} Paid</p>
+                <p className={"expense-payer" + (props.category === settlementCategoryId ? "-settlement" : "")}>{props.payerId === props.currentUser ? "You" : props.payerName} Paid</p>
             </div>
+            {props.category !== settlementCategoryId ?
             <div className="expense-split">
-                <p className="split-amount"
-                id="split-amount"
-                style={{
-                  color:
-                    props.payerId.toString() === props.currentUser
-                      ? "#4495C7"
-                      : !userSplit
-                      ? "white"
-                      : "#FE6789",
-                }}
-                >
-                {props.payerId.toString() === props.currentUser ? Intl.NumberFormat("en-GB", {style: "currency", currency: "GBP", minimumFractionDigits: 2, maximumFractionDigits: 2}).format(nonUserSplit) : !userSplit ? "-" : Intl.NumberFormat("en-GB", {style: "currency", currency: "GBP", minimumFractionDigits: 2, maximumFractionDigits: 2}).format(userSplit.shareAmount)}
-                </p>
-                <p className="expense-payer">{props.payerId.toString() === props.currentUser ? "You Lent" : !userSplit ? "" : "You Borrowed"}</p>
+              <p className="split-amount"
+              id="split-amount"
+              style={{
+                color:
+                  props.payerId === props.currentUser
+                    ? "#4495C7"
+                    : !userSplit
+                    ? "white"
+                    : "#FE6789",
+              }}
+              >
+              {props.payerId === props.currentUser ? Intl.NumberFormat("en-GB", {style: "currency", currency: "GBP", minimumFractionDigits: 2, maximumFractionDigits: 2}).format(nonUserSplit) : !userSplit ? "-" : Intl.NumberFormat("en-GB", {style: "currency", currency: "GBP", minimumFractionDigits: 2, maximumFractionDigits: 2}).format(userSplit.shareAmount)}
+              </p>
+              <p className="expense-payer">{props.payerId === props.currentUser ? "You Lent" : !userSplit ? "" : "You Borrowed"}</p>
             </div>
+            : null} 
         </div>
       </div>
     );

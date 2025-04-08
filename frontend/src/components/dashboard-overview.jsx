@@ -1,16 +1,9 @@
-import { useEffect, useState } from "react";
-
-// importing icons
 import totalIOwe from "../assets/total-i-owe-icon.png";
 import owedToMe from "../assets/owed-to-me-icon.png";
-
-// importing Charts
 import DoughnutChart from "./dashboard-overview-chart";
-
-// importing style sheet
 import "../styles/dashboard-overview.css";
 
-export function Overview({userId, groupId, loading, data, error}) {
+export function Overview({loading, data, error}) {
   const date = getCurrentMonthYear();
   let overallBalance = 0;
   let positiveBalance = 0;
@@ -22,12 +15,10 @@ export function Overview({userId, groupId, loading, data, error}) {
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return <p>Unable to load, see error</p>;
   }
 
-  // iterating through data to calculate balance
   data.forEach((e) => {
-    console.log(e.balance);
     overallBalance += e.balance;
     if (e.balance > 0) {
       positiveBalance += e.balance;
@@ -38,18 +29,14 @@ export function Overview({userId, groupId, loading, data, error}) {
 
   const status = getStatus(overallBalance)
 
-  // formatting the balance to 2 decimal place
   const formattedOverallBalance = Intl.NumberFormat("en-GB", {style: "currency", currency: "GBP", minimumFractionDigits: 2, maximumFractionDigits: 2}).format(Math.abs(overallBalance));
   const formattedPositiveBalance = Intl.NumberFormat("en-GB", {style: "currency", currency: "GBP", minimumFractionDigits: 2, maximumFractionDigits: 2}).format(Math.abs(positiveBalance));
   const formattedNegativeBalance = Intl.NumberFormat("en-GB", {style: "currency", currency: "GBP", minimumFractionDigits: 2, maximumFractionDigits: 2}).format(Math.abs(negativeBalance));
-
-  console.log(typeof negativeBalance);
 
   return (
     <div className="dashboard-grid-component">
       <h2 className="component-title">Overview</h2>
 
-      {/* Overall Container */}
       <div className="overall">
         <div className="overall-information">
           <div className="overall-balance">{formattedOverallBalance}</div>
@@ -58,7 +45,6 @@ export function Overview({userId, groupId, loading, data, error}) {
         <div className="date">{date}</div>
       </div>
 
-      {/* Individual Container */}
       <div className="overview-details">
         <div className="individual-balances">
           <div className="owed-to-me">

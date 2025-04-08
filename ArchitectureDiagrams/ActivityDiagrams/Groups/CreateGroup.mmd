@@ -1,0 +1,30 @@
+graph TD
+    A[Start] --> B{Receive POST /group/create Request};
+B --> C[Extract CreateGroupRequest data];
+C --> D(Call Create Group Service);
+
+subgraph "GroupService: createGroup (as provided)"
+E[Find creating User by ID] --> F{User Found?};
+F -- No --> G[Service Returns null - User Not Found];
+F -- Yes --> H[Create new Group entity];
+H --> I[Set Group Name, Date Created];
+I --> J[Add creating User to Group's user set];
+J --> K[Save Group via Repository];
+K --> L[Service Returns Saved Group];
+end
+
+D --> E;
+
+L --> M{Result is Group?};
+G --> M;
+
+M -- No - User Not Found --> N[Create Response 'User not found', false];
+
+M -- Yes --> Q{Result Group Name == 'GroupExistsError'?};
+Q -- Yes --> R[Create Response - 'Group exists', false];
+Q -- No  --> O[Create Response - 'New group created!', true, groupId];
+
+N --> P[Return CreateGroupResponse];
+R --> P;
+O --> P;
+P --> Z[End];

@@ -1,15 +1,7 @@
 import "../styles/friends.css";
 import { FriendsRequestItem } from "./friends-request-item";
 
-export function FriendsRequest({userId, loading, data, error}) {
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    return <p>Error: {error}</p>;
-  }
+export function FriendsRequest({data, reload}) {
 
     return (
       <div>
@@ -23,6 +15,7 @@ export function FriendsRequest({userId, loading, data, error}) {
                     email={e.email}
                     username={e.username}
                     requestId={e.requestId}
+                    reload={reload}
                   />
             </li>
           ))}

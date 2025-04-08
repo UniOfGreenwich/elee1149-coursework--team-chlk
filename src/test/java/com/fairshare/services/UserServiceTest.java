@@ -1,82 +1,163 @@
 package com.fairshare.services;
 
 import com.fairshare.Requests.CreateUserRequest;
+import com.fairshare.Responses.GroupResponse;
+import com.fairshare.entity.Group;
 import com.fairshare.entity.User;
+import com.fairshare.repository.GroupRepository;
 import com.fairshare.repository.UserRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.MockitoAnnotations;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)
 class UserServiceTest {
 
-    @Mock
-    UserRepository userRepository;
-
     @InjectMocks
-    UserService userService;
+    private UserService userService;
 
-    String email = "test@example.com";
-    String password = "password";
+    @Mock
+    private UserRepository userRepository;
 
-    @Test
-    void testAuthenticateLoginWithValidCredentials() {
-        User testUser = new User();
+    @Mock
+    private GroupRepository groupRepository;
 
-        testUser.setEmail(email);
-        testUser.setPassword(password);
+    @Mock
+    private ExpenseService expenseService;
 
-        when(userRepository.findByEmail(email)).thenReturn(testUser);
+    @Mock
+    private PasswordEncoder passwordEncoder;
 
-        User testResult = userService.authenticateLogin(email, password);
-
-        assertNotNull(testResult);
-        assertEquals(email, testResult.getEmail());
-
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    void testAuthenitcateLoginWithInvalidCredentials() {
-        when(userRepository.findByEmail(email)).thenReturn(null);
+    void testAuthenticateLogin_Success() {
+        User user = new User();
+        user.setPassword("encodedPassword");
 
-        User testResult = userService.authenticateLogin(email, password);
+        when(userRepository.findByEmail(anyString())).thenReturn(user);
+        when(passwordEncoder.matches(anyString(), anyString())).thenReturn(true);
 
-        assertNull(testResult);
-    }
-
-    @Test
-    void testCreateUserWhenUserDoesNotExist() {
-        CreateUserRequest testCreateUserRequest = new CreateUserRequest("hello", "world", "username", "test@example.com", "password");
-        User testUser = new User();
-        testUser.setEmail(testCreateUserRequest.getEmail());
-
-        when(userRepository.findByEmail(testCreateUserRequest.getEmail())).thenReturn(null);
-        when(userRepository.save(any(User.class))).thenReturn(testUser);
-
-        User result = userService.createUser(testCreateUserRequest);
+        User result = userService.authenticateLogin("email@example.com", "password");
 
         assertNotNull(result);
-        assertEquals(testCreateUserRequest.getEmail(), result.getEmail());
+        verify(userRepository, times(1)).findByEmail("email@example.com");
+        verify(passwordEncoder, times(1)).matches("password", "encodedPassword");
     }
 
     @Test
-    void testCreateUserWhenUserExists() {
-        CreateUserRequest testCreateUserRequest = new CreateUserRequest("hello", "world", "username", "test@example.com", "password");
-        User testUser = new User();
-        testUser.setEmail(testCreateUserRequest.getEmail());
+    void testAuthenticateLogin_Failure() {
+        when(userRepository.findByEmail(anyString())).thenReturn(null);
 
-        when(userRepository.findByEmail(testCreateUserRequest.getEmail())).thenReturn(testUser);
-
-        User result = userService.createUser(testCreateUserRequest);
+        User result = userService.authenticateLogin("email@example.com", "password");
 
         assertNull(result);
+        verify(userRepository, times(1)).findByEmail("email@example.com");
+        verify(passwordEncoder, never()).matches(anyString(), anyString());
+    }
+
+    @Test
+    void testCreateUser_Success() {
+        CreateUserRequest request = new CreateUserRequest();
+        request.setEmail("email@example.com");
+        request.setPassword("password");
+
+        when(userRepository.findByEmail(anyString())).thenReturn(null);
+        when(passwordEncoder.encode(anyString())).thenReturn("encodedPassword");
+        when(userRepository.save(any(User.class))).thenReturn(new User());
+
+        User result = userService.createUser(request);
+
+        assertNotNull(result);
+        verify(userRepository, times(1)).findByEmail("email@example.com");
+        verify(passwordEncoder, times(1)).encode("password");
+        verify(userRepository, times(1)).save(any(User.class));
+    }
+
+    @Test
+    void testCreateUser_AlreadyExists() {
+        CreateUserRequest request = new CreateUserRequest();
+        request.setEmail("email@example.com");
+
+        when(userRepository.findByEmail(anyString())).thenReturn(new User());
+
+        User result = userService.createUser(request);
+
+        assertNull(result);
+        verify(userRepository, times(1)).findByEmail("email@example.com");
+        verify(passwordEncoder, never()).encode(anyString());
+        verify(userRepository, never()).save(any(User.class));
+    }
+
+    @Test
+    void testGetUsersGroups_UserExists() {
+        User user = new User();
+        Set<Group> groups = new HashSet<>();
+        Group group = new Group();
+        group.setGroupId(1);
+        group.setUsers(new HashSet<>());
+        groups.add(group);
+        user.setGroups(groups);
+
+        when(userRepository.findById(anyInt())).thenReturn(Optional.of(user));
+        when(expenseService.getTotalExpensesByGroupId(anyInt())).thenReturn(100.0);
+
+        List<GroupResponse> result = userService.getUsersGroups(1);
+
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        verify(userRepository, times(1)).findById(1);
+        verify(expenseService, times(1)).getTotalExpensesByGroupId(1);
+    }
+
+    @Test
+    void testGetUsersGroups_UserNotExists() {
+        when(userRepository.findById(anyInt())).thenReturn(Optional.empty());
+
+        List<GroupResponse> result = userService.getUsersGroups(1);
+
+        assertNull(result);
+        verify(userRepository, times(1)).findById(1);
+        verify(expenseService, never()).getTotalExpensesByGroupId(anyInt());
+    }
+
+    @Test
+    void testGetNumOfUsersInGroup_GroupExists() {
+        Group group = new Group();
+        group.setUsers(new HashSet<>());
+
+        when(groupRepository.findById(anyInt())).thenReturn(Optional.of(group));
+
+        int result = userService.getNumOfUsersInGroup(1);
+
+        assertEquals(0, result);
+        verify(groupRepository, times(1)).findById(1);
+    }
+
+    @Test
+    void testGetNumOfUsersInGroup_GroupNotExists() {
+        when(groupRepository.findById(anyInt())).thenReturn(Optional.empty());
+
+        int result = userService.getNumOfUsersInGroup(1);
+
+        assertEquals(0, result);
+        verify(groupRepository, times(1)).findById(1);
     }
 }

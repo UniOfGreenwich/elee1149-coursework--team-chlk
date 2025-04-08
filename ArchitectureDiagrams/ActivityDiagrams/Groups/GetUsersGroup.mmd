@@ -1,0 +1,28 @@
+graph TD
+
+    A[Start] --> B{Receive GET /users/groups Request};
+    B --> C[Extract userId];
+    C --> D(Call Get Groups Service);
+
+subgraph "UserService: getUsersGroups"
+E[Find User by ID] --> F{User Found?};
+F -- No --> G[Service Returns Null];
+F -- Yes --> H[Init GroupResponse List];
+H --> I{Loop: user.getGroups};
+I -- For Each Group --> J[Create GroupResponse DTO];
+J --> K[Populate DTO - Details, User Count];
+K --> L[Call ExpenseService for Total];
+L --> M[Set Total Spent in DTO];
+M --> N[Add DTO to List];
+N --> I;
+I -- End Loop --> O[Service Returns List];
+end
+
+D --> E;
+
+O --> P[Set Result: List];
+G --> P;
+
+P --> Q[Return Result - List or Null];
+Q --> Z[End];
+

@@ -1,16 +1,12 @@
-//importing styles
 import "../styles/dashboard-quick-actions.css";
-
 import React, { useState } from "react";
-
-// importing components
 import AddExpense from "./add-expense";
 import SettlePayment from "./settle-payment";
 import AddNewFriend from "./add-new-friend";
 import AddNewGroup from "./add-new-group";
 
-export function QuickActions({ userId, groupId = undefined }) {
-  const [modalType, setModalType] = useState(null); // null means no modal is open
+export function QuickActions({ userId, groupId = undefined, reload = () => null}) {
+  const [modalType, setModalType] = useState(null);
 
   const openModal = (type) => setModalType(type);
   const closeModal = () => setModalType(null);
@@ -47,20 +43,20 @@ export function QuickActions({ userId, groupId = undefined }) {
         Add Friend
       </button>
     </div> }
-
-      {/* Conditionally Render Modals */}
+    
       {modalType === "AddExpense" && (
-        <AddExpense userId={userId} groupId={groupId} closeModal={closeModal} />
+        <AddExpense userId={userId} groupId={groupId} reload={reload} closeModal={closeModal} />
       )}
       {modalType === "SettlePayment" && (
         <SettlePayment
           userId={userId}
           groupId={groupId}
+          reload={reload} 
           closeModal={closeModal}
         />
       )}
       {modalType === "AddNewFriend" && (
-              <AddNewFriend userId={userId} groupId={groupId} closeModal={closeModal} />
+              <AddNewFriend userId={userId} groupId={groupId} reload={reload} closeModal={closeModal} />
             )}
             {modalType === "AddNewGroup" && (
                       <AddNewGroup

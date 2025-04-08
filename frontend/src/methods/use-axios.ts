@@ -1,16 +1,19 @@
 import axios, { AxiosRequestConfig } from 'axios'
 import { useEffect, useState } from 'react'
+import { httpErrorHandler } from './http-error-handler';
 
 axios.defaults.baseURL = 'https://fairshare-backend-174597868590.us-central1.run.app'
 //axios.defaults.baseURL = 'http://localhost:8080/'
 
-export const useAxios = <T>(config: AxiosRequestConfig<any>): [boolean, T | undefined, string, () => void] => {
+export const useAxios = <T>(config: AxiosRequestConfig<any>, loadOnStart: boolean=true): [boolean, T[] | undefined, string, () => void, (action: T[] | ((prevState: T[]) => T[])) => void] => {
     const [loading, setLoading] = useState(true);
-    const [data, setData] = useState<T>([]);
+    const [data, setData] = useState<T[]>([]);
     const [error, setError] = useState('');
 
+
     useEffect(() => {
-        sendRequest();
+        if (loadOnStart) sendRequest() 
+        else setLoading(false)
     }, []);
 
     const request = () => {
@@ -28,16 +31,21 @@ export const useAxios = <T>(config: AxiosRequestConfig<any>): [boolean, T | unde
                 }
             )
             .catch((error) => {
-                setError(error.message)
+                httpErrorHandler({
+                    err: error.response,
+                    errorKeys: ['field1', 'field2'],
+                    setFieldErrors: setError,
+                    onCustomError: () => console.log('Custom error handling')
+                })
             })
             .finally(() => setLoading(false));
     };
 
-    return [loading, data, error, request];
+    return [loading, data, error, request, setData];
 }
 
 interface UserShare {
-    id: number;
+    id?: number;
     shareAmount: number;
     userId: number;
 }
@@ -48,20 +56,17 @@ interface Expense {
   currency: string;
   date: Date;
   description: string;
-  expenseId: number;
+  expenseId?: number;
   groupId: number;
-  payerId: number;
-  userName: string;
+  payerId?: number;
+  userId?: number;
+  userName?: string;
   userShares: UserShare[];
   groupName?: string;
 }
 
-interface ExpenseListResponse {
-  expenses : Expense[];
-}
-
- export const GroupExpensesData = (groupId) => {
-    const [loading, data, error, request] = useAxios<ExpenseListResponse>({method: 'GET', url: `expense/all-expenses?groupId=${groupId}`})
+ export const GroupExpensesData = (groupId: any): [boolean, Expense[] | undefined, string, () => void] => {
+    const [loading, data, error, request] = useAxios<Expense>({method: 'GET', url: `expense/all-expenses?groupId=${groupId}`})
 
     return [loading, data, error, request];
 }
@@ -76,34 +81,31 @@ interface Group {
     message: string;
 }
   
-interface GroupListResponse {
-    groups : Group[];
-}
-  
-export const GroupsData = (userId) => {
-    const [loading, data, error, request] = useAxios<GroupListResponse>({method: 'GET', url: `users/groups?userId=${userId}`})
+export const GroupsData = (userId: any): [boolean, Group[] | undefined, string, () => void] => {
+    const [loading, data, error, request] = useAxios<Group>({method: 'GET', url: `users/groups?userId=${userId}`})
   
     return [loading, data, error, request];
 }
 
 interface GroupMember {
+    groupId?: number;
     balance: number;
+    email: string;
     firstName: string;
+    lastName: string;
+    userId: number;
+    username: string;
 }
 
-interface GroupMemberListResponse {
-  groupMembers : GroupMember[];
-}
-
-export const GroupMembersData = (groupId, userId) => {
-    const [loading, data, error, request] = useAxios<GroupMemberListResponse>({method: 'GET', url: `group/${groupId}/${userId}/users`})
+export const GroupMembersData = (groupId: any, userId: any): [boolean, GroupMember[] | undefined, string, () => void] => {
+    const [loading, data, error, request] = useAxios<GroupMember>({method: 'GET', url: `group/${groupId}/${userId}/users`})
 
     return [loading, data, error, request];
 }
 
-export const AllExpenseData = <ExpenseListResponse>(userId: number): [boolean, ExpenseListResponse | undefined, string, () => void]=> {
+export const AllExpenseData = (userId: number): [boolean, Expense[] | undefined, string, () => void]=> {
     const [loading, setLoading] = useState(true);
-    const [data, setData] = useState<ExpenseListResponse>([]);
+    const [data, setData] = useState<Expense[]>([]);
     const [error, setError] = useState('');
 
     useEffect(() => {
@@ -111,6 +113,7 @@ export const AllExpenseData = <ExpenseListResponse>(userId: number): [boolean, E
     }, []);
 
     const request = () => {
+        setData([])
         sendRequest();
     }
 
@@ -119,33 +122,46 @@ export const AllExpenseData = <ExpenseListResponse>(userId: number): [boolean, E
         setData([])
 
         axios.get(`users/groups?userId=${userId}`)
-            .then((response) => {
-                    response.data.forEach(group => {
+            .then((groups) => {
+                    groups.data.forEach((group: Group) => {
                         axios.get(`expense/all-expenses?groupId=${group.groupId}`)
-                            .then((response) => {
-                                response.data.forEach(element => {
-                                    element.groupName = group.groupName;
-                                    setData(data => [...data, element])
+                            .then((expenses) => {
+                                expenses.data.forEach((expense: Expense) => {
+                                    expense.groupName = group.groupName;
+                                    setData(data => [...data, expense])
                                 })
-                            }).catch((error) => {
-                                setError(error.message)
+                            })
+                            .catch((error) => {
+                                httpErrorHandler({
+                                    err: error.response,
+                                    errorKeys: ['field1', 'field2'],
+                                    setFieldErrors: setError,
+                                    onCustomError: () => console.log('Custom error handling')
+                                })
                             })
                     })
 
                 }
             )
             .catch((error) => {
-                setError(error.message)
+                httpErrorHandler({
+                    err: error.response,
+                    errorKeys: ['field1', 'field2'],
+                    setFieldErrors: setError,
+                    onCustomError: () => console.log('Custom error handling')
+                })
             })
-            .finally(() => setLoading(false));
+            .finally(() => {
+                setLoading(false);
+            })
     };
 
     return [loading, data, error, request];
 }
 
-export const AllMembersData = <GroupMemberListResponse>(userId: number): [boolean, GroupMemberListResponse | undefined, string, () => void]=> {
+export const AllMembersData = (userId: number): [boolean, GroupMember[] | undefined, string, () => void]=> {
     const [loading, setLoading] = useState(true);
-    const [data, setData] = useState<GroupMemberListResponse>([]);
+    const [data, setData] = useState<GroupMember[]>([]);
     const [error, setError] = useState('');
 
     useEffect(() => {
@@ -161,23 +177,33 @@ export const AllMembersData = <GroupMemberListResponse>(userId: number): [boolea
         setData([])
 
         axios.get(`users/groups?userId=${userId}`)
-            .then((response) => {
-                    response.data.forEach(element => {
-                        axios.get(`group/${element.groupId}/${userId}/users`)
-                            .then((response) => {
-                                response.data.forEach(element => {
-                                    setData(data => [...data, element])
+            .then((groups) => {
+                    groups.data.forEach((group: Group) => {
+                        axios.get(`group/${group.groupId}/${userId}/users`)
+                            .then((groupMembers) => {
+                                groupMembers.data.forEach((groupMember: GroupMember) => {
+                                    setData(data => [...data, groupMember]) 
                                 })
-                                // setData(data => [...data, response.data])
-                            }).catch((error) => {
-                                setError(error.message)
+                            })
+                            .catch((error) => {
+                                httpErrorHandler({
+                                    err: error.response,
+                                    errorKeys: ['field1', 'field2'],
+                                    setFieldErrors: setError,
+                                    onCustomError: () => console.log('Custom error handling')
+                                })
                             })
                     })
 
                 }
             )
             .catch((error) => {
-                setError(error.message)
+                httpErrorHandler({
+                    err: error.response,
+                    errorKeys: ['field1', 'field2'],
+                    setFieldErrors: setError,
+                    onCustomError: () => console.log('Custom error handling')
+                })
             })
             .finally(() => setLoading(false));
     };
@@ -195,19 +221,123 @@ interface Friend {
     recieverId: number;
     requestId: number;
 }
-  
-interface FriendListResponse {
-    friends : Friend[];
-}
 
-export const FriendsListData = (userId) => {
-    const [loading, data, error, request] = useAxios<FriendListResponse>({method: 'GET', url: `friends/list?userId=${userId}`})
+export const FriendsListData = (userId: any): [boolean, Friend[] | undefined, string, () => void] => {
+    const [loading, data, error, request] = useAxios<Friend>({method: 'GET', url: `friends/list?userId=${userId}`})
 
     return [loading, data, error, request];
 }
 
-export const PendingRequestData = (userId) => {
-    const [loading, data, error, request] = useAxios<FriendListResponse>({method: 'GET', url: `friends/pendingRequests?userId=${userId}`})
+export const PendingRequestData = (userId: any): [boolean, Friend[] | undefined, string, () => void] => {
+    const [loading, data, error, request] = useAxios<Friend>({method: 'GET', url: `friends/pendingRequests?userId=${userId}`})
 
     return [loading, data, error, request];
+}
+
+interface SignupPayload {
+    firstName: string,
+    lastName: string,
+    email: string,
+    username: string,
+    password: string
+}
+
+interface SignupResponse {
+    message: string,
+    success: boolean,
+    userId: number
+}
+
+export const SignupRequest = (payload: SignupPayload): [boolean, SignupResponse[] | undefined, string, () => void, (action: SignupResponse[] | ((prevState: SignupResponse[]) => SignupResponse[])) => void] => {
+    const [loading, data, error, request, setData] = useAxios<SignupResponse>({method: 'POST', url: "users/newUser", data: payload}, false)
+
+    return [loading, data, error, request, setData]
+}
+
+interface LoginPayload {
+    email: string,
+    password: string
+}
+
+interface LoginResponse {
+    message: string,
+    success: boolean,
+    userId: number,
+    firstName: string,
+    lastName: string
+}
+
+export const LoginRequest = (payload: LoginPayload): [boolean, LoginResponse[] | undefined, string, () => void, (action: LoginResponse[] | ((prevState: LoginResponse[]) => LoginResponse[])) => void] => {
+    const [loading, data, error, request, setData] = useAxios<LoginResponse>({method: 'POST', url: "users/login", data: payload}, false)
+
+    return [loading, data, error, request, setData]
+}
+
+interface AddNewGroupPayload {
+    groupName: string,
+    userId: number,
+}
+
+interface AddNewGroupResponse {
+    message: string,
+    success: boolean,
+    groupId: number
+}
+
+export const AddNewGroupRequest = (payload: AddNewGroupPayload): [boolean, AddNewGroupResponse[] | undefined, string, () => void] => {
+    const [loading, data, error, request] = useAxios<AddNewGroupResponse>({method: 'POST', url: "group/create", data: payload}, false)
+
+    return [loading, data, error, request]
+}
+
+interface AddNewFriendResponse {
+    message: string,
+    success: boolean,
+    userWithBalance: null
+}
+
+export const AddNewFriendRequest = (userId: any, friendEmail: any): [boolean, AddNewFriendResponse[] | undefined, string, () => void] => {
+    const [loading, data, error, request] = useAxios<AddNewFriendResponse>({method: 'POST', url: `friends/sendRequest?userId=${userId}&friendEmail=${friendEmail}`}, false)
+
+    return [loading, data, error, request]
+}
+
+export const AcceptFriendRequest = (requestId: any): [boolean, string[] | undefined, string, () => void] => {
+    const [loading, data, error, request] = useAxios<string>({method: 'POST', url: `friends/acceptFriendRequest?requestId=${requestId}`}, false)
+
+    return [loading, data, error, request]
+}
+
+export const DeclineFriendRequest = (requestId: any): [boolean, string[] | undefined, string, () => void] => {
+    const [loading, data, error, request] = useAxios<string>({method: 'DELETE', url: `friends/declineRequest?requestId=${requestId}`}, false)
+
+    return [loading, data, error, request]
+}
+
+interface AddNewGroupMemberPayload {
+    userId: number
+}
+
+interface AddNewGroupMemberResponse {
+    message: string,
+    success: boolean,
+    groupId: number
+}
+
+export const AddNewGroupMemberRequest = (groupId: any, payload: AddNewGroupMemberPayload): [boolean, AddNewGroupMemberResponse[] | undefined, string, () => void] => {
+    const [loading, data, error, request] = useAxios<AddNewGroupMemberResponse>({method: 'POST', url: `group/${groupId}/addUser`, data: payload}, false)
+
+    return [loading, data, error, request]
+}
+
+interface AddExpenseResponse {
+    message: string,
+    success: boolean,
+    expenseId: number
+}
+
+export const AddExpenseRequest = (userId: any, payload: Expense): [boolean, AddExpenseResponse[] | undefined, string, () => void] => {
+    const [loading, data, error, request] = useAxios<AddExpenseResponse>({method: 'POST', url: `expense/add-expense?payerId=${userId}`, data: payload}, false)
+
+    return [loading, data, error, request]
 }

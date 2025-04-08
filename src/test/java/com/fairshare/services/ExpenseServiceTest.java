@@ -9,107 +9,165 @@ import com.fairshare.repository.ExpenseRepository;
 import com.fairshare.repository.GroupRepository;
 import com.fairshare.repository.UserRepository;
 import com.fairshare.repository.UserShareRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.MockitoAnnotations;
 
-import java.util.Collections;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyDouble;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)
 class ExpenseServiceTest {
 
     @InjectMocks
-    ExpenseService expenseService;
+    private ExpenseService expenseService;
 
     @Mock
-    ExpenseRepository expenseRepository;
+    private ExpenseRepository expenseRepository;
 
     @Mock
-    UserShareRepository userShareRepository;
+    private UserShareRepository userShareRepository;
 
     @Mock
-    UserRepository userRepository;
+    private BalanceService balanceService;
 
     @Mock
-    GroupRepository groupRepository;
+    private UserRepository userRepository;
 
     @Mock
-    BalanceService balanceService;
+    private GroupRepository groupRepository;
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+    }
 
     @Test
-    void testAddExpense() {
+    void testAddExpense_UserAndGroupNotFound() {
         CreateExpenseRequest request = new CreateExpenseRequest();
-        request.setExpenseName("Test Expense");
-        request.setExpenseId(1);
-        request.setDescription("Test Description");
-        request.setAmount(100.0);
-        request.setCurrency("USD");
-        request.setPayerId(1);
-        request.setCategoryId(1);
         request.setGroupId(1);
 
+        when(userRepository.findById(anyInt())).thenReturn(Optional.empty());
+        when(groupRepository.findById(anyInt())).thenReturn(Optional.empty());
+
+        Expense result = expenseService.addExpense(1, request);
+
+        assertEquals("GroupAndUserNotFoundError", result.getDescription());
+        verify(userRepository, times(1)).findById(1);
+        verify(groupRepository, times(1)).findById(1);
+    }
+
+    @Test
+    void testAddExpense_UserNotFound() {
+        CreateExpenseRequest request = new CreateExpenseRequest();
+        request.setGroupId(1);
+
+        when(userRepository.findById(anyInt())).thenReturn(Optional.empty());
+        when(groupRepository.findById(anyInt())).thenReturn(Optional.of(new Group()));
+
+        Expense result = expenseService.addExpense(1, request);
+
+        assertEquals("UserNotFoundError", result.getDescription());
+        verify(userRepository, times(1)).findById(1);
+        verify(groupRepository, times(1)).findById(1);
+    }
+
+    @Test
+    void testAddExpense_GroupNotFound() {
+        CreateExpenseRequest request = new CreateExpenseRequest();
+        request.setGroupId(1);
+
+        when(userRepository.findById(anyInt())).thenReturn(Optional.of(new User()));
+        when(groupRepository.findById(anyInt())).thenReturn(Optional.empty());
+
+        Expense result = expenseService.addExpense(1, request);
+
+        assertEquals("GroupNotFoundError", result.getDescription());
+        verify(userRepository, times(1)).findById(1);
+        verify(groupRepository, times(1)).findById(1);
+    }
+
+    @Test
+    void testAddExpense_PayerNotInGroup() {
         User user = new User();
-        user.setUserId(1);
-
         Group group = new Group();
-        group.setGroupId(1);
-        group.setUsers(Collections.singleton(user));
+        group.setUsers(new HashSet<>());
 
-        when(groupRepository.findById(anyInt())).thenReturn(Optional.of(group));
+        CreateExpenseRequest request = new CreateExpenseRequest();
+        request.setGroupId(1);
+
         when(userRepository.findById(anyInt())).thenReturn(Optional.of(user));
-        when(expenseRepository.existsByExpenseNameAndGroupId(anyString(), anyInt())).thenReturn(false);
-        when(expenseRepository.existsByExpenseId(anyInt())).thenReturn(false);
+        when(groupRepository.findById(anyInt())).thenReturn(Optional.of(group));
 
-        Expense result = expenseService.addExpense(request);
+        Expense result = expenseService.addExpense(1, request);
 
-        assertEquals("Test Expense", result.getExpenseName());
-        assertEquals(1, result.getExpenseId());
-        assertEquals("Test Description", result.getDescription());
-        assertEquals(100.0, result.getAmount());
-        assertEquals("USD", result.getCurrency());
-        assertEquals(1, result.getPayerId());
-        assertEquals(1, result.getCategoryId());
-        assertEquals(1, result.getGroupId());
+        assertEquals("PayerNotInGroupError", result.getDescription());
+        verify(userRepository, times(1)).findById(1);
+        verify(groupRepository, times(1)).findById(1);
+    }
 
+    @Test
+    void testAddExpense_Success() {
+        User user = new User();
+        Group group = new Group();
+        group.setUsers(Set.of(user));
+
+        CreateExpenseRequest request = new CreateExpenseRequest();
+        request.setGroupId(1);
+        request.setUserShares(new ArrayList<>());
+
+        when(userRepository.findById(anyInt())).thenReturn(Optional.of(user));
+        when(groupRepository.findById(anyInt())).thenReturn(Optional.of(group));
+
+        Expense result = expenseService.addExpense(1, request);
+
+        assertNotNull(result);
         verify(expenseRepository, times(1)).save(any(Expense.class));
-        verify(userShareRepository, times(result.getUserShares().size())).save(any(UserShare.class));
-        verify(balanceService, times(result.getUserShares().size())).updateBalance(anyInt(), anyInt(), anyDouble());
+        verify(userShareRepository, times(request.getUserShares().size())).save(any(UserShare.class));
+        verify(balanceService, times(request.getUserShares().size())).updateBalance(anyInt(), anyInt(), anyDouble());
     }
 
     @Test
     void testGetExpensesByGroupId() {
+        List<Expense> expenses = new ArrayList<>();
         Expense expense = new Expense();
-        expense.setDescription("Test Expense");
-        expense.setAmount(100.0);
-        expense.setCurrency("GBP");
-        //expense.setDate(new Date());
-        expense.setCategoryId(1);
-        expense.setGroupId(1);
         expense.setPayerId(1);
+        expenses.add(expense);
 
-        when(expenseRepository.findByGroupId(anyInt())).thenReturn(Collections.singletonList(expense));
-        when(userRepository.findById(anyInt())).thenReturn(Optional.of(new User())); // Mock userRepository
+        when(expenseRepository.findByGroupId(anyInt())).thenReturn(expenses);
+        when(userRepository.findById(anyInt())).thenReturn(Optional.of(new User()));
 
-        List<Expense> expenses = expenseService.getExpensesByGroupId(1);
+        List<Expense> result = expenseService.getExpensesByGroupId(1);
 
-        assertEquals(1, expenses.size());
-        assertEquals("Test Expense", expenses.get(0).getDescription());
-        verify(expenseRepository, Mockito.times(1)).findByGroupId(1);
+        assertEquals(1, result.size());
+        verify(expenseRepository, times(1)).findByGroupId(1);
+        verify(userRepository, times(1)).findById(1);
+    }
+
+    @Test
+    void testGetTotalExpensesByGroupId() {
+        List<Expense> expenses = new ArrayList<>();
+        Expense expense1 = new Expense();
+        expense1.setAmount(100.0);
+        Expense expense2 = new Expense();
+        expense2.setAmount(200.0);
+        expenses.add(expense1);
+        expenses.add(expense2);
+
+        when(expenseRepository.findByGroupId(anyInt())).thenReturn(expenses);
+
+        double result = expenseService.getTotalExpensesByGroupId(1);
+
+        assertEquals(300.0, result, 0.001);
+        verify(expenseRepository, times(1)).findByGroupId(1);
     }
 }

@@ -1,19 +1,16 @@
-import { useEffect, useState } from "react";
 import "../styles/dashboard-top-categories.css";
 import { TopCategoriesItem } from "./dashboard-top-categories-item";
 import categories from "../data/category-map";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-export function TopCategories({ userId, groupId, loading, data, error }) {
+export function TopCategories({ loading, data, error }) {
   if (loading) {
     return <p>Loading...</p>;
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return <p>Unable to load, see error</p>;
   }
-
-  console.log(data); //printing the data to the console
 
   if (data !== undefined) {
     categories.forEach((category) => {
@@ -35,10 +32,8 @@ export function TopCategories({ userId, groupId, loading, data, error }) {
     .reverse()
     .slice(0, 4);
 
-  console.log(sortedCategories);
-
   return (
-    <div className="dashboard-grid-component-scroll">
+    <div className="dashboard-grid-component">
       <h2 className="component-title">Top Categories</h2>
       <div className="component-content">
         <ul className="categories-grid">

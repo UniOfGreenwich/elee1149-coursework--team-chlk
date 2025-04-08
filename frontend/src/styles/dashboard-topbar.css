@@ -18,6 +18,9 @@
     font-size: 24px;
     font-weight: bold;
     width: 150px;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+    
 }
 
 .date {

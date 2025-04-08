@@ -1,12 +1,17 @@
 package com.fairshare.controllers;
 
+import com.fairshare.config.TestSecurityConfig;
 import com.fairshare.entity.Expense;
 import com.fairshare.services.ExpenseService;
 import org.junit.jupiter.api.Test;
 
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.Import;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -19,6 +24,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(ExpenseController.class)
+@Import(TestSecurityConfig.class)
+@ActiveProfiles("test")
 class ExpenseControllerTests {
 
     @Autowired
