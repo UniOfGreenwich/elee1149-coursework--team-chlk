@@ -160,7 +160,9 @@ For detailed designs, please refer ro the [Design](Design) folder.
       </tr>
     </tbody>
   </table>
-  <div></div>
+  </details>
+
+  <details>
   <summary>NPM Dependencies</summary>
   <div></div>
   <table>
