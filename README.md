@@ -90,7 +90,7 @@ To run the app locally: [axios.ts](frontend/src/methods/use-axios.ts)
 ## Tech Stack 
 | Technology   | Section Used    |
 |--------------|-----------------|
-| <img src="[https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/hoppscotch.png]" width="50"> | API Testing |
+| <img src="[https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/postman.png]" width="50"> | API Testing |
 | <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/html.png" width="50"> | Frontend Structure |
 | <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/css.png" width="50"> | Frontend Styling |
 | <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/javascript.png" width="50"> | Frontend Logic |
@@ -100,7 +100,7 @@ To run the app locally: [axios.ts](frontend/src/methods/use-axios.ts)
 | <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring.png" width="50"> | Backend Framework |
 | <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/postgresql.png" width="50"> | Database Management |
 | <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring_boot.png" width="50"> | Backend Framework |
-| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/render.png" width="50"> | Render (DB Host) |
+| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/postgresql.png" width="50"> | Render (DB Host) |
 | <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/gcp.png" width="50"> | GCP (Backend Host) |
 
 
