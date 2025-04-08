@@ -109,6 +109,10 @@ See the [Dependencies section](#dependencies) below for details on the project's
 
 <a id="dependencies"></a>
 
+## Design
+
+For detailed designs, please refer ro the [Design](Design) folder.
+
 ## Class Diagrams
 
 For detailed class diagrams, please refer to the [class_diagrams](class_diagrams) folder.
@@ -228,6 +232,80 @@ apply changes to the code to use this secret. See [GCP Branch](https://github.co
       </tr>
     </tbody>
   </table>
+  <div></div>
+  <summary>NPM Dependencies</summary>
+  <div></div>
+  <table>
+    <thead>
+      <tr>
+        <th>Dependency</th>
+        <th>Version</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>axios</td>
+        <td>^1.8.4</td>
+        <td>Promise based HTTP client</td>
+      </tr>
+      <tr>
+        <td>cra-template</td>
+        <td>1.2.0</td>
+        <td>Base template for Create React App</td>
+      </tr>
+      <tr>
+        <td>date-fns</td>
+        <td>^4.1.0</td>
+        <td>Date Utility Library</td>
+      </tr>
+      <tr>
+        <td>react</td>
+        <td>^19.0.0</td>
+        <td>UI Library</td>
+      </tr>
+      <tr>
+        <td>react-dom</td>
+        <td>^19.0.0</td>
+        <td>DOM-specific methods for rendering React components into the browser's DOM</td>
+      </tr>
+      <tr>
+        <td>react-hook-form</td>
+        <td>^7.54.2</td>
+        <td>Performant, flexible and extensible forms with easy-to-use validation</td>
+      </tr>
+      <tr>
+        <td>react-router-dom</td>
+        <td>^7.1.5</td>
+        <td>Declarative routing for React</td>
+      </tr>
+      <tr>
+        <td>react-scripts</td>
+        <td>^5.0.1</td>
+        <td>Scripts and configuration for Create React App</td>
+      </tr>
+      <tr>
+        <td>react-toastify</td>
+        <td>^11.0.5</td>
+        <td>Notification Library</td>
+      </tr>
+      <tr>
+        <td>recharts</td>
+        <td>^2.15.1</td>
+        <td>Refined charts Library</td>
+      </tr>
+      <tr>
+        <td>Save</td>
+        <td>^2.9.0</td>
+        <td>CRUD based persistence abstraction for storing objects to sany backend data store</td>
+      </tr>
+      <tr>
+        <td>typescript</td>
+        <td>^5.8.2</td>
+        <td>Language for application-scale JavaScript</td>
+      </tr>
+    </tbody>
+  </table>
 </details>
 
 ## Contributers
@@ -247,17 +325,29 @@ apply changes to the code to use this secret. See [GCP Branch](https://github.co
 
 **Charu (Main Database Manager, Secondary Backend Role):**
 
-Hamza:
-- Tech Stack: React, JSX, CSS and HTML
+#### Hamza (Frontend Developer):
+- Tech Stack: NPM, React, JSX, CSS and HTML
 - Created application wireframe and design
 - Documentation: Requirements Engineering
 - Documentation: Styling Guide for the application
 - Front-end pages: Home, Login, Sign-up, Dashboards 
 - Dashboard component: Overview, Action Buttons, Group Members
+- Functionality: Add Friend, Add Group, Add Member, Add Expense, Settlement Payment
 - Styling and decoration: CSS
 - Application walkthrough and testing
 
-Lewis:
+#### Lewis (Frontend Developer):
+- Frontend Tech Stack: NPM, React, JSX, CSS and HTML
+- React Frontend: initial app creation
+- Documentation: Requirements Engineering
+- Frontend pages: Groups, Friends, Expenses
+- Dashboard components: Recent Expenses, Top Categories, Groups
+- Functionality: Signup, Login, Logout, Navigation, Error Notification, Success Notification
+- Axios HTTP client for API calls
+- API Error Handling
+- Styling and decoration: CSS
+- Github Pages deployment
+- Application testing
 
 ## References
 
