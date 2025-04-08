@@ -309,6 +309,23 @@ or you can run the tests individually by executing the following command:
 ```bash
 ./gradlew test
 ```
+## Dummy accounts
+Here are some dummy accounts that can be used to login to FairShare (alternatively, you can sign up and create a new account):
+
+1) **Username:** lwalker@gmail.com
+   **Password:** TestAccount1
+
+2) **Username:** kanderson1@gmail.com
+   **Password:** TestAccount2
+
+3) **Username:** hkhan@gmail.com
+   **Password:** TestAccount3
+
+4) **Username:** csrivastava@gmail.com
+   **Password:** TestAccount4
+
+5) **Username:** sblair@gmail.com
+   **Password:** TestAccount5
 
 ### Testing Documents
 In addition to automated test, we have followed some manual testing procedures through the
