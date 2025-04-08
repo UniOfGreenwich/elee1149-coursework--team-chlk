@@ -27,6 +27,9 @@ Fairshare offers a streamlined approach to managing shared expenses, eliminating
 - **Secure and Reliable:** Your data is safe and accessible whenever you need it.
 </details>
 
+## FairShare App Runthrough video
+Here you can find the full runthrough video for the FairShare app: [FairShare App Runthrough](https://uogcloud-my.sharepoint.com/:v:/g/personal/cs2726g_gre_ac_uk/EYs3ySSc75tMg2-GBZZ6L38BLUrBBxlcjO3uDrvJghuFtAnav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=CPinSy)
+
 ## Usage
 Fairshare can be accessed through GitHub pages and ran online [Github pages](https://github.com/UniOfGreenwich/elee1149-coursework--team-chlk/settings/pages)
 
