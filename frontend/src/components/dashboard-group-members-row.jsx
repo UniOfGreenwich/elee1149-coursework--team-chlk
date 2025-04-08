@@ -4,24 +4,25 @@ import { useLocation, useParams } from "react-router-dom";
 import SettlePayment from "./settle-payment";
 
 
-export function GroupMembersRow(props) {
-  const [modalType, setModalType] = useState(null); // null means no modal is open
+export function GroupMembersRow({name, status, balance, user, currentUser, groupId, reload  = () => null}) {
+
+  const [modalType, setModalType] = useState(null);
   const openModal = (type) => setModalType(type);
   const closeModal = () => setModalType(null);
 
-  const formattedBalance = Intl.NumberFormat("en-GB", {style: "currency", currency: "GBP", minimumFractionDigits: 2, maximumFractionDigits: 2}).format(Math.abs(props.balance));
+  const formattedBalance = Intl.NumberFormat("en-GB", {style: "currency", currency: "GBP", minimumFractionDigits: 2, maximumFractionDigits: 2}).format(Math.abs(balance));
   return (
     <div className="group-members-row" onClick={() => openModal("SettlePayment")}>
-      <p className="member-name">{props.name}</p>
-      <p className="status">{props.status}</p>
+      <p className="member-name">{name}</p>
+      <p className="status">{status}</p>
       <p
         className="balance"
         id="balance"
         style={{
           color:
-            props.balance > 0
+            balance > 0
               ? "#4495C7"
-              : props.balance < 0
+              : balance < 0
               ? "#FE6789"
               : "white",
         }}
@@ -30,11 +31,12 @@ export function GroupMembersRow(props) {
       </p>
       {modalType === "SettlePayment" && (
         <SettlePayment
-          userId={props.currentUser}
-          groupId={props.groupId}
+          userId={currentUser}
+          groupId={groupId}
           closeModal={closeModal}
-          recipient={props.user}
-          balance={props.balance}
+          recipient={user}
+          balance={balance}
+          reload={reload}
         />
       )}
     </div>

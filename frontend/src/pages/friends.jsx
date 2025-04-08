@@ -72,7 +72,7 @@ export function Friends({userId}) {
             <p>Unable to load, see error</p> :
             <div>
           <h2 className="friends-list-header">Your Friends</h2>
-          {friendData && pendingSentData && JSON.stringify(friendData) !== '[]' && JSON.stringify(pendingSentData) !== '[]' ? 
+          {friendData || pendingSentData || JSON.stringify(friendData) !== '[]' || JSON.stringify(pendingSentData) !== '[]' ? 
             <div>
               <p className="friend-status-title">Status</p>
               <ul className={"friends-component-" + (pendingRecievedData !== null ? pendingRecievedData.length !== 0 ? "with-requests" : "without-requests" : "without-requests" )}>
