@@ -1,9 +1,6 @@
----
-## Sequence Diagram for user case 5
----
 
 sequenceDiagram
-    title Use case 5:Create Expense
+    title Create Expense
     actor User
     participant ExpenseController
     participant ExpenseService
@@ -28,11 +25,6 @@ sequenceDiagram
         ExpenseService-->>ExpenseController: Expense with "GroupNotFoundError"
     else Payer Not in Group
         ExpenseService-->>ExpenseController: Expense with "PayerNotInGroupError"
-    else Expense Exists
-        ExpenseService->>ExpenseRepository: existsByExpenseNameAndGroupId(expenseName, groupId)
-        ExpenseRepository-->>ExpenseService: true / false
-        alt Expense Exists
-            ExpenseService-->>ExpenseController: Expense with "ExpenseExistsInGroupError"
         else Create New Expense
             ExpenseService->>ExpenseRepository: save(newExpense)
             ExpenseRepository-->>ExpenseService: Saved Expense
@@ -42,4 +34,3 @@ sequenceDiagram
             end
             ExpenseService-->>ExpenseController: New Expense created
         end
-    end

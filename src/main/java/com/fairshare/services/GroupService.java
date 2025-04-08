@@ -46,11 +46,6 @@ public class GroupService {
             return null; // Indicates user not found
         }
 
-//        if (groupRepository.existsByGroupName(groupName) || groupRepository.existsByGroupId(groupId)) {
-//            Group errorGroup = new Group();
-//            errorGroup.setGroupName("GroupExistsError");
-//            return errorGroup; // Indicate group exists
-//        }
 
         Group newGroup = new Group();
         newGroup.setGroupName(groupName);

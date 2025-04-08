@@ -1,0 +1,17 @@
+graph TD
+    A[Start] --> B{"Receive GET /friends Request (userId, friendUserId)"};
+    B --> C[Extract userId & friendUserId];
+    C --> D(Call Are Friends Service);
+
+subgraph "FriendsService: areFriends"
+E[Check if friendship exists via Repository.existsFriendship - userId, friendUserId];
+E --> F[Service Returns boolean result];
+end
+
+D --> E;
+
+F --> G{Process Service Result};
+
+G --> H[Create ResponseEntity.ok - boolean result];
+H --> ZEnd[End];
+

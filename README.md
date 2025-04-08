@@ -111,7 +111,7 @@ See the [Dependencies section](#dependencies) below for details on the project's
 
 ## Class Diagrams
 
-For detailed class diagrams, please refer to the [class_diagrams](class_diagrams) folder.
+For detailed class diagrams, please refer to the [class_diagrams](ArchitectureDiagrams/ClassDiagrams) folder.
 
 ## Requirements Engineering
 The requirements engineering documentation can be found here: [requirements-engineering](requirements-engineering/requirements-engineering.md)

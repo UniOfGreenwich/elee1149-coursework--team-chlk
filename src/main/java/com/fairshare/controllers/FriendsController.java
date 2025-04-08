@@ -1,11 +1,8 @@
 package com.fairshare.controllers;
 
-import com.fairshare.DTO.FriendsDTO;
 import com.fairshare.DTO.FriendsListDTO;
 import com.fairshare.Responses.FriendsResponse;
-import com.fairshare.entity.Friends;
 import com.fairshare.services.FriendsService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;

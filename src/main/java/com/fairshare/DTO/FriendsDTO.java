@@ -1,9 +1,5 @@
 package com.fairshare.DTO;
 
-import com.fairshare.repository.FriendsRepository;
-
-import java.util.List;
-
 public class FriendsDTO {
     private Integer userId;
     private String firstName;

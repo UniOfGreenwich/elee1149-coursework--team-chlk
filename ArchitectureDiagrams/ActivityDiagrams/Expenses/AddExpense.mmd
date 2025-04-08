@@ -1,0 +1,74 @@
+graph TD
+    A[Start] --> B{"Receive POST /expense/add-expense Request (payerId, body)"};
+    B --> C[Extract payerId & CreateExpenseRequest data];
+    C --> D(Call Add Expense Service);
+
+subgraph "ExpenseService: addExpense"
+E[Extract details from Request]
+F[Find Group by groupId]
+G[Find User / Payer by payerId]
+E --> F;
+E --> G;
+
+F --> H{Group Found?};
+G --> I{User / Payer Found?};
+
+H -- No --> J{User Also Not Found?};
+I -- No --> J;
+H -- Yes --> K{User Also Found?};
+I -- Yes --> K;
+
+J -- Yes - Both Null --> L[Create Error Expense 'GroupAndUserNotFound'];
+J -- No - Group Null, User Found --> M[Create Error Expense 'GroupNotFound'];
+
+K -- No Group Found, User Null --> N[Create Error Expense 'UserNotFound'];
+K -- Yes - Both Found --> O[Check if Payer User is in Group];
+O --> P{Payer In Group?};
+P -- No --> Q[Create Error Expense 'PayerNotInGroup'];
+
+P -- Yes --> R{Category ID is null?};
+R -- Yes --> S[Set Default Category ID - 1];
+R -- No --> T[Create new Expense entity];
+S --> T;
+
+T --> U[Populate Expense fields Description, Amount, etc.];
+U --> V[Set Expense reference on each UserShare];
+V --> W[Set UserShare list on Expense];
+W --> X[Save Expense via Repository];
+X --> Y{Loop: Expense UserShares};
+Y -- For Each UserShare --> Z1[Save UserShare via Repository];
+Z1 --> Z2[Call balanceService.updateBalance];
+Z2 --> Y;
+Y -- End Loop --> AA[Return Saved Expense - Success];
+
+
+L --> BB[Service Returns Error Expense];
+M --> BB;
+N --> BB;
+Q --> BB;
+AA --> CC[Service Returns Success Expense];
+end
+
+D --> E;
+
+BB --> DD{Process Service Result};
+CC --> DD;
+
+DD --> EE{Result is Error Expense?};
+EE -- Yes --> FF{Check Error Type};
+FF -- 'GroupAndUserNotFound' --> GG[Create Response 'Group and User not found', false];
+FF -- 'UserNotFound' --> HH[Create Response 'User not found', false];
+FF -- 'GroupNotFound' --> II[Create Response 'Group not found', false];
+FF -- 'PayerNotInGroup' --> JJ[Create Response 'Payer not in group', false];
+
+EE -- No - Success --> LL[Create Response -'New expense created!', true, expenseId];
+
+GG --> MM[Return CreateExpenseResponse];
+HH --> MM;
+II --> MM;
+JJ --> MM;
+KK --> MM;
+LL --> MM;
+
+MM --> ZEnd[End];
+

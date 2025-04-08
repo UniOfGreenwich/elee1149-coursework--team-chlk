@@ -12,9 +12,6 @@ import java.util.List;
 public interface FriendsRepository extends JpaRepository<Friends, Integer> {
     List<Friends> findByFriendUserIdAndStatus(Integer userId, Boolean status);
 
-    List<Friends> findByUserIdAndStatus(Integer userId, boolean status);
-
-
     @Query("SELECT CASE WHEN COUNT(f) > 0 THEN true ELSE false END FROM Friends f WHERE (f.userId = :userId AND f.friendUserId = :friendUserId) OR (f.userId = :friendUserId AND f.friendUserId = :userId)")
     boolean existsFriendship(@Param("userId") Integer userId, @Param("friendUserId") Integer friendUserId);
 
