@@ -23,7 +23,7 @@ export function SideBar( { token, setToken } ) {
         <div className="side-bar-navigation">
           <ul className="sidebar-navigation-list">
             <li className="nav-item">
-              <Link to={`/user/${token.userId}/`}>
+              <Link to={`/`}>
                 <SideBarNavItem
                   navPageName="Dashboard"
                   navIcon={dashboardIcon}
@@ -31,17 +31,17 @@ export function SideBar( { token, setToken } ) {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to={`/user/${token.userId}/expenses`}>
+              <Link to={`/expenses`}>
                 <SideBarNavItem navPageName="Expenses" navIcon={expensesIcon} />
               </Link>
             </li>
             <li className="nav-item">
-              <Link to={`/user/${token.userId}/friends`}>
+              <Link to={`/friends`}>
                 <SideBarNavItem navPageName="Friends" navIcon={friendsIcon} />
               </Link>
             </li>
             <li className="nav-item">
-              <Link to={`/user/${token.userId}/groups`}>
+              <Link to={`/groups`}>
                 <SideBarNavItem navPageName="Groups" navIcon={groupsIcon}/>
               </Link>
             </li>

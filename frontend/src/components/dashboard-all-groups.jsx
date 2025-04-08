@@ -43,7 +43,7 @@ export function Groups({ userId, loading, data, error }) {
         {sortedGroups.map((e) => (
           <li key={e.groupId}>
             <Link
-              to={`/user/${userId}/groups/${e.groupId}/`}
+              to={`/groups/${e.groupId}/`}
               state={{ groupName: e.groupName }}
             >
               <GroupsRow

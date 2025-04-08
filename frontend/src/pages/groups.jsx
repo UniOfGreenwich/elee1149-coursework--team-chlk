@@ -6,13 +6,15 @@ import { TopBar } from "../components/dashboard-topbar";
 import React, { useState } from "react";
 import AddNewGroup from "../components/add-new-group";
 
-export function Groups() {
-  const [modalType, setModalType] = useState(null);
+export function Groups({userId}) {
 
+  const [modalType, setModalType] = useState(null);
   const openModal = (type) => setModalType(type);
   const closeModal = () => setModalType(null);
+
   let params = useParams();
-  const [loading, data, error, request] = GroupsData(params.id);
+
+  const [loading, data, error, request] = GroupsData(userId);
 
   return (
     <div className="dashboard-content">
@@ -41,7 +43,7 @@ export function Groups() {
                 <ul className="groups-component">
                   <li className="groups-component-list">
                     <GroupsList
-                      userId={params.id}
+                      userId={userId}
                       loading={loading}
                       data={data}
                       error={error}
@@ -53,7 +55,7 @@ export function Groups() {
         </div>
         {modalType === "AddNewGroup" && (
           <AddNewGroup
-            userId={params.id}
+            userId={userId}
             groupId={params.groupId}
             closeModal={closeModal}
           />

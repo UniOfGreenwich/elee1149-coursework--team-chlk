@@ -8,14 +8,16 @@ import React, { useCallback, useEffect, useState } from "react";
 import AddNewFriend from "../components/add-new-friend";
 
 
-export function Friends() {
-  const [modalType, setModalType] = useState(null);
+export function Friends({userId}) {
 
+  const [modalType, setModalType] = useState(null);
   const openModal = (type) => setModalType(type);
   const closeModal = () => setModalType(null);
+
   let params = useParams()
-  const [friendLoading, friendData, friendError, friendRequest] = FriendsListData(params.id)
-  const [pendingLoading, pendingData, pendingError, pendingRequest] = PendingRequestData(params.id)
+
+  const [friendLoading, friendData, friendError, friendRequest] = FriendsListData(userId)
+  const [pendingLoading, pendingData, pendingError, pendingRequest] = PendingRequestData(userId)
 
   const reloadData = useCallback(() => {
     friendRequest()
@@ -24,8 +26,8 @@ export function Friends() {
 
   useEffect(() => reloadData(), [])
   
-  const pendingRecievedData = pendingData.friends !== undefined ? !pendingData.friends.filter(item => item.recieverId.toString() === params.id) ? null : pendingData.friends.filter(item => item.recieverId.toString() === params.id) : null
-  const pendingSentData = pendingData.friends !== undefined ? !pendingData.friends.filter(item => item.senderId.toString() === params.id) ? null : pendingData.friends.filter(item => item.senderId.toString() === params.id) : null
+  const pendingRecievedData = pendingData.friends !== undefined ? !pendingData.friends.filter(item => item.recieverId === userId) ? null : pendingData.friends.filter(item => item.recieverId === userId) : null
+  const pendingSentData = pendingData.friends !== undefined ? !pendingData.friends.filter(item => item.senderId === userId) ? null : pendingData.friends.filter(item => item.senderId === userId) : null
 
   const combinedLoading = pendingLoading || friendLoading ? true : false;
 
@@ -56,7 +58,7 @@ export function Friends() {
               <h2 className="friends-request-header">Friend Requests</h2>
               <ul className="request-component">
                 <li className="request-component-list">
-                  <FriendsRequest userId={params.id} data={pendingRecievedData} reload={reloadData}/>
+                  <FriendsRequest userId={userId} data={pendingRecievedData} reload={reloadData}/>
                 </li>
               </ul>
             </div>
@@ -85,7 +87,7 @@ export function Friends() {
         } 
       </div>
       {modalType === "AddNewFriend" && (
-        <AddNewFriend userId={params.id} reload={reloadData} closeModal={closeModal} />
+        <AddNewFriend userId={userId} reload={reloadData} closeModal={closeModal} />
       )}
       
         
