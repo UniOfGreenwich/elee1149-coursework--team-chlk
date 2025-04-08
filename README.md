@@ -113,11 +113,10 @@ See the [Dependencies section](#dependencies) below for details on the project's
 
 <a id="dependencies"></a>
 
-<<<<<<< HEAD
 ## Design
 
 For detailed designs, please refer ro the [Design](Design) folder.
-=======
+
 ## Dependencies
 
 <details>
@@ -161,9 +160,82 @@ For detailed designs, please refer ro the [Design](Design) folder.
       </tr>
     </tbody>
   </table>
+  <div></div>
+  <summary>NPM Dependencies</summary>
+  <div></div>
+  <table>
+    <thead>
+      <tr>
+        <th>Dependency</th>
+        <th>Version</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>axios</td>
+        <td>^1.8.4</td>
+        <td>Promise based HTTP client</td>
+      </tr>
+      <tr>
+        <td>cra-template</td>
+        <td>1.2.0</td>
+        <td>Base template for Create React App</td>
+      </tr>
+      <tr>
+        <td>date-fns</td>
+        <td>^4.1.0</td>
+        <td>Date Utility Library</td>
+      </tr>
+      <tr>
+        <td>react</td>
+        <td>^19.0.0</td>
+        <td>UI Library</td>
+      </tr>
+      <tr>
+        <td>react-dom</td>
+        <td>^19.0.0</td>
+        <td>DOM-specific methods for rendering React components into the browser's DOM</td>
+      </tr>
+      <tr>
+        <td>react-hook-form</td>
+        <td>^7.54.2</td>
+        <td>Performant, flexible and extensible forms with easy-to-use validation</td>
+      </tr>
+      <tr>
+        <td>react-router-dom</td>
+        <td>^7.1.5</td>
+        <td>Declarative routing for React</td>
+      </tr>
+      <tr>
+        <td>react-scripts</td>
+        <td>^5.0.1</td>
+        <td>Scripts and configuration for Create React App</td>
+      </tr>
+      <tr>
+        <td>react-toastify</td>
+        <td>^11.0.5</td>
+        <td>Notification Library</td>
+      </tr>
+      <tr>
+        <td>recharts</td>
+        <td>^2.15.1</td>
+        <td>Refined charts Library</td>
+      </tr>
+      <tr>
+        <td>Save</td>
+        <td>^2.9.0</td>
+        <td>CRUD based persistence abstraction for storing objects to sany backend data store</td>
+      </tr>
+      <tr>
+        <td>typescript</td>
+        <td>^5.8.2</td>
+        <td>Language for application-scale JavaScript</td>
+      </tr>
+    </tbody>
+  </table>
 </details>
 
->>>>>>> f2eba2658eaf18485a73b51391d87063653a482b
 
 ## Class Diagrams
 
@@ -247,121 +319,6 @@ apply changes to the code to use this secret. See [GCP Branch](https://github.co
 **Locking Down Endpoints:** The API security should be increased to allow the endpoints to not be hit externally. Locking down the endpoints so the calls can only be made through the app would increase security.
 
 **Vanity URLS:** Currnelty the URLs in the app are still including the endpoints. Going foward with more time we would make vanity URLs. These act as a the name suggest a fake URL hiding the main URL. 
-
-
-<<<<<<< HEAD
-## Dependencies
-
-<details>
-<summary>Gradle Dependencies</summary>
-<div></div>
-  <table>
-    <thead>
-      <tr>
-        <th>Dependency</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code>org.springframework.boot:spring-boot-starter-web</code></td>
-        <td>Provides the core Spring Boot web starter for building web applications.</td>
-      </tr>
-      <tr>
-        <td><code>org.postgresql:postgresql</code></td>
-        <td>PostgreSQL JDBC driver for database connectivity.</td>
-      </tr>
-      <tr>
-        <td><code>org.springframework.boot:spring-boot-starter-data-jpa</code></td>
-        <td>Spring Data JPA for simplified database interactions.</td>
-      </tr>
-      <tr>
-        <td><code>org.springframework.boot:spring-boot-starter-test</code></td>
-        <td>Spring Boot test utilities for testing.</td>
-      </tr>
-      <tr>
-        <td><code>org.junit.platform:junit-platform-launcher</code> (testRuntimeOnly)</td>
-        <td>JUnit Platform launcher for running tests.</td>
-      </tr>
-    </tbody>
-  </table>
-  <div></div>
-  <summary>NPM Dependencies</summary>
-  <div></div>
-  <table>
-    <thead>
-      <tr>
-        <th>Dependency</th>
-        <th>Version</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>axios</td>
-        <td>^1.8.4</td>
-        <td>Promise based HTTP client</td>
-      </tr>
-      <tr>
-        <td>cra-template</td>
-        <td>1.2.0</td>
-        <td>Base template for Create React App</td>
-      </tr>
-      <tr>
-        <td>date-fns</td>
-        <td>^4.1.0</td>
-        <td>Date Utility Library</td>
-      </tr>
-      <tr>
-        <td>react</td>
-        <td>^19.0.0</td>
-        <td>UI Library</td>
-      </tr>
-      <tr>
-        <td>react-dom</td>
-        <td>^19.0.0</td>
-        <td>DOM-specific methods for rendering React components into the browser's DOM</td>
-      </tr>
-      <tr>
-        <td>react-hook-form</td>
-        <td>^7.54.2</td>
-        <td>Performant, flexible and extensible forms with easy-to-use validation</td>
-      </tr>
-      <tr>
-        <td>react-router-dom</td>
-        <td>^7.1.5</td>
-        <td>Declarative routing for React</td>
-      </tr>
-      <tr>
-        <td>react-scripts</td>
-        <td>^5.0.1</td>
-        <td>Scripts and configuration for Create React App</td>
-      </tr>
-      <tr>
-        <td>react-toastify</td>
-        <td>^11.0.5</td>
-        <td>Notification Library</td>
-      </tr>
-      <tr>
-        <td>recharts</td>
-        <td>^2.15.1</td>
-        <td>Refined charts Library</td>
-      </tr>
-      <tr>
-        <td>Save</td>
-        <td>^2.9.0</td>
-        <td>CRUD based persistence abstraction for storing objects to sany backend data store</td>
-      </tr>
-      <tr>
-        <td>typescript</td>
-        <td>^5.8.2</td>
-        <td>Language for application-scale JavaScript</td>
-      </tr>
-    </tbody>
-  </table>
-</details>
-=======
->>>>>>> f2eba2658eaf18485a73b51391d87063653a482b
 
 ## Contributers
 #### Kyle (Main Backend Developer, Secondary Database Manager): 
