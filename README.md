@@ -223,8 +223,16 @@ apply changes to the code to use this secret. See [GCP Branch](https://github.co
         <td>Spring Data JPA for simplified database interactions.</td>
       </tr>
       <tr>
+        <td><code>org.springframework.boot:spring-boot-starter-security</code></td>
+        <td>Spring Security for authentication and authorization.</td>
+      </tr>
+      <tr>
         <td><code>org.springframework.boot:spring-boot-starter-test</code></td>
         <td>Spring Boot test utilities for testing.</td>
+      </tr>
+      <tr>
+        <td><code>org.springframework.security:spring-security-test</code></td>
+        <td>Utilities for testing Spring Security components.</td>
       </tr>
       <tr>
         <td><code>org.junit.platform:junit-platform-launcher</code> (testRuntimeOnly)</td>
