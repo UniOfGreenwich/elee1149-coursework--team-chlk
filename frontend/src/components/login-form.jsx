@@ -31,7 +31,7 @@ export function LoginForm( { setToken } ) {
       if(data.success) {
         setToken(data)
         showSuccessToast(`${data.message}, welcome ${data.firstName}`)
-        navigate(`/user/${data.userId}/`)
+        navigate(`/`)
       } else {
         showErrorToast(data.message)
         setTrigger(false)

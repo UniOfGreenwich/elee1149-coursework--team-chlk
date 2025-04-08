@@ -58,15 +58,6 @@
   border-radius: 8px;
 }
 
-.dashboard-grid-component-scroll {
-  height: 100%;
-  background-color: #222645;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  padding-left: 1rem;
-  border-radius: 8px;
-}
-
 .component-header {
   display: flex;
   justify-content: space-between;

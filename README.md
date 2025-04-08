@@ -88,6 +88,7 @@ To run the app locally: [axios.ts](frontend/src/methods/use-axios.ts)
 </details>
 
 ## Tech Stack 
+
 | Technology Name | Technology Logo | Section Used  |
 |--------------|-----------------|------------------|
 | Hoppscotch | <img src="[https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/hoppscotch.png]" width="50"> | API Testing ||
@@ -140,8 +141,6 @@ Purpose: This diagram describes the static structure of the system's codebase. I
 
 FairShare Context: Class diagrams showed the main Java classes in the backend, such as User, Freind, Group, Expense, Balance, Category, along with the Controller, Service, and Repository classes (BalanceController, BalanceService, BalanceRepository, etc.). 
 
-Here is where you can find the [FairShare Class Diagrams](ArchitectureDiagrams/ClassDiagrams)
-
 **Entity-Relationship Diagram (ERD)**:
 
 Purpose: An ERD specifically models the structure of the database. It shows the entities (which become database tables), their attributes (columns), primary and foreign keys, and the relationships (one-to-one, one-to-many, many-to-many) between these entities.
@@ -157,6 +156,131 @@ Purpose: A mind map is good for brainstorming, planning, summarising information
 FairShare Context: For FairShare the midnmap diagram was used as a use-case diagram. This is because Mermaid does not recognise 'useCaseDiagrams' so a different way was needed to illustrate the different use cases for FairShare.
 
 Here is where you can find the [FairShare Mindamap_diagram](ArchitectureDiagrams/MermaidDiagram.mmd).
+
+## Design
+
+For detailed designs, please refer ro the [Design](Design) folder.
+
+## Dependencies
+
+<details>
+<summary>Gradle Dependencies</summary>
+<div></div>
+  <table>
+    <thead>
+      <tr>
+        <th>Dependency</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>org.springframework.boot:spring-boot-starter-web</code></td>
+        <td>Provides the core Spring Boot web starter for building web applications.</td>
+      </tr>
+      <tr>
+        <td><code>org.postgresql:postgresql</code></td>
+        <td>PostgreSQL JDBC driver for database connectivity.</td>
+      </tr>
+      <tr>
+        <td><code>org.springframework.boot:spring-boot-starter-data-jpa</code></td>
+        <td>Spring Data JPA for simplified database interactions.</td>
+      </tr>
+      <tr>
+        <td><code>org.springframework.boot:spring-boot-starter-security</code></td>
+        <td>Spring Security for authentication and authorization.</td>
+      </tr>
+      <tr>
+        <td><code>org.springframework.boot:spring-boot-starter-test</code></td>
+        <td>Spring Boot test utilities for testing.</td>
+      </tr>
+      <tr>
+        <td><code>org.springframework.security:spring-security-test</code></td>
+        <td>Utilities for testing Spring Security components.</td>
+      </tr>
+      <tr>
+        <td><code>org.junit.platform:junit-platform-launcher</code> (testRuntimeOnly)</td>
+        <td>JUnit Platform launcher for running tests.</td>
+      </tr>
+    </tbody>
+  </table>
+  </details>
+
+  <details>
+  <summary>NPM Dependencies</summary>
+  <div></div>
+  <table>
+    <thead>
+      <tr>
+        <th>Dependency</th>
+        <th>Version</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>axios</td>
+        <td>^1.8.4</td>
+        <td>Promise based HTTP client</td>
+      </tr>
+      <tr>
+        <td>cra-template</td>
+        <td>1.2.0</td>
+        <td>Base template for Create React App</td>
+      </tr>
+      <tr>
+        <td>date-fns</td>
+        <td>^4.1.0</td>
+        <td>Date Utility Library</td>
+      </tr>
+      <tr>
+        <td>react</td>
+        <td>^19.0.0</td>
+        <td>UI Library</td>
+      </tr>
+      <tr>
+        <td>react-dom</td>
+        <td>^19.0.0</td>
+        <td>DOM-specific methods for rendering React components into the browser's DOM</td>
+      </tr>
+      <tr>
+        <td>react-hook-form</td>
+        <td>^7.54.2</td>
+        <td>Performant, flexible and extensible forms with easy-to-use validation</td>
+      </tr>
+      <tr>
+        <td>react-router-dom</td>
+        <td>^7.1.5</td>
+        <td>Declarative routing for React</td>
+      </tr>
+      <tr>
+        <td>react-scripts</td>
+        <td>^5.0.1</td>
+        <td>Scripts and configuration for Create React App</td>
+      </tr>
+      <tr>
+        <td>react-toastify</td>
+        <td>^11.0.5</td>
+        <td>Notification Library</td>
+      </tr>
+      <tr>
+        <td>recharts</td>
+        <td>^2.15.1</td>
+        <td>Refined charts Library</td>
+      </tr>
+      <tr>
+        <td>Save</td>
+        <td>^2.9.0</td>
+        <td>CRUD based persistence abstraction for storing objects to sany backend data store</td>
+      </tr>
+      <tr>
+        <td>typescript</td>
+        <td>^5.8.2</td>
+        <td>Language for application-scale JavaScript</td>
+      </tr>
+    </tbody>
+  </table>
+</details>
 
 ## Requirements Engineering
 The requirements engineering documentation can be found here: [requirements-engineering](requirements-engineering/requirements-engineering.md)
@@ -220,6 +344,7 @@ test and the expected vs actual results. The testing table can be found [table](
 
 ## Future Improvements
 Below is a list of additional features and security we wish to add in future development.
+
 ### Additional Features
 - Profile Customisation
 - Adding profile images
@@ -240,44 +365,6 @@ apply changes to the code to use this secret. See [GCP Branch](https://github.co
 **Locking Down Endpoints:** The API security should be increased to allow the endpoints to not be hit externally. Locking down the endpoints so the calls can only be made through the app would increase security.
 
 **Vanity URLS:** Currnelty the URLs in the app are still including the endpoints. Going foward with more time we would make vanity URLs. These act as a the name suggest a fake URL hiding the main URL. 
-
-
-## Dependencies
-
-<details>
-<summary>Gradle Dependencies</summary>
-<div></div>
-  <table>
-    <thead>
-      <tr>
-        <th>Dependency</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code>org.springframework.boot:spring-boot-starter-web</code></td>
-        <td>Provides the core Spring Boot web starter for building web applications.</td>
-      </tr>
-      <tr>
-        <td><code>org.postgresql:postgresql</code></td>
-        <td>PostgreSQL JDBC driver for database connectivity.</td>
-      </tr>
-      <tr>
-        <td><code>org.springframework.boot:spring-boot-starter-data-jpa</code></td>
-        <td>Spring Data JPA for simplified database interactions.</td>
-      </tr>
-      <tr>
-        <td><code>org.springframework.boot:spring-boot-starter-test</code></td>
-        <td>Spring Boot test utilities for testing.</td>
-      </tr>
-      <tr>
-        <td><code>org.junit.platform:junit-platform-launcher</code> (testRuntimeOnly)</td>
-        <td>JUnit Platform launcher for running tests.</td>
-      </tr>
-    </tbody>
-  </table>
-</details>
 
 ## Contributers
 #### Kyle (Main Backend Developer, Secondary Database Manager): 
@@ -308,17 +395,29 @@ apply changes to the code to use this secret. See [GCP Branch](https://github.co
 - Architecture diagrams: Entity Relationship diagram
 - Architecture diagrams: MindMap diagram
 
-Hamza:
-- Tech Stack: React, JSX, CSS and HTML
+#### Hamza (Frontend Developer):
+- Tech Stack: NPM, React, JSX, CSS and HTML
 - Created application wireframe and design
 - Documentation: Requirements Engineering
 - Documentation: Styling Guide for the application
 - Front-end pages: Home, Login, Sign-up, Dashboards 
 - Dashboard component: Overview, Action Buttons, Group Members
+- Functionality: Add Friend, Add Group, Add Member, Add Expense, Settlement Payment
 - Styling and decoration: CSS
 - Application walkthrough and testing
 
-Lewis:
+#### Lewis (Frontend Developer):
+- Frontend Tech Stack: NPM, React, JSX, CSS and HTML
+- React Frontend: initial app creation
+- Documentation: Requirements Engineering
+- Frontend pages: Groups, Friends, Expenses
+- Dashboard components: Recent Expenses, Top Categories, Groups
+- Functionality: Signup, Login, Logout, Navigation, Error Notification, Success Notification
+- Axios HTTP client for API calls
+- API Error Handling
+- Styling and decoration: CSS
+- Github Pages deployment
+- Application testing
 
 ## References
 
